@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="dotcom.com.sam.LoginActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView  android:src="@drawable/app_logo"
+                android:layout_gravity="center"
+                android:layout_width="300dp"
+                android:layout_height="185dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center"
+                android:background="@drawable/categeory_shpe"
+                android:id="@+id/usernameWrapper"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+
+                    android:textSize="15dp"
+                    android:drawablePadding="10dp"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/ic_user_icon"
+                    android:background="@null"
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:inputType="textEmailAddress"
+                    android:layout_marginBottom="5dp"
+                    android:hint="Username"/>
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:background="@drawable/categeory_shpe"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/pass"
+
+                    android:textSize="15dp"
+                    android:drawablePadding="10dp"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/ic_icon_key"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:inputType="textPassword"
+                    android:layout_marginBottom="5dp"
+                    android:hint="Password"/>
+
+            </android.support.design.widget.TextInputLayout>
+            <TextView
+                android:textColor="@color/textcolor"
+                android:text="Forgot Password ?"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_login"
+                android:textColor="#fff"
+                android:text="SIGN IN"
+                android:background="@color/colorPrimary"
+                android:layout_margin="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:textColor="@color/textcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Not Registered ? " />
+
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Register" />
+
+            </LinearLayout>
+            <ImageView
+                android:src="@drawable/login_footerimg"
+                android:layout_width="match_parent"
+                android:layout_height="180dp" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

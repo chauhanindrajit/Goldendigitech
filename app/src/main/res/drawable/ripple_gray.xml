@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+        android:color="#bab7b7" >
+    <item
+        android:drawable="@drawable/dog_feed"
+        android:id="@android:id/mask"/>
+
+</ripple>

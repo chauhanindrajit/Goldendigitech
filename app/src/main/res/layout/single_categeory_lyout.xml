@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:layout_height="200dp">
+    <LinearLayout
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_weight="4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_marginLeft="15dp"
+            android:gravity="center_vertical"
+            android:src="@mipmap/ic_dog"
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:id="@+id/categeoryName"
+            android:textColor="@color/textcolor"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_weight="0.5"
+            android:text="DOG"
+            android:textSize="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/txt_view"
+            android:clickable="true"
+            android:background="@drawable/ripple_gray"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/textcolor"
+            android:textStyle="bold"
+            android:gravity="right"
+            android:paddingTop="2dp"
+            android:text="VIEW ALL"
+            android:textSize="10dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/categeory"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+   <View
+        android:layout_marginTop="15dp"
+        android:background="#dcdcdc"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+</LinearLayout>

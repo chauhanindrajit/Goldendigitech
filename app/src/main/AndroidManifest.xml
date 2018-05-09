@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="dotcom.com.sam">
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/BaseThemMY">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Categeory" />
+        <activity android:name=".ProductActivity" />
+        <activity android:name=".ProductDatailAcitvity" />
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".VetList" />
+        <activity android:name=".PetDoctor" />
+        <activity android:name=".VetProfileActivity" />
+        <activity android:name=".PatientDetails" />
+        <activity android:name=".Diagnostics" />
+        <activity android:name=".DiagnosticForm" />
+        <activity android:name=".SingleMating" />
+        <activity android:name=".AdoptProfile" />
+        <activity android:name=".AdoptForm" />
+        <activity android:name=".PetPhotography">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PhotoMain" />
+        <activity android:name=".ImageViewerActivity" />
+        <activity android:name=".Adoption" />
+        <activity android:name=".BuyPetList"></activity>
+    </application>
+
+</manifest>
