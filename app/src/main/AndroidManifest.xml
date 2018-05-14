@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/BaseThemMY">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:largeHeap="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,11 +24,7 @@
         <activity android:name=".ProductActivity" />
         <activity android:name=".ProductDatailAcitvity" />
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".VetList" />
         <activity android:name=".PetDoctor" />
@@ -38,16 +36,12 @@
         <activity android:name=".AdoptProfile" />
         <activity android:name=".AdoptForm" />
         <activity android:name=".PetPhotography">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".PhotoMain" />
         <activity android:name=".ImageViewerActivity" />
         <activity android:name=".Adoption" />
-        <activity android:name=".BuyPetList"></activity>
+        <activity android:name=".BuyPetList" />
+        <activity android:name=".PetOldAgeHomeProfile"></activity>
     </application>
 
 </manifest>

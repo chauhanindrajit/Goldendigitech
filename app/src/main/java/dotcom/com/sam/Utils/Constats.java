@@ -12,6 +12,6 @@ public class Module
       final public static int ADOPTED=2;
       final public static int PHOTO=3;
       final public static int BUY_PET=4;
-
+      public static final int PET_OLDAGE_HOME = 5;
    }
 }

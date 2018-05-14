@@ -6,10 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".BuyPetList">
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/recylcerview_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:translationZ="16dp"
+        android:elevation="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize">
+
+    </android.support.v7.widget.Toolbar>
 
 </RelativeLayout>

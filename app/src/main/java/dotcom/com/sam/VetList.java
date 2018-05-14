@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import dotcom.com.sam.Adapters.DiagnosticListAdapter;
 import dotcom.com.sam.Adapters.MatingAdapter;
+import dotcom.com.sam.Adapters.PetOldageListAdapter;
 import dotcom.com.sam.Adapters.VetListAdapter;
 import dotcom.com.sam.Utils.Constats;
 
@@ -101,13 +102,18 @@ public class VetList extends AppCompatActivity {
        {
         adapter =new MatingAdapter(this);
         }
-    else {
+        else if(MainActivity.module_name==Constats.Module.PET_OLDAGE_HOME)
+        {
+            adapter =new PetOldageListAdapter(this);
+        }
+        else {
             if (PetDoctor.categeory == Constats.VET_AT_HOME || PetDoctor.categeory == Constats.VET_NEAR_ME||PetDoctor.categeory == Constats.VACCINATION) {
                 adapter = new VetListAdapter(this);
             } else if (PetDoctor.categeory == Constats.DIAGNOSTICS) {
                 adapter = new DiagnosticListAdapter(this);
             }
         }
+
 
 
 

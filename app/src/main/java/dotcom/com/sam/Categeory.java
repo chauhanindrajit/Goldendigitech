@@ -26,7 +26,7 @@ public class Categeory extends AppCompatActivity {
         Utils.setExplodTransition(this);
 
         toolbar=findViewById(R.id.toolbar);
-        toolbar.setTitle("SAMcdd");
+        toolbar.setTitle("SAM");
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
 
