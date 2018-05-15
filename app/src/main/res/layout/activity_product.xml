@@ -32,6 +32,7 @@
         app:tabMinWidth="90dp"
         app:tabTextColor="#76e6ff"
         app:tabSelectedTextColor="#fff"
+        app:tabIndicatorColor="#fff"
         android:layout_gravity="center"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
