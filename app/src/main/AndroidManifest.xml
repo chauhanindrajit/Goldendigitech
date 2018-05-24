@@ -13,35 +13,75 @@
         android:theme="@style/BaseThemMY">
         <activity
             android:name=".MainActivity"
-            android:largeHeap="true">
+            android:largeHeap="true"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".Categeory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProductActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProductDatailAcitvity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".VetList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PetDoctor"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VetProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PatientDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Diagnostics"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DiagnosticForm"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SingleMating"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AdoptProfile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AdoptForm"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PetPhotography"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".PhotoMain"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ImageViewerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Adoption"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BuyPetList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PetOldAgeHomeProfile"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Splash"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Categeory" />
-        <activity android:name=".ProductActivity" />
-        <activity android:name=".ProductDatailAcitvity" />
-        <activity android:name=".LoginActivity">
-
-        </activity>
-        <activity android:name=".VetList" />
-        <activity android:name=".PetDoctor" />
-        <activity android:name=".VetProfileActivity" />
-        <activity android:name=".PatientDetails" />
-        <activity android:name=".Diagnostics" />
-        <activity android:name=".DiagnosticForm" />
-        <activity android:name=".SingleMating" />
-        <activity android:name=".AdoptProfile" />
-        <activity android:name=".AdoptForm" />
-        <activity android:name=".PetPhotography">
-        </activity>
-        <activity android:name=".PhotoMain" />
-        <activity android:name=".ImageViewerActivity" />
-        <activity android:name=".Adoption" />
-        <activity android:name=".BuyPetList" />
-        <activity android:name=".PetOldAgeHomeProfile"></activity>
     </application>
 
 </manifest>

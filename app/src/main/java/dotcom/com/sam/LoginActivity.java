@@ -1,16 +1,19 @@
 package dotcom.com.sam;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText ed_username,ed_pass;
     String username,password;
     Button btn_login;
+    TextView txt_skip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,14 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        txt_skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initView()
@@ -38,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         ed_username=(EditText)findViewById(R.id.username);
         ed_pass=(EditText)findViewById(R.id.pass);
         btn_login=(Button) findViewById(R.id.btn_login);
+        txt_skip=findViewById(R.id.txt_skip);
 
     }
 
