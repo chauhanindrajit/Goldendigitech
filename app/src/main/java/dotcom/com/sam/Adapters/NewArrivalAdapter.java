@@ -75,10 +75,10 @@ public class NewArrivalAdapter extends RecyclerView.Adapter<NewArrivalAdapter.Vi
     private void setcategeory(RecyclerView recyclerView)
     {
 
-        SubCategeoryAdapter subCategeoryAdapter=new SubCategeoryAdapter(context);
-        LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManagaer);
-        recyclerView.setAdapter(subCategeoryAdapter);
+//        SubCategeoryAdapter subCategeoryAdapter=new SubCategeoryAdapter(context);
+//        LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+//        recyclerView.setLayoutManager(horizontalLayoutManagaer);
+//        recyclerView.setAdapter(subCategeoryAdapter);
 
     }
 }

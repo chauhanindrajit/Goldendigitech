@@ -24,11 +24,11 @@ public  class Constants {
     public  static  final String STOP_TRIP="stoptrip";
     public  static  final String TRIP_SHARED="tripshred";
     public  static  ArrayList<HashMap<String, String>> arrcontactList;
-    public  static ArrayList<ArrayList<HashMap<String, String>>> arrSubCateogry;
+    public  static String arrSubCateogry;
     public  ArrayList<HashMap<String, String>> arrSubCateogrySK;
     Constants(){
         arrcontactList = new ArrayList<>();
-        arrSubCateogry = new ArrayList<>();
+        arrSubCateogry = String.valueOf(new ArrayList<>());
         arrSubCateogrySK = new ArrayList<>();
     }
 }

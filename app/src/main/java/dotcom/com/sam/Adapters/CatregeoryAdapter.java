@@ -7,22 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import dotcom.com.sam.Categeory;
 import dotcom.com.sam.ProductActivity;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Utils.Utils;
-import dotcom.com.sam.extras.Constants;
 import dotcom.com.sam.extras.RegistrationResponse;
-import dotcom.com.sam.extras.TripSingalton;
 
 /**
  * Created by sanjay on 3/9/2018.
@@ -34,14 +27,16 @@ public class CatregeoryAdapter extends RecyclerView.Adapter<CatregeoryAdapter.Vi
     public static int glob;
 
 
-    private List<RegistrationResponse.ResponseBean> dataBeen;
+    private ArrayList<RegistrationResponse.ResponseBean> arrSubCateogry;
 
 
-    public CatregeoryAdapter(Context context)
+    public CatregeoryAdapter(Categeory context, List<RegistrationResponse.ResponseBean> arrSubCateogry)
     {
         //this.dataBeen=response;
         this.context=context;
+        this.arrSubCateogry = (ArrayList<RegistrationResponse.ResponseBean>) arrSubCateogry;
     }
+
 
 
 
@@ -61,17 +56,18 @@ public class CatregeoryAdapter extends RecyclerView.Adapter<CatregeoryAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolderIN holder, int position) {
 
+
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         holder.recyclerView.setLayoutManager(horizontalLayoutManagaer);
-        holder.recyclerView.setAdapter(new SubCategeoryAdapter(context));
+        holder.recyclerView.setAdapter(new SubCategeoryAdapter(context,arrSubCateogry));
         holder.recyclerView.setTag(position);
-        HashMap<String, String> obj = Constants.shareInstace.arrcontactList.get(position);
-        Constants.shareInstace.arrSubCateogrySK = Constants.shareInstace.arrSubCateogry.get(position);
-        holder.categeoryName.setText(obj.get("CategosryName"));
+//        HashMap<String, String> obj = Constants.shareInstace.arrcontactList.get(position);
+    //    Constants.shareInstace.arrSubCateogrySK = Constants.shareInstace.arrSubCateogry.get(position);
+        holder.categeoryName.setText(arrSubCateogry.get(position).getCategosryName());
         holder.recyclerView.setTag(position);
 
 //        final int glob =  Integer.valueOf(String.valueOf(holder.recyclerView.setTag(position)));
-//        CatregeoryAdapter.glob = glob;
+//        CatregeoryAdapter.glob = glob;glob=  holder.categeoryName.setTag(arrSubCateogry.get(position).getC_Id());
 
         holder.recyclerView.getAdapter();
 
@@ -83,7 +79,7 @@ public class CatregeoryAdapter extends RecyclerView.Adapter<CatregeoryAdapter.Vi
     public int getItemCount() {
 
 
-            return Constants.shareInstace.arrcontactList.size();
+        return arrSubCateogry.size();
 
 
 

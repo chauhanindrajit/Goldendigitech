@@ -8,11 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import dotcom.com.sam.Categeory;
 import dotcom.com.sam.R;
 import dotcom.com.sam.extras.Constants;
+import dotcom.com.sam.extras.RegistrationResponse;
 
 /**
  * Created by sanjay on 3/9/2018.
@@ -20,12 +23,18 @@ import dotcom.com.sam.extras.Constants;
 
 public class SubCategeoryAdapter extends RecyclerView.Adapter<SubCategeoryAdapter.ViewHolder> {
     Context context;
-
+public static int glob;
     int currentPosition;
+    private ArrayList<RegistrationResponse.ResponseBean> arrSubCateogry;
 
-    public SubCategeoryAdapter(Context context) {
-        this.context = context;
+
+    public SubCategeoryAdapter(Context context, List<RegistrationResponse.ResponseBean> arrSubCateogry)
+    {
+        //this.dataBeen=response;
+        this.context=context;
+        this.arrSubCateogry = (ArrayList<RegistrationResponse.ResponseBean>) arrSubCateogry;
     }
+
 
 
     @Override
@@ -42,25 +51,16 @@ public class SubCategeoryAdapter extends RecyclerView.Adapter<SubCategeoryAdapte
 
     @Override
     public void onBindViewHolder(SubCategeoryAdapter.ViewHolder holder, int position) {
-        ;
-        if (Constants.shareInstace.arrSubCateogrySK.size() > 0) {
+       // glob =holder.categeoryName.getTag();
+        holder.subcat.setText(arrSubCateogry.get(position).getSubCategories().get(position).getSubCategoryName());
 
-            //Constants.shareInstace.arrSubCateogrySK.clear();
-
-
-            holder.cardView.setId(position);
-
-        }
-
-        HashMap<String, String> obj = Constants.shareInstace.arrSubCateogrySK.get(position);
-        holder.subcat.setText(obj.get("SubCategoryName"));
 
     }
 
     @Override
     public int getItemCount() {
 
-        return Constants.shareInstace.arrSubCateogrySK.size();
+       return Integer.parseInt(String.valueOf(arrSubCateogry.get(glob).getSubCategories().size()));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
