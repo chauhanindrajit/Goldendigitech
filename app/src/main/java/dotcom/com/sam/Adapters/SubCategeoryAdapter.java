@@ -42,7 +42,7 @@ public class SubCategeoryAdapter extends RecyclerView.Adapter<SubCategeoryAdapte
 
     @Override
     public void onBindViewHolder(SubCategeoryAdapter.ViewHolder holder, int position) {
-        CatregeoryAdapter catregeoryAdapter = new CatregeoryAdapter(context);
+        ;
         if (Constants.shareInstace.arrSubCateogrySK.size() > 0) {
 
             //Constants.shareInstace.arrSubCateogrySK.clear();

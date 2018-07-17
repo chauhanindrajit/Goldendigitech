@@ -127,8 +127,8 @@ public class Categeory extends AppCompatActivity {
                     RegistrationResponse registrationResponse = response.body();
 
                     List<List<RegistrationResponse.ResponseBean>> dataList = Collections.singletonList(registrationResponse.getResponse());
-                    // stringList.clear();
 
+                    stringList.clear();
                     final int size = dataList.get(0).size();
                     for (int i = 0; i < size; i++) {
                         stringList.add(String.valueOf(dataList.get(i)));
@@ -192,6 +192,7 @@ public class Categeory extends AppCompatActivity {
 
 
                     // looping through All Contacts
+                    contactList.clear();
                     for (int i = 0; i < contacts.length(); i++) {
                         JSONObject c = contacts.getJSONObject(i);
 
