@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="end"
+    android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
-    tools:context="dotcom.com.sam.MainActivity">
+    tools:context="dotcom.com.sam.Activity.MainActivity">
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -115,7 +116,7 @@
             android:layout_height="100dp">
             <Button
                 android:id="@+id/btn_adopt"
-                android:background="@drawable/ripple_adoption"
+                android:background="@drawable/ripple_pet_services"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </android.support.v7.widget.CardView>
@@ -128,7 +129,7 @@
             app:cardBackgroundColor="#c64dff"
             android:layout_height="100dp">
             <Button
-                android:background="@drawable/ripple_ediagnosis"
+                android:background="@drawable/ripple_pethotel_services"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </android.support.v7.widget.CardView>
@@ -141,7 +142,8 @@
             android:layout_width="match_parent"
             android:layout_height="100dp">
             <Button
-           android:background="@drawable/ripple_pet_services"
+            android:id="@+id/btn_mating"
+           android:background="@drawable/ripple_mating"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -154,7 +156,8 @@
             android:layout_width="match_parent"
             android:layout_height="100dp">
             <Button
-                android:background="@drawable/ripple_petsitter"
+                android:id="@+id/buyapet"
+                android:background="@drawable/ripple_buypet_services"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </android.support.v7.widget.CardView>
@@ -167,7 +170,8 @@
             android:layout_width="match_parent"
             android:layout_height="100dp">
             <Button
-               android:background="@drawable/ripple_petdayout"
+                android:id="@+id/adoptapet"
+               android:background="@drawable/ripple_adoptpet_services"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </android.support.v7.widget.CardView>
@@ -179,7 +183,8 @@
             android:layout_width="match_parent"
             android:layout_height="100dp">
             <Button
-                android:background="@drawable/ripple_hotel"
+                android:id="@+id/petoldhome"
+                android:background="@drawable/ripple_petoldagegome_services"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </android.support.v7.widget.CardView>
@@ -191,8 +196,21 @@
             android:layout_width="match_parent"
             android:layout_height="100dp">
             <Button
-                android:id="@+id/btn_mating"
-                android:background="@drawable/ripple_mating"
+
+                android:background="@drawable/ripple_petdayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:translationZ="6dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+            <Button
+                android:id="@+id/e_doctor"
+                android:background="@drawable/ripple_ediagnosis"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </android.support.v7.widget.CardView>
@@ -216,6 +234,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp">
             <Button
+                android:id="@+id/btn_photos"
                 android:background="@drawable/ripple_pet_relocation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -235,16 +254,15 @@
                 android:layout_height="match_parent" />
         </android.support.v7.widget.CardView>
 
-
     </LinearLayout>
     </ScrollView>
 </LinearLayout>
-   <android.support.design.widget.NavigationView
-       android:fitsSystemWindows="true"
-       android:translationZ="16dp"
-       android:layout_width="260dp"
-       android:layout_height="match_parent"
-       app:menu="@menu/navigation_menu"
-       android:layout_gravity="start"></android.support.design.widget.NavigationView>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/activity_main_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

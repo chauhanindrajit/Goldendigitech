@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VetList">
+    tools:context=".Activity.VetList">
 
     <LinearLayout
         android:layout_marginTop="?attr/actionBarSize"
@@ -30,6 +30,8 @@
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
+            android:scrollingCache="false"
+            android:cacheColorHint="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
@@ -76,11 +78,13 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:src="@drawable/ic_place_black_24dp" />
-
-                    <EditText
+                    <AutoCompleteTextView
+                        android:id="@+id/languages"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:cursorVisible="true"
                         android:layout_weight="1"
+                        android:autoSizeMaxTextSize="20dp"
                         android:background="#00ffffff"
                         android:hint="Select your location" />
 
@@ -89,49 +93,21 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="5dp"
+                        android:id="@+id/pdnitm"
                         android:src="@drawable/ic_expand_more_black_24dp" />
 
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/categeory_shpe"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:src="@drawable/ic_star_black_24dp" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="#00ffffff"
-                        android:hint="Select vet speciality" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="5dp"
-                        android:src="@drawable/ic_expand_more_black_24dp" />
-
-
-                </LinearLayout>
-
                 <Button
+                    android:id="@+id/seachbtn"
                     android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
                     android:background="@color/colorPrimary"
                     android:text="SEARCH"
+                    android:clickable="true"
+                    android:focusableInTouchMode="true"
                     android:textColor="#fff"
                     android:textStyle="bold" />
 

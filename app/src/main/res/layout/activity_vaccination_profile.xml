@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity.VetProfileActivity">
+    <ScrollView
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<LinearLayout
+
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <android.support.v7.widget.CardView
+        android:translationZ="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="#03303a"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/profilepicture_default"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FF000000"
+                android:layout_gravity="center"
+                android:transitionName="img_profile"
+                android:layout_marginTop="8dp"/>
+            <TextView
+                android:id="@+id/doctname"
+                android:textSize="20dp"
+                android:gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:maxLines="1"
+                android:text="Dr.Krishna Ingole"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/subqualification"
+                android:maxLines="1"
+                android:textSize="16dp"
+                android:gravity="center_horizontal"
+                android:textColor="#fff"
+                android:text="B.V.Sc and A.H,MVSC-medicin "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/subexperiance"
+                android:maxLines="1"
+                android:textSize="16dp"
+                android:gravity="center_horizontal"
+                android:textColor="#fff"
+                android:layout_width="match_parent"
+                android:text="17 years experience"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/subdoctortype"
+                android:maxLines="1"
+                android:textSize="16dp"
+                android:gravity="center_horizontal"
+                android:textColor="#fff"
+                android:layout_width="match_parent"
+                android:text="veternarian"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="30dp"
+                android:paddingRight="15dp">
+
+                <ImageView
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:src="@drawable/ic_place_blue_24dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/location"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="Shop Number 22, Jangid Home CHS, Jangid Complex Road, Landmark: Near Jangid Estate and Opposite Hetal Park,Mumbai" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingLeft="30dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:src="@drawable/rupee_icon_blue"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="400"
+                    android:id="@+id/ssubcharge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/visit_at_home_layout"
+                android:layout_marginTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingLeft="30dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:src="@drawable/rupee_icon_blue"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <TextView
+                    android:textColor="#dc3e3e"
+                    android:textStyle="bold"
+                    android:id="@+id/ssubvisitathomefee"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="600 - Visit At Home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/vaccination_layout"
+                android:layout_marginTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingLeft="30dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:src="@drawable/cube"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <TextView
+                    android:textColor="#dc3e3e"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="Yearly Vaccination Package"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingLeft="30dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:src="@drawable/ic_access_time_blue_24dp"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp" />
+                <TextView
+
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="Visits Today"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="15dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textStyle="bold"
+                android:text="Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <View
+                android:background="@color/colorPrimary"
+                android:layout_width="80dp"
+                android:layout_height="1dp"></View>
+            <TextView
+                android:id="@+id/detaildescription"
+                android:text="Dr. Krishna Ingole, (B.V.Sc. and A.H.,M.V.Sc Medicine) working as Hospital Registrar, at Bombay Vetterinary College since April 2008.He was Executive production (4 years) at Indian Immunological LTD, Hyderabad.He was responsible for Production of Bacterial vaccine: HS, BQ, ET, Anthrax, Leptospira, and Brucella.Production of viral vaccine: CDV, CAV1, CAV2, CPV, CV, sheep pox, PPR, Blue tongue and Production of Protozoal vaccine: Theileriosis vaccine. Preparation of master and working cell line and media preparation."
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+
+
+
+
+
+
+</LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_bookapointment"
+        android:textColor="#FFF"
+        android:text="BOOK APPOINMENT"
+        android:translationZ="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"/>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:translationZ="16dp"
+        android:elevation="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize">
+
+    </android.support.v7.widget.Toolbar>
+
+</RelativeLayout>

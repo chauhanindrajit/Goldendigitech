@@ -39,6 +39,7 @@
                         android:minLines="1"
                         android:maxLines="1"
                         android:textSize="20dp"
+                        android:id="@+id/diagnosticsname"
                         android:textStyle="bold"
                         android:text="Aspira Diagnostics"
                         android:layout_width="match_parent"
@@ -52,6 +53,7 @@
                             android:layout_width="15dp"
                             android:layout_height="15dp" />
                         <TextView
+                            android:id="@+id/services"
                             android:layout_marginLeft="5dp"
                             android:minLines="1"
                             android:maxLines="1"
@@ -70,6 +72,7 @@
                             android:layout_width="15dp"
                             android:layout_height="15dp" />
                         <TextView
+                            android:id="@+id/sampletype"
                             android:layout_marginLeft="5dp"
                             android:minLines="1"
                             android:maxLines="1"
@@ -88,6 +91,7 @@
                             android:layout_width="15dp"
                             android:layout_height="15dp" />
                         <TextView
+                            android:id="@+id/blodcollectntime"
                             android:layout_marginLeft="5dp"
                             android:minLines="1"
                             android:maxLines="1"
@@ -106,6 +110,7 @@
                             android:layout_width="15dp"
                             android:layout_height="15dp" />
                         <TextView
+                            android:id="@+id/pettype"
                             android:layout_marginLeft="5dp"
                             android:minLines="1"
                             android:maxLines="1"
@@ -129,6 +134,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_access_time_black_24dp"/>
                 <TextView
+                    android:id="@+id/opentimes"
                     android:layout_marginLeft="5dp"
                     android:textColor="#2b2929"
                     android:textSize="12dp"

@@ -25,6 +25,7 @@
                     android:layout_height="match_parent"
                     >
                     <ImageView
+                        android:id="@+id/bgimage"
                         android:background="@drawable/sample_dog"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
@@ -58,6 +59,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
+                            android:id="@+id/Mlocation"
                             android:maxLines="1"
                             android:layout_marginLeft="10dp"
                             android:text="Andheri"
@@ -84,6 +86,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                             <TextView
+                                android:id="@+id/Mdogname"
                                 android:maxLines="1"
                                 android:textStyle="bold"
                                 android:layout_marginLeft="10dp"
@@ -105,6 +108,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                             <TextView
+                                android:id="@+id/Mfemale"
                                 android:maxLines="1"
                                 android:textStyle="bold"
                                 android:layout_marginLeft="10dp"
@@ -133,6 +137,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                             <TextView
+                                android:id="@+id/Mbreed"
                                 android:maxLines="1"
                                 android:textStyle="bold"
                                 android:layout_marginLeft="10dp"
@@ -154,6 +159,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                             <TextView
+                                android:id="@+id/Mage"
                                 android:maxLines="1"
                                 android:textStyle="bold"
                                 android:layout_marginLeft="10dp"
@@ -170,6 +176,7 @@
             </LinearLayout>
             <ImageView
 
+                android:id="@+id/mainimage"
                 android:paddingRight="70dp"
                 android:paddingLeft="70dp"
                 android:layout_marginBottom="50dp"
@@ -177,6 +184,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
             <TextView
+                android:id="@+id/Mstatus"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
                 android:padding="10dp"

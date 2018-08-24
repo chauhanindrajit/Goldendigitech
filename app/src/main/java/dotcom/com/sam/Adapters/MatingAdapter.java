@@ -13,14 +13,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import dotcom.com.sam.AdoptProfile;
-import dotcom.com.sam.Diagnostics;
-import dotcom.com.sam.MainActivity;
-import dotcom.com.sam.PetDoctor;
+import dotcom.com.sam.ProfileActivity.AdoptProfile;
+import dotcom.com.sam.Activity.MainActivity;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Utils.Constats;
-import dotcom.com.sam.Utils.Utils;
-import dotcom.com.sam.VetProfileActivity;
 
 public class MatingAdapter extends RecyclerView.Adapter<MatingAdapter.VetViewHolder> {
     Context context;
@@ -49,7 +45,7 @@ public class MatingAdapter extends RecyclerView.Adapter<MatingAdapter.VetViewHol
             holder.layoutAdopt.setVisibility(View.GONE);
             holder.layoutMating.setVisibility(View.VISIBLE);
 
-            if (position % 2 == 0) {
+            if (position % 1 == 0) {
                 holder.mainImage.setBackgroundResource(R.drawable.cat_sample);
                 holder.background.setBackgroundResource(R.drawable.cat_sample);
                 holder.txt_availiblity.setBackgroundResource(R.drawable.unavailable_shpe);
@@ -61,7 +57,7 @@ public class MatingAdapter extends RecyclerView.Adapter<MatingAdapter.VetViewHol
         if(MainActivity.module_name==Constats.Module.ADOPTED) {
             holder.layoutAdopt.setVisibility(View.VISIBLE);
             holder.layoutMating.setVisibility(View.GONE);
-            if (position % 2 == 0) {
+            if (position % 1 == 0) {
                 holder.mainImage.setBackgroundResource(R.drawable.cat_sample);
                 holder.background.setBackgroundResource(R.drawable.cat_sample);
                // holder.txt_availiblity.setBackgroundResource(R.drawable.unavailable_shpe);

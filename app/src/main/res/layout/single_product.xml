@@ -30,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/proctname"
                     android:textSize="12dp"
                     android:maxLines="2"
                     android:textStyle="bold"
@@ -42,6 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/withdiscount"
                         android:textStyle="bold"
                         android:textColor="#90133b"
                         android:text="Rs:200"

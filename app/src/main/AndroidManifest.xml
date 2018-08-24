@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dotcom.com.sam">
+
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -9,6 +10,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -19,69 +21,77 @@
         android:supportsRtl="true"
         android:theme="@style/BaseThemMY">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:largeHeap="true"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".Activity.Categeory"-->
+            <!--android:screenOrientation="portrait" />-->
         <activity
-            android:name=".Categeory"
+            android:name=".Activity.ProductActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ProductActivity"
+            android:name=".Activity.ProductDatailAcitvity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ProductDatailAcitvity"
+            android:name=".Credentials.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".VetList"
+            android:name=".Activity.VetList"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PetDoctor"
+            android:name=".Activity.PetDoctor"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".VetProfileActivity"
+            android:name=".ProfileActivity.VetProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PatientDetails"
+            android:name=".Utils.PatientDetails"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Diagnostics"
+            android:name=".Activity.Diagnostics"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DiagnosticForm"
+            android:name=".Utils.DiagnosticForm"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SingleMating"
+            android:name=".Activity.SingleMating"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdoptProfile"
+            android:name=".ProfileActivity.AdoptProfile"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdoptForm"
+            android:name=".Utils.AdoptForm"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PetPhotography"
-            android:screenOrientation="portrait"></activity>
+            android:name=".Activity.PetPhotography"
+            android:screenOrientation="portrait" />
+         <activity
+         android:name=".Utils.PhotoMain"
+         android:screenOrientation="portrait" />
         <activity
-            android:name=".PhotoMain"
+            android:name=".Activity.ImageViewerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ImageViewerActivity"
+            android:name=".Activity.Adoption"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Adoption"
+            android:name=".Activity.BuyPetList"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".BuyPetList"
+            android:name=".ProfileActivity.PetOldAgeHomeProfile"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PetOldAgeHomeProfile"
+            android:name=".Activity.HomeList"
             android:screenOrientation="portrait" />
-        <activity android:name=".Splash"
+        <activity
+            android:name=".ProfileActivity.HomeProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProfileActivity.VaccinationProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Categeory"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -89,6 +99,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.DiagoHome" />
+        <activity android:name=".Activity.VacccinationHome" />
+        <activity android:name=".Activity.Adoptpet" />
+        <activity android:name=".Activity.PetOldAgeHome" />
+        <activity android:name=".Activity.Mating" />
+        <activity android:name=".Credentials.Registration" />
+        <activity android:name=".Credentials.ForgotPassword" />
+        <activity android:name=".Credentials.ResetPassword" />
+        <activity android:name=".Activity.DogGrooming" />
+        <activity android:name=".ProfileActivity.Doggromingprofile" />
+        <activity android:name=".Activity.CatGrooming" />
+        <activity android:name=".ProfileActivity.Catgromingprofile" />
+        <activity android:name=".Activity.GroomingService" />
+        <activity android:name=".Activity.TrainigServices" />
+        <activity android:name=".Activity.MicroChipping" />
+        <activity android:name=".Activity.PetSitterWalking" />
+        <activity android:name=".Activity.PetSetter" />
+        <activity android:name=".Activity.PetWalking" />
+        <activity android:name=".ProfileActivity.MicroChippingProfile" />
+        <activity android:name=".ProfileActivity.AdoptpetProfile" />
+        <activity android:name=".ProfileActivity.BuypetProfile" />
+        <activity android:name=".ProfileActivity.Petsetterprofileprofile" />
+        <activity android:name=".ProfileActivity.WalkingProfile" />
+        <activity android:name=".ProfileActivity.TrainingProfile" />
+        <activity android:name=".Activity.PhotoViewerMutiple" />
+        <activity android:name=".Activity.EDoctor"></activity>
     </application>
 
 </manifest>

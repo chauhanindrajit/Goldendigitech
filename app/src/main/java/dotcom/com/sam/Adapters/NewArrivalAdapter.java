@@ -4,17 +4,19 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import dotcom.com.sam.MainActivity;
-import dotcom.com.sam.ProductDatailAcitvity;
+import java.util.HashMap;
+
+import dotcom.com.sam.Activity.ProductDatailAcitvity;
 import dotcom.com.sam.R;
+import dotcom.com.sam.extras.Constants;
 
 /**
  * Created by sanjay on 3/8/2018.
@@ -40,7 +42,9 @@ public class NewArrivalAdapter extends RecyclerView.Adapter<NewArrivalAdapter.Vi
 
     @Override
     public void onBindViewHolder(final NewArrivalAdapter.ViewHOLDER holder, int position) {
-
+        HashMap<String, String> obj = Constants.shareInstace.arrcontactList1.get(position);
+        Constants.shareInstace.arrSubCateogry1 = String.valueOf(Constants.shareInstace.arrcontactList1.get(position));
+         holder.proddetails.setText(obj.get("ProductName"));
          holder.prod.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
@@ -55,30 +59,23 @@ public class NewArrivalAdapter extends RecyclerView.Adapter<NewArrivalAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return 6;
+        return Constants.shareInstace.arrcontactList1.size();
     }
 
     public class ViewHOLDER extends RecyclerView.ViewHolder {
         //RecyclerView recyclerView;
         ImageView imageView;
+        TextView proddetails;
         LinearLayout prod;
         public ViewHOLDER(View itemView) {
             super(itemView);
             imageView=(ImageView) itemView.findViewById(R.id.prod_image);
             prod=(LinearLayout) itemView.findViewById(R.id.newarrival_layout);
-
+proddetails =(TextView)itemView.findViewById(R.id.prdctdetail);
         }
     }
 
 
 
-    private void setcategeory(RecyclerView recyclerView)
-    {
 
-//        SubCategeoryAdapter subCategeoryAdapter=new SubCategeoryAdapter(context);
-//        LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-//        recyclerView.setLayoutManager(horizontalLayoutManagaer);
-//        recyclerView.setAdapter(subCategeoryAdapter);
-
-    }
 }

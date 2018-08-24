@@ -10,9 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import dotcom.com.sam.ImageViewerActivity;
-import dotcom.com.sam.PetPhotography;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import dotcom.com.sam.Activity.ImageViewerActivity;
 import dotcom.com.sam.R;
+import dotcom.com.sam.SingaltonsClasses.GetPhotograpgySingalton;
 
 /**
  * Created by sanjay on 3/12/2018.
@@ -20,8 +25,11 @@ import dotcom.com.sam.R;
 
 public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.ViewHolderPro> {
     Context context;
-    public PhotoListAdapter(Context context)
+    public static int i;
+    private List<String> arrSubCateogry;
+    public PhotoListAdapter(Context context, List<String> arrSubCateogry)
     {
+        this.arrSubCateogry = (ArrayList<String>) arrSubCateogry;
         this.context=context;
     }
     @Override
@@ -34,11 +42,11 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolderPro holder, int position) {
-        if(position%2==0)
-        {
-            holder.imageView.setImageResource(R.drawable.sample_dog);
-        }
+    public void onBindViewHolder(final ViewHolderPro holder, final int position) {
+//        if(position%2==0)
+//        {
+//            holder.imageView.setImageResource(R.drawable.sample_dog);
+//        }
       /* holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,9 +56,12 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.View
 
             }
         });*/
+        Picasso.with(context).load(arrSubCateogry.get(position).replaceAll(" ", "%20")).fit().placeholder(R.drawable.noimage).into(holder.imageView);
+
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPhotograpgySingalton.getInstance().setImgUrl((arrSubCateogry.get(position).replaceAll(" ", "%20")));
                 ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"image");
                 Intent intent=new Intent(context,ImageViewerActivity.class);
                 context.startActivity(intent,activityOptions.toBundle());
@@ -61,7 +72,7 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.View
 
     @Override
     public int getItemCount() {
-        return 22;
+        return arrSubCateogry.size();
     }
 
     public class ViewHolderPro extends RecyclerView.ViewHolder {

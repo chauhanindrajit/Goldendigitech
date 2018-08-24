@@ -5,7 +5,7 @@
   <!--  <item
         android:id="@android:id/mask"
         android:drawable="@drawable/shop_by_pet"/>-->
-    <item android:drawable="@drawable/mating"/>
+    <item android:drawable="@drawable/matingg"/>
 
 </ripple>
 <!--

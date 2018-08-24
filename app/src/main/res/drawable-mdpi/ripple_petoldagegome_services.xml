@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/colorRipple" >
+
+  <!--  <item
+        android:id="@android:id/mask"
+        android:drawable="@drawable/shop_by_pet"/>-->
+    <item android:drawable="@drawable/petoldagehome"/>
+
+</ripple>
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="#000"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/mask"
+        android:drawable="@drawable/shop_by_pet"
+        />
+    <item android:drawable="@drawable/shop_by_pet" />
+
+</ripple>-->

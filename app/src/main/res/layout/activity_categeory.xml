@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:theme="@style/ThemeOverlay.AppCompat.Dark"
 
-    tools:context="dotcom.com.sam.Categeory">
+    tools:context="dotcom.com.sam.Activity.Categeory">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:translationZ="16dp"

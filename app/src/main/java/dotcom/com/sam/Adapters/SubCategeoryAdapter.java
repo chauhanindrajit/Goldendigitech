@@ -6,14 +6,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import dotcom.com.sam.Categeory;
+import dotcom.com.sam.Activity.ProductActivity;
 import dotcom.com.sam.R;
+import dotcom.com.sam.SingaltonsClasses.CategorySingalton;
+import dotcom.com.sam.SingaltonsClasses.SubcategorySingalton;
+import dotcom.com.sam.Utils.Utils;
 import dotcom.com.sam.extras.Constants;
 import dotcom.com.sam.extras.RegistrationResponse;
 
@@ -23,16 +26,18 @@ import dotcom.com.sam.extras.RegistrationResponse;
 
 public class SubCategeoryAdapter extends RecyclerView.Adapter<SubCategeoryAdapter.ViewHolder> {
     Context context;
-public static int glob;
-    int currentPosition;
-    private ArrayList<RegistrationResponse.ResponseBean> arrSubCateogry;
-
-
-    public SubCategeoryAdapter(Context context, List<RegistrationResponse.ResponseBean> arrSubCateogry)
+    public static int length;
+    int id;
+    ArrayList<String> stringList = new ArrayList<String>();
+    public static ArrayList<String> arrSubCateogry1;
+    public  static ArrayList<RegistrationResponse.ResponseBean.SubCategoriesBean>subCategoriesBeans;
+    List<RegistrationResponse.ResponseBean.SubCategoriesBean> arrTemp;
+    public SubCategeoryAdapter(Context context, ArrayList<RegistrationResponse.ResponseBean.SubCategoriesBean> arrTemp)
     {
         //this.dataBeen=response;
         this.context=context;
-        this.arrSubCateogry = (ArrayList<RegistrationResponse.ResponseBean>) arrSubCateogry;
+        this.arrTemp = (ArrayList<RegistrationResponse.ResponseBean.SubCategoriesBean>)arrTemp;
+        this.arrSubCateogry1 =  arrSubCateogry1;
     }
 
 
@@ -50,17 +55,32 @@ public static int glob;
     }
 
     @Override
-    public void onBindViewHolder(SubCategeoryAdapter.ViewHolder holder, int position) {
-       // glob =holder.categeoryName.getTag();
-        holder.subcat.setText(arrSubCateogry.get(position).getSubCategories().get(position).getSubCategoryName());
+    public void onBindViewHolder(final SubCategeoryAdapter.ViewHolder holder, final int position) {
+        if (arrTemp.size() > 0) {
+            // arrSubCateogry1.clear();
+            id = CategorySingalton.getInstance().getC_Id();
+            holder.cardView.setId(id);
+            holder.setIsRecyclable(false);
+            holder.subcat.setText(arrTemp.get(position).getSubCategoryName());
+            stringList.add(arrTemp.get(position).getSubCategoryName());
+            SubcategorySingalton.getInstance().setSubCategoryName(arrTemp.get(position).getSubCategoryName());
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SubcategorySingalton.getInstance().setSc_Id(arrTemp.get(position).getSc_Id());
+                    CategorySingalton.getInstance().setCat(null);
+                    CategorySingalton.getInstance().setSubcateID(arrTemp.get(position).getC_Id());
+                    Utils.moveNextWithAnimation(context,ProductActivity.class);
+                }
+            });
 
-
+        }
     }
 
     @Override
     public int getItemCount() {
 
-       return Integer.parseInt(String.valueOf(arrSubCateogry.get(glob).getSubCategories().size()));
+        return arrTemp.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

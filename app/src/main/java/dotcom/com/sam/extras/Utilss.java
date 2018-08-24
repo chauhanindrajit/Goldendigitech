@@ -56,9 +56,9 @@ public class Utilss {
     public static WebService getWebService() {
 
         OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
-        okHttpClient.connectTimeout(20, TimeUnit.SECONDS);
-        okHttpClient.readTimeout(20, TimeUnit.SECONDS);
-        okHttpClient.writeTimeout(20, TimeUnit.SECONDS);
+        okHttpClient.connectTimeout(7000, TimeUnit.SECONDS);
+        okHttpClient.readTimeout(7000, TimeUnit.SECONDS);
+        okHttpClient.writeTimeout(7000, TimeUnit.SECONDS);
 
         return new retrofit2.Retrofit.Builder()                                   // Retrofit client.
                 .baseUrl(WEB_API_BASE_URL)                                       // Base domain URL.
@@ -69,17 +69,17 @@ public class Utilss {
     }
 
     public static WebService getWebServiceForAuthorization(final Context context) {
-        Log.e(TAG, "Authorization" + " Bearer " + Utilss.getStringUserPreference(context,Constants.ACCESS_TOKEN));
+        Log.e(TAG, "Authorization" + " Bearer " + Utilss.getStringUserPreference(context,Constants.USER_NAME));
 
         OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
-        okHttpClient.connectTimeout(20, TimeUnit.SECONDS);
-        okHttpClient.readTimeout(20, TimeUnit.SECONDS);
-        okHttpClient.writeTimeout(20, TimeUnit.SECONDS);
+        okHttpClient.connectTimeout(7000, TimeUnit.SECONDS);
+        okHttpClient.readTimeout(7000, TimeUnit.SECONDS);
+        okHttpClient.writeTimeout(7000, TimeUnit.SECONDS);
         okHttpClient.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 final Request request = chain.request().newBuilder()
-                        .addHeader("Authorization", " Bearer " + Utilss.getStringUserPreference(context,Constants.ACCESS_TOKEN))
+                        .addHeader("Authorization", " Bearer " + Utilss.getStringUserPreference(context,Constants.USER_NAME))
                         .build();
                 return chain.proceed(request);
             }
@@ -98,9 +98,9 @@ public class Utilss {
     public static WebService getWebServiceForGoogleApi(String url) {
 
         OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
-        okHttpClient.connectTimeout(20, TimeUnit.SECONDS);
-        okHttpClient.readTimeout(20, TimeUnit.SECONDS);
-        okHttpClient.writeTimeout(20, TimeUnit.SECONDS);
+        okHttpClient.connectTimeout(7000, TimeUnit.SECONDS);
+        okHttpClient.readTimeout(7000, TimeUnit.SECONDS);
+        okHttpClient.writeTimeout(7000, TimeUnit.SECONDS);
 
         return new retrofit2.Retrofit.Builder()                                   // Retrofit client.
                 .baseUrl(url)                                // Base domain URL.

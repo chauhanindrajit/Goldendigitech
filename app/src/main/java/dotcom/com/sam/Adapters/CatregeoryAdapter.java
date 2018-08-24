@@ -11,9 +11,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import dotcom.com.sam.Categeory;
-import dotcom.com.sam.ProductActivity;
+import dotcom.com.sam.Activity.Categeory;
+import dotcom.com.sam.Activity.ProductActivity;
 import dotcom.com.sam.R;
+import dotcom.com.sam.SingaltonsClasses.CategorySingalton;
 import dotcom.com.sam.Utils.Utils;
 import dotcom.com.sam.extras.RegistrationResponse;
 
@@ -25,19 +26,39 @@ import dotcom.com.sam.extras.RegistrationResponse;
 public class CatregeoryAdapter extends RecyclerView.Adapter<CatregeoryAdapter.ViewHolderIN> {
     Context context;
     public static int glob;
+    private List<RegistrationResponse.ResponseBean.SubCategoriesBean> values;
+    private RecyclerView.Adapter variantAdapter;
+    ArrayList<RegistrationResponse.ResponseBean> arrTemp = new ArrayList<>();
+    ArrayList<String> stringList = new ArrayList<>();
+    private RecyclerView.LayoutManager variantLayoutManager;
+    public  static List<RegistrationResponse.ResponseBean.SubCategoriesBean>subCategoriesBeans;
+    //public static ArrayList<RegistrationResponse.ResponseBean.SubCategoriesBean> arrSubCateogry1;
+    public ArrayList<RegistrationResponse.ResponseBean> arrSubCateogry1;
+    public static List<RegistrationResponse.ResponseBean> arrSubCateogry;
 
 
-    private ArrayList<RegistrationResponse.ResponseBean> arrSubCateogry;
-
-
-    public CatregeoryAdapter(Categeory context, List<RegistrationResponse.ResponseBean> arrSubCateogry)
-    {
-        //this.dataBeen=response;
+    public CatregeoryAdapter(Categeory context, List<RegistrationResponse.ResponseBean> arrSubCateogry,ArrayList<String>stringList ){
+        this.stringList=stringList;
         this.context=context;
+        this.arrTemp = (ArrayList<RegistrationResponse.ResponseBean>)arrTemp;
         this.arrSubCateogry = (ArrayList<RegistrationResponse.ResponseBean>) arrSubCateogry;
+        // this.arrSubCateogry1 = arrSubCateogry1;
     }
 
 
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        RecyclerView recyclerView;
+        TextView categeoryName;
+
+        private ViewHolder(View convertView) {
+            super(convertView);
+
+            recyclerView=(RecyclerView) itemView.findViewById(R.id.categeory);
+            categeoryName=(TextView)itemView.findViewById(R.id.categeoryName);
+
+        }
+    }
 
 
     @Override
@@ -54,41 +75,48 @@ public class CatregeoryAdapter extends RecyclerView.Adapter<CatregeoryAdapter.Vi
 
 
     @Override
-    public void onBindViewHolder(ViewHolderIN holder, int position) {
-
+    public void onBindViewHolder(ViewHolderIN holder, final int position) {
+        ArrayList res = new ArrayList();
+        arrSubCateogry1 = res;
+       // CategorySingalton.getInstance().setSubname(arrSubCateogry.get(position).getSubname());
+        SubCategeoryAdapter subCatregeoryAdapterr = new SubCategeoryAdapter(context ,arrSubCateogry.get(position).getSubCategories());
+//        notifyDataSetChanged();
 
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         holder.recyclerView.setLayoutManager(horizontalLayoutManagaer);
-        holder.recyclerView.setAdapter(new SubCategeoryAdapter(context,arrSubCateogry));
-        holder.recyclerView.setTag(position);
-//        HashMap<String, String> obj = Constants.shareInstace.arrcontactList.get(position);
-    //    Constants.shareInstace.arrSubCateogrySK = Constants.shareInstace.arrSubCateogry.get(position);
+        holder.recyclerView.setAdapter(subCatregeoryAdapterr);
+//        holder.recyclerView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Utils.moveNextWithAnimation(context,ProductActivity.class);
+//            }
+//        });
+        glob = position;
         holder.categeoryName.setText(arrSubCateogry.get(position).getCategosryName());
-        holder.recyclerView.setTag(position);
 
-//        final int glob =  Integer.valueOf(String.valueOf(holder.recyclerView.setTag(position)));
-//        CatregeoryAdapter.glob = glob;glob=  holder.categeoryName.setTag(arrSubCateogry.get(position).getC_Id());
+        holder.setIsRecyclable(false);
+        holder.recyclerView.getRecycledViewPool().clear();
+        holder.recyclerView.stopScroll();
+        holder.view_all_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    /*Intent intent=new Intent(context, ProductActivity.class);
+                    context.startActivity(intent);
+*/
+                    stringList.add(CategorySingalton.getInstance().getCategosryName());
+                    CategorySingalton.getInstance().setCat(arrSubCateogry.get(position).getCategosryName());
+                    CategorySingalton.getInstance().setCateID(arrSubCateogry.get(position).getC_Id());
+                    Utils.moveNextWithAnimation(context,ProductActivity.class);
 
-        holder.recyclerView.getAdapter();
 
-
+            }
+        });
 
     }
-
     @Override
     public int getItemCount() {
-
-
         return arrSubCateogry.size();
-
-
-
     }
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
     public class ViewHolderIN extends RecyclerView.ViewHolder {
         RecyclerView recyclerView;
         TextView view_all_txt;
@@ -101,21 +129,22 @@ public class CatregeoryAdapter extends RecyclerView.Adapter<CatregeoryAdapter.Vi
             view_all_txt=(TextView) itemView.findViewById(R.id.txt_view);
 
 
-            view_all_txt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    /*Intent intent=new Intent(context, ProductActivity.class);
-                    context.startActivity(intent);
-*/
-                    try {
-                        Utils.moveNextWithAnimation(context,ProductActivity.class);
-                    }
-                    catch (Exception e){
-                        Utils.moveNextWithAnimation(context,ProductActivity.class);
-                    }
-
-                }
-            });
+//            view_all_txt.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    /*Intent intent=new Intent(context, ProductActivity.class);
+//                    context.startActivity(intent);
+//*/
+//                    try {
+//
+//                        Utils.moveNextWithAnimation(context,ProductActivity.class);
+//                    }
+//                    catch (Exception e){
+//                        Utils.moveNextWithAnimation(context,ProductActivity.class);
+//                    }
+//
+//                }
+//            });
         }
     }
 

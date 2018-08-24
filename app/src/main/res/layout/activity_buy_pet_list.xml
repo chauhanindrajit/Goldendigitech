@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BuyPetList">
+    tools:context=".Activity.BuyPetList">
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/recylcerview_products"
@@ -18,9 +18,10 @@
         android:elevation="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+        app:navigationIcon="@drawable/ic_arrow_back_whitw_24dp"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize">
 
     </android.support.v7.widget.Toolbar>
-
 </RelativeLayout>

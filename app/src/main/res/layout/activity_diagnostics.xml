@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Diagnostics">
+    tools:context=".Activity.Diagnostics">
     <ScrollView
         android:layout_marginBottom="?attr/actionBarSize"
         android:layout_marginTop="?attr/actionBarSize"
@@ -27,6 +27,7 @@
                     android:layout_height="200dp"
                     >
                     <ImageView
+                        android:id="@+id/imgprofile"
                         android:transitionName="diagnostic_image"
                         android:background="@drawable/pathology_labs"
                         android:layout_width="match_parent"
@@ -38,6 +39,7 @@
                      android:layout_width="match_parent"
                      android:layout_height="50dp">
                      <TextView
+                         android:id="@+id/subcentername"
                          android:layout_marginLeft="30dp"
                          android:textSize="25dp"
                          android:gravity="center_vertical"
@@ -77,6 +79,7 @@
                             android:src="@drawable/ic_place_blue_24dp" />
 
                         <TextView
+                            android:id="@+id/blocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
@@ -102,6 +105,7 @@
                             android:layout_marginLeft="15dp"
                             android:layout_weight="1"
                             android:text="Open Today"
+                            android:id="@+id/stime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
 
@@ -134,7 +138,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp" />
                         <TextView
-
+android:id="@+id/ssericess"
                             android:layout_marginLeft="15dp"
                             android:layout_weight="1"
                             android:text="Services Available : X-Rays, CT Scan, MRI"
@@ -155,6 +159,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp" />
                         <TextView
+                            android:id="@+id/ssamtype"
                             android:layout_marginLeft="15dp"
                             android:layout_weight="1"
                             android:text="Sample Checks Of : Blood, Urine, Stool"
@@ -177,6 +182,7 @@
                         <TextView
                             android:textStyle="bold"
                             android:layout_marginLeft="15dp"
+                            android:id="@+id/scollectntimess"
                             android:layout_weight="1"
                             android:text=" Sample collection at home done between : 11 am - 6 pm"
                             android:layout_width="match_parent"
@@ -196,7 +202,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp" />
                         <TextView
-
+                            android:id="@+id/spettype"
                             android:layout_marginLeft="15dp"
                             android:layout_weight="1"
                             android:text="Pets : Dog, Cat"

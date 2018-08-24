@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VetProfileActivity">
+    tools:context=".ProfileActivity.VetProfileActivity">
     <ScrollView
         android:layout_marginBottom="?attr/actionBarSize"
         android:layout_marginTop="?attr/actionBarSize"
@@ -39,6 +39,7 @@
                 android:transitionName="img_profile"
                 android:layout_marginTop="8dp"/>
             <TextView
+                android:id="@+id/doctname"
                 android:textSize="20dp"
                 android:gravity="center_horizontal"
                 android:textStyle="bold"
@@ -48,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/subqualification"
                 android:maxLines="1"
                 android:textSize="16dp"
                 android:gravity="center_horizontal"
@@ -56,6 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/subexperiance"
                 android:maxLines="1"
                 android:textSize="16dp"
                 android:gravity="center_horizontal"
@@ -64,6 +67,7 @@
                 android:text="17 years experience"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/subdoctortype"
                 android:maxLines="1"
                 android:textSize="16dp"
                 android:gravity="center_horizontal"
@@ -102,6 +106,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
+                    android:id="@+id/location"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
@@ -125,6 +130,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
                     android:text="400"
+                    android:id="@+id/vetsubcharge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -146,6 +152,7 @@
                 <TextView
                     android:textColor="#dc3e3e"
                     android:textStyle="bold"
+                    android:id="@+id/subvisitathomefee"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
                     android:text="600 - Visit At Home"
@@ -192,7 +199,6 @@
                     android:layout_width="23dp"
                     android:layout_height="23dp" />
                 <TextView
-
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
                     android:text="Visits Today"
@@ -228,6 +234,7 @@
                 android:layout_width="80dp"
                 android:layout_height="1dp"></View>
             <TextView
+                android:id="@+id/detaildescription"
                 android:text="Dr. Krishna Ingole, (B.V.Sc. and A.H.,M.V.Sc Medicine) working as Hospital Registrar, at Bombay Vetterinary College since April 2008.He was Executive production (4 years) at Indian Immunological LTD, Hyderabad.He was responsible for Production of Bacterial vaccine: HS, BQ, ET, Anthrax, Leptospira, and Brucella.Production of viral vaccine: CDV, CAV1, CAV2, CPV, CV, sheep pox, PPR, Blue tongue and Production of Protozoal vaccine: Theileriosis vaccine. Preparation of master and working cell line and media preparation."
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

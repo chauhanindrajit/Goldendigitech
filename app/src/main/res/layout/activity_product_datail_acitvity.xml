@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="dotcom.com.sam.ProductDatailAcitvity">
+    tools:context="dotcom.com.sam.Activity.ProductDatailAcitvity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:translationZ="16dp"

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Adoption">
-
-
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".Activity.Adoption">
     <LinearLayout
         android:gravity="center"
         android:orientation="vertical"
@@ -26,15 +25,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <Button
-                    android:id="@+id/btn_adopt_pet"
+                    android:id="@+id/btngroming"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@drawable/adopt_pet" />
+                    android:background="@drawable/gromingservic" />
                 <TextView
                     android:layout_gravity="center"
                     android:textColor="#1d1c1c"
                     android:textStyle="bold"
-                    android:text="ADOPT A PET"
+                    android:singleLine="false"
+                    android:gravity="center"
+                    android:text="GROOMING\nSERVICES"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -47,15 +48,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <Button
-                    android:id="@+id/btn_buy_pet"
+                    android:id="@+id/btn_traing_services"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@drawable/buy_pet" />
+                    android:background="@drawable/trainingservices" />
                 <TextView
                     android:layout_gravity="center"
                     android:textColor="#1d1c1c"
                     android:textStyle="bold"
-                    android:text="BUY PET"
+                    android:text="TRAINING\nSERVICES"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -63,34 +64,53 @@
         </LinearLayout>
 
         <LinearLayout
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
 
-
             <LinearLayout
-                android:gravity="center"
                 android:padding="15dp"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <Button
-                    android:id="@+id/btn_old_age_home"
+                    android:id="@+id/btnsitter"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@drawable/pet_old_age_home" />
+                    android:background="@drawable/petsisterwalk" />
                 <TextView
                     android:layout_gravity="center"
                     android:textColor="#1d1c1c"
                     android:textStyle="bold"
-                    android:text="PET OLD AGE HOME"
+                    android:singleLine="false"
+                    android:gravity="center"
+                    android:text="PET SITTER &amp;\nPET WALKING"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
 
+
+            <LinearLayout
+                android:padding="15dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btn_micochipping"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/microchipping" />
+                <TextView
+                    android:layout_gravity="center"
+                    android:textColor="#1d1c1c"
+                    android:textStyle="bold"
+                    android:text="MICRO-\nCHIPPING"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
@@ -100,8 +120,13 @@
         android:elevation="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+        app:navigationIcon="@drawable/ic_arrow_back_whitw_24dp"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize">
 
     </android.support.v7.widget.Toolbar>
-</RelativeLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>
