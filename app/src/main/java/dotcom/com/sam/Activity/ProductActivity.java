@@ -23,6 +23,7 @@ import dotcom.com.sam.Adapters.ProductPagerAdapter;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Response.ProductResponse;
 import dotcom.com.sam.SingaltonsClasses.CategorySingalton;
+import dotcom.com.sam.SingaltonsClasses.PSingalton;
 import dotcom.com.sam.SingaltonsClasses.ProductSingalton;
 import dotcom.com.sam.SingaltonsClasses.SubcategorySingalton;
 import dotcom.com.sam.Utils.Utils;
@@ -45,7 +46,7 @@ public class ProductActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     Integer ID, IDS;
     String sum;
-    private ArrayList<ProductSingalton> tripSingaltonss;
+    ArrayList tripSingaltonss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class ProductActivity extends AppCompatActivity {
         actionBar = getSupportActionBar();
         fragmentManager = getSupportFragmentManager();
         tripSingaltonss = new ArrayList<>();
+        tripSingaltonss.clear();
         if (CategorySingalton.getInstance().getCat() != null) {
             IDS = CategorySingalton.getInstance().getCateID();
             checkAcceptTrip(IDS);
@@ -74,8 +76,8 @@ public class ProductActivity extends AppCompatActivity {
 
         //addTab();
         //stringList.add(String.valueOf(CategorySingalton.getInstance().getCategosryName()));
-       //tabLayout.addTab(tabLayout.newTab().setText(""));
-       // tabLayout.getTabAt(Integer.parseInt(SubcategorySingalton.getInstance().getSubCategoryName()));
+        //tabLayout.addTab(tabLayout.newTab().setText(""));
+        // tabLayout.getTabAt(Integer.parseInt(SubcategorySingalton.getInstance().getSubCategoryName()));
 
 //        ProductPagerAdapter productPagerAdapter = new ProductPagerAdapter(fragmentManager, stringList);
 //        mViewPager.setAdapter(productPagerAdapter);
@@ -117,6 +119,9 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 pDialog.hide();
+                if (stringList.size() > 0) {
+                    stringList.clear();
+                }
                 if (response.code() == 200) {
                     ProductResponse productResponse = response.body();
                     // checkAcceptTrip1();
@@ -125,9 +130,8 @@ public class ProductActivity extends AppCompatActivity {
 
                     for (int i = 0; i < productResponse.getResponse().size(); i++) {
                         ProductSingalton productSingalton=new ProductSingalton();
-
+                        PSingalton pSingalton= new PSingalton();
                         for(int j = 0;j< productResponse.getResponse().get(i).getProdList().size();j++){
-
                             productSingalton.setProductName(productResponse.getResponse().get(i).getProdList().get(j).getProductName());
                             productSingalton.setDiscount(productResponse.getResponse().get(i).getProdList().get(j).getDiscount());
                             productSingalton.setPrice(productResponse.getResponse().get(i).getProdList().get(j).getPrice());
@@ -135,15 +139,14 @@ public class ProductActivity extends AppCompatActivity {
                             productSingalton.setCategosryName(productResponse.getResponse().get(i).getProdList().get(j).getCategosryName());
                             productSingalton.setSubCategoryName(productResponse.getResponse().get(i).getProdList().get(j).getSubCategoryName());
                             productSingalton.setImage(productResponse.getResponse().get(i).getProdList().get(j).getImage());
-                            productSingalton.setC_Id(SubcategorySingalton.getInstance().getSc_Id());
                             tripSingaltonss.add(productSingalton);
                         }
-
+                        // tripSingaltonss.add(productSingalton);
                         stringList.add(productResponse.getResponse());
                         tabLayout.addTab(tabLayout.newTab().setText(productResponse.getResponse().get(i).getSubCategoryName()));
-                        if(productResponse.getResponse().get(i).getSc_Id()==SubcategorySingalton.getInstance().getSc_Id()){
-                            //tabLayout.getTabAt(3).getPosition();
-                        }
+                        tabLayout.getTabCount();
+                        productSingalton.setSc_Id(tabLayout.getSelectedTabPosition());
+
                         ProductPagerAdapter productPagerAdapter = new ProductPagerAdapter(fragmentManager, stringList,tripSingaltonss);
                         mViewPager.setAdapter(productPagerAdapter);
                         productPagerAdapter.notifyDataSetChanged();

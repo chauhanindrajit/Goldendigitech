@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,12 +27,15 @@ import dotcom.com.sam.SingaltonsClasses.ProductSingalton;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolderPro> {
     Context context;
+    int pos;
     private ArrayList<ProductSingalton> details;
 
-    public ProductAdapter(Context context, List<ProductSingalton> details)
+    public ProductAdapter(Context context, ArrayList<ProductSingalton> details)
     {
-        this.details =(ArrayList<ProductSingalton>)details;
+
+        this.details =details;
         this.context=context;
+        notifyDataSetChanged();
     }
     @Override
     public ViewHolderPro onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -45,11 +49,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolderPro holder, int position) {
 
-
         holder.pdctname.setText(details.get(position).getProductName());
         holder.withdiscont.setText(details.get(position).getDiscountPrice());
         holder.actualprce.setText(String.valueOf(details.get(position).getPrice()));
-
+        holder.actualprce.setPaintFlags(holder.actualprce.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         if (details.get(position).getImage() != null) {
             Picasso.with(context).load("http://mrsam.in/sam/MainImage/" + details.get(position).getImage().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(holder.imageView);
         } else {
@@ -60,16 +63,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"productimage");
-           Intent intent=new Intent(context,ProductDatailAcitvity.class);
-           context.startActivity(intent,activityOptions.toBundle());
+                Intent intent=new Intent(context,ProductDatailAcitvity.class);
+                context.startActivity(intent,activityOptions.toBundle());
 
 
             }
         });
+        pos=position;
     }
 
     @Override
     public int getItemCount() {
+
         return details.size();
     }
 

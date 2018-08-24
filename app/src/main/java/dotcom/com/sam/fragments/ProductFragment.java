@@ -59,15 +59,16 @@ public class ProductFragment extends Fragment {
     ActionBar actionBar;
     TabLayout tabLayout;
     private ArrayList<ProductResponse.ResponseBean> arrSubCateogry;
-    List<ProductSingalton> count = new ArrayList<>();
+    ArrayList<ProductSingalton> count = new ArrayList<>();
     ArrayList<String> stringList = new ArrayList<String>();
     ViewPager mViewPager;
     private ArrayList<ProductSingalton> tripSingaltonss;
     private ProgressDialog pDialog;
-     int pos;
-     int ID;
+    int pos;
+    int ID;
     @SuppressLint("ValidFragment")
-    public ProductFragment(int pos, List<ProductSingalton> count) {
+    public ProductFragment(int pos, ArrayList<ProductSingalton> count) {
+
         this.pos=pos;
         this.count=count;
         // Required empty public constructor
@@ -92,6 +93,7 @@ public class ProductFragment extends Fragment {
         setRecyclerviewProduct();
         setBottomFillter();
         pos= SubcategorySingalton.getInstance().getSc_Id();
+       // count.clear();
         //ID = CategorySingalton.getInstance().getSubcateID();
 //        if(ProductSingalton.getInstance().getSc_Id()==0){
 //            ID = 1;
@@ -107,12 +109,13 @@ public class ProductFragment extends Fragment {
 
     private  void setRecyclerviewProduct()
     {
-     //   recyclerView
+        //   recyclerView
         ProductAdapter productAdapter=new ProductAdapter(getContext(),count);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(), 2);
-      //  LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.Gr, false);
+        productAdapter.notifyDataSetChanged();
+        //  LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.Gr, false);
         recyclerView.setLayoutManager(gridLayoutManager);
-         recyclerView.setAdapter(productAdapter);
+        recyclerView.setAdapter(productAdapter);
 
 
     }
@@ -144,7 +147,7 @@ public class ProductFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              dialog.dismiss();
+                dialog.dismiss();
             }
         });
     }
@@ -154,7 +157,7 @@ public class ProductFragment extends Fragment {
         pDialog = new ProgressDialog(getContext());
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
-       // pDialog.show();
+        // pDialog.show();
         final Call<ProductResponse> productResponseCall = Utilss.getWebService().PRODUCT_RESPONSE_CALL(ID);
         Log.e("URL", "checkAcceptTrip: " + productResponseCall.request().url().toString());
         productResponseCall.enqueue(new Callback<ProductResponse>() {
