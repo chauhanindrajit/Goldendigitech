@@ -66,9 +66,9 @@
         <activity
             android:name=".Activity.PetPhotography"
             android:screenOrientation="portrait" />
-         <activity
-         android:name=".Utils.PhotoMain"
-         android:screenOrientation="portrait" />
+        <activity
+            android:name=".Utils.PhotoMain"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ImageViewerActivity"
             android:screenOrientation="portrait" />
@@ -111,7 +111,7 @@
         <activity android:name=".ProfileActivity.Doggromingprofile" />
         <activity android:name=".Activity.CatGrooming" />
         <activity android:name=".ProfileActivity.Catgromingprofile" />
-        <activity android:name=".Activity.GroomingService" />
+        <!-- <activity android:name=".Activity.GroomingService" /> -->
         <activity android:name=".Activity.TrainigServices" />
         <activity android:name=".Activity.MicroChipping" />
         <activity android:name=".Activity.PetSitterWalking" />
@@ -124,7 +124,10 @@
         <activity android:name=".ProfileActivity.WalkingProfile" />
         <activity android:name=".ProfileActivity.TrainingProfile" />
         <activity android:name=".Activity.PhotoViewerMutiple" />
-        <activity android:name=".Activity.EDoctor"></activity>
+        <activity android:name=".Utils.WishlistActivity" />
+        <activity android:name=".Activity.CartListActivity" />
+        <activity android:name=".Activity.EDoctor" />
+        <activity android:name=".Activity.GroomingLastpage"></activity>
     </application>
 
 </manifest>

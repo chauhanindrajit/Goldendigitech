@@ -1,6 +1,11 @@
 package dotcom.com.sam.Response;
 
+import android.util.Log;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 public class ProductResponse {
 
@@ -530,6 +535,7 @@ public class ProductResponse {
             private String ModifyDate;
             private String ModifyBy;
             private String status;
+
             private String DeleteStatus;
             private List<SubListBean> SubList;
 
@@ -617,6 +623,7 @@ public class ProductResponse {
                 private String SubCatName;
                 private String BrandName;
                 private String BreedName;
+                private Boolean Selected;
 
                 public int getSub_Id() {
                     return Sub_Id;
@@ -648,6 +655,54 @@ public class ProductResponse {
 
                 public void setBreedName(String BreedName) {
                     this.BreedName = BreedName;
+                }
+
+                public Boolean getSelected() {
+                    return true;
+                }
+
+
+                public void setSelected(Boolean selected) {
+                    Selected = selected;
+                }
+                public ArrayList<Integer> getBrandIdList() {
+                    return brandIdList;
+                }
+
+                public void setBrandIdList(ArrayList<Integer> brandIdList) {
+                    this.brandIdList = brandIdList;
+                }
+                private boolean check;
+                ArrayList<Integer> brandIdList = new ArrayList<>();
+                public boolean addBrandId(int id) {
+                    Log.e(TAG, "brand size : " + brandIdList.size());
+                    check = false;
+                    int a = brandIdList.size();
+                    if (brandIdList.size() > 0) {
+                        for (int i = 0; i < a; i++) {
+                            if (id == brandIdList.get(i)) {
+                                brandIdList.set(i, id);
+                                check = true;
+                                return a == brandIdList.size();
+                            }
+                        }
+                    }
+                    if (!check) {
+                        brandIdList.add(id);
+                        check = false;
+                        return a < brandIdList.size();
+                    }
+                    return false;
+                }
+
+                public void removeBrandId(int brand_id) {
+                    if (brandIdList.size() > 0) {
+                        for (int i = 0; i < brandIdList.size(); i++) {
+                            if (brand_id == brandIdList.get(i)) {
+                                brandIdList.remove(i);
+                            }
+                        }
+                    }
                 }
             }
         }

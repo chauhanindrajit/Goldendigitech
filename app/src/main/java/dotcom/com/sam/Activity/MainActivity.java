@@ -37,6 +37,7 @@ import dotcom.com.sam.R;
 import dotcom.com.sam.Utils.UserSessionManager;
 import dotcom.com.sam.Utils.Constats;
 import dotcom.com.sam.Utils.Utils;
+import dotcom.com.sam.Utils.WishlistActivity;
 import dotcom.com.sam.extras.Constants;
 import dotcom.com.sam.extras.HttpHandler;
 
@@ -138,9 +139,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -180,6 +181,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             pbutton.setTextColor(Color.rgb(30, 144, 255));
             Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
             nbutton.setTextColor(Color.rgb(30, 144, 255));
+        }
+        else if (id == R.id.my_wishlist) {
+            startActivity(new Intent(MainActivity.this, WishlistActivity.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

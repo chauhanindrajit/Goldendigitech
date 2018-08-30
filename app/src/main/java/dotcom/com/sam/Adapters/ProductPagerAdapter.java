@@ -19,8 +19,8 @@ public class ProductPagerAdapter extends FragmentPagerAdapter {
     ArrayList<List<ProductResponse.ResponseBean>> count = new ArrayList<>();
     private boolean doNotifyDataSetChangedOnce = false;
 
-    ArrayList<ProductSingalton> tripSingaltonss = new ArrayList<>();
-    public ProductPagerAdapter(FragmentManager fragmentManager, ArrayList<List<ProductResponse.ResponseBean>> count, ArrayList<ProductSingalton> tripSingaltonss) {
+    List<ProductResponse.ResponseBean> tripSingaltonss = new ArrayList<>();
+    public ProductPagerAdapter(FragmentManager fragmentManager, ArrayList<List<ProductResponse.ResponseBean>> count, List<ProductResponse.ResponseBean> tripSingaltonss) {
         super(fragmentManager);
         notifyDataSetChanged();
         this.count=count;
@@ -31,7 +31,7 @@ public class ProductPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
 
         //  notifyDataSetChanged();
-        ProductFragment fragment=new ProductFragment(position,tripSingaltonss);
+        ProductFragment fragment=new ProductFragment(position,tripSingaltonss.get(position).getProdList(),tripSingaltonss.get(position).getFilterList());
         return fragment;
     }
 

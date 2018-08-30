@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/drawer_layout"
     tools:context="dotcom.com.sam.Activity.ProductActivity">
 
     <android.support.v7.widget.Toolbar
@@ -13,9 +14,19 @@
         android:elevation="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:menu="@menu/main"
+        app:actionLayout="@menu/main"
         android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/ic_arrow_back_whitw_24dp"
         android:minHeight="?attr/actionBarSize">
-
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:id="@+id/addtocard"
+            android:src="@drawable/shooping"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
     </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:visibility="gone"
@@ -45,11 +56,20 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:id="@+id/nodata"
+            android:visibility="gone"
+            android:text="SORRY NO DATA FOUND"/>
         <android.support.v4.view.ViewPager
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+
 
     </LinearLayout>
 

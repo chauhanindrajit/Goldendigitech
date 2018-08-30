@@ -2,15 +2,25 @@ package dotcom.com.sam.Activity;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
@@ -34,11 +44,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductActivity extends AppCompatActivity {
+public class ProductActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
     public static FragmentManager fragmentManager;
     ViewPager mViewPager;
     Toolbar toolbar;
     ActionBar actionBar;
+    ImageView addtocart;
     TabLayout tabLayout;
     private ArrayList<ProductResponse.ResponseBean> arrSubCateogry;
     List<RegistrationResponse.ResponseBean> count = new ArrayList<>();
@@ -46,8 +57,11 @@ public class ProductActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     Integer ID, IDS;
     String sum;
+    TextView nodat;
+    int subcatid;
+    Menu customMenu;
     ArrayList tripSingaltonss;
-
+    public static int notificationCountCart = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,23 +70,44 @@ public class ProductActivity extends AppCompatActivity {
         initView();
         arrSubCateogry = new ArrayList<>();
         toolbar = findViewById(R.id.toolbar);
-        initView();
-        toolbar.setTitle("DOG");
+        addtocart=(ImageView)findViewById(R.id.addtocard);
+
+        addtocart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProductActivity.this,CartListActivity.class);
+                startActivity(i);
+            }
+        });
+
+
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         actionBar = getSupportActionBar();
         fragmentManager = getSupportFragmentManager();
         tripSingaltonss = new ArrayList<>();
         tripSingaltonss.clear();
+        nodat=(TextView)findViewById(R.id.nodata);
+        subcatid= SubcategorySingalton.getInstance().getSc_Id();
         if (CategorySingalton.getInstance().getCat() != null) {
             IDS = CategorySingalton.getInstance().getCateID();
-            checkAcceptTrip(IDS);
+            subcatid=0;
+            checkAcceptTrip(IDS,subcatid);
+            toolbar.setTitle(CategorySingalton.getInstance().getCategosryName());
+
             ;
         } else {
             ID = CategorySingalton.getInstance().getSubcateID();
-
-            checkAcceptTrip(ID);
+            subcatid= SubcategorySingalton.getInstance().getSc_Id();
+            checkAcceptTrip(ID,subcatid);
+            toolbar.setTitle(CategorySingalton.getInstance().getCategosryName());
         }
         sum= SubcategorySingalton.getInstance().getSubCategoryName();
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         //addTab();
         //stringList.add(String.valueOf(CategorySingalton.getInstance().getCategosryName()));
@@ -84,12 +119,49 @@ public class ProductActivity extends AppCompatActivity {
 //        productPagerAdapter.notifyDataSetChanged();
 //        productPagerAdapter.getCount();
 
-        TabListener();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Get the notifications MenuItem and
+        // its LayerDrawable (layer-list)
+
+        MenuItem item = menu.findItem(R.id.action_cart);
+        //NotificationCountSetClass.setAddToCart(ProductActivity.this, item,notificationCountCart);
+        // force the ActionBar to relayout its MenuItems.
+        // onCreateOptionsMenu(Menu) will be called again.
+        invalidateOptionsMenu();
+        return super.onPrepareOptionsMenu(menu);
 
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+      if (id == R.id.action_cart) {
+
+           /* NotificationCountSetClass.setAddToCart(MainActivity.this, item, notificationCount);
+            invalidateOptionsMenu();*/
+            startActivity(new Intent(ProductActivity.this, CartListActivity.class));
+
+           /* notificationCount=0;//clear notification count
+            invalidateOptionsMenu();*/
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void initView() {
         mViewPager = (ViewPager) findViewById(R.id.pager);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
@@ -106,7 +178,7 @@ public class ProductActivity extends AppCompatActivity {
 
     }
 
-    private void checkAcceptTrip(Integer ID) {
+    private void checkAcceptTrip(Integer ID, final int subcatid) {
         arrSubCateogry = new ArrayList<>();
 
         pDialog = new ProgressDialog(ProductActivity.this);
@@ -129,9 +201,12 @@ public class ProductActivity extends AppCompatActivity {
                     Log.e("Proct", new GsonBuilder().create().toJson(response));
 
                     for (int i = 0; i < productResponse.getResponse().size(); i++) {
+
                         ProductSingalton productSingalton=new ProductSingalton();
                         PSingalton pSingalton= new PSingalton();
                         for(int j = 0;j< productResponse.getResponse().get(i).getProdList().size();j++){
+                            Bundle bundle = new Bundle(); //I guess you're missing this
+                            bundle.putInt("category",SubcategorySingalton.getInstance().getSc_Id());
                             productSingalton.setProductName(productResponse.getResponse().get(i).getProdList().get(j).getProductName());
                             productSingalton.setDiscount(productResponse.getResponse().get(i).getProdList().get(j).getDiscount());
                             productSingalton.setPrice(productResponse.getResponse().get(i).getProdList().get(j).getPrice());
@@ -143,13 +218,34 @@ public class ProductActivity extends AppCompatActivity {
                         }
                         // tripSingaltonss.add(productSingalton);
                         stringList.add(productResponse.getResponse());
-                        tabLayout.addTab(tabLayout.newTab().setText(productResponse.getResponse().get(i).getSubCategoryName()));
-                        tabLayout.getTabCount();
                         productSingalton.setSc_Id(tabLayout.getSelectedTabPosition());
-
-                        ProductPagerAdapter productPagerAdapter = new ProductPagerAdapter(fragmentManager, stringList,tripSingaltonss);
+                        ProductPagerAdapter productPagerAdapter = new ProductPagerAdapter(fragmentManager, stringList, (productResponse.getResponse()));
                         mViewPager.setAdapter(productPagerAdapter);
                         productPagerAdapter.notifyDataSetChanged();
+//                        if(productResponse.getResponse().size()>0){
+//                            nodat.setVisibility(View.INVISIBLE);
+//                        }
+//                        else {
+//                            nodat.setVisibility(View.VISIBLE);
+//                        }
+                        tabLayout.addTab(tabLayout.newTab().setText(productResponse.getResponse().get(i).getSubCategoryName()));
+                        tabLayout.getTabCount();
+                        if(productResponse.getResponse().get(i).getSc_Id()== subcatid){
+
+                            tabLayout.setScrollPosition(i,0f,true);
+                            mViewPager.setCurrentItem(i);
+                            mViewPager.getCurrentItem();
+                            mViewPager.setOffscreenPageLimit(3);
+                            TabListener();
+                            final int finalI = i;
+                            mViewPager.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mViewPager.setCurrentItem(finalI);
+                                    TabListener();
+                                }
+                            });
+                        }TabListener();
                     }
 
                 }
@@ -169,10 +265,8 @@ public class ProductActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                // mViewPager.setPage tab.getPosition();
+                // mViewPager.setPage(tab.getPosition());
                 mViewPager.setCurrentItem(tab.getPosition());
-
-
             }
 
             @Override
@@ -193,20 +287,34 @@ public class ProductActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(final int position) {
                 tabLayout.getTabAt(position).select();
 
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
+                tabLayout.getTabAt(state);
+
 
             }
+
         });
 
 
     }
-
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        final int pos = 3;
+//        mViewPager.postDelayed(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                mViewPager.setCurrentItem(subcatid-1);
+//            }
+//        }, 100);
+//    }
 
     public void addfragment() {
         fragmentManager.beginTransaction().add(R.id.main_conainer, new ProductMainFragment()).commit();
@@ -249,4 +357,13 @@ public class ProductActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }

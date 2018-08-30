@@ -60,6 +60,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="18dp">
                         <ImageView
+                            android:id="@+id/wishlist"
                             android:layout_alignParentRight="true"
                             android:foregroundGravity="right"
                             android:background="@mipmap/ic_heart_non_selected"

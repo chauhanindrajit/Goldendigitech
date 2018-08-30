@@ -102,7 +102,7 @@ public class CatregeoryAdapter extends RecyclerView.Adapter<CatregeoryAdapter.Vi
             public void onClick(View v) {
                     /*Intent intent=new Intent(context, ProductActivity.class);
                     context.startActivity(intent);
-*/
+*/                   CategorySingalton.getInstance().setCategosryName(arrSubCateogry.get(position).getCategosryName());
                     stringList.add(CategorySingalton.getInstance().getCategosryName());
                     CategorySingalton.getInstance().setCat(arrSubCateogry.get(position).getCategosryName());
                     CategorySingalton.getInstance().setCateID(arrSubCateogry.get(position).getC_Id());

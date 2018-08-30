@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.CatGrooming">
+    tools:context=".Activity.DogGrooming">
 
     <LinearLayout
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
@@ -21,29 +21,28 @@
             android:baselineAligned="false"
             android:translationZ="16dp"
             app:cardBackgroundColor="#ff9900">
-
             <ImageView
+                android:src="@drawable/ic_expand_more_white_24dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_expand_more_white_24dp" />
+                android:layout_height="match_parent" />
 
         </android.support.v7.widget.CardView>
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:scrollingCache="false"
             android:cacheColorHint="@android:color/transparent"
-            android:scrollingCache="false"></android.support.v7.widget.RecyclerView>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
     <LinearLayout
 
+        android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/seach_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
@@ -63,43 +62,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="SEARCH FOR GROOMING SERVICES"
+                    android:text="SEARCH FOR CAT GROOMING SERVICES"
                     android:textColor="@color/colorPrimary" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/categeory_shpe"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:src="@drawable/ic_place_black_24dp" />
-
-                    <AutoCompleteTextView
-                        android:id="@+id/languages"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:autoSizeMaxTextSize="20dp"
-                        android:background="#00ffffff"
-                        android:cursorVisible="true"
-                        android:hint="Select your location" />
-
-                    <ImageView
-                        android:id="@+id/pdnitm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="5dp"
-                        android:src="@drawable/ic_expand_more_black_24dp" />
-
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -113,14 +78,14 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
-                        android:src="@drawable/services" />
+                        android:src="@drawable/breedtype" />
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#00ffffff"
-                        android:hint="Select Services at" />
+                        android:hint="Select your breed type" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -162,7 +127,6 @@
 
 
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -193,7 +157,6 @@
 
 
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -206,14 +169,14 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
-                        android:src="@drawable/breedtype" />
+                        android:src="@drawable/services" />
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#00ffffff"
-                        android:hint="Select your breed type" />
+                        android:hint="Select Services at" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -224,7 +187,39 @@
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/categeory_shpe"
+                    android:orientation="horizontal">
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/ic_place_black_24dp" />
+                    <AutoCompleteTextView
+                        android:id="@+id/languages"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:cursorVisible="true"
+                        android:layout_weight="1"
+                        android:autoSizeMaxTextSize="20dp"
+                        android:background="#00ffffff"
+                        android:hint="Select your location" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="5dp"
+                        android:id="@+id/pdnitm"
+                        android:src="@drawable/ic_expand_more_black_24dp" />
+
+
+                </LinearLayout>
                 <Button
                     android:id="@+id/seachbtn"
                     android:layout_width="150dp"
@@ -232,9 +227,9 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
                     android:background="@color/colorPrimary"
+                    android:text="SEARCH"
                     android:clickable="true"
                     android:focusableInTouchMode="true"
-                    android:text="SEARCH"
                     android:textColor="#fff"
                     android:textStyle="bold" />
 
@@ -252,14 +247,12 @@
             android:clickable="true"
             android:translationZ="16dp"
             app:cardBackgroundColor="#ff9900">
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_expand_less_white_24dp" />
+                android:src="@drawable/ic_expand_less_white_24dp"/>
         </android.support.v7.widget.CardView>
     </LinearLayout>
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:translationZ="16dp"

@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import dotcom.com.sam.Activity.DogGrooming;
+import dotcom.com.sam.Activity.GroomingLastpage;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Utils.Utils;
 
@@ -18,7 +19,7 @@ public class Doggromingprofile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doggromingprofile);
-        button= findViewById(R.id.btn_collection);
+        button= findViewById(R.id.btn_bookpackage);
         cntnm=(TextView)findViewById(R.id.subcentername);
         servic=(TextView)findViewById(R.id.ssericess);
         smpltype=(TextView)findViewById(R.id.ssamtype);
@@ -40,7 +41,7 @@ public class Doggromingprofile extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.moveNextWithAnimation(Doggromingprofile.this,DogGrooming.class);
+                Utils.moveNextWithAnimation(Doggromingprofile.this,GroomingLastpage.class);
             }
         });
     }

@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,7 +31,10 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import dotcom.com.sam.Activity.PetPhotography;
 import dotcom.com.sam.Activity.ProductActivity;
+import dotcom.com.sam.Adapters.BasePhotoAdapter;
+import dotcom.com.sam.Adapters.FilterAdapter;
 import dotcom.com.sam.Adapters.ProductAdapter;
 import dotcom.com.sam.Adapters.ProductPagerAdapter;
 import dotcom.com.sam.R;
@@ -53,24 +57,30 @@ import static dotcom.com.sam.Activity.ProductActivity.fragmentManager;
  */
 @SuppressLint("ValidFragment")
 public class ProductFragment extends Fragment {
-    RecyclerView recyclerView;
+    RecyclerView recyclerView,filterview;
     CardView filterLaout;
     Toolbar toolbar;
     ActionBar actionBar;
     TabLayout tabLayout;
     private ArrayList<ProductResponse.ResponseBean> arrSubCateogry;
-    ArrayList<ProductSingalton> count = new ArrayList<>();
+    List<ProductResponse.ResponseBean.ProdListBean> count = new ArrayList<>();
+    List<ProductResponse.ResponseBean.FilterListBean> filterList = new ArrayList<>();
     ArrayList<String> stringList = new ArrayList<String>();
     ViewPager mViewPager;
+    private String[] mValues;
     private ArrayList<ProductSingalton> tripSingaltonss;
     private ProgressDialog pDialog;
     int pos;
     int ID;
+    private RecyclerView.LayoutManager mLayoutManager;
     @SuppressLint("ValidFragment")
-    public ProductFragment(int pos, ArrayList<ProductSingalton> count) {
+    public ProductFragment(int pos, List<ProductResponse.ResponseBean.ProdListBean> count, List<ProductResponse.ResponseBean.FilterListBean> filterList) {
 
         this.pos=pos;
         this.count=count;
+        this.filterList=filterList;
+
+
         // Required empty public constructor
     }
 
@@ -90,27 +100,18 @@ public class ProductFragment extends Fragment {
         txt.setText(Integer.toString(pos));
         tripSingaltonss = new ArrayList<>();
         recyclerView=(RecyclerView) getView().findViewById(R.id.recylcerview_products);
+
         setRecyclerviewProduct();
         setBottomFillter();
-        pos= SubcategorySingalton.getInstance().getSc_Id();
-       // count.clear();
-        //ID = CategorySingalton.getInstance().getSubcateID();
-//        if(ProductSingalton.getInstance().getSc_Id()==0){
-//            ID = 1;
-//            checkAcceptTrip(ID);
-//        }
-//        else{ ID =ProductSingalton.getInstance().getSc_Id();
-//            checkAcceptTrip(ID);
-//        }
 
-
+       // pos= SubcategorySingalton.getInstance().getSc_Id();
     }
 
 
     private  void setRecyclerviewProduct()
     {
         //   recyclerView
-        ProductAdapter productAdapter=new ProductAdapter(getContext(),count);
+        ProductAdapter productAdapter=new ProductAdapter(getContext(),count,mValues);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(), 2);
         productAdapter.notifyDataSetChanged();
         //  LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.Gr, false);
@@ -119,7 +120,16 @@ public class ProductFragment extends Fragment {
 
 
     }
-
+//
+//    private  void FilterRecyclerviewProducts()
+//    {
+//        //   recyclerView
+//        mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+//        filterview.setLayoutManager(mLayoutManager);
+//        filterview.setAdapter(new FilterAdapter(getContext(), filterList));
+//
+//
+//    }
 
 
     private void setBottomFillter()
@@ -127,13 +137,11 @@ public class ProductFragment extends Fragment {
         LayoutInflater inflater= (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View view2=inflater.inflate(R.layout.filter_dialog_layout,null);
         ImageView imageView=view2.findViewById(R.id.cancle_image);
-
+       final RecyclerView filterview=view2.findViewById(R.id.filtrrecyview);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view2);
         final AlertDialog dialog = builder.create();
-
-
 
         recyclerView.addOnScrollListener(new OnVerticalScrollListener(filterLaout));
         filterLaout.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +149,9 @@ public class ProductFragment extends Fragment {
             public void onClick(View view) {
 
                 dialog.show();
+                mLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+                filterview.setLayoutManager(mLayoutManager);
+                filterview.setAdapter(new FilterAdapter(getContext(), filterList));
             }
         });
 
@@ -181,18 +192,18 @@ public class ProductFragment extends Fragment {
                             productSingalton.setProductName(productResponse.getResponse().get(i).getProdList().get(j).getProductName());
                             productSingalton.setDiscount(productResponse.getResponse().get(i).getProdList().get(j).getDiscount());
                             productSingalton.setPrice(productResponse.getResponse().get(i).getProdList().get(j).getPrice());
-                            productSingalton.setDiscountPrice(productResponse.getResponse().get(i).getProdList().get(j).getDiscountPrice());
+                            productSingalton.setDiscountPrice(String.valueOf(productResponse.getResponse().get(i).getProdList().get(j).getDiscountPrice()));
                             productSingalton.setCategosryName(productResponse.getResponse().get(i).getProdList().get(j).getCategosryName());
                             productSingalton.setSubCategoryName(productResponse.getResponse().get(i).getProdList().get(j).getSubCategoryName());
                             productSingalton.setImage(productResponse.getResponse().get(i).getProdList().get(j).getImage());
                             tripSingaltonss.add(productSingalton);
                         }
 
-                        ProductAdapter productAdapter=new ProductAdapter(getContext(),tripSingaltonss);
-                        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(), 2);
-                        //  LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.Gr, false);
-                        recyclerView.setLayoutManager(gridLayoutManager);
-                        recyclerView.setAdapter(productAdapter);
+//                        ProductAdapter productAdapter=new ProductAdapter(getContext(),tripSingaltonss);
+//                        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(), 2);
+//                        //  LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.Gr, false);
+//                        recyclerView.setLayoutManager(gridLayoutManager);
+//                        recyclerView.setAdapter(productAdapter);
                     }
 
                 }

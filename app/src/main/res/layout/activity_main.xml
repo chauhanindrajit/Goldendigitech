@@ -126,7 +126,6 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_width="match_parent"
-            app:cardBackgroundColor="#c64dff"
             android:layout_height="100dp">
             <Button
                 android:background="@drawable/ripple_pethotel_services"
@@ -138,7 +137,6 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            app:cardBackgroundColor="#c64dff"
             android:layout_width="match_parent"
             android:layout_height="100dp">
             <Button

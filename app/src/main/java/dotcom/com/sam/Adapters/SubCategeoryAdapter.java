@@ -68,6 +68,8 @@ public class SubCategeoryAdapter extends RecyclerView.Adapter<SubCategeoryAdapte
                 @Override
                 public void onClick(View view) {
                     SubcategorySingalton.getInstance().setSc_Id(arrTemp.get(position).getSc_Id());
+                    CategorySingalton.getInstance().setCategosryName(arrTemp.get(position).getCategosryName());
+                    SubcategorySingalton.getInstance().setSubCategoryName(arrTemp.get(position).getSubCategoryName());
                     CategorySingalton.getInstance().setCat(null);
                     CategorySingalton.getInstance().setSubcateID(arrTemp.get(position).getC_Id());
                     Utils.moveNextWithAnimation(context,ProductActivity.class);

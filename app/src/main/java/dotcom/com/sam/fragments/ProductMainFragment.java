@@ -26,7 +26,7 @@ public class ProductMainFragment extends Fragment {
 
     ViewPager mViewPager;
     TabLayout tabLayout;
-    private ArrayList<ProductSingalton> arrSubCateogry;
+    private ArrayList<ProductResponse.ResponseBean> arrSubCateogry;
     ArrayList<List<ProductResponse.ResponseBean>> stringList = new ArrayList<List<ProductResponse.ResponseBean>>();
     public ProductMainFragment() {
         // Required empty public constructor

@@ -25,6 +25,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp">
                     <ImageView
+                        android:id="@+id/productimage"
                         android:transitionName="productimage"
                         android:src="@drawable/prod1"
                         android:layout_width="fill_parent"
@@ -52,6 +53,7 @@
                             <TextView
                                 android:textColor="@color/colorPrimary"
                                 android:textStyle="bold"
+                                android:id="@+id/profilepructname"
                                 android:text="ROYAL CANIN GAIN PUPPY 15 KG "
                                 android:maxLines="2"
                                 android:textSize="16dp"
@@ -86,13 +88,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <TextView
+                                    android:id="@+id/discountprice"
                                     android:textStyle="bold"
                                     android:textSize="22dp"
                                     android:text="Rs.450.00"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
                                 <TextView
-
+                                    android:id="@+id/actualprice"
                                     android:textSize="15dp"
                                     android:text="Rs.500"
                                     android:layout_marginLeft="15dp"
@@ -326,6 +329,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <Button
+                    android:id="@+id/addtocart"
                     android:textSize="18dp"
                     android:text="ADD TO CART"
                     android:gravity="center"
