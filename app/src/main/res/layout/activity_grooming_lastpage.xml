@@ -283,6 +283,8 @@
         android:elevation="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+        app:navigationIcon="@drawable/ic_arrow_back_whitw_24dp"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize">
 

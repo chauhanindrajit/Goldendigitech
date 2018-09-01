@@ -24,9 +24,9 @@
             android:name=".Activity.MainActivity"
             android:largeHeap="true"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activity.Categeory"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".Activity.Categeory"-->
+            <!--android:screenOrientation="portrait" />-->
         <activity
             android:name=".Activity.ProductActivity"
             android:screenOrientation="portrait" />
@@ -91,7 +91,7 @@
             android:name=".ProfileActivity.VaccinationProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Credentials.Splash"
+            android:name=".Activity.Categeory"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -111,7 +111,7 @@
         <activity android:name=".ProfileActivity.Doggromingprofile" />
         <activity android:name=".Activity.CatGrooming" />
         <activity android:name=".ProfileActivity.Catgromingprofile" />
-        <!-- <activity android:name=".Activity.GroomingService" /> -->
+        <activity android:name=".Activity.GroomingService" />
         <activity android:name=".Activity.TrainigServices" />
         <activity android:name=".Activity.MicroChipping" />
         <activity android:name=".Activity.PetSitterWalking" />
@@ -127,7 +127,13 @@
         <activity android:name=".Utils.WishlistActivity" />
         <activity android:name=".Activity.CartListActivity" />
         <activity android:name=".Activity.EDoctor" />
-        <activity android:name=".Activity.GroomingLastpage"></activity>
+        <activity android:name=".Activity.GroomingLastpage" />
+        <activity android:name=".Activity.Adoptpetlast" />
+        <activity android:name=".Activity.CatGroomingLastpage" />
+        <activity android:name=".Activity.Buypetlast" />
+        <activity android:name=".Activity.Matinglast" />
+        <activity android:name=".Activity.PetEvent" />
+        <activity android:name=".Activity.Petoldagelast"></activity>
     </application>
 
 </manifest>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.HomeList">
+    tools:context=".Activity.PetEvent">
 
     <LinearLayout
         android:layout_marginTop="?attr/actionBarSize"
@@ -20,7 +20,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
             android:baselineAligned="false"
-            android:visibility="gone"
             android:translationZ="16dp"
             app:cardBackgroundColor="#ff9900">
             <ImageView
@@ -30,7 +29,7 @@
 
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
+            android:id="@+id/recylcerview_products"
             android:scrollingCache="false"
             android:cacheColorHint="@android:color/transparent"
             android:layout_width="match_parent"
@@ -57,7 +56,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"
+
                 android:orientation="vertical"
                 android:padding="15dp">
 
@@ -100,38 +99,6 @@
 
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/categeory_shpe"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:src="@drawable/ic_star_black_24dp" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="#00ffffff"
-                        android:hint="Select vet speciality" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="5dp"
-                        android:src="@drawable/ic_expand_more_black_24dp" />
-
-
-                </LinearLayout>
-
                 <Button
                     android:id="@+id/seachbtn"
                     android:layout_width="150dp"
@@ -154,14 +121,12 @@
             android:id="@+id/crad_buttonup"
             android:layout_width="70dp"
             android:layout_height="30dp"
-            android:visibility="gone"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:clickable="true"
             android:translationZ="16dp"
             app:cardBackgroundColor="#ff9900">
             <ImageView
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_expand_less_white_24dp"/>

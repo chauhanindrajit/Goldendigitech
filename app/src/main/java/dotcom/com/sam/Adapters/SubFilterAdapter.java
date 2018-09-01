@@ -1,21 +1,29 @@
 package dotcom.com.sam.Adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import dotcom.com.sam.R;
 import dotcom.com.sam.Response.ProductResponse;
 import dotcom.com.sam.SingaltonsClasses.ProductSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 
 /**
  * Created by sanjay on 3/9/2018.
@@ -28,11 +36,19 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
     String catname;
     ArrayList tripSingaltonss;
     ArrayList<Integer>subcatid;
+    int data;
+    ArrayList<String> selchkboxlist=new ArrayList<String>();
+    CheckBox[] cbs;
+    ArrayList<String> userid= new ArrayList<String>();
+    boolean[] checkBoxState;
+    private String[] udis;
+    String Price="Price",Age="Age";
 
-    public SubFilterAdapter(Context context, List<ProductResponse.ResponseBean.FilterListBean.SubListBean> subList, String catName) {
+
+    public SubFilterAdapter(Context context, List<ProductResponse.ResponseBean.FilterListBean.SubListBean> subList, String catname) {
         this.context=context;
         this.filterList=subList;
-        this.catname=catName;
+        this.catname=catname;
     }
 
 
@@ -50,31 +66,103 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
     public void onBindViewHolder(final SubFilterAdapter.ViewHolder holder, final int position) {
         holder.subcat.setText(filterList.get(position).getSubCatName());
         holder.checkBox.setText("Checkbox " + position);
-       // holder.checkBox.setChecked(Boolean.parseBoolean(String.valueOf(filterList.get(position).getSelected())));
+        // holder.checkBox.setChecked(Boolean.parseBoolean(String.valueOf(filterList.get(position).getSelected())));
         holder.checkBox.setTag(position);
         tripSingaltonss = new ArrayList<>();
         tripSingaltonss.clear();
-        holder.checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Integer pos = (Integer) holder.checkBox.getTag();
-                if(holder.checkBox.isChecked()){
-                Toast.makeText(context, catname+ ":"+filterList.get(pos).getSub_Id(), Toast.LENGTH_SHORT).show();
-                mUserItems.add(filterList.get(pos));
 
-                    for (int i = 0; i < filterList.size(); i++){
-                        ProductSingalton productSingalton=new ProductSingalton();
-                        productSingalton.setSc_Id(filterList.get(pos).getSub_Id());
-                        tripSingaltonss.add(productSingalton);
+        final ProductResponse.ResponseBean.FilterListBean.SubListBean pBean = filterList.get(position);
+        try {
+            for (int i = 0; i < SingletonClass.getInstance().getBrandIdList().size(); i++) {
+                if (pBean.getSub_Id() == SingletonClass.getInstance().getBrandIdList().get(i))
+                    holder.checkBox.setChecked(true);
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        //  holder.catId.setText(String.valueOf(pBean.getBrandid()));
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!catname.equals("Price") || !catname.equals("Age")) {
+                    if (isChecked) {
+                        SingletonClass.getInstance().removeBrandId(0);
+                        SingletonClass.getInstance().addBrandId(pBean.getSub_Id());
+                        if (catname.equals("Price")||catname.equals("Age")){
+                            SingletonClass.getInstance().removeBrandname(catname);
+                            SingletonClass.getInstance().addBrandname(pBean.getSubCatName());
+                        }
+                        else {
+
+                        }
+                    } else {
+                        SingletonClass.getInstance().removeBrandId(pBean.getSub_Id());
+                        SingletonClass.getInstance().removeBrandname(pBean.getSubCatName());
                     }
 
                 }
-
-                 else {
-                    Toast.makeText(context, "REMOVED"+ " clicked!", Toast.LENGTH_SHORT).show();
-                }
             }
         });
+
+
+
+
+//        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Integer pos = (Integer) holder.checkBox.getTag();
+//                if(holder.checkBox.isChecked()){
+//                Toast.makeText(context, catname+ ":"+filterList.get(pos).getSub_Id(), Toast.LENGTH_SHORT).show();
+//                mUserItems.add(filterList.get(pos));
+//                selchkboxlist.addAll(Collections.singleton(filterList.get(pos).getSubCatName()));
+//                    Toast.makeText(context, catname+ ":"+filterList.get(pos).getSub_Id(), Toast.LENGTH_SHORT).show();
+//                    selchkboxlist.size();
+//
+//                }
+//
+//                 else {
+//                    selchkboxlist.remove(filterList.get(pos).getSubCatName());
+//                    Toast.makeText(context, "REMOVED"+ " clicked!", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+
+//        holder.checkBox.setTag(position);
+//        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+//                                           private Integer s;
+//                                           @Override
+//                                           public void onClick(View v) {
+//                                               if (((CheckBox) v).isChecked()){
+//                                                 //  checkBoxState[position]=true;
+//                                                  // data.setChecked(true);
+//                                                   //  isChecked=true;
+//                                                   s=filterList.get(position).getSub_Id();
+//                                                   Log.e("IDDDDDDDD", String.valueOf(s));
+//
+//                                                   userid.add(String.valueOf(s));
+//                                                   Log.e("ADDED ID", userid.toString());
+//                                               }
+//                                               else{
+//
+//                                                   s=filterList.get(position).getSub_Id();
+//                                                   userid.remove(s);
+//                                                   Log.e("Removed ID", userid.toString());
+//                                               }
+//                                               SharedPreferences app_preferences = PreferenceManager
+//                                                       .getDefaultSharedPreferences(context);
+//                                               SharedPreferences.Editor editor = app_preferences.edit();
+//
+//                                               editor.putString("userid", TextUtils.join(",", userid));
+//                                               editor.commit();
+//                                           }
+
+
+
+
+
+
 //        holder.checkBox.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -92,6 +180,7 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
 
 
 
+//    });
     }
 
 

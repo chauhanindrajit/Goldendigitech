@@ -1,21 +1,30 @@
 package dotcom.com.sam.ProfileActivity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import dotcom.com.sam.Activity.Adoptpetlast;
+import dotcom.com.sam.Activity.GroomingService;
 import dotcom.com.sam.R;
 import dotcom.com.sam.SingaltonsClasses.AdoptprofileSingalton;
 import dotcom.com.sam.SingaltonsClasses.OldHomeSingalton;
 
 public class AdoptpetProfile extends AppCompatActivity {
 Context context;
+Button btn_enquirenow;
     TextView name,dogname,loctn,breedname,status,condition,gender,age,ownername,contctno,emailid,lc;
     ImageView imag;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +43,17 @@ Context context;
         contctno=(TextView)findViewById(R.id.apcontctno);
         emailid=(TextView)findViewById(R.id.apemailid);
         imag =(ImageView)findViewById(R.id.profile_image);
+        btn_enquirenow =(Button)findViewById(R.id.btn_enquirynow);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Adopt A Pet ");
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         //OldpetRequest oldpetRequest= new OldpetRequest();
 
         if (AdoptprofileSingalton.getInstance().getImage() != null) {
@@ -55,7 +75,14 @@ Context context;
         contctno.setText(String.valueOf(AdoptprofileSingalton.getInstance().getOwnerContact()));
         emailid.setText(AdoptprofileSingalton.getInstance().getOwnerEmail());
 
+btn_enquirenow.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent i = new Intent(AdoptpetProfile.this, Adoptpetlast.class);
+        startActivity(i);
 
+    }
+});
 
 
 

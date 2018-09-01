@@ -201,6 +201,11 @@ android:id="@+id/ssericess"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+                        <RadioGroup
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
                         <RadioButton
                             android:textSize="11dp"
                             android:text="Salon Price :"
@@ -226,6 +231,7 @@ android:id="@+id/ssericess"
                             android:textColor="#efde3131"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
+                        </RadioGroup>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_marginTop="5dp"
@@ -269,6 +275,8 @@ android:id="@+id/ssericess"
         android:elevation="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+        app:navigationIcon="@drawable/ic_arrow_back_whitw_24dp"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize">
 

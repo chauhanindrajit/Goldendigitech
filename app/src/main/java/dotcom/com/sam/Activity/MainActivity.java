@@ -45,7 +45,7 @@ import dotcom.com.sam.extras.HttpHandler;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
     RecyclerView recyclerView;
-    Button btn_shopBypet, btn_vet, btn_mate, btn_adobpet, btn_photo, buyapet, adoptapet, petoldhome, petservice,e_dctor;
+    Button btn_shopBypet, btn_vet, btn_mate, btn_adobpet, btn_photo, buyapet, adoptapet, petoldhome, petevents,e_dctor;
     public static int module_name = 0;
 
     RecyclerView categeoryLayout;
@@ -201,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btn_adobpet = findViewById(R.id.btn_adopt);
         btn_photo = findViewById(R.id.btn_photo);
         e_dctor = findViewById(R.id.e_doctor);
+        petevents=findViewById(R.id.petevent);
     }
 
 
@@ -288,6 +289,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 Utils.moveNextWithAnimation(MainActivity.this, PhotoMain.class);
+                module_name = Constats.Module.PHOTO;
+            }
+        });
+        petevents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.moveNextWithAnimation(MainActivity.this, PetEvent.class);
                 module_name = Constats.Module.PHOTO;
             }
         });

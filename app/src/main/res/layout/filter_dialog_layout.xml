@@ -57,6 +57,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
+        android:id="@+id/aplyfilter"
         android:background="@color/colorPrimary"
         android:text="APPLY FILTER"
         android:layout_width="match_parent"

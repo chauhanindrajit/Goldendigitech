@@ -269,9 +269,9 @@ android:id="@+id/oldplocation"
     </ScrollView>
 
     <Button
-        android:id="@+id/btn_collection"
+        android:id="@+id/btn_contact"
         android:textColor="#FFF"
-        android:text="SAMPLE COLLECTION"
+        android:text="CONTACT"
         android:translationZ="8dp"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
@@ -284,8 +284,11 @@ android:id="@+id/oldplocation"
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:translationZ="16dp"
+        android:elevation="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+        app:navigationIcon="@drawable/ic_arrow_back_whitw_24dp"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize">
 
