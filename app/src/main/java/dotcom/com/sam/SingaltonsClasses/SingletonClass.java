@@ -32,18 +32,32 @@ public class SingletonClass {
     }
 
     public ArrayList<Integer> getBrandIdList() {
-        return brandIdList;
+        return brand;
     }
-    public ArrayList<String> getBrandname() {
-        return brandname;
+    public ArrayList<Integer> getCatidlist() {
+        return catidlist;
     }
+    public ArrayList<Integer> getBreedidlist() {
+        return breedidlist;
+    }
+    public ArrayList<String> getPricename() {
+        return pricename;
+    }
+    public ArrayList<String> getAgename() {
+        return Agename;
+    }
+
 
     public void setBrandIdList(ArrayList<Integer> brandIdList) {
-        this.brandIdList = brandIdList;
+        this.brand = brandIdList;
     }
 
-    ArrayList<Integer> brandIdList = new ArrayList<>();
-    ArrayList<String> brandname = new ArrayList<>();
+    ArrayList<Integer> brand = new ArrayList<>();
+    ArrayList<Integer> catidlist = new ArrayList<>();
+    ArrayList<Integer> breedidlist = new ArrayList<>();
+    ArrayList<String> pricename = new ArrayList<>();
+    ArrayList<String> Agename = new ArrayList<>();
+
 
 
     public boolean isFilterApply() {
@@ -58,82 +72,177 @@ public class SingletonClass {
 
     //-----------------brand filter
 
-    public boolean addBrandId(int id) {
-        Log.e(TAG, "brand size : " + brandIdList.size());
+    public boolean addcatId(int id) {
+        Log.e(TAG, "brand size : " + catidlist.size());
         check = false;
-        int a = brandIdList.size();
-        if (brandIdList.size() > 0) {
+        int a = catidlist.size();
+        if (catidlist.size() > 0) {
             for (int i = 0; i < a; i++) {
-                if (id == brandIdList.get(i)) {
-                    brandIdList.set(i, id);
+                if (id == catidlist.get(i)) {
+                    catidlist.set(i, id);
                     check = true;
-                    return a == brandIdList.size();
+                    return a == catidlist.size();
                 }
             }
         }
         if (!check) {
-            brandIdList.add(id);
+            catidlist.add(id);
             check = false;
-            return a < brandIdList.size();
+            return a < catidlist.size();
         }
         return false;
     }
 
-    public void removeBrandId(int brand_id) {
-        if (brandIdList.size() > 0) {
-            for (int i = 0; i < brandIdList.size(); i++) {
-                if (brand_id == brandIdList.get(i)) {
-                    brandIdList.remove(i);
+    public void removecatId(int brand_id) {
+        if (catidlist.size() > 0) {
+            for (int i = 0; i < catidlist.size(); i++) {
+                if (brand_id == catidlist.get(i)) {
+                    catidlist.remove(i);
                 }
             }
         }
     }
 
-    public boolean addBrandname(String name) {
+    public boolean addBrand(int id) {
+        Log.e(TAG, "brand size : " + brand.size());
         check = false;
-        int a = brandname.size();
-        if (brandname.size() > 0) {
+        int a = brand.size();
+        if (brand.size() > 0) {
             for (int i = 0; i < a; i++) {
-                if (name == brandname.get(i)) {
-                    brandname.set(i, name);
+                if (id == brand.get(i)) {
+                    brand.set(i, id);
                     check = true;
-                    return a == brandname.size();
+                    return a == brand.size();
                 }
             }
         }
         if (!check) {
-            brandname.add(name);
+            brand.add(id);
             check = false;
-            return a < brandname.size();
+            return a < brand.size();
+        }
+        return false;
+    }
+
+    public void removeBrand(int brand_id) {
+        if (brand.size() > 0) {
+            for (int i = 0; i < brand.size(); i++) {
+                if (brand_id == brand.get(i)) {
+                    brand.remove(i);
+                }
+            }
+        }
+    }
+    public boolean addBreedId(int id) {
+        Log.e(TAG, "brand size : " + breedidlist.size());
+        check = false;
+        int a = breedidlist.size();
+        if (breedidlist.size() > 0) {
+            for (int i = 0; i < a; i++) {
+                if (id == breedidlist.get(i)) {
+                    breedidlist.set(i, id);
+                    check = true;
+                    return a == breedidlist.size();
+                }
+            }
+        }
+        if (!check) {
+            breedidlist.add(id);
+            check = false;
+            return a < breedidlist.size();
+        }
+        return false;
+    }
+
+    public void removeBreedId(int brand_id) {
+        if (breedidlist.size() > 0) {
+            for (int i = 0; i < breedidlist.size(); i++) {
+                if (brand_id == breedidlist.get(i)) {
+                    breedidlist.remove(i);
+                }
+            }
+        }
+    }
+
+
+    public boolean addPricename(String name) {
+        check = false;
+        int a = pricename.size();
+        if (pricename.size() > 0) {
+            for (int i = 0; i < a; i++) {
+                if (name == pricename.get(i)) {
+                    pricename.set(i, name);
+                    check = true;
+                    return a == pricename.size();
+                }
+            }
+        }
+        if (!check) {
+            pricename.add(name);
+            check = false;
+            return a < pricename.size();
         }
         return false;
 
 
     }
 
-    public void removeBrandname(String name) {
+    public void removepricename(String name) {
         check = false;
-        if (brandname.size() > 0) {
-            for (int i = 0; i < brandname.size(); i++) {
-                if (name == brandname.get(i)) {
-                    brandname.remove(i);
+        if (pricename.size() > 0) {
+            for (int i = 0; i < pricename.size(); i++) {
+                if (name == pricename.get(i)) {
+                    pricename.remove(i);
+                }
+            }
+        }
+    }
+
+    public boolean addAgename(String name) {
+        check = false;
+        int a = Agename.size();
+        if (Agename.size() > 0) {
+            for (int i = 0; i < a; i++) {
+                if (name == Agename.get(i)) {
+                    Agename.set(i, name);
+                    check = true;
+                    return a == Agename.size();
+                }
+            }
+        }
+        if (!check) {
+            Agename.add(name);
+            check = false;
+            return a < Agename.size();
+        }
+        return false;
+
+
+    }
+
+    public void removeAgename(String name) {
+        check = false;
+        if (Agename.size() > 0) {
+            for (int i = 0; i < Agename.size(); i++) {
+                if (name == Agename.get(i)) {
+                    Agename.remove(i);
                 }
             }
         }
     }
 
     public boolean clearReport() {
-        brandIdList.clear();
-        return brandIdList.size() == 0;
+        brand.clear();
+        return brand.size() == 0;
     }
 
     public String getBrandFilter() {
         String str = null;
-        for (int i = 0; i < brandIdList.size(); i++) {
+        for (int i = 0; i < brand.size(); i++) {
             if (i == 0)
-                str = String.valueOf(brandIdList.get(i));
+                str = String.valueOf(brand.get(i));
             else
-                str = str + "," + brandIdList.get(i);
+                str = str + "," + brand.get(i);
         }
         return str;
     }

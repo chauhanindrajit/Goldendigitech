@@ -4,6 +4,7 @@ package dotcom.com.sam.fragments;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -40,7 +41,11 @@ import dotcom.com.sam.Adapters.BasePhotoAdapter;
 import dotcom.com.sam.Adapters.FilterAdapter;
 import dotcom.com.sam.Adapters.ProductAdapter;
 import dotcom.com.sam.Adapters.ProductPagerAdapter;
+import dotcom.com.sam.Adapters.SubFilterAdapter;
+import dotcom.com.sam.Credentials.LoginActivity;
+import dotcom.com.sam.Credentials.Registration;
 import dotcom.com.sam.R;
+import dotcom.com.sam.Response.ProductFilterdataResponse;
 import dotcom.com.sam.Response.ProductResponse;
 import dotcom.com.sam.SingaltonsClasses.CategorySingalton;
 import dotcom.com.sam.SingaltonsClasses.MatingSingalton;
@@ -51,6 +56,8 @@ import dotcom.com.sam.Utils.Utils;
 import dotcom.com.sam.extras.OnVerticalScrollListener;
 import dotcom.com.sam.extras.RegistrationResponse;
 import dotcom.com.sam.extras.Utilss;
+import dotcom.com.sam.request.ProductfilterdataRequest;
+import dotcom.com.sam.request.RegistrationRequest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,6 +85,7 @@ public class ProductFragment extends Fragment {
     private ProgressDialog pDialog;
     int pos;
     int ID;
+    List<String>type;
     private RecyclerView.LayoutManager mLayoutManager;
     @SuppressLint("ValidFragment")
     public ProductFragment(int pos, List<ProductResponse.ResponseBean.ProdListBean> count, List<ProductResponse.ResponseBean.FilterListBean> filterList) {
@@ -173,60 +181,62 @@ public class ProductFragment extends Fragment {
         applyfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("FilteringIDS", "onClick: "+SingletonClass.getInstance().getBrandIdList() );
-                Log.e("FilteringName", "onClick: "+SingletonClass.getInstance().getBrandname() );
+                dialog.dismiss();
+                type=new ArrayList<>();
+                type.add("Featured Product");
+                checkAcceptTrip();
+                Log.e("category", "onClick: "+SingletonClass.getInstance().getCatidlist() );
+                Log.e("brand", "onClick: "+SingletonClass.getInstance().getBrandIdList() );
+                Log.e("breed", "onClick: "+SingletonClass.getInstance().getBreedidlist() );
+                Log.e("PriceName", "onClick: "+SingletonClass.getInstance().getPricename() );
+                Log.e("AgeName", "onClick: "+SingletonClass.getInstance().getAgename() );
+
             }
         });
     }
-    private void checkAcceptTrip(Integer ID) {
+    private void checkAcceptTrip() {
         arrSubCateogry = new ArrayList<>();
 
         pDialog = new ProgressDialog(getContext());
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+
+        ProductfilterdataRequest productfilterdataRequest = new ProductfilterdataRequest();
+        productfilterdataRequest.setCheckboxAge(SingletonClass.getInstance().getAgename());
+        productfilterdataRequest.setCheckboxBrand(SingletonClass.getInstance().getBrandIdList());
+        productfilterdataRequest.setCheckboxBreed(SingletonClass.getInstance().getBreedidlist());
+        productfilterdataRequest.setCheckboxPrice(String.valueOf(SingletonClass.getInstance().getPricename()));
+        productfilterdataRequest.setCheckboxCategory(SingletonClass.getInstance().getCatidlist());
+        productfilterdataRequest.setCheckboxProductType(type);
+
         // pDialog.show();
-        final Call<ProductResponse> productResponseCall = Utilss.getWebService().PRODUCT_RESPONSE_CALL(ID);
-        Log.e("URL", "checkAcceptTrip: " + productResponseCall.request().url().toString());
-        productResponseCall.enqueue(new Callback<ProductResponse>() {
+        final Call<ProductFilterdataResponse> productFilterdataResponseCall = Utilss.getWebService().PRODUCT_FILTERDATA_RESPONSE_CALL(productfilterdataRequest);
+        Log.e("URL", "checkAcceptTrip: " + productFilterdataResponseCall.request().url().toString());
+        productFilterdataResponseCall.enqueue(new Callback<ProductFilterdataResponse>() {
             @Override
-            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+            public void onResponse(Call<ProductFilterdataResponse> call, Response<ProductFilterdataResponse> response) {
                 pDialog.hide();
-                if (response.code() == 200) {
-                    pDialog.hide();
-                    ProductResponse productResponse = response.body();
-                    // checkAcceptTrip1();
-
-
-                    ProductSingalton productSingalton = new ProductSingalton();
-                    Log.e("Proct", new GsonBuilder().create().toJson(response));
-
-                    for (int i = 0; i < productResponse.getResponse().size(); i++) {
-
-
-                        for(int j = 0;j< productResponse.getResponse().get(i).getProdList().size();j++){
-
-                            productSingalton.setProductName(productResponse.getResponse().get(i).getProdList().get(j).getProductName());
-                            productSingalton.setDiscount(productResponse.getResponse().get(i).getProdList().get(j).getDiscount());
-                            productSingalton.setPrice(productResponse.getResponse().get(i).getProdList().get(j).getPrice());
-                            productSingalton.setDiscountPrice(String.valueOf(productResponse.getResponse().get(i).getProdList().get(j).getDiscountPrice()));
-                            productSingalton.setCategosryName(productResponse.getResponse().get(i).getProdList().get(j).getCategosryName());
-                            productSingalton.setSubCategoryName(productResponse.getResponse().get(i).getProdList().get(j).getSubCategoryName());
-                            productSingalton.setImage(productResponse.getResponse().get(i).getProdList().get(j).getImage());
-                            tripSingaltonss.add(productSingalton);
-                        }
-
-//                        ProductAdapter productAdapter=new ProductAdapter(getContext(),tripSingaltonss);
-//                        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(), 2);
-//                        //  LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.Gr, false);
-//                        recyclerView.setLayoutManager(gridLayoutManager);
-//                        recyclerView.setAdapter(productAdapter);
+                    if (response.code() == 200) {
+                        pDialog.hide();
+                        Utils.customMessage(getActivity(), "Filtered Successfully");
+                    } else if (response.code() == 400) {
+                        pDialog.hide();
+                        Utils.customMessage(getActivity(), "Something went wrong.");
+                    } else if (response.code() == 404) {
+                        pDialog.hide();
+                        Utils.customMessage(getActivity(), "There is problem to filter.");
+                    } else if (response.code() == 409) {
+                        pDialog.hide();
+                        Utils.customMessage(getActivity(), "Email id already exists.");
+                    } else if (response.code() == 500) {
+                        pDialog.hide();
+                        Utils.customMessage(getActivity(), "Internal server error.");
                     }
-
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ProductResponse> call, Throwable t) {
+
+                @Override
+            public void onFailure(Call<ProductFilterdataResponse> call, Throwable t) {
                 pDialog.hide();
                 Log.e("Failed", "onFailure: " + t);
                 Toast.makeText(getContext(), "Failedd", Toast.LENGTH_LONG).show();

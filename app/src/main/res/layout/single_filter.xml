@@ -6,9 +6,11 @@
 
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
+        android:id="@+id/child"
         android:clipToPadding="false"
         android:layout_width="250dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
             <LinearLayout
                 android:gravity="center_vertical"
@@ -29,9 +31,67 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
+        <!--<FrameLayout android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--<LinearLayout-->
+            <!--android:clipToPadding="false"-->
+            <!--android:layout_width="250dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/linearFilter"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="#fff"-->
+                <!--android:visibility="gone"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:weightSum="1">-->
+
+                <!--<RadioGroup-->
+<!--android:id="@+id/grop"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                   <!--&gt;-->
+
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/radbtn"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="start"-->
+                        <!--android:layout_margin="4dp"-->
+                        <!--android:paddingRight="15dp"-->
+                        <!--android:text="Price : Low to high"-->
+                        <!--android:textAlignment="textStart"-->
+                        <!--/>-->
 
 
+
+
+                <!--</RadioGroup>-->
+            <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+        <!--</FrameLayout>-->
+        <!--<RadioGroup-->
+            <!--android:id="@+id/radiogrp"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/ss"-->
+                <!--android:layout_width="30dp"-->
+                <!--android:layout_height="30dp" />-->
+            <!--<TextView-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:textSize="15dp"-->
+                <!--android:text="Price"-->
+                <!--android:id="@+id/s"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+
+        <!--</RadioGroup>-->
+        </LinearLayout>
     </LinearLayout>
-
-
-</LinearLayout>

@@ -66,7 +66,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.actualprce.setText(String.valueOf(details.get(position).getPrice()));
         holder.actualprce.setPaintFlags(holder.actualprce.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         if (details.get(position).getImage() != null) {
-            Picasso.with(context).load("http://mrsam.in/sam/MainImage/" + details.get(position).getImage().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(holder.imageView);
+            Picasso.with(context).load("http://mrsam.in/sam/ProductImages/" + details.get(position).getImage().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(holder.imageView);
         } else {
             Picasso.with(context).load(R.drawable.noimage).into(holder.imageView);
 

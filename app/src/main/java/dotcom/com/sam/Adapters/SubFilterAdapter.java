@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.support.annotation.IdRes;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -13,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,12 +41,15 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
     ArrayList tripSingaltonss;
     ArrayList<Integer>subcatid;
     int data;
+    RadioGroup genderGrp;
     ArrayList<String> selchkboxlist=new ArrayList<String>();
     CheckBox[] cbs;
+    private int selectedPosition = -1;
     ArrayList<String> userid= new ArrayList<String>();
     boolean[] checkBoxState;
     private String[] udis;
     String Price="Price",Age="Age";
+    private RadioButton lastCheckedRB = null;
 
 
     public SubFilterAdapter(Context context, List<ProductResponse.ResponseBean.FilterListBean.SubListBean> subList, String catname) {
@@ -64,14 +71,60 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
 
     @Override
     public void onBindViewHolder(final SubFilterAdapter.ViewHolder holder, final int position) {
+        final ProductResponse.ResponseBean.FilterListBean.SubListBean pBean = filterList.get(position);
         holder.subcat.setText(filterList.get(position).getSubCatName());
         holder.checkBox.setText("Checkbox " + position);
+        final int pos=position;
+        holder.checkBox.setChecked(selectedPosition == position);
+//        if(catname.equals("Price")) {
+//            holder.linearlayout.setVisibility(View.VISIBLE);
+//            holder.checkBox.setVisibility(View.GONE);
+//            holder.subcat.setVisibility(View.GONE);
+//            holder.radionprice.setText(filterList.get(position).getSubCatName());
+//            holder.genderGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+//                    RadioButton checkedRadioButton = (RadioButton) group.findViewById(checkedId);
+//                    boolean isChecked = checkedRadioButton.isChecked();
+//                    if (isChecked) {
+//
+//
+//                        if (lastCheckedRB != null) {
+//                            lastCheckedRB.setChecked(false);
+//                        }
+//                        //store the clicked radiobutton
+//                        else {
+//                            lastCheckedRB = holder.radionprice;
+//                            holder.radionprice.setChecked(true);
+//                            //   lastCheckedRB.setChecked(true);
+//                        }
+//                        //radiogroup.check(radiogroup.getChildAt(0).getId());
+//
+//                        // holder.genderGrp.check(pBean.getSub_Id());
+//                        SingletonClass.getInstance().addPricename(String.valueOf(checkedRadioButton.getText()));
+//                        Log.e(" Gender Group ", "onCheckedChanged: " + checkedRadioButton.getText());
+//                    }
+//                    else{
+//                        SingletonClass.getInstance().removepricename(String.valueOf(checkedRadioButton.getText()));
+//
+//                        // gender = String.valueOf(checkedRadioButton.getText());
+//
+//                    }
+//                }
+//            });
+//        }
+//
+//
+//        else{
+//            // parentView.removeView(childView);
+//            holder.childlayout.removeView(holder.linearlayout);
+//        }
         // holder.checkBox.setChecked(Boolean.parseBoolean(String.valueOf(filterList.get(position).getSelected())));
         holder.checkBox.setTag(position);
         tripSingaltonss = new ArrayList<>();
         tripSingaltonss.clear();
 
-        final ProductResponse.ResponseBean.FilterListBean.SubListBean pBean = filterList.get(position);
+        //final ProductResponse.ResponseBean.FilterListBean.SubListBean pBean = filterList.get(position);
         try {
             for (int i = 0; i < SingletonClass.getInstance().getBrandIdList().size(); i++) {
                 if (pBean.getSub_Id() == SingletonClass.getInstance().getBrandIdList().get(i))
@@ -82,28 +135,54 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
 
         }
 
-        //  holder.catId.setText(String.valueOf(pBean.getBrandid()));
+
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(!catname.equals("Price") || !catname.equals("Age")) {
                     if (isChecked) {
-                        SingletonClass.getInstance().removeBrandId(0);
-                        SingletonClass.getInstance().addBrandId(pBean.getSub_Id());
-                        if (catname.equals("Price")||catname.equals("Age")){
-                            SingletonClass.getInstance().removeBrandname(catname);
-                            SingletonClass.getInstance().addBrandname(pBean.getSubCatName());
+                        if(catname.equals("Category")){
+                            SingletonClass.getInstance().removecatId(0);
+                            SingletonClass.getInstance().addcatId(pBean.getSub_Id());
                         }
-                        else {
+                        if(catname.equals("Brand")){
+                            SingletonClass.getInstance().removeBrand(0);
+                            SingletonClass.getInstance().addBrand(pBean.getSub_Id());
 
                         }
+                        if(catname.equals("Breed")){
+                            SingletonClass.getInstance().removeBreedId(0);
+                            SingletonClass.getInstance().addBreedId(pBean.getSub_Id());
+                        }
+                        if (catname.equals("Price")){
+                          selectedPosition = holder.getAdapterPosition();
+
+                             notifyDataSetChanged();
+                            if(selectedPosition == position){
+                                holder.checkBox.setChecked(true); }
+                            else{
+                                holder.checkBox.setChecked(false);
+                            }
+                            SingletonClass.getInstance().addPricename(pBean.getSubCatName());
+                            SingletonClass.getInstance().removepricename(catname);
+                            SingletonClass.getInstance().removeAgename(catname);
+                            notifyDataSetChanged();
+                        }
+                        if (catname.equals("Age")){
+                            SingletonClass.getInstance().removepricename(catname);
+                            SingletonClass.getInstance().removeAgename(catname);
+                            SingletonClass.getInstance().addAgename(pBean.getSubCatName());
+                        }
+
                     } else {
-                        SingletonClass.getInstance().removeBrandId(pBean.getSub_Id());
-                        SingletonClass.getInstance().removeBrandname(pBean.getSubCatName());
+                        SingletonClass.getInstance().removeBrand(pBean.getSub_Id());
+                        SingletonClass.getInstance().removeBreedId(pBean.getSub_Id());
+                        SingletonClass.getInstance().removecatId(pBean.getSub_Id());
+                        SingletonClass.getInstance().removepricename(pBean.getSubCatName());
+                        SingletonClass.getInstance().removeAgename(pBean.getSubCatName());
                     }
 
                 }
-            }
+
         });
 
 
@@ -195,12 +274,18 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
         CardView cardView;
         CheckBox checkBox;
         TextView categeoryName, subcat;
-
+        LinearLayout linearlayout,childlayout;
+        RadioGroup genderGrp;
+        RadioButton radionprice;
         public ViewHolder(View itemView) {
             super(itemView);
             checkBox=(CheckBox)itemView.findViewById(R.id.checkbox);
             cardView = (CardView) itemView.findViewById(R.id.cardview);
             subcat = (TextView) itemView.findViewById(R.id.subcaty);
+          //  linearlayout = (LinearLayout) itemView.findViewById(R.id.linearFilter);
+          //  childlayout = (LinearLayout) itemView.findViewById(R.id.child);
+           // radionprice = (RadioButton) itemView.findViewById(R.id.radbtn);
+           // genderGrp = (RadioGroup) itemView.findViewById(R.id.grop);
         }
     }
 }

@@ -1,7 +1,9 @@
 package dotcom.com.sam.Activity;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,7 +15,7 @@ public class PetDoctor extends AppCompatActivity {
 
     public static int categeory = 0;
     Button btnVetNearMe, btnVetAtHome, btnDiagnostic, btnVaccination;
-
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +24,16 @@ public class PetDoctor extends AppCompatActivity {
         btnVetAtHome = findViewById(R.id.btn_vet_at_home);
         btnDiagnostic = findViewById(R.id.btn_diagnostic);
         btnVaccination = findViewById(R.id.btn_vaccination);
-
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("PetDoctor");
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         btnVetNearMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

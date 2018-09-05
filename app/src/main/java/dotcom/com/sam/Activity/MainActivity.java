@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,8 +33,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import dotcom.com.sam.Adapters.AdoptpetAdapter;
 import dotcom.com.sam.Adapters.NewArrivalAdapter;
 import dotcom.com.sam.Credentials.LoginActivity;
+import dotcom.com.sam.Response.AdoptpetResponse;
+import dotcom.com.sam.Response.NewArrivalResponse;
+import dotcom.com.sam.SingaltonsClasses.AdoptaPetSingalton;
+import dotcom.com.sam.SingaltonsClasses.NewArrivalSingalton;
 import dotcom.com.sam.Utils.PhotoMain;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Utils.UserSessionManager;
@@ -40,6 +48,10 @@ import dotcom.com.sam.Utils.Utils;
 import dotcom.com.sam.Utils.WishlistActivity;
 import dotcom.com.sam.extras.Constants;
 import dotcom.com.sam.extras.HttpHandler;
+import dotcom.com.sam.extras.Utilss;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -52,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView SubCtegeryLayout;
 
     ListView listView;
-    List<String> stringList = new ArrayList<>();
+    ArrayList<String> stringList = new ArrayList<>();
     private ListView stationsListView;
 
 
@@ -63,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static String url = "http://worldindia.in/SamApi/api/ShopByPetVC/getFeaturedproduct?Featured=new";
 
     public static ArrayList<HashMap<String, String>> contactList;
-    public static ArrayList<ArrayList<HashMap<String, String>>> arrSubCateogry;
-
-    TextView catname;
+    public static List<NewArrivalResponse.ResponseBean> arrSubCateogry;
+    ArrayList tripSingaltonss;
+    TextView catname,viewall;
 
 
     @Override
@@ -77,11 +89,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //setTransition
         Utils.setExplodTransition(this);
         contactList = new ArrayList<>();
-        arrSubCateogry = new ArrayList<ArrayList<HashMap<String, String>>>();
+        tripSingaltonss = new ArrayList<>();
+        tripSingaltonss.clear();
+
         session = new UserSessionManager(getApplicationContext());
 
         if (Utils.isOnline(MainActivity.this)) {
-            new GetContacts().execute();
+            checkAcceptTrip();
         } else {
             android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MainActivity.this);
             builder.setTitle("Internet problem");
@@ -202,11 +216,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btn_photo = findViewById(R.id.btn_photo);
         e_dctor = findViewById(R.id.e_doctor);
         petevents=findViewById(R.id.petevent);
+        viewall=(TextView)findViewById(R.id.viewall);
     }
 
 
     void setRecyclerView() {
-        NewArrivalAdapter newArrivalAdapter = new NewArrivalAdapter(MainActivity.this);
+        NewArrivalAdapter newArrivalAdapter = new NewArrivalAdapter(MainActivity.this,arrSubCateogry,stringList);
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManagaer);
         recyclerView.setAdapter(newArrivalAdapter);
@@ -297,6 +312,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 Utils.moveNextWithAnimation(MainActivity.this, PetEvent.class);
                 module_name = Constats.Module.PHOTO;
+            }
+        });
+        viewall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               Utils.customMessage(MainActivity.this,"Please try after some time");
             }
         });
     }
@@ -397,6 +419,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 pDialog.dismiss();
             setRecyclerView();
         }
+
+    }
+
+    private void checkAcceptTrip() {
+        arrSubCateogry = new ArrayList<>();
+
+        pDialog = new ProgressDialog(MainActivity.this);
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+        final Call<NewArrivalResponse> newArrivalResponseCall = Utilss.getWebService().NEW_ARRIVAL_RESPONSE_CALL();
+        newArrivalResponseCall.enqueue(new Callback<NewArrivalResponse>() {
+            @Override
+            public void onResponse(Call<NewArrivalResponse> call, Response<NewArrivalResponse> response) {
+                pDialog.hide();
+                if (response.code() == 200) {
+                    NewArrivalResponse newArrivalResponse = response.body();
+                    Log.e("dioglist", new GsonBuilder().create().toJson(response));
+                    for (int i = 0; i < newArrivalResponse.getResponse().size(); i++) {
+                        NewArrivalSingalton newArrivalSingalton = new NewArrivalSingalton();
+
+                        newArrivalSingalton.setB_Id(newArrivalResponse.getResponse().get(i).getB_Id());
+                        newArrivalSingalton.setAge(newArrivalResponse.getResponse().get(i).getAge());
+                        newArrivalSingalton.setBrandName(newArrivalResponse.getResponse().get(i).getBrandName());
+                        newArrivalSingalton.setBreedName(newArrivalResponse.getResponse().get(i).getBreedName());
+                        newArrivalSingalton.setBRAND_Id(newArrivalResponse.getResponse().get(i).getBRAND_Id());
+                        newArrivalSingalton.setB_Id(newArrivalResponse.getResponse().get(i).getB_Id());
+                        newArrivalSingalton.setB_Id(newArrivalResponse.getResponse().get(i).getB_Id());
+                        tripSingaltonss.add(newArrivalSingalton);
+                        NewArrivalAdapter newArrivalAdapter = new NewArrivalAdapter(MainActivity.this,newArrivalResponse.getResponse() ,tripSingaltonss);
+                        newArrivalAdapter.getItemCount();
+                        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+                        recyclerView.setLayoutManager(verticalLayoutManager);
+                        recyclerView.setAdapter(newArrivalAdapter);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewArrivalResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
+                Log.e("FAILEDDDD", "onFailure: "+t);
+            }
+
+
+        });
 
     }
 

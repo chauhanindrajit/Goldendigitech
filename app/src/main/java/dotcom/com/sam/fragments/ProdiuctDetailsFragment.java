@@ -1,6 +1,7 @@
 package dotcom.com.sam.fragments;
 
 
+import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,12 +15,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import dotcom.com.sam.Activity.MainActivity;
 import dotcom.com.sam.Activity.NotificationCountSetClass;
 import dotcom.com.sam.Activity.ProductActivity;
 import dotcom.com.sam.R;
+import dotcom.com.sam.SingaltonsClasses.BuypetprofileSingalton;
 import dotcom.com.sam.SingaltonsClasses.ProductSingalton;
 import dotcom.com.sam.Utils.ImageUrlUtils;
 
@@ -30,6 +34,7 @@ public class ProdiuctDetailsFragment extends Fragment {
     TextView prodctname,actualprce,discountprice;
     ImageView image;
 Button btnaddtocart;
+    Context context;
     int imagePosition;
     String stringImageUri;
     public ProdiuctDetailsFragment() {
@@ -66,7 +71,12 @@ Button btnaddtocart;
                 NotificationCountSetClass.setNotifyCount(ProductActivity.notificationCountCart);
             }
         });
+        if (ProductSingalton.getInstance().getImage() != null) {
+            Picasso.with(context).load("http://mrsam.in/sam/ProductImages/" + ProductSingalton.getInstance().getImage().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(image);
+        } else {
+            Picasso.with(context).load(R.drawable.noimage).into(image);
 
+        }
         // pos= SubcategorySingalton.getInstance().getSc_Id();
     }
 }

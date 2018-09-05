@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +78,12 @@ public class SubCategeoryAdapter extends RecyclerView.Adapter<SubCategeoryAdapte
                     Utils.moveNextWithAnimation(context,ProductActivity.class);
                 }
             });
+            if (arrTemp.get(position).getImage() != null) {
+                Picasso.with(context).load("http://mrsam.in/sam/ProductImages/" + arrTemp.get(position).getImage().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(holder.imageView);
+            } else {
+                Picasso.with(context).load(R.drawable.noimage).into(holder.imageView);
+
+            }
 
         }
     }
@@ -89,12 +98,13 @@ public class SubCategeoryAdapter extends RecyclerView.Adapter<SubCategeoryAdapte
         RecyclerView recyclerView;
         CardView cardView;
         TextView categeoryName, subcat;
-
+ImageView imageView;
         public ViewHolder(View itemView) {
             super(itemView);
 
             cardView = (CardView) itemView.findViewById(R.id.cardview);
             subcat = (TextView) itemView.findViewById(R.id.text_subcat);
+            imageView = (ImageView) itemView.findViewById(R.id.subimage);
         }
     }
 }

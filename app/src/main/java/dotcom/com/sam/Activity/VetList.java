@@ -63,13 +63,13 @@ public class VetList extends AppCompatActivity implements AdapterView.OnItemClic
     private ArrayList<TripSingalton> arrSubCateogry;
     private ArrayAdapter<TripSingalton> stationListAdapter;
     TextView catname;
-    Toolbar toolbar;
+
     List<String> locationTypeList = new ArrayList<>();
     ImageView pdnitm;
     public static Boolean isfilter = false;
     ArrayList<String> item = new ArrayList<>();
     private ArrayAdapter<String> adapter;
-
+    Toolbar toolbar;
     AutoCompleteTextView acTextView;
 
     @Override
@@ -78,7 +78,16 @@ public class VetList extends AppCompatActivity implements AdapterView.OnItemClic
         setContentView(R.layout.activity_vet_list);
         tripSingaltonss = new ArrayList<>();
         tripSingaltonss.clear();
-
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Vet Near Me");
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         intitViewS();
         searchDrawer();
         setViewVisiblity();

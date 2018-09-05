@@ -11,11 +11,13 @@ import dotcom.com.sam.Response.LoginResponse;
 import dotcom.com.sam.Response.MatingResponse;
 import dotcom.com.sam.Response.MatingsearchResponse;
 import dotcom.com.sam.Response.MicroChippingRespose;
+import dotcom.com.sam.Response.NewArrivalResponse;
 import dotcom.com.sam.Response.OldPetResponse;
 import dotcom.com.sam.Response.PetSitterResponse;
 import dotcom.com.sam.Response.PetSittersearchResponse;
 import dotcom.com.sam.Response.PetWalkingResponse;
 import dotcom.com.sam.Response.PhotoResponse;
+import dotcom.com.sam.Response.ProductFilterdataResponse;
 import dotcom.com.sam.Response.ProductResponse;
 import dotcom.com.sam.Response.RegisttnResponsemain;
 import dotcom.com.sam.Response.SubcategoryResponse;
@@ -25,6 +27,7 @@ import dotcom.com.sam.Response.VetNearMeResponse;
 import dotcom.com.sam.Response.WalkingsearchResponse;
 import dotcom.com.sam.request.ChangePassRequest;
 import dotcom.com.sam.request.ForgetPassRequest;
+import dotcom.com.sam.request.ProductfilterdataRequest;
 import dotcom.com.sam.request.RegistrationRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -135,4 +138,9 @@ public interface WebService {
 
     @GET("api/ShopByPetVC/ShopByPetSubCategoryProductListbyCid/{id}")
     Call<ProductResponse> PRODUCT_RESPONSE_CALL(@Path("id") Integer id);
+    @GET("api/ShopByPetVC/getFeaturedproduct?Featured=new")
+    Call<NewArrivalResponse> NEW_ARRIVAL_RESPONSE_CALL();
+
+    @POST("api/ShopByPetVC/ShopByPetFilter")
+    Call<ProductFilterdataResponse> PRODUCT_FILTERDATA_RESPONSE_CALL(@Body ProductfilterdataRequest productfilterdataRequest);
 }

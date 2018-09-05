@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -55,7 +56,7 @@ public class HomeList extends AppCompatActivity {
     Button searchdoct;
     List<String> locationTypeList = new ArrayList<>();
     ArrayList<String> item = new ArrayList<>();
-
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,16 @@ public class HomeList extends AppCompatActivity {
         searchDrawer();
         //setViewVisiblity();
         initList();
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Vet At Home");
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         if (Utils.isOnline(HomeList.this)) {
             checkAcceptTrip();
         } else {
