@@ -111,71 +111,71 @@ android:id="@+id/ssericess"
 
 
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginTop="5dp"
-                        android:paddingRight="15dp"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:text="Haily breeds :"
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:id="@+id/ssamtype"
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1"
-                            android:text="Sample Checks Of : Blood,"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                    <!--<LinearLayout-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:paddingRight="15dp"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent">-->
+                        <!--<TextView-->
+                            <!--android:text="Haily breeds :"-->
+                            <!--android:textStyle="bold"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content" />-->
+                        <!--<TextView-->
+                            <!--android:id="@+id/ssamtype"-->
+                            <!--android:layout_marginLeft="5dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:text="Sample Checks Of : Blood,"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content" />-->
 
 
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginTop="5dp"
-                        android:paddingRight="15dp"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:text="Less hairy breeds :"
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1"
-                            android:text="Sample Checks Of"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                    <!--</LinearLayout>-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:paddingRight="15dp"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent">-->
+                        <!--<TextView-->
+                            <!--android:text="Less hairy breeds :"-->
+                            <!--android:textStyle="bold"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content" />-->
+                        <!--<TextView-->
+                            <!--android:layout_marginLeft="5dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:text="Sample Checks Of"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content" />-->
 
 
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginTop="5dp"
-                        android:paddingRight="15dp"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:text="Size :"
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
+                    <!--</LinearLayout>-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:paddingRight="15dp"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent">-->
+                        <!--<TextView-->
+                            <!--android:text="Size :"-->
+                            <!--android:textStyle="bold"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content" />-->
+                        <!--<TextView-->
 
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1"
-                            android:text="Sample Checks Of : Blood,"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            <!--android:layout_marginLeft="5dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:text="Sample Checks Of : Blood,"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content" />-->
 
 
 
-                    </LinearLayout>
+                    <!--</LinearLayout>-->
                     <LinearLayout
                         android:layout_marginTop="5dp"
                         android:paddingRight="15dp"
@@ -233,8 +233,38 @@ android:id="@+id/ssericess"
                             android:layout_height="wrap_content" />
                         </RadioGroup>
                     </LinearLayout>
+                    <TextView
+
+                        android:layout_weight="1"
+                        android:textSize="15dp"
+                        android:text="Add on services"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
                     <LinearLayout
-                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/categeory_shpe"
+                        android:orientation="horizontal">
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="#00ffffff"
+                            android:hint="Please Select services" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/ic_expand_more_black_24dp" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
                         android:paddingRight="15dp"
                         android:weightSum="2"
                         android:orientation="horizontal"

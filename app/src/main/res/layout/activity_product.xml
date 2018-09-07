@@ -2,73 +2,76 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/drawer_layout"
     tools:context="dotcom.com.sam.Activity.ProductActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:translationZ="16dp"
-        android:elevation="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/main"
-        app:actionLayout="@menu/main"
         android:background="@color/colorPrimary"
-        app:navigationIcon="@drawable/ic_arrow_back_whitw_24dp"
-        android:minHeight="?attr/actionBarSize">
+        android:elevation="16dp"
+        android:minHeight="?attr/actionBarSize"
+        android:translationZ="16dp"
+        app:actionLayout="@menu/main"
+        app:menu="@menu/main"
+        app:navigationIcon="@drawable/ic_arrow_back_whitw_24dp">
+
         <ImageView
+            android:id="@+id/addtocard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:id="@+id/addtocard"
-            android:src="@drawable/shooping"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:src="@drawable/shooping" />
     </android.support.v7.widget.Toolbar>
+
     <LinearLayout
-        android:visibility="gone"
-        android:orientation="horizontal"
         android:id="@+id/main_conainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:visibility="gone"></LinearLayout>
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tablayout"
-        android:translationZ="16dp"
-        android:elevation="16dp"
-        app:tabMode="scrollable"
-        app:tabGravity="center"
-        app:tabMinWidth="90dp"
-        app:tabTextColor="#76e6ff"
-        app:tabSelectedTextColor="#fff"
-        app:tabIndicatorColor="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:elevation="16dp"
+        android:translationZ="16dp"
+        app:tabGravity="center"
+        app:tabIndicatorColor="#fff"
+        app:tabMinWidth="90dp"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="#fff"
+        app:tabTextColor="#76e6ff">
 
     </android.support.design.widget.TabLayout>
 
     <LinearLayout
         android:id="@+id/container"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <TextView
+            android:id="@+id/nodata"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:gravity="center"
-            android:id="@+id/nodata"
-            android:visibility="gone"
-            android:text="SORRY NO DATA FOUND"/>
-        <android.support.v4.view.ViewPager
-            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:text="SORRY NO DATA FOUND"
+            android:visibility="gone" />
+
+        <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
 
 
     </LinearLayout>

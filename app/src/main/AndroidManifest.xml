@@ -24,9 +24,9 @@
             android:name=".Activity.MainActivity"
             android:largeHeap="true"
             android:screenOrientation="portrait" />
-        <!--<activity-->
-            <!--android:name=".Activity.Categeory"-->
-            <!--android:screenOrientation="portrait" />-->
+        <activity
+            android:name=".Activity.Categeory"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ProductActivity"
             android:screenOrientation="portrait" />
@@ -91,7 +91,7 @@
             android:name=".ProfileActivity.VaccinationProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.Categeory"
+            android:name=".Credentials.Splash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

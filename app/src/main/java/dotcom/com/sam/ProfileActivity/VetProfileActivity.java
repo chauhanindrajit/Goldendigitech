@@ -15,10 +15,14 @@ import android.widget.TimePicker;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
+import dotcom.com.sam.Activity.GroomingLastpage;
 import dotcom.com.sam.Activity.PetDoctor;
 import dotcom.com.sam.SingaltonsClasses.OldHomeSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.Utils.PatientDetails;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Utils.Constats;
@@ -32,6 +36,7 @@ public class VetProfileActivity extends AppCompatActivity {
     LinearLayout visitAtHomeLayout,vaccinationLayoput;
     ImageView imag;
     Context context;
+    final Calendar myCalendar = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +55,35 @@ public class VetProfileActivity extends AppCompatActivity {
         experiance.setText(TripSingalton.getInstance().getWorkExperience());
         subcharge.setText(String.valueOf(TripSingalton.getInstance().getNearMeFees()));
         subdoctortype.setText(TripSingalton.getInstance().getDoctorType());
-       // opentime.setText(TripSingalton.getInstance().getAvailableTime());
+        btnBook=findViewById(R.id.btn_bookapointment);
+        // opentime.setText(TripSingalton.getInstance().getAvailableTime());
         desctription.setText(TripSingalton.getInstance().getDescription());
         locatn.setText(TripSingalton.getInstance().getLocation());
 
         imag =(ImageView)findViewById(R.id.profile_image);
         //OldpetRequest oldpetRequest= new OldpetRequest();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+        btnBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(VetProfileActivity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
         if (TripSingalton.getInstance().getImage() != null) {
             Picasso.with(context).load("http://mrsam.in/sam/MainImage/" + TripSingalton.getInstance().getImage().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(imag);
         } else {
@@ -92,8 +119,8 @@ public class VetProfileActivity extends AppCompatActivity {
 
     private void initView() {
         profileImage=findViewById(R.id.profile_image);
-       // Bitmap bitmap= BitmapFactory.decodeResource()
-        btnBook=findViewById(R.id.btn_bookapointment);
+        // Bitmap bitmap= BitmapFactory.decodeResource()
+
         visitAtHomeLayout=findViewById(R.id.visit_at_home_layout);
         vaccinationLayoput=findViewById(R.id.vaccination_layout);
     }
@@ -101,13 +128,7 @@ public class VetProfileActivity extends AppCompatActivity {
 
     private void initListner()
     {
-        btnBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDate();
 
-            }
-        });
     }
 
     private void getDate()
@@ -126,14 +147,29 @@ public class VetProfileActivity extends AppCompatActivity {
 
     void getTime()
     {
-        TimePickerDialog timePickerDialog=new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        int second = mcurrentTime.get(Calendar.SECOND);
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(VetProfileActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
-            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-
-                //
-                Utils.moveNextWithAnimation(VetProfileActivity.this,PatientDetails.class);
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                SingletonClass.getInstance().setTime(selectedHour + ":" + selectedMinute);
+                Utils.moveNextWithAnimation(VetProfileActivity.this, PatientDetails.class);
+                //starttime.setText(selectedHour + ":" + selectedMinute);
             }
-        },12,60,false);
-        timePickerDialog.show();
+        }, hour, minute, false);//Yes 24 hour time
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
+    }
+
+    private void updateLabel() {
+        String myFormat = "dd/MM/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        SingletonClass.getInstance().setDate(sdf.format(myCalendar.getTime()));
+        // getdate.setText(sdf.format(myCalendar.getTime()));
+        getTime();
+        // enddtae.setText(sdf.format(myCalendar.getTime()));
     }
 }

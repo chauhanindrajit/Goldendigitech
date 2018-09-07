@@ -67,7 +67,8 @@ public class SingletonClass {
     public void setFilterApply(boolean filterApply) {
         isFilterApply = filterApply;
     }
-
+    private String Date;
+    private String Time;
     boolean isFilterApply;
 
     //-----------------brand filter
@@ -296,4 +297,19 @@ public class SingletonClass {
     }
 
 
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
+    public String getTime() {
+        return Time;
+    }
+
+    public void setTime(String time) {
+        Time = time;
+    }
 }

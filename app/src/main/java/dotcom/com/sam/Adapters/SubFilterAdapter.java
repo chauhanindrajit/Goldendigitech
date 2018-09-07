@@ -125,20 +125,22 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
         tripSingaltonss.clear();
 
         //final ProductResponse.ResponseBean.FilterListBean.SubListBean pBean = filterList.get(position);
-        try {
-            for (int i = 0; i < SingletonClass.getInstance().getBrandIdList().size(); i++) {
-                if (pBean.getSub_Id() == SingletonClass.getInstance().getBrandIdList().get(i))
-                    holder.checkBox.setChecked(true);
-            }
+//        try {
+//            for (int i = 0; i < SingletonClass.getInstance().getBrandIdList().size(); i++) {
+//                if (pBean.getSub_Id() == SingletonClass.getInstance().getBrandIdList().get(i))
+//                    holder.checkBox.setChecked(false);
+//            }
+//
+//        } catch (Exception e) {
+//
+//        }
 
-        } catch (Exception e) {
-
-        }
-
-
+        //  holder.catId.setText(String.valueOf(pBean.getBrandid()));
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(!catname.equals("Price") || !catname.equals("Age")) {
                     if (isChecked) {
                         if(catname.equals("Category")){
                             SingletonClass.getInstance().removecatId(0);
@@ -154,25 +156,25 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
                             SingletonClass.getInstance().addBreedId(pBean.getSub_Id());
                         }
                         if (catname.equals("Price")){
-                          selectedPosition = holder.getAdapterPosition();
-
-                             notifyDataSetChanged();
+                            selectedPosition = pos;
+                            notifyDataSetChanged();
                             if(selectedPosition == position){
-                                holder.checkBox.setChecked(true); }
+                                holder.checkBox.setChecked(true);
+                            }
                             else{
                                 holder.checkBox.setChecked(false);
                             }
                             SingletonClass.getInstance().addPricename(pBean.getSubCatName());
                             SingletonClass.getInstance().removepricename(catname);
                             SingletonClass.getInstance().removeAgename(catname);
-                            notifyDataSetChanged();
                         }
                         if (catname.equals("Age")){
                             SingletonClass.getInstance().removepricename(catname);
                             SingletonClass.getInstance().removeAgename(catname);
                             SingletonClass.getInstance().addAgename(pBean.getSubCatName());
                         }
-
+                        else {
+                        }
                     } else {
                         SingletonClass.getInstance().removeBrand(pBean.getSub_Id());
                         SingletonClass.getInstance().removeBreedId(pBean.getSub_Id());
@@ -182,7 +184,7 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
                     }
 
                 }
-
+            }
         });
 
 
@@ -282,10 +284,10 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
             checkBox=(CheckBox)itemView.findViewById(R.id.checkbox);
             cardView = (CardView) itemView.findViewById(R.id.cardview);
             subcat = (TextView) itemView.findViewById(R.id.subcaty);
-          //  linearlayout = (LinearLayout) itemView.findViewById(R.id.linearFilter);
-          //  childlayout = (LinearLayout) itemView.findViewById(R.id.child);
-           // radionprice = (RadioButton) itemView.findViewById(R.id.radbtn);
-           // genderGrp = (RadioGroup) itemView.findViewById(R.id.grop);
+            //  linearlayout = (LinearLayout) itemView.findViewById(R.id.linearFilter);
+            //  childlayout = (LinearLayout) itemView.findViewById(R.id.child);
+            // radionprice = (RadioButton) itemView.findViewById(R.id.radbtn);
+            // genderGrp = (RadioGroup) itemView.findViewById(R.id.grop);
         }
     }
 }

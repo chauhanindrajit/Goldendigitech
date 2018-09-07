@@ -20,6 +20,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,11 +36,13 @@ import java.util.List;
 
 import javax.security.auth.login.LoginException;
 
+import dotcom.com.sam.Activity.Categeory;
 import dotcom.com.sam.Activity.PetPhotography;
 import dotcom.com.sam.Activity.ProductActivity;
 import dotcom.com.sam.Adapters.BasePhotoAdapter;
 import dotcom.com.sam.Adapters.FilterAdapter;
 import dotcom.com.sam.Adapters.ProductAdapter;
+import dotcom.com.sam.Adapters.ProductFilterAdapter;
 import dotcom.com.sam.Adapters.ProductPagerAdapter;
 import dotcom.com.sam.Adapters.SubFilterAdapter;
 import dotcom.com.sam.Credentials.LoginActivity;
@@ -86,6 +89,7 @@ public class ProductFragment extends Fragment {
     int pos;
     int ID;
     List<String>type;
+    Boolean API;
     private RecyclerView.LayoutManager mLayoutManager;
     @SuppressLint("ValidFragment")
     public ProductFragment(int pos, List<ProductResponse.ResponseBean.ProdListBean> count, List<ProductResponse.ResponseBean.FilterListBean> filterList) {
@@ -115,10 +119,12 @@ public class ProductFragment extends Fragment {
         txt.setText(Integer.toString(pos));
         tripSingaltonss = new ArrayList<>();
         recyclerView=(RecyclerView) getView().findViewById(R.id.recylcerview_products);
+        filterview=(RecyclerView) getView().findViewById(R.id.recylcerview_products);
 
         setRecyclerviewProduct();
         setBottomFillter();
-
+        API=true;
+//        FilterRecyclerviewProducts();
        // pos= SubcategorySingalton.getInstance().getSc_Id();
     }
 
@@ -135,16 +141,16 @@ public class ProductFragment extends Fragment {
 
 
     }
-//
-//    private  void FilterRecyclerviewProducts()
-//    {
-//        //   recyclerView
-//        mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-//        filterview.setLayoutManager(mLayoutManager);
-//        filterview.setAdapter(new FilterAdapter(getContext(), filterList));
-//
-//
-//    }
+
+    private  void FilterRecyclerviewProducts()
+    {
+        //   recyclerView
+        mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        filterview.setLayoutManager(mLayoutManager);
+        filterview.setAdapter(new FilterAdapter(getContext(), filterList));
+
+
+    }
 
 
     private void setBottomFillter()
@@ -163,7 +169,21 @@ public class ProductFragment extends Fragment {
         filterLaout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (SingletonClass.getInstance().getCatidlist().size() > 0) {
+                    SingletonClass.getInstance().getCatidlist().clear();
+                }
+                if (SingletonClass.getInstance().getBreedidlist().size() > 0) {
+                    SingletonClass.getInstance().getBreedidlist().clear();
+                }
+                if (SingletonClass.getInstance().getBrandIdList().size() > 0) {
+                    SingletonClass.getInstance().getBrandIdList().clear();
+                }
+                if (SingletonClass.getInstance().getPricename().size() > 0) {
+                    SingletonClass.getInstance().getPricename().clear();
+                }
+                if (SingletonClass.getInstance().getAgename().size() > 0) {
+                    SingletonClass.getInstance().getAgename().clear();
+                }
                 dialog.show();
                 mLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
                 filterview.setLayoutManager(mLayoutManager);
@@ -181,16 +201,17 @@ public class ProductFragment extends Fragment {
         applyfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+
                 type=new ArrayList<>();
                 type.add("Featured Product");
-                checkAcceptTrip();
+
                 Log.e("category", "onClick: "+SingletonClass.getInstance().getCatidlist() );
                 Log.e("brand", "onClick: "+SingletonClass.getInstance().getBrandIdList() );
                 Log.e("breed", "onClick: "+SingletonClass.getInstance().getBreedidlist() );
                 Log.e("PriceName", "onClick: "+SingletonClass.getInstance().getPricename() );
                 Log.e("AgeName", "onClick: "+SingletonClass.getInstance().getAgename() );
-
+                checkAcceptTrip();
+                dialog.hide();
             }
         });
     }
@@ -209,7 +230,7 @@ public class ProductFragment extends Fragment {
         productfilterdataRequest.setCheckboxCategory(SingletonClass.getInstance().getCatidlist());
         productfilterdataRequest.setCheckboxProductType(type);
 
-        // pDialog.show();
+         pDialog.show();
         final Call<ProductFilterdataResponse> productFilterdataResponseCall = Utilss.getWebService().PRODUCT_FILTERDATA_RESPONSE_CALL(productfilterdataRequest);
         Log.e("URL", "checkAcceptTrip: " + productFilterdataResponseCall.request().url().toString());
         productFilterdataResponseCall.enqueue(new Callback<ProductFilterdataResponse>() {
@@ -217,7 +238,26 @@ public class ProductFragment extends Fragment {
             public void onResponse(Call<ProductFilterdataResponse> call, Response<ProductFilterdataResponse> response) {
                 pDialog.hide();
                     if (response.code() == 200) {
-                        pDialog.hide();
+                        API=false;
+                        ProductFilterdataResponse productFilterdataResponse = response.body();
+                        // checkAcceptTrip1();
+
+                        Log.e("Proct", new GsonBuilder().create().toJson(response));
+
+                        for (int i = 0; i < productFilterdataResponse.getResponse().size(); i++) {
+
+                        }
+                        if(productFilterdataResponse.getResponse().size()>0) {
+                            ProductFilterAdapter productFilterAdapter = new ProductFilterAdapter(getContext(), productFilterdataResponse.getResponse(), mValues);
+                            GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(), 2);
+                            productFilterAdapter.notifyDataSetChanged();
+                            recyclerView.setLayoutManager(gridLayoutManager);
+                            recyclerView.setAdapter(productFilterAdapter);
+                        }
+                        else if (productFilterdataResponse.getResponse().size()==0){
+                            setRecyclerviewProduct();
+                        }
+                            pDialog.hide();
                         Utils.customMessage(getActivity(), "Filtered Successfully");
                     } else if (response.code() == 400) {
                         pDialog.hide();
@@ -244,6 +284,36 @@ public class ProductFragment extends Fragment {
         });
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        if(getView() == null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    // handle back button's click listener
+                    if(API==false){
+                    setRecyclerviewProduct();
+                    API=true;
+                    }
+                    else if(API==true){
+                        Intent i = new Intent(getActivity(), Categeory.class);
+                        startActivity(i);
+                        getActivity().finish();
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
 
 }

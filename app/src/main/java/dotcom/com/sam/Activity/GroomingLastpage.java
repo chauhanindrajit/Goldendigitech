@@ -5,11 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 
 import dotcom.com.sam.R;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 
 public class GroomingLastpage extends AppCompatActivity {
     Toolbar toolbar;
+    EditText time,date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,5 +27,10 @@ public class GroomingLastpage extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        time=(EditText)findViewById(R.id.time);
+        date=(EditText)findViewById(R.id.date);
+
+        time.setText(SingletonClass.getInstance().getTime());
+        date.setText(SingletonClass.getInstance().getDate());
     }
 }

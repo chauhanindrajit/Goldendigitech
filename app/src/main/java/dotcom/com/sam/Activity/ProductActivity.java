@@ -35,6 +35,7 @@ import dotcom.com.sam.Response.ProductResponse;
 import dotcom.com.sam.SingaltonsClasses.CategorySingalton;
 import dotcom.com.sam.SingaltonsClasses.PSingalton;
 import dotcom.com.sam.SingaltonsClasses.ProductSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.SingaltonsClasses.SubcategorySingalton;
 import dotcom.com.sam.Utils.Utils;
 import dotcom.com.sam.extras.RegistrationResponse;
@@ -44,7 +45,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
+public class ProductActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static FragmentManager fragmentManager;
     ViewPager mViewPager;
     Toolbar toolbar;
@@ -62,6 +63,7 @@ public class ProductActivity extends AppCompatActivity  implements NavigationVie
     Menu customMenu;
     ArrayList tripSingaltonss;
     public static int notificationCountCart = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +72,12 @@ public class ProductActivity extends AppCompatActivity  implements NavigationVie
         initView();
         arrSubCateogry = new ArrayList<>();
         toolbar = findViewById(R.id.toolbar);
-        addtocart=(ImageView)findViewById(R.id.addtocard);
+        addtocart = (ImageView) findViewById(R.id.addtocard);
 
         addtocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ProductActivity.this,CartListActivity.class);
+                Intent i = new Intent(ProductActivity.this, CartListActivity.class);
                 startActivity(i);
             }
         });
@@ -86,22 +88,22 @@ public class ProductActivity extends AppCompatActivity  implements NavigationVie
         fragmentManager = getSupportFragmentManager();
         tripSingaltonss = new ArrayList<>();
         tripSingaltonss.clear();
-        nodat=(TextView)findViewById(R.id.nodata);
-        subcatid= SubcategorySingalton.getInstance().getSc_Id();
+        nodat = (TextView) findViewById(R.id.nodata);
+        subcatid = SubcategorySingalton.getInstance().getSc_Id();
         if (CategorySingalton.getInstance().getCat() != null) {
             IDS = CategorySingalton.getInstance().getCateID();
-            subcatid=0;
-            checkAcceptTrip(IDS,subcatid);
+            subcatid = 0;
+            checkAcceptTrip(IDS, subcatid);
             toolbar.setTitle(CategorySingalton.getInstance().getCategosryName());
 
             ;
         } else {
             ID = CategorySingalton.getInstance().getSubcateID();
-            subcatid= SubcategorySingalton.getInstance().getSc_Id();
-            checkAcceptTrip(ID,subcatid);
+            subcatid = SubcategorySingalton.getInstance().getSc_Id();
+            checkAcceptTrip(ID, subcatid);
             toolbar.setTitle(CategorySingalton.getInstance().getCategosryName());
         }
-        sum= SubcategorySingalton.getInstance().getSubCategoryName();
+        sum = SubcategorySingalton.getInstance().getSubCategoryName();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +122,7 @@ public class ProductActivity extends AppCompatActivity  implements NavigationVie
 //        productPagerAdapter.getCount();
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -150,7 +153,7 @@ public class ProductActivity extends AppCompatActivity  implements NavigationVie
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-      if (id == R.id.action_cart) {
+        if (id == R.id.action_cart) {
 
            /* NotificationCountSetClass.setAddToCart(MainActivity.this, item, notificationCount);
             invalidateOptionsMenu();*/
@@ -162,6 +165,7 @@ public class ProductActivity extends AppCompatActivity  implements NavigationVie
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void initView() {
         mViewPager = (ViewPager) findViewById(R.id.pager);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
@@ -195,6 +199,10 @@ public class ProductActivity extends AppCompatActivity  implements NavigationVie
                     stringList.clear();
                 }
                 if (response.code() == 200) {
+
+
+
+
                     ProductResponse productResponse = response.body();
                     // checkAcceptTrip1();
 
@@ -202,11 +210,11 @@ public class ProductActivity extends AppCompatActivity  implements NavigationVie
 
                     for (int i = 0; i < productResponse.getResponse().size(); i++) {
 
-                        ProductSingalton productSingalton=new ProductSingalton();
-                        PSingalton pSingalton= new PSingalton();
-                        for(int j = 0;j< productResponse.getResponse().get(i).getProdList().size();j++){
+                        ProductSingalton productSingalton = new ProductSingalton();
+                        PSingalton pSingalton = new PSingalton();
+                        for (int j = 0; j < productResponse.getResponse().get(i).getProdList().size(); j++) {
                             Bundle bundle = new Bundle(); //I guess you're missing this
-                            bundle.putInt("category",SubcategorySingalton.getInstance().getSc_Id());
+                            bundle.putInt("category", SubcategorySingalton.getInstance().getSc_Id());
                             productSingalton.setProductName(productResponse.getResponse().get(i).getProdList().get(j).getProductName());
                             productSingalton.setDiscount(productResponse.getResponse().get(i).getProdList().get(j).getDiscount());
                             productSingalton.setPrice(productResponse.getResponse().get(i).getProdList().get(j).getPrice());
@@ -230,9 +238,9 @@ public class ProductActivity extends AppCompatActivity  implements NavigationVie
 //                        }
                         tabLayout.addTab(tabLayout.newTab().setText(productResponse.getResponse().get(i).getSubCategoryName()));
                         tabLayout.getTabCount();
-                        if(productResponse.getResponse().get(i).getSc_Id()== subcatid){
+                        if (productResponse.getResponse().get(i).getSc_Id() == subcatid) {
 
-                            tabLayout.setScrollPosition(i,0f,true);
+                            tabLayout.setScrollPosition(i, 0f, true);
                             mViewPager.setCurrentItem(i);
                             mViewPager.getCurrentItem();
                             mViewPager.setOffscreenPageLimit(3);
@@ -245,7 +253,8 @@ public class ProductActivity extends AppCompatActivity  implements NavigationVie
                                     TabListener();
                                 }
                             });
-                        }TabListener();
+                        }
+                        TabListener();
                     }
 
                 }
@@ -365,5 +374,13 @@ public class ProductActivity extends AppCompatActivity  implements NavigationVie
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

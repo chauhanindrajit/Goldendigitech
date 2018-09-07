@@ -41,6 +41,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp" />
                 <TextView
+                    android:id="@+id/patentdate"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
@@ -57,6 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:id="@+id/patenttime"
                     android:text="06:00 PM"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold" />

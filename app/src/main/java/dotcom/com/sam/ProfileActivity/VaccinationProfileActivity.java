@@ -15,8 +15,11 @@ import android.widget.TimePicker;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.Utils.PatientDetails;
 import dotcom.com.sam.Activity.PetDoctor;
 import dotcom.com.sam.R;
@@ -26,11 +29,12 @@ import dotcom.com.sam.SingaltonsClasses.VacccinationSingalton;
 
 public class VaccinationProfileActivity extends AppCompatActivity {
     ImageView profileImage;
-    Button btnBook;
+    Button btnBook,button;
     TextView drname,qualifictn,experiance,homefeess,subdoctortype,desctription,locatn,subcharge;
     LinearLayout visitAtHomeLayout,vaccinationLayoput;
     ImageView imag;
     Context context;
+    final Calendar myCalendar = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,7 @@ public class VaccinationProfileActivity extends AppCompatActivity {
         experiance = (TextView)findViewById(R.id.subexperiance);
         homefeess = (TextView)findViewById(R.id.ssubvisitathomefee);
         subdoctortype =(TextView)findViewById(R.id.subdoctortype);
+        button = findViewById(R.id.btn_bookapointment);
         subcharge =(TextView)findViewById(R.id.ssubcharge);
         //opentime = (TextView)findViewById(R.id.availabletime);
         desctription = (TextView)findViewById(R.id.detaildescription);
@@ -54,7 +59,29 @@ public class VaccinationProfileActivity extends AppCompatActivity {
         locatn.setText(VacccinationSingalton.getInstance().getLocation());
         imag =(ImageView)findViewById(R.id.profile_image);
         //OldpetRequest oldpetRequest= new OldpetRequest();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(VaccinationProfileActivity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+
+            }
+        });
         if (VacccinationSingalton.getInstance().getImage() != null) {
             Picasso.with(context).load("http://mrsam.in/sam/MainImage/" + VacccinationSingalton.getInstance().getImage().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(imag);
         } else {
@@ -99,39 +126,33 @@ public class VaccinationProfileActivity extends AppCompatActivity {
 
     private void initListner()
     {
-        btnBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDate();
 
-            }
-        });
     }
 
-    private void getDate()
-    {
-        Calendar calendar = Calendar.getInstance();
-
-        DatePickerDialog datePickerDialog=new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-
-                getTime();
-            }
-        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE));
-        datePickerDialog.show();
+    private void updateLabel() {
+        String myFormat = "dd/MM/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        SingletonClass.getInstance().setDate(sdf.format(myCalendar.getTime()));
+        // getdate.setText(sdf.format(myCalendar.getTime()));
+        getTime();
+        // enddtae.setText(sdf.format(myCalendar.getTime()));
     }
 
-    void getTime()
-    {
-        TimePickerDialog timePickerDialog=new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+    void getTime() {
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        int second = mcurrentTime.get(Calendar.SECOND);
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(VaccinationProfileActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
-            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-
-                //
-                Utils.moveNextWithAnimation(VaccinationProfileActivity.this,PatientDetails.class);
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                SingletonClass.getInstance().setTime(selectedHour + ":" + selectedMinute);
+                Utils.moveNextWithAnimation(VaccinationProfileActivity.this, PatientDetails.class);
+                //starttime.setText(selectedHour + ":" + selectedMinute);
             }
-        },12,60,false);
-        timePickerDialog.show();
+        }, hour, minute, false);//Yes 24 hour time
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
     }
 }

@@ -64,39 +64,6 @@
                     android:layout_height="wrap_content"
                     android:text="SEARCH FOR DOG GROOMING SERVICES"
                     android:textColor="@color/colorPrimary" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/categeory_shpe"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:src="@drawable/breedtype" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="#00ffffff"
-                        android:hint="Select your breed type" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="5dp"
-                        android:src="@drawable/ic_expand_more_black_24dp" />
-
-
-                </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -127,6 +94,39 @@
 
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/categeory_shpe"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/breedtype" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="#00ffffff"
+                        android:hint="Select Age" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/ic_expand_more_black_24dp" />
+
+
+                </LinearLayout>
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -146,7 +146,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#00ffffff"
-                        android:hint="Select your breed size" />
+                        android:hint="Select size" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -176,7 +176,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#00ffffff"
-                        android:hint="Select Services at" />
+                        android:hint="Salon Location" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -208,7 +208,7 @@
                         android:layout_weight="1"
                         android:autoSizeMaxTextSize="20dp"
                         android:background="#00ffffff"
-                        android:hint="Select your location" />
+                        android:hint="Select location" />
 
                     <ImageView
                         android:layout_width="wrap_content"
