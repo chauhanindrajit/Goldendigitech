@@ -106,7 +106,7 @@ public class BuypetResponse {
         private String Image;
         private int Price;
         private String BreedName;
-        private Object SR_Id;
+        private int SR_Id;
         private Object Type;
         private Object C_Id;
         private Object AdoptPetCount;
@@ -304,11 +304,11 @@ public class BuypetResponse {
             this.BreedName = BreedName;
         }
 
-        public Object getSR_Id() {
+        public int getSR_Id() {
             return SR_Id;
         }
 
-        public void setSR_Id(Object SR_Id) {
+        public void setSR_Id(int SR_Id) {
             this.SR_Id = SR_Id;
         }
 

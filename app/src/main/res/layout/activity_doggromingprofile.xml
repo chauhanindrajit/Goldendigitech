@@ -249,9 +249,12 @@ android:id="@+id/ssericess"
                         android:orientation="horizontal">
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="30dp"
                             android:layout_weight="1"
+                            android:focusableInTouchMode="false"
+                            android:defaultFocusHighlightEnabled="false"
                             android:background="#00ffffff"
+                            android:textAlignment="center"
                             android:hint="Please Select services" />
 
                         <ImageView
@@ -266,19 +269,18 @@ android:id="@+id/ssericess"
                     <LinearLayout
                         android:layout_marginTop="10dp"
                         android:paddingRight="15dp"
-                        android:weightSum="2"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <Button
                             android:id="@+id/btn_bookpackage"
                             android:layout_width="wrap_content"
-                            android:layout_height="33dp"
+                            android:layout_height="40dp"
                             android:layout_alignParentBottom="true"
                             android:background="@color/colorPrimary"
                             android:text="Book package"
                             android:textColor="#FFF"
-                            android:textSize="10dp"
+                            android:textSize="12dp"
                             android:translationZ="8dp" />
                     </LinearLayout>
 

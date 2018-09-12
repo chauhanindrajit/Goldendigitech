@@ -14,8 +14,11 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import dotcom.com.sam.Activity.Petoldagelast;
+import dotcom.com.sam.Activity.ServicesLastPage;
 import dotcom.com.sam.R;
+import dotcom.com.sam.SingaltonsClasses.MicroChippingSingalton;
 import dotcom.com.sam.SingaltonsClasses.OldHomeSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.request.OldpetRequest;
 
 public class PetOldAgeHomeProfile extends AppCompatActivity {
@@ -66,7 +69,10 @@ Button contact;
 contact.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        Intent i = new Intent(PetOldAgeHomeProfile.this, Petoldagelast.class);
+        SingletonClass.getInstance().setCentername(OldHomeSingalton.getInstance().getHomeName());
+        SingletonClass.getInstance().setSRID(String.valueOf(MicroChippingSingalton.getInstance().getSR_Id()));
+        SingletonClass.getInstance().setActivityname("PetOldAgeHome");
+        Intent i = new Intent(PetOldAgeHomeProfile.this, ServicesLastPage.class);
         startActivity(i);
     }
 });

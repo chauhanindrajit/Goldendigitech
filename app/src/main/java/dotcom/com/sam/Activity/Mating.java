@@ -397,8 +397,10 @@ public class Mating extends AppCompatActivity {
                     for (int i = 0; i < matingResponse.getResponse().size(); i++) {
                         MatingSingalton matingSingalton = new MatingSingalton();
                         matingSingalton.setPettype(matingResponse.getResponse().get(i).getPettype());
+                        matingSingalton.setPetName(matingResponse.getResponse().get(i).getPetName());
                         matingSingalton.setBreedName(matingResponse.getResponse().get(i).getBreedName());
                         matingSingalton.setGender(matingResponse.getResponse().get(i).getGender());
+                        matingSingalton.setSR_Id(matingResponse.getResponse().get(i).getSR_Id());
                         matingSingalton.setAge(matingResponse.getResponse().get(i).getAge());
                         matingSingalton.setB_Id(Integer.parseInt(String.valueOf(matingResponse.getResponse().get(i).getB_Id())));
                         matingSingalton.setLocation(matingResponse.getResponse().get(i).getLocation());

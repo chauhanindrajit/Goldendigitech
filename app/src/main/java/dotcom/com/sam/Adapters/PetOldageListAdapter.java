@@ -72,6 +72,7 @@ public class PetOldageListAdapter extends RecyclerView.Adapter<PetOldageListAdap
                 OldHomeSingalton.getInstance().setDescription(arrSubCateogry.get(position).getDescription());
                 OldHomeSingalton.getInstance().setPetType(arrSubCateogry.get(position).getPetType());
                 OldHomeSingalton.getInstance().setServicesType(arrSubCateogry.get(position).getServicesType());
+                OldHomeSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
                 OldHomeSingalton.getInstance().setImage(arrSubCateogry.get(position).getImage());
 
 

@@ -11,9 +11,12 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import dotcom.com.sam.Activity.DogGrooming;
+import dotcom.com.sam.Activity.ServicesLastPage;
 import dotcom.com.sam.R;
 import dotcom.com.sam.SingaltonsClasses.MicroChippingSingalton;
 import dotcom.com.sam.SingaltonsClasses.PetsetterprofileSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
+import dotcom.com.sam.SingaltonsClasses.TrainingSingalton;
 import dotcom.com.sam.Utils.Utils;
 
 public class Petsetterprofileprofile extends AppCompatActivity {
@@ -51,7 +54,10 @@ public class Petsetterprofileprofile extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.moveNextWithAnimation(Petsetterprofileprofile.this, DogGrooming.class);
+                SingletonClass.getInstance().setCentername(PetsetterprofileSingalton.getInstance().getName());
+                SingletonClass.getInstance().setSRID(String.valueOf(PetsetterprofileSingalton.getInstance().getSR_Id()));
+                SingletonClass.getInstance().setActivityname("Pet setter");
+                Utils.moveNextWithAnimation(Petsetterprofileprofile.this, ServicesLastPage.class);
             }
         });
     }

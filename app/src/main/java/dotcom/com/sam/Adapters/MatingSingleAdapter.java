@@ -19,19 +19,21 @@ import java.util.List;
 
 import dotcom.com.sam.Activity.MainActivity;
 import dotcom.com.sam.Activity.Matinglast;
+import dotcom.com.sam.Activity.ServicesLastPage;
 import dotcom.com.sam.ProfileActivity.Doggromingprofile;
 import dotcom.com.sam.R;
 import dotcom.com.sam.SingaltonsClasses.MatingSingalton;
+import dotcom.com.sam.SingaltonsClasses.MicroChippingSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 
 public class MatingSingleAdapter extends RecyclerView.Adapter<MatingSingleAdapter.VetViewHolder> {
     Context context;
     static List<MatingSingalton> matingSingaltons;
     public static ArrayList<MatingSingalton> filterItem;
 
-    public MatingSingleAdapter(Context context,List<MatingSingalton> matingSingaltons)
-    {
-        this.context=context;
-        this.matingSingaltons=matingSingaltons;
+    public MatingSingleAdapter(Context context, List<MatingSingalton> matingSingaltons) {
+        this.context = context;
+        this.matingSingaltons = matingSingaltons;
         this.filterItem = new ArrayList<>();
         filterItem.addAll(matingSingaltons);
 
@@ -39,16 +41,16 @@ public class MatingSingleAdapter extends RecyclerView.Adapter<MatingSingleAdapte
 
     @Override
     public VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.activity_single_mating,parent,false);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.activity_single_mating, parent, false);
 
-        MatingSingleAdapter.VetViewHolder vetViewHolder=new MatingSingleAdapter.VetViewHolder(view);
+        MatingSingleAdapter.VetViewHolder vetViewHolder = new MatingSingleAdapter.VetViewHolder(view);
 
         return vetViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(final VetViewHolder holder, int position) {
+    public void onBindViewHolder(final VetViewHolder holder, final int position) {
 
         holder.loc.setText(matingSingaltons.get(position).getLocation());
         holder.pet.setText(matingSingaltons.get(position).getPettype());
@@ -72,9 +74,12 @@ public class MatingSingleAdapter extends RecyclerView.Adapter<MatingSingleAdapte
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"diagnostic_image");
-                Intent intent=new Intent(context,Matinglast.class);
-                context.startActivity(intent,activityOptions.toBundle());
+                SingletonClass.getInstance().setCentername(matingSingaltons.get(position).getPetName());
+                SingletonClass.getInstance().setSRID(String.valueOf(matingSingaltons.get(position).getSR_Id()));
+                SingletonClass.getInstance().setActivityname("Mating");
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.imageView, "diagnostic_image");
+                Intent intent = new Intent(context, ServicesLastPage.class);
+                context.startActivity(intent, activityOptions.toBundle());
 
             }
         });
@@ -87,26 +92,26 @@ public class MatingSingleAdapter extends RecyclerView.Adapter<MatingSingleAdapte
 
 
     public class VetViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView,bgimage;
-       TextView loc,pet,gender,age,breed,status;
-       CardView  cardView;
+        ImageView imageView, bgimage;
+        TextView loc, pet, gender, age, breed, status;
+        CardView cardView;
 
         public VetViewHolder(View itemView) {
             super(itemView);
-            loc=itemView.findViewById(R.id.Mlocation);
-            pet=itemView.findViewById(R.id.Mdogname);
-            imageView=itemView.findViewById(R.id.mainimage);
-            cardView=itemView.findViewById(R.id.matingcard);
-            bgimage=itemView.findViewById(R.id.bgimage);
-            gender=itemView.findViewById(R.id.Mfemale);
-            age=itemView.findViewById(R.id.Mage);
-            breed=itemView.findViewById(R.id.Mbreed);
-            status=itemView.findViewById(R.id.Mstatus);
-
+            loc = itemView.findViewById(R.id.Mlocation);
+            pet = itemView.findViewById(R.id.Mdogname);
+            imageView = itemView.findViewById(R.id.mainimage);
+            cardView = itemView.findViewById(R.id.matingcard);
+            bgimage = itemView.findViewById(R.id.bgimage);
+            gender = itemView.findViewById(R.id.Mfemale);
+            age = itemView.findViewById(R.id.Mage);
+            breed = itemView.findViewById(R.id.Mbreed);
+            status = itemView.findViewById(R.id.Mstatus);
 
 
         }
     }
+
     public void filter(String charText) {
 
 //        charText = charText.toLowerCase(Locale.getDefault());

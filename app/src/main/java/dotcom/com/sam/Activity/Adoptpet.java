@@ -96,6 +96,7 @@ RecyclerView recyclerView;
                         adoptaPetSingalton.setImage(adoptpetResponse.getResponse().get(i).getImage());
                         adoptaPetSingalton.setOwnerEmail(adoptpetResponse.getResponse().get(i).getOwnerEmail());
                         adoptaPetSingalton.setStatus(adoptpetResponse.getResponse().get(i).getStatus());
+                        adoptaPetSingalton.setSR_Id(adoptpetResponse.getResponse().get(i).getSR_Id());
                         adoptaPetSingalton.setCondition(adoptpetResponse.getResponse().get(i).getCondition());
                         adoptaPetSingalton.setLocation(adoptpetResponse.getResponse().get(i).getLocation());
                         //adoptaPetSingalton.setn(adoptpetResponse.getResponse().get(i).getPet_Name());

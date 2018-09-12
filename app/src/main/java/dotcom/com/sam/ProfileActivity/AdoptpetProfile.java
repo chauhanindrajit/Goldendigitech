@@ -15,9 +15,12 @@ import com.squareup.picasso.Picasso;
 
 import dotcom.com.sam.Activity.Adoptpetlast;
 import dotcom.com.sam.Activity.GroomingService;
+import dotcom.com.sam.Activity.ServicesLastPage;
 import dotcom.com.sam.R;
 import dotcom.com.sam.SingaltonsClasses.AdoptprofileSingalton;
+import dotcom.com.sam.SingaltonsClasses.MicroChippingSingalton;
 import dotcom.com.sam.SingaltonsClasses.OldHomeSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 
 public class AdoptpetProfile extends AppCompatActivity {
 Context context;
@@ -78,7 +81,10 @@ Button btn_enquirenow;
 btn_enquirenow.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        Intent i = new Intent(AdoptpetProfile.this, Adoptpetlast.class);
+        SingletonClass.getInstance().setCentername(AdoptprofileSingalton.getInstance().getPet_Name());
+        SingletonClass.getInstance().setSRID(String.valueOf(AdoptprofileSingalton.getInstance().getSR_Id()));
+        SingletonClass.getInstance().setActivityname("Adopt A Pet");
+        Intent i = new Intent(AdoptpetProfile.this, ServicesLastPage.class);
         startActivity(i);
 
     }

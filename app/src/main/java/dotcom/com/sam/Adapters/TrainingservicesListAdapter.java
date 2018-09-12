@@ -68,6 +68,7 @@ public class TrainingservicesListAdapter extends RecyclerView.Adapter<Trainingse
                 TrainingSingalton.getInstance().setServices(arrSubCateogry.get(position).getServices());
                 TrainingSingalton.getInstance().setImage(arrSubCateogry.get(position).getImage());
                 TrainingSingalton.getInstance().setMobile(arrSubCateogry.get(position).getMobile());
+                TrainingSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
                 ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"diagnostic_image");
            Intent intent=new Intent(context,TrainingProfile.class);
            context.startActivity(intent,activityOptions.toBundle());

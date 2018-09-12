@@ -541,6 +541,7 @@ public class PetSetter extends AppCompatActivity {
                         petSitterSingalton.setFees(petSitterResponse.getResponse().get(i).getFees());
                         petSitterSingalton.setPetAvailability(petSitterResponse.getResponse().get(i).getPetAvailability());
                         petSitterSingalton.setImage(petSitterResponse.getResponse().get(i).getImage());
+                        petSitterSingalton.setSR_Id(petSitterResponse.getResponse().get(i).getSR_Id());
 
                         tripSingaltonss.add(petSitterSingalton);
                         locationTypeList.add(petSitterResponse.getResponse().get(i).getLocation());

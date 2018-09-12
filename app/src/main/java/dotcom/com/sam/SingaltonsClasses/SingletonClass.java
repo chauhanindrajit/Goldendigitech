@@ -69,6 +69,10 @@ public class SingletonClass {
     }
     private String Date;
     private String Time;
+    private String Activityname;
+    private String Centername;
+    private String Message;
+    private String SRID;
     boolean isFilterApply;
 
     //-----------------brand filter
@@ -311,5 +315,37 @@ public class SingletonClass {
 
     public void setTime(String time) {
         Time = time;
+    }
+
+    public String getActivityname() {
+        return Activityname;
+    }
+
+    public void setActivityname(String activityname) {
+        Activityname = activityname;
+    }
+
+    public String getSRID() {
+        return SRID;
+    }
+
+    public void setSRID(String SRID) {
+        this.SRID = SRID;
+    }
+
+    public String getCentername() {
+        return Centername;
+    }
+
+    public void setCentername(String centername) {
+        Centername = centername;
+    }
+
+    public String getMessage() {
+        return Message;
+    }
+
+    public void setMessage(String message) {
+        Message = message;
     }
 }

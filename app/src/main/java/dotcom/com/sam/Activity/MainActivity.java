@@ -318,6 +318,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
 
+               // Utils.moveNextWithAnimation(MainActivity.this,ProductActivity.class);
                Utils.customMessage(MainActivity.this,"Please try after some time");
             }
         });
@@ -424,7 +425,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void checkAcceptTrip() {
         arrSubCateogry = new ArrayList<>();
-
         pDialog = new ProgressDialog(MainActivity.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);

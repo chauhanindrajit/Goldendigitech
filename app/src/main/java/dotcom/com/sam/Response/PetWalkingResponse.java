@@ -100,7 +100,7 @@ public class PetWalkingResponse {
         private String ModifyBy;
         private String Status;
         private String DeleteStatus;
-        private Object SR_Id;
+        private int SR_Id;
         private String Address;
         private String Email;
         private String Mobile;
@@ -274,11 +274,11 @@ public class PetWalkingResponse {
             this.DeleteStatus = DeleteStatus;
         }
 
-        public Object getSR_Id() {
+        public int getSR_Id() {
             return SR_Id;
         }
 
-        public void setSR_Id(Object SR_Id) {
+        public void setSR_Id(int SR_Id) {
             this.SR_Id = SR_Id;
         }
 

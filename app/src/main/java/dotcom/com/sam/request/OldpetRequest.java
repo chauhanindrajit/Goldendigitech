@@ -26,7 +26,7 @@ public class OldpetRequest {
         private Object ModifyBy;
         private String Status;
         private Object DeleteStatus;
-        private Object SR_Id;
+        private int SR_Id;
         private String MobileNo;
 
         public int getOAH_Id() {
@@ -173,11 +173,11 @@ public class OldpetRequest {
             this.DeleteStatus = DeleteStatus;
         }
 
-        public Object getSR_Id() {
+        public int getSR_Id() {
             return SR_Id;
         }
 
-        public void setSR_Id(Object SR_Id) {
+        public void setSR_Id(int SR_Id) {
             this.SR_Id = SR_Id;
         }
 

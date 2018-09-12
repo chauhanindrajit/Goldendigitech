@@ -65,6 +65,7 @@ public class MicrochippingAdapter extends RecyclerView.Adapter<MicrochippingAdap
                 MicroChippingSingalton.getInstance().setFees(arrSubCateogry.get(position).getFees());
                 MicroChippingSingalton.getInstance().setDescription(arrSubCateogry.get(position).getDescription());
                 MicroChippingSingalton.getInstance().setImage(arrSubCateogry.get(position).getImage());
+                MicroChippingSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
 
 
 

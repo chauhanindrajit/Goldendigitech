@@ -440,6 +440,7 @@ public class PetWalking extends AppCompatActivity {
                         petWalkingRequest.setMobile(petWalkingResponse.getResponse().get(i).getMobile());
                         petWalkingRequest.setPerhoureCost(petWalkingResponse.getResponse().get(i).getPerhoureCost());
                         petWalkingRequest.setPerDayCost(petWalkingResponse.getResponse().get(i).getPerDayCost());
+                        petWalkingRequest.setSR_Id(petWalkingResponse.getResponse().get(i).getSR_Id());
                         petWalkingRequest.setDescription(petWalkingResponse.getResponse().get(i).getDescription());
                         petWalkingRequest.setProfile(petWalkingResponse.getResponse().get(i).getProfile());
 

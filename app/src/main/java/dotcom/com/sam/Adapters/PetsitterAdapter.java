@@ -26,6 +26,7 @@ import dotcom.com.sam.Response.DiagonsticResponse;
 import dotcom.com.sam.SingaltonsClasses.DiagonsticSingalton;
 import dotcom.com.sam.SingaltonsClasses.PetSitterSingalton;
 import dotcom.com.sam.SingaltonsClasses.PetsetterprofileSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 
 public class PetsitterAdapter extends RecyclerView.Adapter<PetsitterAdapter.VetViewHolder> {
     Context context;
@@ -66,8 +67,9 @@ public class PetsitterAdapter extends RecyclerView.Adapter<PetsitterAdapter.VetV
                 PetsetterprofileSingalton.getInstance().setImage(arrSubCateogry.get(position).getImage());
                 PetsetterprofileSingalton.getInstance().setServicesType(arrSubCateogry.get(position).getServicesType());
                 PetsetterprofileSingalton.getInstance().setFees(arrSubCateogry.get(position).getFees());
+                PetsetterprofileSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
                 PetsetterprofileSingalton.getInstance().setPetAvailability(arrSubCateogry.get(position).getPetAvailability());
-
+                SingletonClass.getInstance().setSRID(String.valueOf(arrSubCateogry.get(position).getSR_Id()));
                 ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.imageView, "diagnostic_image");
                 Intent intent = new Intent(context, Petsetterprofileprofile.class);
                 context.startActivity(intent, activityOptions.toBundle());

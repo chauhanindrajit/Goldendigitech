@@ -300,6 +300,7 @@ public class TrainigServices extends AppCompatActivity {
                         trainingRequest.setServices(trainingServicesResponse.getResponse().get(i).getServices());
                         trainingRequest.setImage(trainingServicesResponse.getResponse().get(i).getImage());
                         trainingRequest.setMobile(trainingServicesResponse.getResponse().get(i).getMobile());
+                        trainingRequest.setSR_Id(trainingServicesResponse.getResponse().get(i).getSR_Id());
 
                         tripSingaltonss.add(trainingRequest);
 

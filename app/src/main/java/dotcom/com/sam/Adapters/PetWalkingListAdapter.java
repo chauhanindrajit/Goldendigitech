@@ -75,6 +75,7 @@ public class PetWalkingListAdapter extends RecyclerView.Adapter<PetWalkingListAd
                 WalkingSingalton.getInstance().setMobile(arrSubCateogry.get(position).getMobile());
                 WalkingSingalton.getInstance().setPerhoureCost(arrSubCateogry.get(position).getPerhoureCost());
                 WalkingSingalton.getInstance().setPerDayCost(arrSubCateogry.get(position).getPerDayCost());
+                WalkingSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
                 WalkingSingalton.getInstance().setDescription(String.valueOf(arrSubCateogry.get(position).getDescription()));
                 WalkingSingalton.getInstance().setProfile(arrSubCateogry.get(position).getProfile());
 

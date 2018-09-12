@@ -72,7 +72,7 @@ import static dotcom.com.sam.Activity.ProductActivity.fragmentManager;
  */
 @SuppressLint("ValidFragment")
 public class ProductFragment extends Fragment {
-    RecyclerView recyclerView,filterview;
+    RecyclerView recyclerView, filterview;
     CardView filterLaout;
     Button applyfilter;
     Toolbar toolbar;
@@ -88,15 +88,16 @@ public class ProductFragment extends Fragment {
     private ProgressDialog pDialog;
     int pos;
     int ID;
-    List<String>type;
+    List<String> type;
     Boolean API;
     private RecyclerView.LayoutManager mLayoutManager;
+
     @SuppressLint("ValidFragment")
     public ProductFragment(int pos, List<ProductResponse.ResponseBean.ProdListBean> count, List<ProductResponse.ResponseBean.FilterListBean> filterList) {
 
-        this.pos=pos;
-        this.count=count;
-        this.filterList=filterList;
+        this.pos = pos;
+        this.count = count;
+        this.filterList = filterList;
 
 
         // Required empty public constructor
@@ -113,27 +114,26 @@ public class ProductFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        TextView txt=(TextView)getView().findViewById(R.id.txt);
-        filterLaout=getView().findViewById(R.id.footer_filter);
-        applyfilter=getView().findViewById(R.id.aplyfilter);
+        TextView txt = (TextView) getView().findViewById(R.id.txt);
+        filterLaout = getView().findViewById(R.id.footer_filter);
+        applyfilter = getView().findViewById(R.id.aplyfilter);
         txt.setText(Integer.toString(pos));
         tripSingaltonss = new ArrayList<>();
-        recyclerView=(RecyclerView) getView().findViewById(R.id.recylcerview_products);
-        filterview=(RecyclerView) getView().findViewById(R.id.recylcerview_products);
+        recyclerView = (RecyclerView) getView().findViewById(R.id.recylcerview_products);
+        filterview = (RecyclerView) getView().findViewById(R.id.recylcerview_products);
 
         setRecyclerviewProduct();
         setBottomFillter();
-        API=true;
+        API = true;
 //        FilterRecyclerviewProducts();
-       // pos= SubcategorySingalton.getInstance().getSc_Id();
+        // pos= SubcategorySingalton.getInstance().getSc_Id();
     }
 
 
-    private  void setRecyclerviewProduct()
-    {
+    private void setRecyclerviewProduct() {
         //   recyclerView
-        ProductAdapter productAdapter=new ProductAdapter(getContext(),count,mValues);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(), 2);
+        ProductAdapter productAdapter = new ProductAdapter(getContext(), count, mValues);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         productAdapter.notifyDataSetChanged();
         //  LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.Gr, false);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -142,8 +142,7 @@ public class ProductFragment extends Fragment {
 
     }
 
-    private  void FilterRecyclerviewProducts()
-    {
+    private void FilterRecyclerviewProducts() {
         //   recyclerView
         mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         filterview.setLayoutManager(mLayoutManager);
@@ -153,13 +152,12 @@ public class ProductFragment extends Fragment {
     }
 
 
-    private void setBottomFillter()
-    {
-        LayoutInflater inflater= (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View view2=inflater.inflate(R.layout.filter_dialog_layout,null);
-        ImageView imageView=view2.findViewById(R.id.cancle_image);
-        Button applyfilter=view2.findViewById(R.id.aplyfilter);
-       final RecyclerView filterview=view2.findViewById(R.id.filtrrecyview);
+    private void setBottomFillter() {
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View view2 = inflater.inflate(R.layout.filter_dialog_layout, null);
+        ImageView imageView = view2.findViewById(R.id.cancle_image);
+        Button applyfilter = view2.findViewById(R.id.aplyfilter);
+        final RecyclerView filterview = view2.findViewById(R.id.filtrrecyview);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view2);
@@ -202,19 +200,20 @@ public class ProductFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                type=new ArrayList<>();
+                type = new ArrayList<>();
                 type.add("Featured Product");
 
-                Log.e("category", "onClick: "+SingletonClass.getInstance().getCatidlist() );
-                Log.e("brand", "onClick: "+SingletonClass.getInstance().getBrandIdList() );
-                Log.e("breed", "onClick: "+SingletonClass.getInstance().getBreedidlist() );
-                Log.e("PriceName", "onClick: "+SingletonClass.getInstance().getPricename() );
-                Log.e("AgeName", "onClick: "+SingletonClass.getInstance().getAgename() );
+                Log.e("category", "onClick: " + SingletonClass.getInstance().getCatidlist());
+                Log.e("brand", "onClick: " + SingletonClass.getInstance().getBrandIdList());
+                Log.e("breed", "onClick: " + SingletonClass.getInstance().getBreedidlist());
+                Log.e("PriceName", "onClick: " + SingletonClass.getInstance().getPricename());
+                Log.e("AgeName", "onClick: " + SingletonClass.getInstance().getAgename());
                 checkAcceptTrip();
                 dialog.hide();
             }
         });
     }
+
     private void checkAcceptTrip() {
         arrSubCateogry = new ArrayList<>();
 
@@ -230,52 +229,51 @@ public class ProductFragment extends Fragment {
         productfilterdataRequest.setCheckboxCategory(SingletonClass.getInstance().getCatidlist());
         productfilterdataRequest.setCheckboxProductType(type);
 
-         pDialog.show();
+        pDialog.show();
         final Call<ProductFilterdataResponse> productFilterdataResponseCall = Utilss.getWebService().PRODUCT_FILTERDATA_RESPONSE_CALL(productfilterdataRequest);
         Log.e("URL", "checkAcceptTrip: " + productFilterdataResponseCall.request().url().toString());
         productFilterdataResponseCall.enqueue(new Callback<ProductFilterdataResponse>() {
             @Override
             public void onResponse(Call<ProductFilterdataResponse> call, Response<ProductFilterdataResponse> response) {
                 pDialog.hide();
-                    if (response.code() == 200) {
-                        API=false;
-                        ProductFilterdataResponse productFilterdataResponse = response.body();
-                        // checkAcceptTrip1();
+                if (response.code() == 200) {
+                    API = false;
+                    ProductFilterdataResponse productFilterdataResponse = response.body();
+                    // checkAcceptTrip1();
 
-                        Log.e("Proct", new GsonBuilder().create().toJson(response));
+                    Log.e("Proct", new GsonBuilder().create().toJson(response));
 
-                        for (int i = 0; i < productFilterdataResponse.getResponse().size(); i++) {
+                    for (int i = 0; i < productFilterdataResponse.getResponse().size(); i++) {
 
-                        }
-                        if(productFilterdataResponse.getResponse().size()>0) {
-                            ProductFilterAdapter productFilterAdapter = new ProductFilterAdapter(getContext(), productFilterdataResponse.getResponse(), mValues);
-                            GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(), 2);
-                            productFilterAdapter.notifyDataSetChanged();
-                            recyclerView.setLayoutManager(gridLayoutManager);
-                            recyclerView.setAdapter(productFilterAdapter);
-                        }
-                        else if (productFilterdataResponse.getResponse().size()==0){
-                            setRecyclerviewProduct();
-                        }
-                            pDialog.hide();
-                        Utils.customMessage(getActivity(), "Filtered Successfully");
-                    } else if (response.code() == 400) {
-                        pDialog.hide();
-                        Utils.customMessage(getActivity(), "Something went wrong.");
-                    } else if (response.code() == 404) {
-                        pDialog.hide();
-                        Utils.customMessage(getActivity(), "There is problem to filter.");
-                    } else if (response.code() == 409) {
-                        pDialog.hide();
-                        Utils.customMessage(getActivity(), "Email id already exists.");
-                    } else if (response.code() == 500) {
-                        pDialog.hide();
-                        Utils.customMessage(getActivity(), "Internal server error.");
                     }
+                    if (productFilterdataResponse.getResponse().size() > 0) {
+                        ProductFilterAdapter productFilterAdapter = new ProductFilterAdapter(getContext(), productFilterdataResponse.getResponse(), mValues);
+                        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+                        productFilterAdapter.notifyDataSetChanged();
+                        recyclerView.setLayoutManager(gridLayoutManager);
+                        recyclerView.setAdapter(productFilterAdapter);
+                    } else if (productFilterdataResponse.getResponse().size() == 0) {
+                        setRecyclerviewProduct();
+                    }
+                    pDialog.hide();
+                    Utils.customMessage(getActivity(), "Filtered Successfully");
+                } else if (response.code() == 400) {
+                    pDialog.hide();
+                    Utils.customMessage(getActivity(), "Something went wrong.");
+                } else if (response.code() == 404) {
+                    pDialog.hide();
+                    Utils.customMessage(getActivity(), "There is problem to filter.");
+                } else if (response.code() == 409) {
+                    pDialog.hide();
+                    Utils.customMessage(getActivity(), "Email id already exists.");
+                } else if (response.code() == 500) {
+                    pDialog.hide();
+                    Utils.customMessage(getActivity(), "Internal server error.");
                 }
+            }
 
 
-                @Override
+            @Override
             public void onFailure(Call<ProductFilterdataResponse> call, Throwable t) {
                 pDialog.hide();
                 Log.e("Failed", "onFailure: " + t);
@@ -284,11 +282,12 @@ public class ProductFragment extends Fragment {
         });
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
 
-        if(getView() == null){
+        if (getView() == null) {
             return;
         }
 
@@ -298,13 +297,12 @@ public class ProductFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                     // handle back button's click listener
-                    if(API==false){
-                    setRecyclerviewProduct();
-                    API=true;
-                    }
-                    else if(API==true){
+                    if (API == false) {
+                        setRecyclerviewProduct();
+                        API = true;
+                    } else if (API == true) {
                         Intent i = new Intent(getActivity(), Categeory.class);
                         startActivity(i);
                         getActivity().finish();

@@ -72,6 +72,7 @@ public class BuyPetAdapter extends RecyclerView.Adapter<BuyPetAdapter.VetViewHol
                 BuypetprofileSingalton.getInstance().setStatus(arrSubCateogry.get(position).getStatus());
                 BuypetprofileSingalton.getInstance().setCondition(arrSubCateogry.get(position).getCondition());
                 BuypetprofileSingalton.getInstance().setLocation(arrSubCateogry.get(position).getLocation());
+                BuypetprofileSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
 
            ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"diagnostic_image");
            Intent intent=new Intent(context,BuypetProfile.class);

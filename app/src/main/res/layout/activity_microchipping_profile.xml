@@ -168,7 +168,7 @@
     <Button
         android:id="@+id/btn_collection"
         android:textColor="#FFF"
-        android:text="SAMPLE COLLECTION"
+        android:text="BOOK APPOINTMENT"
         android:translationZ="8dp"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"

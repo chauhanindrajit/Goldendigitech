@@ -39,23 +39,23 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
     ArrayList<ProductResponse.ResponseBean.FilterListBean.SubListBean> mUserItems = new ArrayList<ProductResponse.ResponseBean.FilterListBean.SubListBean>();
     String catname;
     ArrayList tripSingaltonss;
-    ArrayList<Integer>subcatid;
+    ArrayList<Integer> subcatid;
     int data;
     RadioGroup genderGrp;
-    ArrayList<String> selchkboxlist=new ArrayList<String>();
+    ArrayList<String> selchkboxlist = new ArrayList<String>();
     CheckBox[] cbs;
     private int selectedPosition = -1;
-    ArrayList<String> userid= new ArrayList<String>();
+    ArrayList<String> userid = new ArrayList<String>();
     boolean[] checkBoxState;
     private String[] udis;
-    String Price="Price",Age="Age";
+    String Price = "Price", Age = "Age";
     private RadioButton lastCheckedRB = null;
 
 
     public SubFilterAdapter(Context context, List<ProductResponse.ResponseBean.FilterListBean.SubListBean> subList, String catname) {
-        this.context=context;
-        this.filterList=subList;
-        this.catname=catname;
+        this.context = context;
+        this.filterList = subList;
+        this.catname = catname;
     }
 
 
@@ -74,7 +74,7 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
         final ProductResponse.ResponseBean.FilterListBean.SubListBean pBean = filterList.get(position);
         holder.subcat.setText(filterList.get(position).getSubCatName());
         holder.checkBox.setText("Checkbox " + position);
-        final int pos=position;
+        final int pos = position;
         holder.checkBox.setChecked(selectedPosition == position);
 //        if(catname.equals("Price")) {
 //            holder.linearlayout.setVisibility(View.VISIBLE);
@@ -140,40 +140,38 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if(!catname.equals("Price") || !catname.equals("Age")) {
+                if (!catname.equals("Price") || !catname.equals("Age")) {
                     if (isChecked) {
-                        if(catname.equals("Category")){
+                        if (catname.equals("Category")) {
                             SingletonClass.getInstance().removecatId(0);
                             SingletonClass.getInstance().addcatId(pBean.getSub_Id());
                         }
-                        if(catname.equals("Brand")){
+                        if (catname.equals("Brand")) {
                             SingletonClass.getInstance().removeBrand(0);
                             SingletonClass.getInstance().addBrand(pBean.getSub_Id());
 
                         }
-                        if(catname.equals("Breed")){
+                        if (catname.equals("Breed")) {
                             SingletonClass.getInstance().removeBreedId(0);
                             SingletonClass.getInstance().addBreedId(pBean.getSub_Id());
                         }
-                        if (catname.equals("Price")){
+                        if (catname.equals("Price")) {
                             selectedPosition = pos;
                             notifyDataSetChanged();
-                            if(selectedPosition == position){
+                            if (selectedPosition == position) {
                                 holder.checkBox.setChecked(true);
-                            }
-                            else{
+                            } else {
                                 holder.checkBox.setChecked(false);
                             }
                             SingletonClass.getInstance().addPricename(pBean.getSubCatName());
                             SingletonClass.getInstance().removepricename(catname);
                             SingletonClass.getInstance().removeAgename(catname);
                         }
-                        if (catname.equals("Age")){
+                        if (catname.equals("Age")) {
                             SingletonClass.getInstance().removepricename(catname);
                             SingletonClass.getInstance().removeAgename(catname);
                             SingletonClass.getInstance().addAgename(pBean.getSubCatName());
-                        }
-                        else {
+                        } else {
                         }
                     } else {
                         SingletonClass.getInstance().removeBrand(pBean.getSub_Id());
@@ -186,8 +184,6 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
                 }
             }
         });
-
-
 
 
 //        holder.checkBox.setOnClickListener(new View.OnClickListener() {
@@ -240,10 +236,6 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
 //                                           }
 
 
-
-
-
-
 //        holder.checkBox.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -258,7 +250,6 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
 //                }
 //                mUserItems.size();
 //            }});
-
 
 
 //    });
@@ -276,12 +267,13 @@ public class SubFilterAdapter extends RecyclerView.Adapter<SubFilterAdapter.View
         CardView cardView;
         CheckBox checkBox;
         TextView categeoryName, subcat;
-        LinearLayout linearlayout,childlayout;
+        LinearLayout linearlayout, childlayout;
         RadioGroup genderGrp;
         RadioButton radionprice;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            checkBox=(CheckBox)itemView.findViewById(R.id.checkbox);
+            checkBox = (CheckBox) itemView.findViewById(R.id.checkbox);
             cardView = (CardView) itemView.findViewById(R.id.cardview);
             subcat = (TextView) itemView.findViewById(R.id.subcaty);
             //  linearlayout = (LinearLayout) itemView.findViewById(R.id.linearFilter);

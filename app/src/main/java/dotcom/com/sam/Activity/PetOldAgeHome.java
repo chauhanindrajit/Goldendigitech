@@ -278,6 +278,7 @@ public class PetOldAgeHome extends AppCompatActivity {
                         oldpetRequest.setServicesType(oldPetResponse.getResponse().get(i).getServicesType());
                         oldpetRequest.setImage(oldPetResponse.getResponse().get(i).getImage());
                         oldpetRequest.setPackage(oldPetResponse.getResponse().get(i).getPackage());
+                        oldpetRequest.setSR_Id(oldPetResponse.getResponse().get(i).getSR_Id());
                         oldpetRequest.setOwnerName(oldPetResponse.getResponse().get(i).getOwnerName());
                         oldpetRequest.setDescription(oldPetResponse.getResponse().get(i).getDescription());
                         oldpetRequest.setAddress(oldPetResponse.getResponse().get(i).getAddress());

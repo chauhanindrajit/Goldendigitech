@@ -3,6 +3,7 @@ package dotcom.com.sam.extras;
 
 import dotcom.com.sam.Response.AdoptpetResponse;
 import dotcom.com.sam.Response.BuypetResponse;
+import dotcom.com.sam.Response.BuypetfilterResponse;
 import dotcom.com.sam.Response.ChangePassResponse;
 import dotcom.com.sam.Response.DiagonsticResponse;
 import dotcom.com.sam.Response.ForgotPassResponse;
@@ -20,6 +21,7 @@ import dotcom.com.sam.Response.PhotoResponse;
 import dotcom.com.sam.Response.ProductFilterdataResponse;
 import dotcom.com.sam.Response.ProductResponse;
 import dotcom.com.sam.Response.RegisttnResponsemain;
+import dotcom.com.sam.Response.ServiceLastPageResponse;
 import dotcom.com.sam.Response.SubcategoryResponse;
 import dotcom.com.sam.Response.TrainingServicesResponse;
 import dotcom.com.sam.Response.VaccinationResponse;
@@ -29,6 +31,7 @@ import dotcom.com.sam.request.ChangePassRequest;
 import dotcom.com.sam.request.ForgetPassRequest;
 import dotcom.com.sam.request.ProductfilterdataRequest;
 import dotcom.com.sam.request.RegistrationRequest;
+import dotcom.com.sam.request.ServicelastpageRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -143,4 +146,10 @@ public interface WebService {
 
     @POST("api/ShopByPetVC/ShopByPetFilter")
     Call<ProductFilterdataResponse> PRODUCT_FILTERDATA_RESPONSE_CALL(@Body ProductfilterdataRequest productfilterdataRequest);
+
+    @GET("api/ShopByPetVC/getAllBuyPetfilterData")
+    Call<BuypetfilterResponse> BUYPETFILTER_RESPONSE_CALL();
+
+    @POST("api/ShopByPetVC/SMSSender")
+    Call<ServiceLastPageResponse> SERVICE_LAST_PAGE_RESPONSE_CALL(@Body ServicelastpageRequest servicelastpageRequest);
 }

@@ -74,6 +74,7 @@ public class AdoptpetAdapter extends RecyclerView.Adapter<AdoptpetAdapter.VetVie
                 AdoptprofileSingalton.getInstance().setStatus(arrSubCateogry.get(position).getStatus());
                 AdoptprofileSingalton.getInstance().setCondition(arrSubCateogry.get(position).getCondition());
                 AdoptprofileSingalton.getInstance().setLocation(arrSubCateogry.get(position).getLocation());
+                AdoptprofileSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
 
            ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"diagnostic_image");
            Intent intent=new Intent(context,AdoptpetProfile.class);

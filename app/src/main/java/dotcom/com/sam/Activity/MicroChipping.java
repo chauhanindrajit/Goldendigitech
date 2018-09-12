@@ -279,6 +279,7 @@ public class MicroChipping extends AppCompatActivity {
                         microChippingSingalton.setCenterName(microChippingRespose.getResponse().get(i).getCenterName());
                         microChippingSingalton.setImage(microChippingRespose.getResponse().get(i).getImage());
                         microChippingSingalton.setTime(microChippingRespose.getResponse().get(i).getTime());
+                        microChippingSingalton.setSR_Id(microChippingRespose.getResponse().get(i).getSR_Id());
 
                         tripSingaltonss.add(microChippingSingalton);
                         locationTypeList.add(microChippingRespose.getResponse().get(i).getLocation());

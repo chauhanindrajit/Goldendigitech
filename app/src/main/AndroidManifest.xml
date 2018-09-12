@@ -133,7 +133,8 @@
         <activity android:name=".Activity.Buypetlast" />
         <activity android:name=".Activity.Matinglast" />
         <activity android:name=".Activity.PetEvent" />
-        <activity android:name=".Activity.Petoldagelast"></activity>
+        <activity android:name=".Activity.Petoldagelast" />
+        <activity android:name=".Activity.ServicesLastPage"></activity>
     </application>
 
 </manifest>
