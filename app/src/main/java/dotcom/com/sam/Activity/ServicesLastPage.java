@@ -161,7 +161,7 @@ public class ServicesLastPage extends AppCompatActivity {
 
         servicelastpageRequest.setSmsCategoryType(activity);
         if (srid == String.valueOf(0)) {
-            servicelastpageRequest.setTime("NULL");
+            servicelastpageRequest.setTime("0");
         } else {
             servicelastpageRequest.setTime(srid);
         }

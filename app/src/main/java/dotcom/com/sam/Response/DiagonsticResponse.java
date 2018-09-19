@@ -92,7 +92,7 @@ public class DiagonsticResponse {
         private Object DeleteStatus;
         private String Image;
         private Object Email;
-        private Object SR_Id;
+        private int SR_Id;
 
         public int getDIG_Id() {
             return DIG_Id;
@@ -246,11 +246,11 @@ public class DiagonsticResponse {
             this.Email = Email;
         }
 
-        public Object getSR_Id() {
+        public int getSR_Id() {
             return SR_Id;
         }
 
-        public void setSR_Id(Object SR_Id) {
+        public void setSR_Id(int SR_Id) {
             this.SR_Id = SR_Id;
         }
     }

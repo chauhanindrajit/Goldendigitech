@@ -27,6 +27,7 @@ import static dotcom.com.sam.Adapters.ProductAdapter.STRING_IMAGE_URI;
 
 public class CartListActivity extends AppCompatActivity {
     private static Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +35,11 @@ public class CartListActivity extends AppCompatActivity {
         mContext = CartListActivity.this;
 
         ImageUrlUtils imageUrlUtils = new ImageUrlUtils();
-        ArrayList<String> cartlistImageUri =imageUrlUtils.getCartListImageUri();
+        ArrayList<String> cartlistImageUri = imageUrlUtils.getCartListImageUri();
         //Show cart layout based on items
         setCartLayout();
 
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         RecyclerView.LayoutManager recylerViewLayoutManager = new LinearLayoutManager(mContext);
 
         recyclerView.setLayoutManager(recylerViewLayoutManager);
@@ -54,7 +55,7 @@ public class CartListActivity extends AppCompatActivity {
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
             public final SimpleDraweeView mImageView;
-            public final LinearLayout mLayoutItem, mLayoutRemove , mLayoutEdit;
+            public final LinearLayout mLayoutItem, mLayoutRemove, mLayoutEdit;
 
             public ViewHolder(View view) {
                 super(view);
@@ -96,13 +97,13 @@ public class CartListActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ProductActivity.class);
-                    intent.putExtra(STRING_IMAGE_URI,mCartlistImageUri.get(position));
+                    intent.putExtra(STRING_IMAGE_URI, mCartlistImageUri.get(position));
                     intent.putExtra(STRING_IMAGE_POSITION, position);
                     mContext.startActivity(intent);
                 }
             });
 
-           //Set click action
+            //Set click action
             holder.mLayoutRemove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -129,16 +130,16 @@ public class CartListActivity extends AppCompatActivity {
         }
     }
 
-    protected void setCartLayout(){
+    protected void setCartLayout() {
         LinearLayout layoutCartItems = (LinearLayout) findViewById(R.id.layout_items);
         LinearLayout layoutCartPayments = (LinearLayout) findViewById(R.id.layout_payment);
         LinearLayout layoutCartNoItems = (LinearLayout) findViewById(R.id.layout_cart_empty);
 
-        if(ProductActivity.notificationCountCart >0){
+        if (ProductActivity.notificationCountCart > 0) {
             layoutCartNoItems.setVisibility(View.GONE);
             layoutCartItems.setVisibility(View.VISIBLE);
             layoutCartPayments.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             layoutCartNoItems.setVisibility(View.VISIBLE);
             layoutCartItems.setVisibility(View.GONE);
             layoutCartPayments.setVisibility(View.GONE);

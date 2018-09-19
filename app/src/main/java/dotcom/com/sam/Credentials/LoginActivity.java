@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +24,8 @@ import dotcom.com.sam.Activity.DogGrooming;
 import dotcom.com.sam.Activity.MainActivity;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Response.LoginResponse;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
+import dotcom.com.sam.Utils.ESPreferences;
 import dotcom.com.sam.Utils.UserSessionManager;
 import dotcom.com.sam.Utils.Utils;
 import dotcom.com.sam.extras.Constants;
@@ -132,6 +136,13 @@ public class LoginActivity extends AppCompatActivity {
                     Utils.saveUserPreference(LoginActivity.this, Constants.RJ_ID, String.valueOf(loginResponse.getRJ_ID()));
                     Utils.saveUserPreference(LoginActivity.this, Constants.ADDRESS, loginResponse.getAddress());
                     Utils.saveUserPreference(LoginActivity.this, Constants.MOBILE, loginResponse.getMobNo());
+                    SingletonClass.getInstance().setUSERID(String.valueOf(loginResponse.getRJ_ID()));
+
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("KEY", String.valueOf(String.valueOf(loginResponse.getRJ_ID())));
+                    editor.apply();
+
 
                     loginstatus = "true";
                     new UserSessionManager(getApplicationContext()).setUrlData(getApplicationContext(), loginstatus, UserSessionManager.LOGIN_STATUS);

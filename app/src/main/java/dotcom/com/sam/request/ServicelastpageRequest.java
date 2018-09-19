@@ -17,7 +17,7 @@ public class ServicelastpageRequest {
      * Address : sample string 7
      * Time : sample string 8
      * Date : sample string 9
-     * CretaedDAte : 2018-09-11T15:38:24.0410875+05:30
+     * CretaedDAte : 2018-09-15T12:17:38.2856334+05:30
      * CretaedBy : sample string 10
      * Status : sample string 11
      * DeleteStatus : sample string 12
@@ -25,6 +25,15 @@ public class ServicelastpageRequest {
      * type2 : sample string 14
      * SR_Id : 1
      * SmsCategoryType : sample string 15
+     * PetBreed : sample string 16
+     * Age : sample string 17
+     * Gender : sample string 18
+     * TimeSlotFrom : sample string 19
+     * TimeSlotTo : sample string 20
+     * SelectSamplefrom : sample string 21
+     * CollectReportAt : sample string 22
+     * DateAndtime : sample string 23
+     * NatureOfVisit : sample string 24
      */
 
     private int SB_Id;
@@ -42,8 +51,17 @@ public class ServicelastpageRequest {
     private String DeleteStatus;
     private String type1;
     private String type2;
-    private String SR_Id;
+    private int SR_Id;
     private String SmsCategoryType;
+    private String PetBreed;
+    private String Age;
+    private String Gender;
+    private String TimeSlotFrom;
+    private String TimeSlotTo;
+    private String SelectSamplefrom;
+    private String CollectReportAt;
+    private String DateAndtime;
+    private String NatureOfVisit;
 
     public int getSB_Id() {
         return SB_Id;
@@ -165,11 +183,11 @@ public class ServicelastpageRequest {
         this.type2 = type2;
     }
 
-    public String getSR_Id() {
+    public int getSR_Id() {
         return SR_Id;
     }
 
-    public void setSR_Id(String SR_Id) {
+    public void setSR_Id(int SR_Id) {
         this.SR_Id = SR_Id;
     }
 
@@ -179,5 +197,77 @@ public class ServicelastpageRequest {
 
     public void setSmsCategoryType(String SmsCategoryType) {
         this.SmsCategoryType = SmsCategoryType;
+    }
+
+    public String getPetBreed() {
+        return PetBreed;
+    }
+
+    public void setPetBreed(String PetBreed) {
+        this.PetBreed = PetBreed;
+    }
+
+    public String getAge() {
+        return Age;
+    }
+
+    public void setAge(String Age) {
+        this.Age = Age;
+    }
+
+    public String getGender() {
+        return Gender;
+    }
+
+    public void setGender(String Gender) {
+        this.Gender = Gender;
+    }
+
+    public String getTimeSlotFrom() {
+        return TimeSlotFrom;
+    }
+
+    public void setTimeSlotFrom(String TimeSlotFrom) {
+        this.TimeSlotFrom = TimeSlotFrom;
+    }
+
+    public String getTimeSlotTo() {
+        return TimeSlotTo;
+    }
+
+    public void setTimeSlotTo(String TimeSlotTo) {
+        this.TimeSlotTo = TimeSlotTo;
+    }
+
+    public String getSelectSamplefrom() {
+        return SelectSamplefrom;
+    }
+
+    public void setSelectSamplefrom(String SelectSamplefrom) {
+        this.SelectSamplefrom = SelectSamplefrom;
+    }
+
+    public String getCollectReportAt() {
+        return CollectReportAt;
+    }
+
+    public void setCollectReportAt(String CollectReportAt) {
+        this.CollectReportAt = CollectReportAt;
+    }
+
+    public String getDateAndtime() {
+        return DateAndtime;
+    }
+
+    public void setDateAndtime(String DateAndtime) {
+        this.DateAndtime = DateAndtime;
+    }
+
+    public String getNatureOfVisit() {
+        return NatureOfVisit;
+    }
+
+    public void setNatureOfVisit(String NatureOfVisit) {
+        this.NatureOfVisit = NatureOfVisit;
     }
 }

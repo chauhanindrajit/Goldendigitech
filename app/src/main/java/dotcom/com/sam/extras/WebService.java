@@ -2,13 +2,16 @@ package dotcom.com.sam.extras;
 
 
 import dotcom.com.sam.Response.AdoptpetResponse;
+import dotcom.com.sam.Response.BaseResponse;
 import dotcom.com.sam.Response.BuypetResponse;
 import dotcom.com.sam.Response.BuypetfilterResponse;
 import dotcom.com.sam.Response.ChangePassResponse;
 import dotcom.com.sam.Response.DiagonsticResponse;
 import dotcom.com.sam.Response.ForgotPassResponse;
+import dotcom.com.sam.Response.GetCartResponse;
 import dotcom.com.sam.Response.HomeRespose;
 import dotcom.com.sam.Response.LoginResponse;
+import dotcom.com.sam.Response.ManageCartResponse;
 import dotcom.com.sam.Response.MatingResponse;
 import dotcom.com.sam.Response.MatingsearchResponse;
 import dotcom.com.sam.Response.MicroChippingRespose;
@@ -29,6 +32,7 @@ import dotcom.com.sam.Response.VetNearMeResponse;
 import dotcom.com.sam.Response.WalkingsearchResponse;
 import dotcom.com.sam.request.ChangePassRequest;
 import dotcom.com.sam.request.ForgetPassRequest;
+import dotcom.com.sam.request.ManageCartRequest;
 import dotcom.com.sam.request.ProductfilterdataRequest;
 import dotcom.com.sam.request.RegistrationRequest;
 import dotcom.com.sam.request.ServicelastpageRequest;
@@ -55,6 +59,7 @@ public interface WebService {
     // Get City List...
     @GET("api/ShopByPetVC/getShopByPetCategoryList")
     Call<RegistrationResponse> RESPONSE_CALL();
+
     @GET("api/ShopByPetVC/getShopByPetCategoryList")
     Call<SubcategoryResponse> SUBCATEGORY_RESPONSE_CALL();
 
@@ -114,7 +119,7 @@ public interface WebService {
     Call<PetSittersearchResponse> PET_SITTERSEARCH_RESPONSE_CALL(@Query("StartDate") String startdate,
                                                                  @Query("EndDates") String enddates,
                                                                  @Query("StrtTime") String starttime,
-                                                                 @Query("Endtime")  String endtime,
+                                                                 @Query("Endtime") String endtime,
                                                                  @Query("location") String location,
                                                                  @Query("shortTime") String shorttime);
 
@@ -130,9 +135,10 @@ public interface WebService {
 
     @GET("api/ShopByPetVC/PetSitterBySearchData?")
     Call<WalkingsearchResponse> WALKINGSEARCH_RESPONSE_CALL(@Query("location") String startdate,
-                                                               @Query("Day") String enddates,
-                                                               @Query("StrtTime") String starttime,
-                                                               @Query("Endtime")  String endtime);
+                                                            @Query("Day") String enddates,
+                                                            @Query("StrtTime") String starttime,
+                                                            @Query("Endtime") String endtime);
+
     @GET("api/ShopByPetVC/Trainingdata")
     Call<TrainingServicesResponse> TRAINING_SERVICES_RESPONSE_CALL();
 
@@ -141,6 +147,7 @@ public interface WebService {
 
     @GET("api/ShopByPetVC/ShopByPetSubCategoryProductListbyCid/{id}")
     Call<ProductResponse> PRODUCT_RESPONSE_CALL(@Path("id") Integer id);
+
     @GET("api/ShopByPetVC/getFeaturedproduct?Featured=new")
     Call<NewArrivalResponse> NEW_ARRIVAL_RESPONSE_CALL();
 
@@ -150,6 +157,17 @@ public interface WebService {
     @GET("api/ShopByPetVC/getAllBuyPetfilterData")
     Call<BuypetfilterResponse> BUYPETFILTER_RESPONSE_CALL();
 
-    @POST("api/ShopByPetVC/SMSSender")
+    @POST("api/ShopByPetVC/SMSSendbyRequest")
     Call<ServiceLastPageResponse> SERVICE_LAST_PAGE_RESPONSE_CALL(@Body ServicelastpageRequest servicelastpageRequest);
+
+
+    //extra
+    @GET("api/ShopByPetVC/CartProduct?")
+    Call<GetCartResponse> getAllCartList(@Query("id") Integer id);
+
+    @POST("cart/edit")
+    Call<BaseResponse> removeCart(@Body ManageCartRequest cartRequest);
+
+    @POST("api/ShopByPetVC/AddToCart")
+    Call<ManageCartResponse> manageCart(@Body ManageCartRequest cartRequest);
 }

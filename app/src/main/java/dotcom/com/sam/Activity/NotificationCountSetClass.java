@@ -11,6 +11,7 @@ import android.widget.ImageView;
  */
 public class NotificationCountSetClass extends Activity {
     private static ImageView icon;
+
     public NotificationCountSetClass() {
         //constructor
     }
@@ -22,7 +23,7 @@ public class NotificationCountSetClass extends Activity {
     }
 
     public static int setNotifyCount(int numMessages) {
-        int count=numMessages;
+        int count = numMessages;
         return count;
 
     }

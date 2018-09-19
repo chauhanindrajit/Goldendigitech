@@ -57,7 +57,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
     RecyclerView recyclerView;
-    Button btn_shopBypet, btn_vet, btn_mate, btn_adobpet, btn_photo, buyapet, adoptapet, petoldhome, petevents,e_dctor;
+    Button btn_shopBypet, btn_vet, btn_mate, btn_adobpet, btn_photo, buyapet, adoptapet, petoldhome, petevents, e_dctor;
     public static int module_name = 0;
 
     RecyclerView categeoryLayout;
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static ArrayList<HashMap<String, String>> contactList;
     public static List<NewArrivalResponse.ResponseBean> arrSubCateogry;
     ArrayList tripSingaltonss;
-    TextView catname,viewall;
+    TextView catname, viewall;
 
 
     @Override
@@ -195,9 +195,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             pbutton.setTextColor(Color.rgb(30, 144, 255));
             Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
             nbutton.setTextColor(Color.rgb(30, 144, 255));
-        }
-        else if (id == R.id.my_wishlist) {
+        } else if (id == R.id.my_wishlist) {
             startActivity(new Intent(MainActivity.this, WishlistActivity.class));
+        }
+        else if (id == R.id.my_cart) {
+            startActivity(new Intent(MainActivity.this, ReviewOrderActivity.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -215,13 +217,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btn_adobpet = findViewById(R.id.btn_adopt);
         btn_photo = findViewById(R.id.btn_photo);
         e_dctor = findViewById(R.id.e_doctor);
-        petevents=findViewById(R.id.petevent);
-        viewall=(TextView)findViewById(R.id.viewall);
+        petevents = findViewById(R.id.petevent);
+        viewall = (TextView) findViewById(R.id.viewall);
     }
 
 
     void setRecyclerView() {
-        NewArrivalAdapter newArrivalAdapter = new NewArrivalAdapter(MainActivity.this,arrSubCateogry,stringList);
+        NewArrivalAdapter newArrivalAdapter = new NewArrivalAdapter(MainActivity.this, arrSubCateogry, stringList);
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManagaer);
         recyclerView.setAdapter(newArrivalAdapter);
@@ -318,8 +320,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
 
-               // Utils.moveNextWithAnimation(MainActivity.this,ProductActivity.class);
-               Utils.customMessage(MainActivity.this,"Please try after some time");
+                // Utils.moveNextWithAnimation(MainActivity.this,ProductActivity.class);
+                Utils.customMessage(MainActivity.this, "Please try after some time");
             }
         });
     }
@@ -448,7 +450,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         newArrivalSingalton.setB_Id(newArrivalResponse.getResponse().get(i).getB_Id());
                         newArrivalSingalton.setB_Id(newArrivalResponse.getResponse().get(i).getB_Id());
                         tripSingaltonss.add(newArrivalSingalton);
-                        NewArrivalAdapter newArrivalAdapter = new NewArrivalAdapter(MainActivity.this,newArrivalResponse.getResponse() ,tripSingaltonss);
+                        NewArrivalAdapter newArrivalAdapter = new NewArrivalAdapter(MainActivity.this, newArrivalResponse.getResponse(), tripSingaltonss);
                         newArrivalAdapter.getItemCount();
                         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
                         recyclerView.setLayoutManager(verticalLayoutManager);
@@ -461,7 +463,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onFailure(Call<NewArrivalResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
-                Log.e("FAILEDDDD", "onFailure: "+t);
+                Log.e("FAILEDDDD", "onFailure: " + t);
             }
 
 

@@ -25,6 +25,7 @@ import dotcom.com.sam.Activity.ProductDatailAcitvity;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Response.ProductResponse;
 import dotcom.com.sam.SingaltonsClasses.ProductSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.Utils.ImageUrlUtils;
 import dotcom.com.sam.fragments.ProductFragment;
 
@@ -36,24 +37,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     Context context;
     int pos;
     private String[] mValues;
+    int count = 1;
+
     private static ProductActivity mActivity;
     private List<ProductResponse.ResponseBean.ProdListBean> details;
     public static final String STRING_IMAGE_URI = "ImageUri";
     public static final String STRING_IMAGE_POSITION = "ImagePosition";
 
-    public ProductAdapter(Context context, List<ProductResponse.ResponseBean.ProdListBean> details ,String[] mValues)
-    {
+    public ProductAdapter(Context context, List<ProductResponse.ResponseBean.ProdListBean> details, String[] mValues) {
 
-        this.details =details;
-        this.context=context;
-        this.mValues=mValues;
+        this.details = details;
+        this.context = context;
+        this.mValues = mValues;
         notifyDataSetChanged();
     }
+
     @Override
     public ViewHolderPro onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.single_product,parent,false);
-        ProductAdapter.ViewHolderPro viewHolder=new ProductAdapter.ViewHolderPro(view);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.single_product, parent, false);
+        ProductAdapter.ViewHolderPro viewHolder = new ProductAdapter.ViewHolderPro(view);
 
         return viewHolder;
     }
@@ -71,6 +74,36 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             Picasso.with(context).load(R.drawable.noimage).into(holder.imageView);
 
         }
+        holder.wishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (count == 1) {
+                    count = 2;
+                    ImageUrlUtils imageUrlUtils = new ImageUrlUtils();
+                    imageUrlUtils.productname(details.get(position).getProductName());
+                    SingletonClass.getInstance().setFav(R.drawable.redfav);
+                    ;
+                    holder.wishlist.setImageResource(R.drawable.redfav);
+                    notifyDataSetChanged();
+                    if (SingletonClass.getInstance().getFav() == R.drawable.redfav) {
+                        Toast.makeText(context, "Item added to wishlist.", Toast.LENGTH_SHORT).show();
+                        // SingletonClass.getInstance().setFav(R.mipmap.ic_heart_non_selected);
+                    }
+                } else if (count == 2) {
+                    count = 1;
+                    ImageUrlUtils imageUrlUtils = new ImageUrlUtils();
+                    imageUrlUtils.productname(details.get(position).getProductName());
+                    SingletonClass.getInstance().setFav(R.mipmap.ic_heart_non_selected);
+                    ;
+                    holder.wishlist.setImageResource(R.mipmap.ic_heart_non_selected);
+                    notifyDataSetChanged();
+                    if (SingletonClass.getInstance().getFav() == R.mipmap.ic_heart_non_selected) {
+                        Toast.makeText(context, "Item Removed from wishlist.", Toast.LENGTH_SHORT).show();
+                        // SingletonClass.getInstance().setFav(R.drawable.redfav);
+                    }
+                }
+            }
+        });
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,26 +113,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 ProductSingalton.getInstance().setPrice(details.get(position).getPrice());
                 ProductSingalton.getInstance().setDiscount(details.get(position).getDiscount());
                 ProductSingalton.getInstance().setDiscountPrice(details.get(position).getDiscountPrice());
+                ProductSingalton.getInstance().setPT_Id(details.get(position).getPT_Id());
+                SingletonClass.getInstance().setActivityname(details.get(position).getCategosryName());
 
-                ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"productimage");
-                Intent intent=new Intent(context,ProductDatailAcitvity.class);
-                context.startActivity(intent,activityOptions.toBundle());
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.imageView, "productimage");
+                Intent intent = new Intent(context, ProductDatailAcitvity.class);
+                context.startActivity(intent, activityOptions.toBundle());
 
-
-            }
-        });
-        holder.wishlist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ImageUrlUtils imageUrlUtils = new ImageUrlUtils();
-                imageUrlUtils.productname(details.get(position).getProductName());
-                holder.wishlist.setImageResource(R.drawable.ic_favorite_black_18dp);
-                notifyDataSetChanged();
-                //Toast.makeText(mActivity,"Item added to wishlist.",Toast.LENGTH_SHORT).show();
 
             }
         });
-        pos=position;
+
+        pos = position;
     }
 
     @Override
@@ -109,15 +134,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public class ViewHolderPro extends RecyclerView.ViewHolder {
-        ImageView imageView,wishlist;
-        TextView pdctname,withdiscont,actualprce;
+        ImageView imageView, wishlist;
+        TextView pdctname, withdiscont, actualprce;
+
         public ViewHolderPro(View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.prod_image);
-            pdctname=itemView.findViewById(R.id.proctname);
-            withdiscont=itemView.findViewById(R.id.withdiscount);
-            actualprce=itemView.findViewById(R.id.actual_price);
-            wishlist=itemView.findViewById(R.id.wishlist);
+            imageView = itemView.findViewById(R.id.prod_image);
+            pdctname = itemView.findViewById(R.id.proctname);
+            withdiscont = itemView.findViewById(R.id.withdiscount);
+            actualprce = itemView.findViewById(R.id.actual_price);
+            wishlist = itemView.findViewById(R.id.wishlist);
 
 
         }

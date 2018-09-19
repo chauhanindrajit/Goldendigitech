@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import dotcom.com.sam.SingaltonsClasses.HomeSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.Utils.DiagnosticForm;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Utils.Utils;
@@ -55,6 +57,9 @@ public class Diagnostics extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SingletonClass.getInstance().setCentername(DiagonsticSingalton.getInstance().getCenterName());
+                SingletonClass.getInstance().setSRID(String.valueOf(DiagonsticSingalton.getInstance().getSR_Id()));
+                SingletonClass.getInstance().setActivityname("Diagnostics");
                 Utils.moveNextWithAnimation(Diagnostics.this, DiagnosticForm.class);
             }
         });

@@ -79,6 +79,7 @@ public class PetWalking extends AppCompatActivity {
     ArrayList tripSingaltonss;
     private ArrayList<WalkingsearchRequest> tripSingaltonsas;
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -293,15 +294,13 @@ public class PetWalking extends AppCompatActivity {
             public void onClick(View view) {
 
 
-
-
                 String loc = acTextView.getText().toString().trim();
                 String strtday = selctday.getText().toString().trim();
                 String Strttime = starttime.getText().toString().trim();
                 String endtym = endtime.getText().toString().trim();
 
-                if(validate()) {
-                    Searchmatingdata(loc,strtday, Strttime, endtym);
+                if (validate()) {
+                    Searchmatingdata(loc, strtday, Strttime, endtym);
 
                     acTextView.setAdapter(loadTypeArrayAdapter);
                     ObjectAnimator animation = ObjectAnimator.ofFloat(seachlayout, "translationY", -seachlayout.getHeight());
@@ -335,7 +334,6 @@ public class PetWalking extends AppCompatActivity {
             }
         });
     }
-
 
 
     public void hideKeyboard(View view) {
@@ -454,10 +452,11 @@ public class PetWalking extends AppCompatActivity {
 
                     }
 
-                }else if (response.code() == 404) {
+                } else if (response.code() == 404) {
                     pDialog.hide();
                     Utils.customMessage(PetWalking.this, "Sorry no data found.!!");
-                }}
+                }
+            }
 
             @Override
             public void onFailure(Call<PetWalkingResponse> call, Throwable t) {
@@ -476,7 +475,7 @@ public class PetWalking extends AppCompatActivity {
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
         pDialog.show();
-        Call<WalkingsearchResponse> walkingsearchResponseCall = Utilss.getWebService().WALKINGSEARCH_RESPONSE_CALL(loc,strtday, strtym, endtym);
+        Call<WalkingsearchResponse> walkingsearchResponseCall = Utilss.getWebService().WALKINGSEARCH_RESPONSE_CALL(loc, strtday, strtym, endtym);
         walkingsearchResponseCall.enqueue(new Callback<WalkingsearchResponse>() {
             @Override
             public void onResponse(Call<WalkingsearchResponse> call, Response<WalkingsearchResponse> response) {
@@ -514,7 +513,7 @@ public class PetWalking extends AppCompatActivity {
 
                 } else
 
-                pDialog.hide();
+                    pDialog.hide();
             }
 
             @Override
@@ -530,18 +529,18 @@ public class PetWalking extends AppCompatActivity {
         });
 
     }
-    private boolean validate() {
 
+    private boolean validate() {
 
 
         if (acTextView.getText().toString().equals("")) {
 
-            Toast.makeText(PetWalking.this,"Please Select location",Toast.LENGTH_LONG).show();
+            Toast.makeText(PetWalking.this, "Please Select location", Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (selctday.getText().toString().equals("")) {
-            Toast.makeText(PetWalking.this,"Please select day",Toast.LENGTH_LONG).show();
+            Toast.makeText(PetWalking.this, "Please select day", Toast.LENGTH_LONG).show();
             return false;
         }
 

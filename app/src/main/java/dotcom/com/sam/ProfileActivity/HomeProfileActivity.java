@@ -21,6 +21,7 @@ import java.util.Locale;
 
 import dotcom.com.sam.Activity.GroomingLastpage;
 import dotcom.com.sam.SingaltonsClasses.SingletonClass;
+import dotcom.com.sam.SingaltonsClasses.VacccinationSingalton;
 import dotcom.com.sam.Utils.PatientDetails;
 import dotcom.com.sam.Activity.PetDoctor;
 import dotcom.com.sam.R;
@@ -151,6 +152,9 @@ public class HomeProfileActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                 SingletonClass.getInstance().setTime(selectedHour + ":" + selectedMinute);
+                SingletonClass.getInstance().setCentername(HomeSingalton.getInstance().getDoctorName());
+                SingletonClass.getInstance().setSRID(String.valueOf(HomeSingalton.getInstance().getSR_Id()));
+                SingletonClass.getInstance().setActivityname("Vet At Home");
                 Utils.moveNextWithAnimation(HomeProfileActivity.this, PatientDetails.class);
                 //starttime.setText(selectedHour + ":" + selectedMinute);
             }

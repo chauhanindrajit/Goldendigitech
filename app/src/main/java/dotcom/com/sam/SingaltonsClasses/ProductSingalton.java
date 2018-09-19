@@ -150,7 +150,6 @@ public class ProductSingalton implements Serializable {
     private List<ProductResponse.ResponseBean.ProdListBean> prodList;
     private List<ProductResponse.ResponseBean.FilterListBean> filterList;
     private int PT_Id;
-
     private int Price;
     private String Discount;
     private String DiscountPrice;

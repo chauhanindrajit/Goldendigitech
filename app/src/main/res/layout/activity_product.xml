@@ -20,14 +20,47 @@
         app:menu="@menu/main"
         app:navigationIcon="@drawable/ic_arrow_back_whitw_24dp">
 
-        <ImageView
-            android:id="@+id/addtocard"
+
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_gravity="right"
-            android:src="@drawable/shooping" />
+            android:layout_gravity="end|top">
+
+            <ImageView
+                android:id="@+id/addtocard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:src="@drawable/cart" />
+
+            <FrameLayout
+                android:id="@+id/counterValuePanel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="end|top">
+
+                <TextView
+                    android:id="@+id/count"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rounded_corner"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+        </FrameLayout>
+
+
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
@@ -69,9 +102,9 @@
             android:visibility="gone" />
 
         <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 
     </LinearLayout>

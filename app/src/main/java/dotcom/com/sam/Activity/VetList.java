@@ -353,6 +353,7 @@ public class VetList extends AppCompatActivity implements AdapterView.OnItemClic
                         tripSingalton.setLocation(vetNearMeResponse.getResponse().get(i).getLocation());
                         tripSingalton.setDoctorType(vetNearMeResponse.getResponse().get(i).getDoctorType());
                         tripSingalton.setImage(vetNearMeResponse.getResponse().get(i).getImage());
+                        tripSingalton.setSR_Id(vetNearMeResponse.getResponse().get(i).getSR_Id());
 
                         tripSingaltonss.add(tripSingalton);
                         // acTextView.setText("");

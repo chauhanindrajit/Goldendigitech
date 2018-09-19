@@ -191,11 +191,11 @@ public class DiagonsticSingalton implements Serializable {
         Email = email;
     }
 
-    public Object getSR_Id() {
+    public int getSR_Id() {
         return SR_Id;
     }
 
-    public void setSR_Id(Object SR_Id) {
+    public void setSR_Id(int SR_Id) {
         this.SR_Id = SR_Id;
     }
 
@@ -209,9 +209,7 @@ public class DiagonsticSingalton implements Serializable {
     private Object DeleteStatus;
     private String Image;
     private Object Email;
-    private Object SR_Id;
-
-
+    private int SR_Id;
 
 
 }

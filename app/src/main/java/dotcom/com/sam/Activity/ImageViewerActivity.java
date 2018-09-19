@@ -15,11 +15,12 @@ import dotcom.com.sam.SingaltonsClasses.GetPhotograpgySingalton;
 public class ImageViewerActivity extends AppCompatActivity {
     ImageView imageView;
     Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_viewer);
-        imageView = (ImageView)findViewById(R.id.imageView);
+        imageView = (ImageView) findViewById(R.id.imageView);
         if (GetPhotograpgySingalton.getInstance().getImgUrl() != null) {
             String i = (GetPhotograpgySingalton.getInstance().getImgUrl());
             Picasso.with(context).load(i).placeholder(R.drawable.progress_animation).into(imageView);

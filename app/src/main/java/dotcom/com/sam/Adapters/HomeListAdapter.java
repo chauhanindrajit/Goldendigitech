@@ -70,6 +70,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.VetVie
                 HomeSingalton.getInstance().setDiagnosticsFees(arrSubCateogry.get(position).getDiagnosticsFees());
                 HomeSingalton.getInstance().setAtHomeFees(arrSubCateogry.get(position).getAtHomeFees());
                 HomeSingalton.getInstance().setImage(arrSubCateogry.get(position).getImage());
+                HomeSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
                  Utils.moveNextWithAnimation(context,HomeProfileActivity.class);
 
 

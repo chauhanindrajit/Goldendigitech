@@ -64,6 +64,7 @@ public class DiagnosticListAdapter extends RecyclerView.Adapter<DiagnosticListAd
                 DiagonsticSingalton.getInstance().setPetsType(arrSubCateogry.get(position).getPetsType());
                 DiagonsticSingalton.getInstance().setLocation(arrSubCateogry.get(position).getLocation());
                 DiagonsticSingalton.getInstance().setImage(arrSubCateogry.get(position).getImage());
+                DiagonsticSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
 
                 ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"diagnostic_image");
            Intent intent=new Intent(context,Diagnostics.class);

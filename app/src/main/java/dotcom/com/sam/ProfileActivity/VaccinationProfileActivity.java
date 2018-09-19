@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import dotcom.com.sam.SingaltonsClasses.SingletonClass;
+import dotcom.com.sam.SingaltonsClasses.TripSingalton;
 import dotcom.com.sam.Utils.PatientDetails;
 import dotcom.com.sam.Activity.PetDoctor;
 import dotcom.com.sam.R;
@@ -148,6 +149,9 @@ public class VaccinationProfileActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                 SingletonClass.getInstance().setTime(selectedHour + ":" + selectedMinute);
+                SingletonClass.getInstance().setCentername(VacccinationSingalton.getInstance().getDoctorName());
+                SingletonClass.getInstance().setSRID(String.valueOf(VacccinationSingalton.getInstance().getSR_Id()));
+                SingletonClass.getInstance().setActivityname("Vaccination");
                 Utils.moveNextWithAnimation(VaccinationProfileActivity.this, PatientDetails.class);
                 //starttime.setText(selectedHour + ":" + selectedMinute);
             }

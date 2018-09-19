@@ -1,7 +1,9 @@
 package dotcom.com.sam.SingaltonsClasses;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.util.Log;
-
+import android.widget.ImageView;
 
 
 import java.util.ArrayList;
@@ -37,6 +39,9 @@ public class SingletonClass {
     public ArrayList<Integer> getCatidlist() {
         return catidlist;
     }
+    public ArrayList<Integer> productid() {
+        return PID;
+    }
     public ArrayList<Integer> getBreedidlist() {
         return breedidlist;
     }
@@ -57,7 +62,7 @@ public class SingletonClass {
     ArrayList<Integer> breedidlist = new ArrayList<>();
     ArrayList<String> pricename = new ArrayList<>();
     ArrayList<String> Agename = new ArrayList<>();
-
+    ArrayList<Integer> PID = new ArrayList<>();
 
 
     public boolean isFilterApply() {
@@ -73,6 +78,10 @@ public class SingletonClass {
     private String Centername;
     private String Message;
     private String SRID;
+    private String USERID;
+    private int fav;
+    private int POSITIONID;
+    private boolean isIncart;
     boolean isFilterApply;
 
     //-----------------brand filter
@@ -347,5 +356,53 @@ public class SingletonClass {
 
     public void setMessage(String message) {
         Message = message;
+    }
+
+    public String getUSERID() {
+        return USERID;
+    }
+
+    public void setUSERID(String USERID) {
+        this.USERID = USERID;
+    }
+
+    public boolean isIsIncart() {
+        return isIncart;
+    }
+
+    public void setIsIncart(boolean isIncart) {
+        this.isIncart = isIncart;
+    }
+
+
+    public int getFav() {
+        return fav;
+    }
+
+    public void setFav(int fav) {
+        this.fav = fav;
+    }
+
+    public int getPOSITIONID() {
+        return POSITIONID;
+    }
+
+    public void setPOSITIONID(int POSITIONID) {
+        this.POSITIONID = POSITIONID;
+    }
+
+
+    public boolean productid(int id) {
+        Log.e(TAG, "brand size : " + PID.size());
+        int a = PID.size();
+        if (PID.size() > 0) {
+            for (int i = 0; i < a; i++) {
+                if (id == PID.get(i)) {
+                    PID.set(i, id);
+                    return a == PID.size();
+                }
+            }
+        }
+        return false;
     }
 }

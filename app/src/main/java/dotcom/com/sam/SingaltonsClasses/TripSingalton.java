@@ -207,11 +207,11 @@ public class TripSingalton implements Serializable, List<TripSingalton> {
         Image = image;
     }
 
-    public String getSR_Id() {
+    public int getSR_Id() {
         return SR_Id;
     }
 
-    public void setSR_Id(String SR_Id) {
+    public void setSR_Id(int SR_Id) {
         this.SR_Id = SR_Id;
     }
 
@@ -249,7 +249,7 @@ public class TripSingalton implements Serializable, List<TripSingalton> {
         public String DeleteStatus;
         public String Type;
         public String Image;
-        public String SR_Id;
+        public int SR_Id;
         public int AtHomeFees;
         public int NearMeFees;
         public int DiagnosticsFees;

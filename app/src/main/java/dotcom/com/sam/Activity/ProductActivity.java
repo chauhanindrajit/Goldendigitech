@@ -3,9 +3,14 @@ package dotcom.com.sam.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
@@ -38,14 +43,16 @@ import dotcom.com.sam.SingaltonsClasses.ProductSingalton;
 import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.SingaltonsClasses.SubcategorySingalton;
 import dotcom.com.sam.Utils.Utils;
+import dotcom.com.sam.extras.Converter;
 import dotcom.com.sam.extras.RegistrationResponse;
 import dotcom.com.sam.extras.Utilss;
+import dotcom.com.sam.Activity.AddorRemoveCallbacks;
 import dotcom.com.sam.fragments.ProductMainFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ProductActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AddorRemoveCallbacks {
     public static FragmentManager fragmentManager;
     ViewPager mViewPager;
     Toolbar toolbar;
@@ -58,10 +65,12 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
     private ProgressDialog pDialog;
     Integer ID, IDS;
     String sum;
-    TextView nodat;
+    public static TextView nodat, conting;
     int subcatid;
     Menu customMenu;
     ArrayList tripSingaltonss;
+    private static int cart_count = 10;
+    FloatingActionButton fab;
     public static int notificationCountCart = 1;
 
     @Override
@@ -73,16 +82,26 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
         arrSubCateogry = new ArrayList<>();
         toolbar = findViewById(R.id.toolbar);
         addtocart = (ImageView) findViewById(R.id.addtocard);
-
+        conting = (TextView) findViewById(R.id.count);
         addtocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ProductActivity.this, CartListActivity.class);
+                Intent i = new Intent(ProductActivity.this, ReviewOrderActivity.class);
                 startActivity(i);
             }
         });
 
-
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ProductActivity.this);
+        String value = sharedPreferences.getString("COU", "");
+        if (value.equals("")) {
+            // not having user id
+            conting.setVisibility(View.INVISIBLE);
+           // Utils.customMessage(ProductActivity.this, "NO CART DATA FOUND");
+        } else {
+            conting.setVisibility(View.VISIBLE);
+            conting.setText(String.valueOf(value));
+            // user id is available
+        }
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         actionBar = getSupportActionBar();
         fragmentManager = getSupportFragmentManager();
@@ -110,16 +129,8 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
                 onBackPressed();
             }
         });
-
-        //addTab();
-        //stringList.add(String.valueOf(CategorySingalton.getInstance().getCategosryName()));
-        //tabLayout.addTab(tabLayout.newTab().setText(""));
-        // tabLayout.getTabAt(Integer.parseInt(SubcategorySingalton.getInstance().getSubCategoryName()));
-
-//        ProductPagerAdapter productPagerAdapter = new ProductPagerAdapter(fragmentManager, stringList);
-//        mViewPager.setAdapter(productPagerAdapter);
-//        productPagerAdapter.notifyDataSetChanged();
-//        productPagerAdapter.getCount();
+        //actionBar.setHomeAsUpIndicator(R.drawable.ic_add_shopping_cart_black_24dp);
+        // actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -127,22 +138,10 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_cart);
+        menuItem.setIcon(Converter.convertLayoutToImage(ProductActivity.this, cart_count, R.drawable.ic_shopping_cart_white_24dp));
+
         return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // Get the notifications MenuItem and
-        // its LayerDrawable (layer-list)
-
-        MenuItem item = menu.findItem(R.id.action_cart);
-        //NotificationCountSetClass.setAddToCart(ProductActivity.this, item,notificationCountCart);
-        // force the ActionBar to relayout its MenuItems.
-        // onCreateOptionsMenu(Menu) will be called again.
-        invalidateOptionsMenu();
-        return super.onPrepareOptionsMenu(menu);
-
-
     }
 
     @Override
@@ -152,18 +151,23 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_cart) {
-
-           /* NotificationCountSetClass.setAddToCart(MainActivity.this, item, notificationCount);
-            invalidateOptionsMenu();*/
-            startActivity(new Intent(ProductActivity.this, CartListActivity.class));
-
-           /* notificationCount=0;//clear notification count
-            invalidateOptionsMenu();*/
-            return true;
-        }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onAddProduct() {
+        cart_count++;
+        invalidateOptionsMenu();
+
+
+    }
+
+    @Override
+    public void onRemoveProduct() {
+        cart_count--;
+        invalidateOptionsMenu();
+
+
     }
 
     private void initView() {
@@ -199,8 +203,6 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
                     stringList.clear();
                 }
                 if (response.code() == 200) {
-
-
 
 
                     ProductResponse productResponse = response.body();
@@ -375,6 +377,7 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
     @Override
     public void onBackPressed() {
         if (getFragmentManager().getBackStackEntryCount() > 0) {
