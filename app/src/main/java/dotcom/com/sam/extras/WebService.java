@@ -6,10 +6,12 @@ import dotcom.com.sam.Response.BaseResponse;
 import dotcom.com.sam.Response.BuypetResponse;
 import dotcom.com.sam.Response.BuypetfilterResponse;
 import dotcom.com.sam.Response.ChangePassResponse;
+import dotcom.com.sam.Response.DeleteallResponse;
 import dotcom.com.sam.Response.DiagonsticResponse;
 import dotcom.com.sam.Response.ForgotPassResponse;
 import dotcom.com.sam.Response.GetCartResponse;
 import dotcom.com.sam.Response.HomeRespose;
+import dotcom.com.sam.Response.IncrDecResponse;
 import dotcom.com.sam.Response.LoginResponse;
 import dotcom.com.sam.Response.ManageCartResponse;
 import dotcom.com.sam.Response.MatingResponse;
@@ -24,6 +26,7 @@ import dotcom.com.sam.Response.PhotoResponse;
 import dotcom.com.sam.Response.ProductFilterdataResponse;
 import dotcom.com.sam.Response.ProductResponse;
 import dotcom.com.sam.Response.RegisttnResponsemain;
+import dotcom.com.sam.Response.RemovecartResponse;
 import dotcom.com.sam.Response.ServiceLastPageResponse;
 import dotcom.com.sam.Response.SubcategoryResponse;
 import dotcom.com.sam.Response.TrainingServicesResponse;
@@ -35,6 +38,7 @@ import dotcom.com.sam.request.ForgetPassRequest;
 import dotcom.com.sam.request.ManageCartRequest;
 import dotcom.com.sam.request.ProductfilterdataRequest;
 import dotcom.com.sam.request.RegistrationRequest;
+import dotcom.com.sam.request.RemoveCartRequest;
 import dotcom.com.sam.request.ServicelastpageRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -170,4 +174,13 @@ public interface WebService {
 
     @POST("api/ShopByPetVC/AddToCart")
     Call<ManageCartResponse> manageCart(@Body ManageCartRequest cartRequest);
+
+    @GET("api/ShopByPetVC/CartRemoveProduct?")
+    Call<RemovecartResponse> REMOVECART_RESPONSE_CALL(@Query("CRT_Id") Integer crtid, @Query("RJ_Id") Integer id);
+
+    @GET("api/ShopByPetVC/AllCartDataRemoveProduct?")
+    Call<DeleteallResponse> DELETEALL_RESPONSE_CALL(@Query("RJ_ID") Integer id);
+
+    @GET("api/ShopByPetVC/DataAddMinusRemoveProduct?")
+    Call<IncrDecResponse> INCR_DEC_RESPONSE_CALL(@Query("CRT_ID") Integer id, @Query("RJ_Id") Integer rj_id, @Query("AddRemove") String addremove);
 }

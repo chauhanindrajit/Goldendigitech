@@ -1,10 +1,13 @@
 package dotcom.com.sam.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -40,6 +43,7 @@ import dotcom.com.sam.Response.AdoptpetResponse;
 import dotcom.com.sam.Response.NewArrivalResponse;
 import dotcom.com.sam.SingaltonsClasses.AdoptaPetSingalton;
 import dotcom.com.sam.SingaltonsClasses.NewArrivalSingalton;
+import dotcom.com.sam.Utils.ESPreferences;
 import dotcom.com.sam.Utils.PhotoMain;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Utils.UserSessionManager;
@@ -134,7 +138,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent setIntent = new Intent(Intent.ACTION_MAIN);
+            setIntent.addCategory(Intent.CATEGORY_HOME);
+            setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(setIntent);
+
         }
     }
 
@@ -178,6 +186,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             }
                             Utils.clearAllPreference(MainActivity.this);
+                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.clear();
+                            editor.commit();
+                            sharedPreferences.edit().clear().apply();
+                            sharedPreferences.edit().remove("COU").commit();
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
@@ -197,8 +211,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             nbutton.setTextColor(Color.rgb(30, 144, 255));
         } else if (id == R.id.my_wishlist) {
             startActivity(new Intent(MainActivity.this, WishlistActivity.class));
-        }
-        else if (id == R.id.my_cart) {
+        } else if (id == R.id.my_cart) {
             startActivity(new Intent(MainActivity.this, ReviewOrderActivity.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -470,5 +483,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
     }
+
 
 }

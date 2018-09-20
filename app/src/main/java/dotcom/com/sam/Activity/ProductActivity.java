@@ -93,10 +93,11 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ProductActivity.this);
         String value = sharedPreferences.getString("COU", "");
-        if (value.equals("")) {
+        if (value.equals("") || value.isEmpty() || value.equals("0")) {
             // not having user id
             conting.setVisibility(View.INVISIBLE);
-           // Utils.customMessage(ProductActivity.this, "NO CART DATA FOUND");
+
+            // Utils.customMessage(ProductActivity.this, "NO CART DATA FOUND");
         } else {
             conting.setVisibility(View.VISIBLE);
             conting.setText(String.valueOf(value));
@@ -384,6 +385,8 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
             getFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
+            this.finish();
         }
     }
+
 }

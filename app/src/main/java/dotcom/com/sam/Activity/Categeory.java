@@ -2,7 +2,10 @@ package dotcom.com.sam.Activity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,7 +27,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import dotcom.com.sam.Adapters.CatregeoryAdapter;
+import dotcom.com.sam.Adapters.ReviewAdapter;
+import dotcom.com.sam.Adapters.ReviewsAdapter;
 import dotcom.com.sam.R;
+import dotcom.com.sam.Response.GetCartResponse;
 import dotcom.com.sam.Response.SubcategoryResponse;
 import dotcom.com.sam.SingaltonsClasses.CategorySingalton;
 import dotcom.com.sam.SingaltonsClasses.SubcategorySingalton;
@@ -32,9 +38,12 @@ import dotcom.com.sam.Utils.Utils;
 import dotcom.com.sam.extras.RegistrationResponse;
 import dotcom.com.sam.SingaltonsClasses.TripSingalton;
 import dotcom.com.sam.extras.Utilss;
+import dotcom.com.sam.request.PlaceOrderRequest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.ContentValues.TAG;
 
 
 public class Categeory extends AppCompatActivity {
@@ -87,6 +96,7 @@ public class Categeory extends AppCompatActivity {
         });
         if (Utils.isOnline(Categeory.this)) {
             checkAcceptTrip();
+            getCartList();
         } else {
             android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Categeory.this);
             builder.setTitle("Internet problem");
@@ -135,6 +145,7 @@ public class Categeory extends AppCompatActivity {
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
                 pDialog.hide();
                 if (response.code() == 200) {
+                    pDialog.hide();
                     RegistrationResponse registrationResponse = response.body();
                     Log.e("summmm", new GsonBuilder().create().toJson(response));
                     List<List<RegistrationResponse.ResponseBean>> dataList = Collections.singletonList(registrationResponse.getResponse());
@@ -203,7 +214,58 @@ public class Categeory extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Intent setIntent = new Intent(Categeory.this,MainActivity.class);
+        setIntent.addCategory(Intent.CATEGORY_HOME);
+        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(setIntent);
+    }
+
+
+
+    private void getCartList() {
+    //    pDialog = new ProgressDialog(Categeory.this);
+//        pDialog.setMessage("Please wait...");
+//        pDialog.setCancelable(false);
+//        pDialog.show();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Categeory.this);
+        String value = sharedPreferences.getString("KEY", "");
+        Call<GetCartResponse> getCartResponseCall = Utilss.getWebService().getAllCartList(Integer.valueOf((value)));
+        Log.e("115 ", ": :" + getCartResponseCall.request().url().toString());
+        getCartResponseCall.enqueue(new Callback<GetCartResponse>() {
+            @Override
+            public void onResponse(Call<GetCartResponse> call, Response<GetCartResponse> response) {
+                GetCartResponse getCartResponse = response.body();
+                Log.e(TAG, "onResponse: " + new GsonBuilder().create().toJson(response.body()));
+                Log.e(TAG, "onResponse code: " + response.code());
+                if (response.code() == 200) {
+                    if (getCartResponse.getStatus() == 200) {
+                       // pDialog.hide();
+                        // ESPreferences.SSP().putLong(CART_COUNT, Long.valueOf(getCartResponse.getResponse().size()));
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Categeory.this);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        String cont= String.valueOf(getCartResponse.getResponse().size());
+                        editor.putString("COU",cont);
+                        editor.apply();
+
+
+                    } else if (getCartResponse.getStatus() == 404) {
+
+                } else if (response.code() == 404) {
+
+                } else if (response.code() == 500) {
+                    Utils.timeOutDialog(Categeory.this, true);
+                } else {
+                    Utils.customMessage(Categeory.this, "Something went wrong.");
+                }
+                //pDialog.hide();
+            }}
+
+            @Override
+            public void onFailure(Call<GetCartResponse> call, Throwable t) {
+               // pDialog.hide();
+                Utils.customMessage(Categeory.this, "Something went wrong.");
+            }
+        });
     }
 }
 

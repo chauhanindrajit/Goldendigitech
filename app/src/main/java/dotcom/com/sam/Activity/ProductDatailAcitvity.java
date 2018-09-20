@@ -52,7 +52,7 @@ public class ProductDatailAcitvity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ProductDatailAcitvity.this);
         String value = sharedPreferences.getString("COU", "");
-        if (value.equals("")) {
+        if (value.equals("") || value.isEmpty() || value.equals("0")) {
             // not having user id
             conting.setVisibility(View.GONE);
         } else {

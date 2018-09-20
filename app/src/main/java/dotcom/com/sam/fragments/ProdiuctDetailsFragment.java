@@ -3,6 +3,7 @@ package dotcom.com.sam.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import dotcom.com.sam.Activity.MainActivity;
 import dotcom.com.sam.Activity.NotificationCountSetClass;
 import dotcom.com.sam.Activity.ProductActivity;
 import dotcom.com.sam.Activity.ProductDatailAcitvity;
+import dotcom.com.sam.Activity.ReviewOrderActivity;
 import dotcom.com.sam.Credentials.Registration;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Response.ManageCartResponse;
@@ -60,7 +62,7 @@ import static dotcom.com.sam.Utils.Constants.CART_COUNT;
 public class ProdiuctDetailsFragment extends Fragment {
     TextView prodctname, actualprce, discountprice, addedCart;
     ImageView image, favimage;
-    Button btnaddtocart;
+    Button btnaddtocart, buynow;
     Context context;
     int count = 1;
     RadioGroup quantygrp;
@@ -103,18 +105,26 @@ public class ProdiuctDetailsFragment extends Fragment {
         image = (ImageView) getView().findViewById(R.id.productimage);
         favimage = (ImageView) getView().findViewById(R.id.favimage);
         btnaddtocart = (Button) getView().findViewById(R.id.addtocart);
+        buynow = (Button) getView().findViewById(R.id.buynow);
         prodctname.setText(ProductSingalton.getInstance().getProductName());
         actualprce.setText(String.valueOf(ProductSingalton.getInstance().getPrice()));
         actualprce.setPaintFlags(actualprce.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         discountprice.setText(ProductSingalton.getInstance().getDiscountPrice());
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         prtID = ProductSingalton.getInstance().getPT_Id();
+        buynow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), ReviewOrderActivity.class);
+                startActivity(i);
+            }
+        });
 //        if(SingletonClass.getInstance().productid().get(0).equals(prtID))
 //        {
 //            Utils.customMessage(getContext(),"already added");
 //        }
         favimage.setImageResource(SingletonClass.getInstance().getFav());
-
+        Addedornot();
         favimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -247,4 +257,65 @@ public class ProdiuctDetailsFragment extends Fragment {
         }
         return true;
     }
+
+    private void Addedornot() {
+        ManageCartRequest manageCartRequest = new ManageCartRequest();
+        manageCartRequest.setPT_Id(prtID);
+
+//        if (qunatype != null) {
+//            manageCartRequest.setQTY(Integer.parseInt(qunatype));
+//        } else {
+//            manageCartRequest.setQTY(1);
+//        }
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String value = sharedPreferences.getString("KEY", "");
+        if (value.equals("")) {
+            // not having user id
+            Utils.customMessage(getContext(), "SORRY USER ID NOT FOUND");
+        } else {
+            manageCartRequest.setRJ_ID(Integer.parseInt((value)));
+            // user id is available
+        }
+        pDialog = new ProgressDialog(getContext());
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+        Call<ManageCartResponse> manageCartResponseCall = Utilss.getWebService().manageCart(manageCartRequest);
+        Log.e("Add into cart ", ": :" + new GsonBuilder().create().toJson(manageCartRequest));
+        Log.e("URL", "checkAcceptTrip: " + manageCartResponseCall.request().url().toString());
+        manageCartResponseCall.enqueue(new Callback<ManageCartResponse>() {
+            @Override
+            public void onResponse(Call<ManageCartResponse> call, Response<ManageCartResponse> response) {
+                Log.e(TAG, "onResponse code: " + response.code());
+                if (response.code() == 200) {
+                    ManageCartResponse manageCartResponse = response.body();
+                    if (manageCartResponse.isSuccess() == false) {
+                        btnaddtocart.setVisibility(View.GONE);
+                        addedCart.setVisibility(View.VISIBLE);
+                    }
+                    pDialog.hide();
+
+                } else if (response.code() == 400) {
+                    pDialog.hide();
+                    Utils.customMessage(getContext(), "Service Unavailable \nOur server is currently unavailable or down for maintenance. Please try again in a while.");
+                } else {
+                    pDialog.hide();
+                    // btnaddtocart.setVisibility(View.GONE);
+                    //  addedCart.setVisibility(View.VISIBLE);
+                    Utils.customMessage(getContext(), "Something went wrong.");
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ManageCartResponse> call, Throwable t) {
+                pDialog.hide();
+            }
+        });
+
+
+    }
+
 }

@@ -7,5 +7,5 @@
     <ImageView
         android:layout_width="210dp"
         android:layout_height="150dp"
-        android:src="@drawable/page_not_found" />
+        android:src="@drawable/nodatafound" />
 </LinearLayout>
