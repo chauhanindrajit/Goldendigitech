@@ -1,6 +1,8 @@
 package dotcom.com.sam.extras;
 
 
+import dotcom.com.sam.Response.AddnewAddressResponse;
+import dotcom.com.sam.Response.AddressResponse;
 import dotcom.com.sam.Response.AdoptpetResponse;
 import dotcom.com.sam.Response.BaseResponse;
 import dotcom.com.sam.Response.BuypetResponse;
@@ -19,6 +21,7 @@ import dotcom.com.sam.Response.MatingsearchResponse;
 import dotcom.com.sam.Response.MicroChippingRespose;
 import dotcom.com.sam.Response.NewArrivalResponse;
 import dotcom.com.sam.Response.OldPetResponse;
+import dotcom.com.sam.Response.PaymentResponse;
 import dotcom.com.sam.Response.PetSitterResponse;
 import dotcom.com.sam.Response.PetSittersearchResponse;
 import dotcom.com.sam.Response.PetWalkingResponse;
@@ -33,6 +36,7 @@ import dotcom.com.sam.Response.TrainingServicesResponse;
 import dotcom.com.sam.Response.VaccinationResponse;
 import dotcom.com.sam.Response.VetNearMeResponse;
 import dotcom.com.sam.Response.WalkingsearchResponse;
+import dotcom.com.sam.request.AddnewaddressRequest;
 import dotcom.com.sam.request.ChangePassRequest;
 import dotcom.com.sam.request.ForgetPassRequest;
 import dotcom.com.sam.request.ManageCartRequest;
@@ -183,4 +187,14 @@ public interface WebService {
 
     @GET("api/ShopByPetVC/DataAddMinusRemoveProduct?")
     Call<IncrDecResponse> INCR_DEC_RESPONSE_CALL(@Query("CRT_ID") Integer id, @Query("RJ_Id") Integer rj_id, @Query("AddRemove") String addremove);
+
+    @GET("api/ShopByPetVC/DeliveryAddress?")
+    Call<AddressResponse> ADDRESS_RESPONSE_CALL(@Query("RJ_ID") Integer id);
+
+    @GET("api/ShopByPetVC/FinalSummryData?")
+    Call<PaymentResponse> PAYMENT_RESPONSE_CALL(@Query("RJ_ID") Integer id);
+
+    @POST("api/ShopByPetVC/AddNewDeliveryAddress")
+    Call<AddnewAddressResponse> ADDNEW_ADDRESS_RESPONSE_CALL(@Body AddnewaddressRequest addnewaddressRequest);
+
 }

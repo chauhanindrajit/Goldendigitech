@@ -77,7 +77,7 @@ public class ReviewOrderActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        Spannable text = new SpannableString("Review Order");
+        Spannable text = new SpannableString("Order Summary");
         text.setSpan(new ForegroundColorSpan(Color.WHITE), 0, text.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         actionBar.setTitle(text);
         checkout = (Button) findViewById(R.id.checkout);
@@ -86,12 +86,7 @@ public class ReviewOrderActivity extends AppCompatActivity {
         totalprice = (TextView) findViewById(R.id.totlprice);
         deleteCart = (ImageView) findViewById(R.id.delete_cart);
         checkout = (Button) findViewById(R.id.checkout);
-        checkout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // startActivity(new Intent(ReviewOrderActivity.this, OrderSummaryActivity.class));
-            }
-        });
+
         placeOrderService = PlaceOrderService.getInstance();
         manageInterface = new ReviewAdapter.ManageInterface() {
             @Override
@@ -169,7 +164,8 @@ public class ReviewOrderActivity extends AppCompatActivity {
                 pbutton.setTextColor(Color.rgb(30, 144, 255));
                 Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
                 nbutton.setTextColor(Color.rgb(30, 144, 255));
-            }});
+            }
+        });
         reviewRecyclerView = (RecyclerView) findViewById(R.id.review_recyler_view);
         reviewRecyclerView.setFocusable(false);
 
@@ -179,7 +175,13 @@ public class ReviewOrderActivity extends AppCompatActivity {
         reviewRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         getCartList();
-
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SingletonClass.getInstance().setFinalPrice(totalprice.getText().toString());
+                startActivity(new Intent(ReviewOrderActivity.this, DeliveryAddress.class));
+            }
+        });
 
     }
 
@@ -234,6 +236,7 @@ public class ReviewOrderActivity extends AppCompatActivity {
 //                        ProductDatailAcitvity.conting.setText(cont);
                         totalQtyPrice.setText(getCartResponse.getResponse().size() + " Items - ₹" + total);
                         totalprice.setText("₹ " + total);
+                        SingletonClass.getInstance().setFinalPrice("₹" + total);
                         ReviewAdapter reviewAdapter = new ReviewAdapter(ReviewOrderActivity.this, getCartResponse.getResponse(), manageInterface);
                         reviewRecyclerView.setAdapter(reviewAdapter);
                     } else if (getCartResponse.getStatus() == 404) {

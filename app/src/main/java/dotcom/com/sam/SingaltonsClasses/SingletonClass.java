@@ -79,9 +79,11 @@ public class SingletonClass {
     private String Message;
     private String SRID;
     private String USERID;
+    private String FinalPrice;
     private int fav;
     private int POSITIONID;
     private boolean isIncart;
+    private boolean newadd;
     boolean isFilterApply;
 
     //-----------------brand filter
@@ -404,5 +406,21 @@ public class SingletonClass {
             }
         }
         return false;
+    }
+
+    public String getFinalPrice() {
+        return FinalPrice;
+    }
+
+    public void setFinalPrice(String finalPrice) {
+        FinalPrice = finalPrice;
+    }
+
+    public boolean isNewadd() {
+        return newadd;
+    }
+
+    public void setNewadd(boolean newadd) {
+        this.newadd = newadd;
     }
 }

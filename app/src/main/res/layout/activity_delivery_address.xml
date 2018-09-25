@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:elevation="16dp"
+            android:minHeight="?attr/actionBarSize"
+            android:translationZ="16dp"
+            app:actionLayout="@menu/main"
+            app:menu="@menu/main"
+            app:navigationIcon="@drawable/ic_arrow_back_whitw_24dp"></android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="address "
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Details"
+                android:textAllCaps="true"
+                android:textColor="@color/gen_black"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2sp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:background="@color/colorPrimaryDark" />
+        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <RadioGroup
+                    android:id="@+id/gender_grp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:checked = "true"
+                        android:id="@+id/existingaddradio"
+                        android:text="Rohit sharma"
+                        android:textColor="#000"
+                        android:textSize="14dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <TextView
+                            android:id="@+id/deliveryaddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
+                            android:singleLine="false"
+                            android:text="charkop kandivbali west mumbai 400067" />
+
+                        <TextView
+                            android:id="@+id/deliverycontctno"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
+                            android:text="+91-9819493436" />
+                    </LinearLayout>
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Add new address"
+                        android:textColor="#000"
+                        android:id="@+id/newaddressradio"
+                        android:textSize="14dp" />
+
+
+                    <LinearLayout
+                        android:id="@+id/newaddlayout"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="Add a new Address"
+                            android:textStyle="bold" />
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/categeory_shpe"
+                            android:gravity="center"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
+
+                            <EditText
+
+                                android:id="@+id/full_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="5dp"
+                                android:background="@null"
+                                android:drawablePadding="10dp"
+                                android:hint="Full Name"
+                                android:textSize="15dp" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+
+                            android:background="@drawable/categeory_shpe"
+                            android:gravity="center"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
+
+                            <EditText
+
+                                android:id="@+id/contact_no"
+                                android:layout_width="match_parent"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="5dp"
+                                android:background="@null"
+                                android:drawablePadding="10dp"
+                                android:hint="Mobile No."
+                                android:inputType="number"
+                                android:textSize="15dp" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <!--<android.support.design.widget.TextInputLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="15dp"-->
+                            <!--android:layout_marginRight="15dp"-->
+                            <!--android:layout_marginTop="10dp"-->
+
+                            <!--android:background="@drawable/categeory_shpe"-->
+                            <!--android:gravity="center"-->
+                            <!--android:paddingLeft="5dp"-->
+                            <!--android:paddingRight="5dp">-->
+
+                            <!--<EditText-->
+
+                                <!--android:id="@+id/emai_id"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="25dp"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:layout_marginBottom="5dp"-->
+                                <!--android:background="@null"-->
+                                <!--android:drawablePadding="10dp"-->
+                                <!--android:hint="Pincode"-->
+                                <!--android:inputType="number"-->
+                                <!--android:maxLength="6"-->
+                                <!--android:textSize="15dp" />-->
+
+                        <!--</android.support.design.widget.TextInputLayout>-->
+
+                        <!--<android.support.design.widget.TextInputLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="15dp"-->
+                            <!--android:layout_marginRight="15dp"-->
+                            <!--android:layout_marginTop="10dp"-->
+
+                            <!--android:background="@drawable/categeory_shpe"-->
+                            <!--android:gravity="center"-->
+                            <!--android:paddingLeft="5dp"-->
+                            <!--android:paddingRight="5dp">-->
+
+                            <!--<EditText-->
+
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="25dp"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:layout_marginBottom="5dp"-->
+                                <!--android:background="@null"-->
+                                <!--android:drawablePadding="10dp"-->
+                                <!--android:hint="Locality"-->
+                                <!--android:maxLength="6"-->
+                                <!--android:textSize="15dp" />-->
+
+                        <!--</android.support.design.widget.TextInputLayout>-->
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/categeory_shpe"
+                            android:gravity="center"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
+
+                            <EditText
+                                android:id="@+id/addnewaddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="5dp"
+                                android:background="@null"
+                                android:singleLine="false"
+                                android:drawablePadding="10dp"
+                                android:hint="Address"
+                                android:textSize="15dp" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <!--<android.support.design.widget.TextInputLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="15dp"-->
+                            <!--android:layout_marginRight="15dp"-->
+                            <!--android:layout_marginTop="10dp"-->
+
+                            <!--android:background="@drawable/categeory_shpe"-->
+                            <!--android:gravity="center"-->
+                            <!--android:paddingLeft="5dp"-->
+                            <!--android:paddingRight="5dp">-->
+
+                            <!--<EditText-->
+
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="25dp"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:layout_marginBottom="5dp"-->
+
+                                <!--android:background="@null"-->
+                                <!--android:drawablePadding="10dp"-->
+                                <!--android:hint="City/District/Town"-->
+                                <!--android:maxLength="6"-->
+                                <!--android:textSize="15dp" />-->
+
+                        <!--</android.support.design.widget.TextInputLayout>-->
+
+                        <!--<android.support.design.widget.TextInputLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="15dp"-->
+                            <!--android:layout_marginRight="15dp"-->
+                            <!--android:layout_marginTop="10dp"-->
+
+                            <!--android:background="@drawable/categeory_shpe"-->
+                            <!--android:gravity="center"-->
+                            <!--android:paddingLeft="5dp"-->
+                            <!--android:paddingRight="5dp">-->
+
+                            <!--<EditText-->
+
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="25dp"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:layout_marginBottom="5dp"-->
+
+                                <!--android:background="@null"-->
+                                <!--android:drawablePadding="10dp"-->
+                                <!--android:hint="Landmark"-->
+                                <!--android:maxLength="6"-->
+                                <!--android:textSize="15dp" />-->
+
+                        <!--</android.support.design.widget.TextInputLayout>-->
+
+                        <!--<android.support.design.widget.TextInputLayout-->
+                            <!--android:id="@+id/usernameWrapper"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="15dp"-->
+                            <!--android:layout_marginRight="15dp"-->
+                            <!--android:layout_marginTop="10dp"-->
+                            <!--android:background="@drawable/categeory_shpe"-->
+                            <!--android:gravity="center"-->
+                            <!--android:paddingLeft="5dp"-->
+                            <!--android:paddingRight="5dp">-->
+
+                            <!--<AutoCompleteTextView-->
+                                <!--android:id="@+id/pet_type"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="25dp"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:layout_marginBottom="5dp"-->
+                                <!--android:background="@null"-->
+                                <!--android:drawableEnd="@drawable/ic_expand_more_black_24dp"-->
+                                <!--android:drawablePadding="10dp"-->
+                                <!--android:editable="false"-->
+                                <!--android:hint="State"-->
+                                <!--android:textSize="15dp" />-->
+
+                        <!--</android.support.design.widget.TextInputLayout>-->
+
+                        <!--<android.support.design.widget.TextInputLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="15dp"-->
+                            <!--android:layout_marginRight="15dp"-->
+                            <!--android:layout_marginTop="10dp"-->
+
+                            <!--android:background="@drawable/categeory_shpe"-->
+                            <!--android:gravity="center"-->
+                            <!--android:paddingLeft="5dp"-->
+                            <!--android:paddingRight="5dp">-->
+
+                            <!--<EditText-->
+
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="25dp"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:layout_marginBottom="5dp"-->
+                                <!--android:background="@null"-->
+                                <!--android:drawablePadding="10dp"-->
+                                <!--android:hint="Alternative phone(Optional)"-->
+                                <!--android:inputType="number"-->
+                                <!--android:maxLength="6"-->
+                                <!--android:textSize="15dp" />-->
+
+                        <!--</android.support.design.widget.TextInputLayout>-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <Button
+                                android:id="@+id/saveanddeliver"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="1"
+                                android:background="#15adaf"
+                                android:text="SAVE AND DELIVER"
+                                android:textColor="#FFF" />
+
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:id="@+id/cancel"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@color/gen_white"
+                                android:text="CANCEL"
+                                android:textColor="@color/colorPrimary" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/finalsummary"
+        android:layout_width="match_parent"
+        android:layout_height="43sp"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"
+        android:text="Continue"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="16dp" />
+
+
+
+</RelativeLayout>

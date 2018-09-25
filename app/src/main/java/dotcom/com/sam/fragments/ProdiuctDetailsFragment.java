@@ -201,10 +201,25 @@ public class ProdiuctDetailsFragment extends Fragment {
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("COU", manageCartResponse.getMessege());
                                 editor.apply();
-                                ProductActivity.conting.setVisibility(View.VISIBLE);
-                                ProductDatailAcitvity.conting.setVisibility(View.VISIBLE);
-                                ProductActivity.conting.setText(manageCartResponse.getMessege());
-                                ProductDatailAcitvity.conting.setText(manageCartResponse.getMessege());
+                                if (SingletonClass.getInstance().getActivityname().equals("New Arrivals")) {
+                                    try {
+                                        ProductActivity.conting.setVisibility(View.VISIBLE);
+                                        ProductDatailAcitvity.conting.setVisibility(View.VISIBLE);
+                                        ProductActivity.conting.setText(manageCartResponse.getMessege());
+                                        ProductDatailAcitvity.conting.setText(manageCartResponse.getMessege());
+                                    } catch (Exception e) {
+
+                                    }
+                                }
+                                try {
+                                    ProductActivity.conting.setVisibility(View.VISIBLE);
+                                    ProductDatailAcitvity.conting.setVisibility(View.VISIBLE);
+                                    ProductActivity.conting.setText(manageCartResponse.getMessege());
+                                    ProductDatailAcitvity.conting.setText(manageCartResponse.getMessege());
+                                } catch (Exception e) {
+
+                                }
+
                                 btnaddtocart.setVisibility(View.GONE);
                                 addedCart.setVisibility(View.VISIBLE);
                                 // ProductSinglton.getInstance().getProductListFinal().get(prtID).setIsIncart(true);

@@ -64,6 +64,8 @@ public class NewArrivalAdapter extends RecyclerView.Adapter<NewArrivalAdapter.Vi
                  ProductSingalton.getInstance().setPrice(arrSubCateogry.get(position).getPrice());
                  ProductSingalton.getInstance().setDiscount(arrSubCateogry.get(position).getDiscount());
                  ProductSingalton.getInstance().setDiscountPrice(String.valueOf(arrSubCateogry.get(position).getDiscountPrice()));
+                 ProductSingalton.getInstance().setPT_Id(arrSubCateogry.get(position).getPT_Id());
+                 dotcom.com.sam.SingaltonsClasses.SingletonClass.getInstance().setActivityname("New Arrivals");
                  ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation((Activity)context,holder.imageView,"productimage");
                  Intent intent=new Intent(context,ProductDatailAcitvity.class);
                  context.startActivity(intent,options.toBundle());
