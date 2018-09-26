@@ -64,12 +64,12 @@ import static dotcom.com.sam.Utils.Constants.CART_COUNT;
 public class ProdiuctDetailsFragment extends Fragment {
     TextView prodctname, actualprce, discountprice, addedCart;
     ImageView image, favimage;
-    Button btnaddtocart, buynow ,btn_checkout;
+    Button btnaddtocart, buynow, btn_checkout;
     Context context;
     CardView radiocard;
     int count = 1;
     RadioGroup quantygrp;
-    LinearLayout checkoutlayout,buynowlayout;
+    LinearLayout checkoutlayout, buynowlayout;
     int prtID;
     int postnid;
     private String qunatype = "";
@@ -106,10 +106,10 @@ public class ProdiuctDetailsFragment extends Fragment {
         actualprce = (TextView) getView().findViewById(R.id.actualprice);
         discountprice = (TextView) getView().findViewById(R.id.discountprice);
         quantygrp = (RadioGroup) getView().findViewById(R.id.gender_grp);
-        checkoutlayout=(LinearLayout)getView().findViewById(R.id.checkoutlayout);
-        buynowlayout=(LinearLayout)getView().findViewById(R.id.buynowlayout);
+        checkoutlayout = (LinearLayout) getView().findViewById(R.id.checkoutlayout);
+        buynowlayout = (LinearLayout) getView().findViewById(R.id.buynowlayout);
         image = (ImageView) getView().findViewById(R.id.productimage);
-        radiocard=(CardView)getView().findViewById(R.id.radiopack);
+        radiocard = (CardView) getView().findViewById(R.id.radiopack);
         favimage = (ImageView) getView().findViewById(R.id.favimage);
         btnaddtocart = (Button) getView().findViewById(R.id.addtocart);
         btn_checkout = (Button) getView().findViewById(R.id.btn_checkout);
@@ -123,7 +123,7 @@ public class ProdiuctDetailsFragment extends Fragment {
         btn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.moveNextWithAnimation(getContext(),ReviewOrderActivity.class);
+                Utils.moveNextWithAnimation(getContext(), ReviewOrderActivity.class);
             }
         });
 
@@ -185,17 +185,10 @@ public class ProdiuctDetailsFragment extends Fragment {
                                 } catch (Exception e) {
 
                                 }
-
-//                                btnaddtocart.setVisibility(View.GONE);
-//                                addedCart.setVisibility(View.VISIBLE);
-
-                                // ProductSinglton.getInstance().getProductListFinal().get(prtID).setIsIncart(true);
-                                //  ProductSinglton.getInstance().getProductListResponse().getResponse().get(position).setIsIncart(true);
                                 SingletonClass.getInstance().productid().add(prtID);
                                 ImageUrlUtils imageUrlUtils = new ImageUrlUtils();
                                 imageUrlUtils.productname(ProductSingalton.getInstance().getProductName());
-                                Utils.moveNextWithAnimation(getContext(),ReviewOrderActivity.class);
-                               // Toast.makeText(getContext(), "Item added to cart.", Toast.LENGTH_SHORT).show();
+                                Utils.moveNextWithAnimation(getContext(), ReviewOrderActivity.class);
                                 ProductActivity.notificationCountCart++;
                                 NotificationCountSetClass.setNotifyCount(ProductActivity.notificationCountCart);
                                 pDialog.dismiss();
@@ -205,8 +198,6 @@ public class ProdiuctDetailsFragment extends Fragment {
                                 Utils.customMessage(getContext(), "Service Unavailable \nOur server is currently unavailable or down for maintenance. Please try again in a while.");
                             } else {
                                 pDialog.dismiss();
-                                // btnaddtocart.setVisibility(View.GONE);
-                                //  addedCart.setVisibility(View.VISIBLE);
                                 Utils.customMessage(getContext(), "Something went wrong.");
                             }
 
@@ -265,8 +256,6 @@ public class ProdiuctDetailsFragment extends Fragment {
         btnaddtocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //ProductActivity.conting.setText(String.valueOf(count + 1));
-                // ProductDatailAcitvity.conting.setText(String.valueOf(count + 1));
                 if (validate()) {
                     ManageCartRequest manageCartRequest = new ManageCartRequest();
                     manageCartRequest.setPT_Id(prtID);
@@ -327,8 +316,6 @@ public class ProdiuctDetailsFragment extends Fragment {
                                 addedCart.setVisibility(View.VISIBLE);
                                 checkoutlayout.setVisibility(View.VISIBLE);
                                 buynowlayout.setVisibility(View.GONE);
-                                // ProductSinglton.getInstance().getProductListFinal().get(prtID).setIsIncart(true);
-                                //  ProductSinglton.getInstance().getProductListResponse().getResponse().get(position).setIsIncart(true);
                                 SingletonClass.getInstance().productid().add(prtID);
                                 ImageUrlUtils imageUrlUtils = new ImageUrlUtils();
                                 imageUrlUtils.productname(ProductSingalton.getInstance().getProductName());
@@ -342,8 +329,6 @@ public class ProdiuctDetailsFragment extends Fragment {
                                 Utils.customMessage(getContext(), "Service Unavailable \nOur server is currently unavailable or down for maintenance. Please try again in a while.");
                             } else {
                                 pDialog.dismiss();
-                                // btnaddtocart.setVisibility(View.GONE);
-                                //  addedCart.setVisibility(View.VISIBLE);
                                 Utils.customMessage(getContext(), "Something went wrong.");
                             }
 
@@ -367,7 +352,6 @@ public class ProdiuctDetailsFragment extends Fragment {
             Picasso.with(context).load(R.drawable.noimage).into(image);
 
         }
-        // pos= SubcategorySingalton.getInstance().getSc_Id();
     }
 
     private boolean validate() {
@@ -381,21 +365,14 @@ public class ProdiuctDetailsFragment extends Fragment {
     private void Addedornot() {
         ManageCartRequest manageCartRequest = new ManageCartRequest();
         manageCartRequest.setPT_Id(prtID);
-
-//        if (qunatype != null) {
-//            manageCartRequest.setQTY(Integer.parseInt(qunatype));
-//        } else {
-//            manageCartRequest.setQTY(1);
-//        }
-
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         String value = sharedPreferences.getString("KEY", "");
         if (value.equals("")) {
-            // not having user id
+
             Utils.customMessage(getContext(), "SORRY USER ID NOT FOUND");
         } else {
             manageCartRequest.setRJ_ID(Integer.parseInt((value)));
-            // user id is available
+
         }
         pDialog = new ProgressDialog(getContext());
         pDialog.setMessage("Please wait...");
@@ -424,8 +401,6 @@ public class ProdiuctDetailsFragment extends Fragment {
                     Utils.customMessage(getContext(), "Service Unavailable \nOur server is currently unavailable or down for maintenance. Please try again in a while.");
                 } else {
                     pDialog.dismiss();
-                    // btnaddtocart.setVisibility(View.GONE);
-                    //  addedCart.setVisibility(View.VISIBLE);
                     Utils.customMessage(getContext(), "Something went wrong.");
                 }
 
