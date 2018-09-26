@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -62,10 +64,12 @@ import static dotcom.com.sam.Utils.Constants.CART_COUNT;
 public class ProdiuctDetailsFragment extends Fragment {
     TextView prodctname, actualprce, discountprice, addedCart;
     ImageView image, favimage;
-    Button btnaddtocart, buynow;
+    Button btnaddtocart, buynow ,btn_checkout;
     Context context;
+    CardView radiocard;
     int count = 1;
     RadioGroup quantygrp;
+    LinearLayout checkoutlayout,buynowlayout;
     int prtID;
     int postnid;
     private String qunatype = "";
@@ -102,9 +106,13 @@ public class ProdiuctDetailsFragment extends Fragment {
         actualprce = (TextView) getView().findViewById(R.id.actualprice);
         discountprice = (TextView) getView().findViewById(R.id.discountprice);
         quantygrp = (RadioGroup) getView().findViewById(R.id.gender_grp);
+        checkoutlayout=(LinearLayout)getView().findViewById(R.id.checkoutlayout);
+        buynowlayout=(LinearLayout)getView().findViewById(R.id.buynowlayout);
         image = (ImageView) getView().findViewById(R.id.productimage);
+        radiocard=(CardView)getView().findViewById(R.id.radiopack);
         favimage = (ImageView) getView().findViewById(R.id.favimage);
         btnaddtocart = (Button) getView().findViewById(R.id.addtocart);
+        btn_checkout = (Button) getView().findViewById(R.id.btn_checkout);
         buynow = (Button) getView().findViewById(R.id.buynow);
         prodctname.setText(ProductSingalton.getInstance().getProductName());
         actualprce.setText(String.valueOf(ProductSingalton.getInstance().getPrice()));
@@ -112,11 +120,106 @@ public class ProdiuctDetailsFragment extends Fragment {
         discountprice.setText(ProductSingalton.getInstance().getDiscountPrice());
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         prtID = ProductSingalton.getInstance().getPT_Id();
+        btn_checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.moveNextWithAnimation(getContext(),ReviewOrderActivity.class);
+            }
+        });
+
         buynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), ReviewOrderActivity.class);
-                startActivity(i);
+                if (validate()) {
+                    ManageCartRequest manageCartRequest = new ManageCartRequest();
+                    manageCartRequest.setPT_Id(prtID);
+
+                    if (qunatype != null) {
+                        manageCartRequest.setQTY(Integer.parseInt(qunatype));
+                    } else {
+                        manageCartRequest.setQTY(1);
+                    }
+
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                    String value = sharedPreferences.getString("KEY", "");
+                    if (value.equals("")) {
+                        // not having user id
+                        Utils.customMessage(getContext(), "SORRY USER ID NOT FOUND");
+                    } else {
+                        manageCartRequest.setRJ_ID(Integer.parseInt((value)));
+                        // user id is available
+                    }
+                    pDialog = new ProgressDialog(getContext());
+                    pDialog.setMessage("Please wait...");
+                    pDialog.setCancelable(false);
+                    pDialog.show();
+                    Call<ManageCartResponse> manageCartResponseCall = Utilss.getWebService().manageCart(manageCartRequest);
+                    Log.e("Add into cart ", ": :" + new GsonBuilder().create().toJson(manageCartRequest));
+                    Log.e("URL", "checkAcceptTrip: " + manageCartResponseCall.request().url().toString());
+                    manageCartResponseCall.enqueue(new Callback<ManageCartResponse>() {
+                        @Override
+                        public void onResponse(Call<ManageCartResponse> call, Response<ManageCartResponse> response) {
+                            Log.e(TAG, "onResponse code: " + response.code());
+                            if (response.code() == 200) {
+                                ManageCartResponse manageCartResponse = response.body();
+
+                                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("COU", manageCartResponse.getMessege());
+                                editor.apply();
+                                if (SingletonClass.getInstance().getActivityname().equals("New Arrivals")) {
+                                    try {
+                                        ProductActivity.conting.setVisibility(View.VISIBLE);
+                                        ProductDatailAcitvity.conting.setVisibility(View.VISIBLE);
+                                        ProductActivity.conting.setText(manageCartResponse.getMessege());
+                                        ProductDatailAcitvity.conting.setText(manageCartResponse.getMessege());
+                                    } catch (Exception e) {
+
+                                    }
+                                }
+                                try {
+                                    ProductActivity.conting.setVisibility(View.VISIBLE);
+                                    ProductDatailAcitvity.conting.setVisibility(View.VISIBLE);
+                                    ProductActivity.conting.setText(manageCartResponse.getMessege());
+                                    ProductDatailAcitvity.conting.setText(manageCartResponse.getMessege());
+                                } catch (Exception e) {
+
+                                }
+
+//                                btnaddtocart.setVisibility(View.GONE);
+//                                addedCart.setVisibility(View.VISIBLE);
+
+                                // ProductSinglton.getInstance().getProductListFinal().get(prtID).setIsIncart(true);
+                                //  ProductSinglton.getInstance().getProductListResponse().getResponse().get(position).setIsIncart(true);
+                                SingletonClass.getInstance().productid().add(prtID);
+                                ImageUrlUtils imageUrlUtils = new ImageUrlUtils();
+                                imageUrlUtils.productname(ProductSingalton.getInstance().getProductName());
+                                Utils.moveNextWithAnimation(getContext(),ReviewOrderActivity.class);
+                               // Toast.makeText(getContext(), "Item added to cart.", Toast.LENGTH_SHORT).show();
+                                ProductActivity.notificationCountCart++;
+                                NotificationCountSetClass.setNotifyCount(ProductActivity.notificationCountCart);
+                                pDialog.dismiss();
+
+                            } else if (response.code() == 400) {
+                                pDialog.dismiss();
+                                Utils.customMessage(getContext(), "Service Unavailable \nOur server is currently unavailable or down for maintenance. Please try again in a while.");
+                            } else {
+                                pDialog.dismiss();
+                                // btnaddtocart.setVisibility(View.GONE);
+                                //  addedCart.setVisibility(View.VISIBLE);
+                                Utils.customMessage(getContext(), "Something went wrong.");
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ManageCartResponse> call, Throwable t) {
+                            pDialog.dismiss();
+                        }
+                    });
+
+                }
             }
         });
 //        if(SingletonClass.getInstance().productid().get(0).equals(prtID))
@@ -222,6 +325,8 @@ public class ProdiuctDetailsFragment extends Fragment {
 
                                 btnaddtocart.setVisibility(View.GONE);
                                 addedCart.setVisibility(View.VISIBLE);
+                                checkoutlayout.setVisibility(View.VISIBLE);
+                                buynowlayout.setVisibility(View.GONE);
                                 // ProductSinglton.getInstance().getProductListFinal().get(prtID).setIsIncart(true);
                                 //  ProductSinglton.getInstance().getProductListResponse().getResponse().get(position).setIsIncart(true);
                                 SingletonClass.getInstance().productid().add(prtID);
@@ -308,6 +413,9 @@ public class ProdiuctDetailsFragment extends Fragment {
                     if (manageCartResponse.isSuccess() == false) {
                         btnaddtocart.setVisibility(View.GONE);
                         addedCart.setVisibility(View.VISIBLE);
+                        checkoutlayout.setVisibility(View.VISIBLE);
+                        buynowlayout.setVisibility(View.GONE);
+                        radiocard.setVisibility(View.GONE);
                     }
                     pDialog.dismiss();
 

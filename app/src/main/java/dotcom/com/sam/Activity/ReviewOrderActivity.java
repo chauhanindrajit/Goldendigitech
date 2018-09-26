@@ -135,8 +135,12 @@ public class ReviewOrderActivity extends AppCompatActivity {
                                             String cont = String.valueOf("0");
                                             editor.putString("COU", cont);
                                             editor.apply();
-                                            ProductActivity.conting.setText(cont);
-                                            ProductDatailAcitvity.conting.setText(cont);
+                                            try {
+                                                ProductActivity.conting.setText(cont);
+                                                ProductDatailAcitvity.conting.setText(cont);
+                                            }catch (Exception e){
+
+                                            }
                                             pDialog.dismiss();
                                         } else if (response.code() == 500) {
                                             pDialog.dismiss();

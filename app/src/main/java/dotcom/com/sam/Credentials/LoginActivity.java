@@ -36,13 +36,14 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     Toolbar toolbar;
-    EditText ed_username,ed_pass;
-    String username,password;
+    EditText ed_username, ed_pass;
+    String username, password;
     Button btn_login;
-    TextView txt_skip,reg_txt,forgotpass;
+    TextView txt_skip, reg_txt, forgotpass;
     private ProgressDialog pDialog;
     public String TAG = Registration.class.getSimpleName();
-    String loginstatus="false";
+    String loginstatus = "false";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,17 +51,17 @@ public class LoginActivity extends AppCompatActivity {
 
         initView();
 
-        reg_txt =(TextView)findViewById(R.id.regstetext);
-        forgotpass =(TextView)findViewById(R.id.forgotpassword);
+        reg_txt = (TextView) findViewById(R.id.regstetext);
+        forgotpass = (TextView) findViewById(R.id.forgotpassword);
 
-    reg_txt.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Intent i = new Intent(LoginActivity.this, Registration.class);
-        startActivity(i);
-       // finish();
-    }
-});
+        reg_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoginActivity.this, Registration.class);
+                startActivity(i);
+                // finish();
+            }
+        });
         forgotpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,8 +74,8 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username=ed_username.getText().toString();
-                password=ed_pass.getText().toString();
+                username = ed_username.getText().toString();
+                password = ed_pass.getText().toString();
 
 
                 if (Utils.isOnline(LoginActivity.this)) {
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
 
-                }else {
+                } else {
                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(LoginActivity.this);
                     builder.setTitle("Internet problem");
                     builder.setMessage("Oops! seems you have lost internet connectivity. Please try again later.");
@@ -107,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         txt_skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -122,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
         pDialog.show();
 
         Log.e(TAG, "sendSignIn: " + email + " " + pass);
-        Call<LoginResponse> loginResponseCall = Utilss.getWebService().login( email, pass);
+        Call<LoginResponse> loginResponseCall = Utilss.getWebService().login(email, pass);
         loginResponseCall.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
@@ -146,10 +147,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     loginstatus = "true";
                     new UserSessionManager(getApplicationContext()).setUrlData(getApplicationContext(), loginstatus, UserSessionManager.LOGIN_STATUS);
-                        Utils.saveUserPreference(LoginActivity.this, Constants.FIRST_NAME, loginResponse.getFullName());
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        finish();
-                    Utils.customMessage(LoginActivity.this, "Login Successfully");
+                    Utils.saveUserPreference(LoginActivity.this, Constants.FIRST_NAME, loginResponse.getFullName());
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
                 } else if (response.code() == 404) {
                     pDialog.dismiss();
                     Utils.customMessage(LoginActivity.this, "Please check email id and password.!!");
@@ -170,34 +170,27 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-    private void initView()
-    {
-        ed_username=(EditText)findViewById(R.id.username);
-        ed_pass=(EditText)findViewById(R.id.pass);
-        btn_login=(Button) findViewById(R.id.btn_login);
-        txt_skip=findViewById(R.id.txt_skip);
+
+    private void initView() {
+        ed_username = (EditText) findViewById(R.id.username);
+        ed_pass = (EditText) findViewById(R.id.pass);
+        btn_login = (Button) findViewById(R.id.btn_login);
+        txt_skip = findViewById(R.id.txt_skip);
 
     }
 
 
-
-
-    private boolean validation(String username,String password ){
-        boolean flag=true;
-        if(username==null||username.equalsIgnoreCase(""))
-        {
+    private boolean validation(String username, String password) {
+        boolean flag = true;
+        if (username == null || username.equalsIgnoreCase("")) {
             ed_username.setError("enter user name");
-            flag=false;
-        }
-        else if(password==null||password.equalsIgnoreCase(""))
-        {
+            flag = false;
+        } else if (password == null || password.equalsIgnoreCase("")) {
             ed_pass.setError("enter password");
-            flag=false;
-        }
-        else if(password.length()<=6)
-        {
+            flag = false;
+        } else if (password.length() <= 6) {
             ed_pass.setError("password should contain minimum 6 character");
-            flag=false;
+            flag = false;
 
         }
 
@@ -214,20 +207,20 @@ public class LoginActivity extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
+
     private boolean validate() {
 
 
-
         if (ed_username.getText().toString().equals("")) {
-            Toast.makeText(LoginActivity.this,"Please enter email id.",Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginActivity.this, "Please enter email id.", Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (ed_pass.getText().toString().equals("")) {
-            Toast.makeText(LoginActivity.this,"Please enter password.",Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginActivity.this, "Please enter password.", Toast.LENGTH_LONG).show();
             return false;
         } else if (ed_pass.getText().length() < 6) {
-            Toast.makeText(LoginActivity.this,"Password must be at least 6 characters long.",Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginActivity.this, "Password must be at least 6 characters long.", Toast.LENGTH_LONG).show();
             return false;
         }
 
