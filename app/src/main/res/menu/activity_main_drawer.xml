@@ -10,12 +10,12 @@
             android:title="Logout" />
         <item
             android:id="@+id/my_cart"
-            android:icon="@drawable/ic_shopping_cart_black_24dp"
+            android:icon="@drawable/ic_add_shopping_cart_black_24dp"
             android:title="@string/my_cart" />
-        <item
-            android:id="@+id/my_wishlist"
-            android:icon="@drawable/ic_favorite_black_24dp"
-            android:title="@string/my_wishlist" />
+        <!--<item-->
+            <!--android:id="@+id/my_wishlist"-->
+            <!--android:icon="@drawable/ic_favorite_black_24dp"-->
+            <!--android:title="@string/my_wishlist" />-->
 
     </group>
 

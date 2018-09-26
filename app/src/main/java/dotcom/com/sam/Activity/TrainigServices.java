@@ -284,7 +284,7 @@ public class TrainigServices extends AppCompatActivity {
         trainingServicesResponseCall.enqueue(new Callback<TrainingServicesResponse>() {
             @Override
             public void onResponse(Call<TrainingServicesResponse> call, Response<TrainingServicesResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     TrainingServicesResponse trainingServicesResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));

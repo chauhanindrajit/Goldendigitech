@@ -522,7 +522,7 @@ public class PetSetter extends AppCompatActivity {
         petSitterResponseCall.enqueue(new Callback<PetSitterResponse>() {
             @Override
             public void onResponse(Call<PetSitterResponse> call, Response<PetSitterResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     PetSitterResponse petSitterResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));
@@ -554,7 +554,7 @@ public class PetSetter extends AppCompatActivity {
                     }
 
                 } else if (response.code() == 404) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(PetSetter.this, "Sorry no data found.!!");
                 }
             }
@@ -581,7 +581,7 @@ public class PetSetter extends AppCompatActivity {
             @Override
             public void onResponse(Call<PetSittersearchResponse> call, Response<PetSittersearchResponse> response) {
                 if (response.code() == 200) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     PetSittersearchResponse petSittersearchResponse = response.body();
                     Log.e("searchresponse", new GsonBuilder().create().toJson(response));
                     for (int i = 0; i < petSittersearchResponse.getResponse().size(); i++) {
@@ -617,7 +617,7 @@ public class PetSetter extends AppCompatActivity {
 
                 } else
                     resultdata.setVisibility(View.VISIBLE);
-                pDialog.hide();
+                pDialog.dismiss();
             }
 
             @Override
@@ -625,7 +625,7 @@ public class PetSetter extends AppCompatActivity {
 
                 Log.e("ssdfsdfsdfsdv", "onFailure: " + t);
                 Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
-                pDialog.hide();
+                pDialog.dismiss();
 
             }
 

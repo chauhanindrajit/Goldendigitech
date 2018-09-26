@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                 LoginResponse loginResponse = response.body();
                 Log.e(TAG, "onResponse: " + new GsonBuilder().create().toJson(loginResponse));
                 if (response.code() == 200) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     assert loginResponse != null;
                     Utils.saveUserPreference(LoginActivity.this, Constants.FIRST_NAME, loginResponse.getFullName());
                     Utils.saveUserPreference(LoginActivity.this, Constants.USER_NAME, loginResponse.getEmail());
@@ -151,13 +151,13 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     Utils.customMessage(LoginActivity.this, "Login Successfully");
                 } else if (response.code() == 404) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(LoginActivity.this, "Please check email id and password.!!");
                 } else if (response.code() == 400) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(LoginActivity.this, "Please check email id and password.!!");
                 } else if (response.code() == 500) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(LoginActivity.this, "Internal server error.!!");
                 }
             }
@@ -165,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                 Utils.customMessage(LoginActivity.this, t.getMessage());
-                pDialog.hide();
+                pDialog.dismiss();
             }
         });
 

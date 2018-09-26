@@ -78,6 +78,7 @@ public class Categeory extends AppCompatActivity {
         setContentView(R.layout.activity_categeory);
         Utils.setExplodTransition(this);
         catname = (TextView) findViewById(R.id.categeoryName);
+
         toolbar = findViewById(R.id.toolbar);
         arrSubCateogry = new ArrayList<>();
         Adddata = new ArrayList<>();
@@ -143,9 +144,9 @@ public class Categeory extends AppCompatActivity {
         registrationResponseCall.enqueue(new Callback<RegistrationResponse>() {
             @Override
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     RegistrationResponse registrationResponse = response.body();
                     Log.e("summmm", new GsonBuilder().create().toJson(response));
                     List<List<RegistrationResponse.ResponseBean>> dataList = Collections.singletonList(registrationResponse.getResponse());
@@ -189,7 +190,7 @@ public class Categeory extends AppCompatActivity {
         subcategoryResponseCall.enqueue(new Callback<SubcategoryResponse>() {
             @Override
             public void onResponse(Call<SubcategoryResponse> call, Response<SubcategoryResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     SubcategoryResponse subcategoryResponse = response.body();
                     Log.e("subcccccc", new GsonBuilder().create().toJson(response));
@@ -199,7 +200,7 @@ public class Categeory extends AppCompatActivity {
 
                         subcategorySingalton.setSubCategoryName(subcategoryResponse.getResponse().get(i).getCategosryName());
 
-                        pDialog.hide();
+                        pDialog.dismiss();
                     }
                 }
             }
@@ -239,7 +240,7 @@ public class Categeory extends AppCompatActivity {
                 Log.e(TAG, "onResponse code: " + response.code());
                 if (response.code() == 200) {
                     if (getCartResponse.getStatus() == 200) {
-                       // pDialog.hide();
+                       // pDialog.dismiss();
                         // ESPreferences.SSP().putLong(CART_COUNT, Long.valueOf(getCartResponse.getResponse().size()));
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Categeory.this);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -257,12 +258,12 @@ public class Categeory extends AppCompatActivity {
                 } else {
                     Utils.customMessage(Categeory.this, "Something went wrong.");
                 }
-                //pDialog.hide();
+                //pDialog.dismiss();
             }}
 
             @Override
             public void onFailure(Call<GetCartResponse> call, Throwable t) {
-               // pDialog.hide();
+               // pDialog.dismiss();
                 Utils.customMessage(Categeory.this, "Something went wrong.");
             }
         });

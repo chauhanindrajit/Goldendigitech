@@ -416,7 +416,7 @@ public class PetWalking extends AppCompatActivity {
         petWalkingResponseCall.enqueue(new Callback<PetWalkingResponse>() {
             @Override
             public void onResponse(Call<PetWalkingResponse> call, Response<PetWalkingResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     PetWalkingResponse petWalkingResponse = response.body();
                     Log.e("walking", new GsonBuilder().create().toJson(response));
@@ -453,7 +453,7 @@ public class PetWalking extends AppCompatActivity {
                     }
 
                 } else if (response.code() == 404) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(PetWalking.this, "Sorry no data found.!!");
                 }
             }
@@ -480,7 +480,7 @@ public class PetWalking extends AppCompatActivity {
             @Override
             public void onResponse(Call<WalkingsearchResponse> call, Response<WalkingsearchResponse> response) {
                 if (response.code() == 200) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     WalkingsearchResponse petSittersearchResponse = response.body();
                     Log.e("searchresponse", new GsonBuilder().create().toJson(response));
                     for (int i = 0; i < petSittersearchResponse.getResponse().size(); i++) {
@@ -513,7 +513,7 @@ public class PetWalking extends AppCompatActivity {
 
                 } else
 
-                    pDialog.hide();
+                    pDialog.dismiss();
             }
 
             @Override
@@ -521,7 +521,7 @@ public class PetWalking extends AppCompatActivity {
 
                 Log.e("ssdfsdfsdfsdv", "onFailure: " + t);
                 Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
-                pDialog.hide();
+                pDialog.dismiss();
 
             }
 

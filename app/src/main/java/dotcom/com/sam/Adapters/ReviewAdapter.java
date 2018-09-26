@@ -151,12 +151,12 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                         Log.e(TAG, "onResponse code: " + response.code());
                         if (response.code() == 200) {
                             manageInterface.manageCart(true);
-                            pDialog.hide();
+                            pDialog.dismiss();
                         } else if (response.code() == 503) {
-                            pDialog.hide();
+                            pDialog.dismiss();
                             Utils.customMessage(mContext, "Service Unavailable \nOur server is currently unavailable or down for maintenance. Please try again in a while.");
                         } else {
-                            pDialog.hide();
+                            pDialog.dismiss();
                             Utils.customMessage(mContext, "Something went wrong.");
                         }
 
@@ -165,7 +165,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
                     @Override
                     public void onFailure(Call<IncrDecResponse> call, Throwable t) {
-                        pDialog.hide();
+                        pDialog.dismiss();
                     }
                 });
 
@@ -206,12 +206,12 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                                 if (response.code() == 200) {
                                     //Utils.customMessage(mContext, "Added into cart");
                                     manageInterface.manageCart(true);
-                                    pDialog.hide();
+                                    pDialog.dismiss();
                                 } else if (response.code() == 503) {
-                                    pDialog.hide();
+                                    pDialog.dismiss();
                                     Utils.customMessage(mContext, "Service Unavailable \nOur server is currently unavailable or down for maintenance. Please try again in a while.");
                                 } else {
-                                    pDialog.hide();
+                                    pDialog.dismiss();
                                     Utils.customMessage(mContext, "Something went wrong.");
                                 }
 
@@ -220,7 +220,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
                             @Override
                             public void onFailure(Call<IncrDecResponse> call, Throwable t) {
-                                pDialog.hide();
+                                pDialog.dismiss();
                             }
                         });
                     }
@@ -275,12 +275,12 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                             notifyDataSetChanged();
                             //Utils.customMessage(mContext, "Added into cart");
                             // manageInterface.manageCart(true);
-                            pDialog.hide();
+                            pDialog.dismiss();
                         } else if (response.code() == 400) {
-                            pDialog.hide();
+                            pDialog.dismiss();
                             Utils.customMessage(mContext, "Service Unavailable \nOur server is currently unavailable or down for maintenance. Please try again in a while.");
                         } else {
-                            pDialog.hide();
+                            pDialog.dismiss();
                             Utils.customMessage(mContext, "Something went wrong.");
                         }
 
@@ -289,7 +289,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
                     @Override
                     public void onFailure(Call<RemovecartResponse> call, Throwable t) {
-                        pDialog.hide();
+                        pDialog.dismiss();
                     }
                 });
             }

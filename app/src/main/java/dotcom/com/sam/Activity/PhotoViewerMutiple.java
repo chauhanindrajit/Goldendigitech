@@ -82,7 +82,7 @@ public class PhotoViewerMutiple extends AppCompatActivity {
         photoResponseCall.enqueue(new Callback<PhotoResponse>() {
             @Override
             public void onResponse(Call<PhotoResponse> call, Response<PhotoResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (url.size() > 0) {
                     url.clear();
                 }
@@ -118,7 +118,7 @@ public class PhotoViewerMutiple extends AppCompatActivity {
                         }
                     }
                 } else if (response.code() == 404) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(PhotoViewerMutiple.this, "Sorry no data found.!!");
                 }
             }

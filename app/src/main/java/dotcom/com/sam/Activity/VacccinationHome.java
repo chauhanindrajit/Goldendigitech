@@ -278,7 +278,7 @@ public class VacccinationHome extends AppCompatActivity {
         vaccinationResponseCall.enqueue(new Callback<VaccinationResponse>() {
             @Override
             public void onResponse(Call<VaccinationResponse> call, Response<VaccinationResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     VaccinationResponse vaccinationResponse = response.body();
                     Log.e("Vetlist", new GsonBuilder().create().toJson(response));

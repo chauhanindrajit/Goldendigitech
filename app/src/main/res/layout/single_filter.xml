@@ -6,7 +6,6 @@
 
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
-        android:id="@+id/child"
         android:clipToPadding="false"
         android:layout_width="250dp"
         android:layout_height="match_parent"

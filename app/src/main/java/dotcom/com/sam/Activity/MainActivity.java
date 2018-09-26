@@ -209,9 +209,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             pbutton.setTextColor(Color.rgb(30, 144, 255));
             Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
             nbutton.setTextColor(Color.rgb(30, 144, 255));
-        } else if (id == R.id.my_wishlist) {
-            startActivity(new Intent(MainActivity.this, WishlistActivity.class));
-        } else if (id == R.id.my_cart) {
+        }  else if (id == R.id.my_cart) {
             startActivity(new Intent(MainActivity.this, ReviewOrderActivity.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -448,7 +446,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         newArrivalResponseCall.enqueue(new Callback<NewArrivalResponse>() {
             @Override
             public void onResponse(Call<NewArrivalResponse> call, Response<NewArrivalResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     NewArrivalResponse newArrivalResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));

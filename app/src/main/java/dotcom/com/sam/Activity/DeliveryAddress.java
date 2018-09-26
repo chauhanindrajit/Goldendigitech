@@ -168,12 +168,12 @@ public class DeliveryAddress extends AppCompatActivity {
                     address.setText(getAddressResponse.getAddress());
                     phoneno.setText(getAddressResponse.getMobNo());
                 }
-                pDialog.hide();
+                pDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<AddressResponse> call, Throwable t) {
-                pDialog.hide();
+                pDialog.dismiss();
             }
         });
     }
@@ -200,12 +200,12 @@ public class DeliveryAddress extends AppCompatActivity {
                 if (response.code() == 200) {
                     Utils.moveNextWithAnimation(DeliveryAddress.this, PaymentPage.class);
                 }
-                pDialog.hide();
+                pDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<AddnewAddressResponse> call, Throwable t) {
-                pDialog.hide();
+                pDialog.dismiss();
             }
         });
 

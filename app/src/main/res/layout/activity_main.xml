@@ -233,7 +233,6 @@
             android:layout_width="match_parent"
             android:layout_height="100dp">
             <Button
-                android:id="@+id/btn_photos"
                 android:background="@drawable/ripple_pet_relocation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

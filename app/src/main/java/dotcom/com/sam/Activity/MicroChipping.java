@@ -265,7 +265,7 @@ public class MicroChipping extends AppCompatActivity {
         microChippingResposeCall.enqueue(new Callback<MicroChippingRespose>() {
             @Override
             public void onResponse(Call<MicroChippingRespose> call, Response<MicroChippingRespose> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     MicroChippingRespose microChippingRespose = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));

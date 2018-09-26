@@ -43,7 +43,7 @@ public class EDoctor extends AppCompatActivity {
         mWebview.getSettings().setJavaScriptEnabled(true);
 
         mWebview.loadUrl("http://worldindia.in/sam1/e-doctor.html");
-//        pDialog.hide();
+//        pDialog.dismiss();
         setContentView(mWebview);
     }
 }

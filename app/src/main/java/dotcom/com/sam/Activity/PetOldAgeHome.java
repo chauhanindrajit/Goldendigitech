@@ -264,7 +264,7 @@ public class PetOldAgeHome extends AppCompatActivity {
         oldPetResponseCall.enqueue(new Callback<OldPetResponse>() {
             @Override
             public void onResponse(Call<OldPetResponse> call, Response<OldPetResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     OldPetResponse oldPetResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));

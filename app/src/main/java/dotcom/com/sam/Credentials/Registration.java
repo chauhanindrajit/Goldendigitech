@@ -139,32 +139,32 @@ public class Registration extends AppCompatActivity {
                 Log.e(TAG, "onResponse: " + new GsonBuilder().create().toJson(registtnResponsemain));
                 if (response.code() == 200) {
 
-                        pDialog.hide();
+                        pDialog.dismiss();
                         startActivity(new Intent(Registration.this, LoginActivity.class));
                     Utils.customMessage(Registration.this, "Register Successful");
                         finish();
 //                        else {
-//                        pDialog.hide();
+//                        pDialog.dismiss();
 //                        Toast.makeText(Registration.this, registtnResponsemain.getMessege(), Toast.LENGTH_SHORT).show();
 //                        }
                 } else if (response.code() == 400) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(Registration.this, "Something went wrong.");
                 } else if (response.code() == 404) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(Registration.this, "There is problem to register.");
                 } else if (response.code() == 409) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(Registration.this, "Email id already exists.");
                 } else if (response.code() == 500) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(Registration.this, "Internal server error.");
                 }
             }
 
             @Override
             public void onFailure(Call<RegisttnResponsemain> call, Throwable t) {
-                pDialog.hide();
+                pDialog.dismiss();
                 Utils.customMessage(Registration.this, t.getMessage());
             }
 

@@ -43,9 +43,7 @@ public class PhotoMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_main);
-
         initView();
-
         tripSingaltonss = new ArrayList<>();
         tripSingaltonss.clear();
 
@@ -124,7 +122,7 @@ public class PhotoMain extends AppCompatActivity {
         photoResponseCall.enqueue(new Callback<PhotoResponse>() {
             @Override
             public void onResponse(Call<PhotoResponse> call, Response<PhotoResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     PhotoResponse photoResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));
@@ -150,7 +148,7 @@ public class PhotoMain extends AppCompatActivity {
                     }
 
                 } else if (response.code() == 404) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(PhotoMain.this, "Sorry no data found.!!");
                 }
             }

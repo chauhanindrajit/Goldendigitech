@@ -390,7 +390,7 @@ public class Mating extends AppCompatActivity {
             public void onResponse(Call<MatingResponse> call, Response<MatingResponse> response) {
 
                 if (response.code() == 200) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     MatingResponse matingResponse = response.body();
                     Log.e("Vetlist", new GsonBuilder().create().toJson(response));
                     // initList();
@@ -425,7 +425,7 @@ public class Mating extends AppCompatActivity {
             @Override
             public void onFailure(Call<MatingResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
-                pDialog.hide();
+                pDialog.dismiss();
 
             }
 
@@ -531,7 +531,7 @@ public class Mating extends AppCompatActivity {
                 if (response.code() == 200) {
                     tripSingaltonss.clear();
                     tripSingaltonsas.clear();
-                    pDialog.hide();
+                    pDialog.dismiss();
                     MatingsearchResponse matingsearchResponse = response.body();
                     Log.e("Vetlist", new GsonBuilder().create().toJson(response));
                     for (int i = 0; i < matingsearchResponse.getResponse().size(); i++) {
@@ -557,13 +557,13 @@ public class Mating extends AppCompatActivity {
                         // initList();
                         //Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
                     }
-                } else pDialog.hide();
+                } else pDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<MatingsearchResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
-                pDialog.hide();
+                pDialog.dismiss();
 
             }
 

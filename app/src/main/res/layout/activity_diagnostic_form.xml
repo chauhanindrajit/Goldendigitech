@@ -158,7 +158,6 @@
                         android:layout_marginTop="10dp"
                         android:gravity="center"
                         android:background="@drawable/categeory_shpe"
-                        android:id="@+id/usernameWrapper"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:layout_width="match_parent"

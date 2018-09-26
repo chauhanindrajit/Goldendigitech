@@ -79,7 +79,7 @@ RecyclerView recyclerView;
         adoptpetResponseCall.enqueue(new Callback<AdoptpetResponse>() {
             @Override
             public void onResponse(Call<AdoptpetResponse> call, Response<AdoptpetResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     AdoptpetResponse adoptpetResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));

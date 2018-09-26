@@ -269,7 +269,7 @@ public class DogGrooming extends AppCompatActivity {
         diagonsticResponseCall.enqueue(new Callback<DiagonsticResponse>() {
             @Override
             public void onResponse(Call<DiagonsticResponse> call, Response<DiagonsticResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     DiagonsticResponse diagonsticResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));

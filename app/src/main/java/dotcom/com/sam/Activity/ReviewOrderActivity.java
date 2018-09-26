@@ -137,24 +137,24 @@ public class ReviewOrderActivity extends AppCompatActivity {
                                             editor.apply();
                                             ProductActivity.conting.setText(cont);
                                             ProductDatailAcitvity.conting.setText(cont);
-                                            pDialog.hide();
+                                            pDialog.dismiss();
                                         } else if (response.code() == 500) {
-                                            pDialog.hide();
+                                            pDialog.dismiss();
                                             Utils.customMessage(ReviewOrderActivity.this, "Service Unavailable \nOur server is currently unavailable or down for maintenance. Please try again in a while.");
                                         } else {
-                                            pDialog.hide();
+                                            pDialog.dismiss();
                                             Utils.customMessage(ReviewOrderActivity.this, "Something went wrong.");
                                         }
                                     }
 
                                     @Override
                                     public void onFailure(Call<DeleteallResponse> call, Throwable t) {
-                                        pDialog.hide();
+                                        pDialog.dismiss();
                                     }
                                 });
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                         public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
                 });
@@ -202,7 +202,7 @@ public class ReviewOrderActivity extends AppCompatActivity {
                 Log.e(TAG, "onResponse code: " + response.code());
                 if (response.code() == 200) {
                     if (getCartResponse.getStatus() == 200) {
-                        pDialog.hide();
+                        pDialog.dismiss();
                         Double total = 0.0;
                         if (placeOrderService.getTbl_orders().size() > 0) {
                             placeOrderService.getTbl_orders().clear();
@@ -251,12 +251,12 @@ public class ReviewOrderActivity extends AppCompatActivity {
                 } else {
                     Utils.customMessage(ReviewOrderActivity.this, "Something went wrong.");
                 }
-                pDialog.hide();
+                pDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<GetCartResponse> call, Throwable t) {
-                pDialog.hide();
+                pDialog.dismiss();
                 Utils.customMessage(ReviewOrderActivity.this, "Something went wrong.");
             }
         });

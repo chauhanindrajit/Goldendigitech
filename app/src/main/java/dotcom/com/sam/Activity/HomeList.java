@@ -275,7 +275,7 @@ public class HomeList extends AppCompatActivity {
         homeResposeCall.enqueue(new Callback<HomeRespose>() {
             @Override
             public void onResponse(Call<HomeRespose> call, Response<HomeRespose> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     HomeRespose homeRespose = response.body();
                     Log.e("Homelist", new GsonBuilder().create().toJson(response));

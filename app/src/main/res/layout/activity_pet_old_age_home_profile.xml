@@ -75,7 +75,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <hyogeun.github.com.colorratingbarlib.ColorRatingBar
-                            android:id="@+id/MyRating"
                             style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"

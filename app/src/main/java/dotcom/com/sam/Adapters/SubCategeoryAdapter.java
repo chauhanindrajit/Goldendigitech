@@ -33,16 +33,15 @@ public class SubCategeoryAdapter extends RecyclerView.Adapter<SubCategeoryAdapte
     int id;
     ArrayList<String> stringList = new ArrayList<String>();
     public static ArrayList<String> arrSubCateogry1;
-    public  static ArrayList<RegistrationResponse.ResponseBean.SubCategoriesBean>subCategoriesBeans;
+    public static ArrayList<RegistrationResponse.ResponseBean.SubCategoriesBean> subCategoriesBeans;
     List<RegistrationResponse.ResponseBean.SubCategoriesBean> arrTemp;
-    public SubCategeoryAdapter(Context context, ArrayList<RegistrationResponse.ResponseBean.SubCategoriesBean> arrTemp)
-    {
-        //this.dataBeen=response;
-        this.context=context;
-        this.arrTemp = (ArrayList<RegistrationResponse.ResponseBean.SubCategoriesBean>)arrTemp;
-        this.arrSubCateogry1 =  arrSubCateogry1;
-    }
 
+    public SubCategeoryAdapter(Context context, ArrayList<RegistrationResponse.ResponseBean.SubCategoriesBean> arrTemp) {
+        //this.dataBeen=response;
+        this.context = context;
+        this.arrTemp = (ArrayList<RegistrationResponse.ResponseBean.SubCategoriesBean>) arrTemp;
+        this.arrSubCateogry1 = arrSubCateogry1;
+    }
 
 
     @Override
@@ -75,7 +74,7 @@ public class SubCategeoryAdapter extends RecyclerView.Adapter<SubCategeoryAdapte
                     SubcategorySingalton.getInstance().setSubCategoryName(arrTemp.get(position).getSubCategoryName());
                     CategorySingalton.getInstance().setCat(null);
                     CategorySingalton.getInstance().setSubcateID(arrTemp.get(position).getC_Id());
-                    Utils.moveNextWithAnimation(context,ProductActivity.class);
+                    Utils.moveNextWithAnimation(context, ProductActivity.class);
                 }
             });
             if (arrTemp.get(position).getImage() != null) {
@@ -98,7 +97,8 @@ public class SubCategeoryAdapter extends RecyclerView.Adapter<SubCategeoryAdapte
         RecyclerView recyclerView;
         CardView cardView;
         TextView categeoryName, subcat;
-ImageView imageView;
+        ImageView imageView;
+
         public ViewHolder(View itemView) {
             super(itemView);
 

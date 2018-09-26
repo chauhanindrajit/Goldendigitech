@@ -159,12 +159,12 @@ public class ResetPassword extends AppCompatActivity {
                     emails.setText("");
                     cPassword.setText("");
                 }
-                pDialog.hide();
+                pDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<ChangePassResponse> call, Throwable t) {
-                pDialog.hide();
+                pDialog.dismiss();
             }
         });
     }

@@ -169,7 +169,6 @@
                             android:src="@drawable/ic_access_time_blue_24dp" />
 
                         <TextView
-                            android:id="@+id/sa"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"

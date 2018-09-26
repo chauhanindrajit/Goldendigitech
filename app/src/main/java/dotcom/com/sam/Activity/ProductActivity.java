@@ -199,7 +199,7 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
         productResponseCall.enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (stringList.size() > 0) {
                     stringList.clear();
                 }
@@ -265,7 +265,7 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
 
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
-                pDialog.hide();
+                pDialog.dismiss();
                 Log.e("Failed", "onFailure: " + t);
                 Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
             }
@@ -342,7 +342,7 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
         registrationResponseCall.enqueue(new Callback<RegistrationResponse>() {
             @Override
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     RegistrationResponse registrationResponse = response.body();
                     Log.e("summmm", new GsonBuilder().create().toJson(response));

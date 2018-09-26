@@ -71,6 +71,7 @@ public class BuyPetList extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         filterLaout = (CardView)findViewById(R.id.footer_filter);
         toolbar.setTitle("Buy Pet");
+
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -123,9 +124,9 @@ public class BuyPetList extends AppCompatActivity {
                 buypetfilterResponseCall.enqueue(new Callback<BuypetfilterResponse>() {
                     @Override
                     public void onResponse(Call<BuypetfilterResponse> call, Response<BuypetfilterResponse> response) {
-                        pDialog.hide();
+                        pDialog.dismiss();
                         if (response.code() == 200) {
-                            pDialog.hide();
+                            pDialog.dismiss();
                             BuypetfilterResponse buypetfilterResponse = response.body();
                             Log.e("dioglist", new GsonBuilder().create().toJson(response));
                             for (int i = 0; i < buypetfilterResponse.getResponse().size(); i++) {
@@ -141,7 +142,7 @@ public class BuyPetList extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<BuypetfilterResponse> call, Throwable t) {
                         Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
-                        pDialog.hide();
+                        pDialog.dismiss();
                     }
 
 
@@ -169,9 +170,9 @@ public class BuyPetList extends AppCompatActivity {
         buypetResponseCall.enqueue(new Callback<BuypetResponse>() {
             @Override
             public void onResponse(Call<BuypetResponse> call, Response<BuypetResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     BuypetResponse buypetResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));
                     for (int i = 0; i < buypetResponse.getResponse().size(); i++) {
@@ -205,7 +206,7 @@ public class BuyPetList extends AppCompatActivity {
             @Override
             public void onFailure(Call<BuypetResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
-                pDialog.hide();
+                pDialog.dismiss();
             }
 
 
@@ -224,13 +225,13 @@ public class BuyPetList extends AppCompatActivity {
         buypetfilterResponseCall.enqueue(new Callback<BuypetfilterResponse>() {
             @Override
             public void onResponse(Call<BuypetfilterResponse> call, Response<BuypetfilterResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     BuypetfilterResponse buypetfilterResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));
                     for (int i = 0; i < buypetfilterResponse.getResponse().size(); i++) {
-                        pDialog.hide();
+                        pDialog.dismiss();
 
                         //Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
                     }
@@ -240,7 +241,7 @@ public class BuyPetList extends AppCompatActivity {
             @Override
             public void onFailure(Call<BuypetfilterResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
-                pDialog.hide();
+                pDialog.dismiss();
             }
 
 

@@ -23,7 +23,6 @@
                 android:layout_marginRight="15dp"
                 android:gravity="center"
                 android:background="@drawable/categeory_shpe"
-                android:id="@+id/usernameWrapper"
                 android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

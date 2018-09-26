@@ -334,7 +334,7 @@ public class VetList extends AppCompatActivity implements AdapterView.OnItemClic
         vetNearMeResponseCall.enqueue(new Callback<VetNearMeResponse>() {
             @Override
             public void onResponse(Call<VetNearMeResponse> call, Response<VetNearMeResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     VetNearMeResponse vetNearMeResponse = response.body();
                     Log.e("Vetlist", new GsonBuilder().create().toJson(response));

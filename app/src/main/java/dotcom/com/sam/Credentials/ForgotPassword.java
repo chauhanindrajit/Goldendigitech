@@ -117,12 +117,12 @@ public class ForgotPassword extends AppCompatActivity {
                 } else {
                     Utils.customMessage(ForgotPassword.this, "Something is wroung");
                 }
-                pDialog.hide();
+                pDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<ForgotPassResponse> call, Throwable t) {
-                pDialog.hide();
+                pDialog.dismiss();
             }
         });
     }

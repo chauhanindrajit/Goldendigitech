@@ -31,20 +31,19 @@ public class CatregeoryAdapter extends RecyclerView.Adapter<CatregeoryAdapter.Vi
     ArrayList<RegistrationResponse.ResponseBean> arrTemp = new ArrayList<>();
     ArrayList<String> stringList = new ArrayList<>();
     private RecyclerView.LayoutManager variantLayoutManager;
-    public  static List<RegistrationResponse.ResponseBean.SubCategoriesBean>subCategoriesBeans;
+    public static List<RegistrationResponse.ResponseBean.SubCategoriesBean> subCategoriesBeans;
     //public static ArrayList<RegistrationResponse.ResponseBean.SubCategoriesBean> arrSubCateogry1;
     public ArrayList<RegistrationResponse.ResponseBean> arrSubCateogry1;
     public static List<RegistrationResponse.ResponseBean> arrSubCateogry;
 
 
-    public CatregeoryAdapter(Categeory context, List<RegistrationResponse.ResponseBean> arrSubCateogry,ArrayList<String>stringList ){
-        this.stringList=stringList;
-        this.context=context;
-        this.arrTemp = (ArrayList<RegistrationResponse.ResponseBean>)arrTemp;
+    public CatregeoryAdapter(Categeory context, List<RegistrationResponse.ResponseBean> arrSubCateogry, ArrayList<String> stringList) {
+        this.stringList = stringList;
+        this.context = context;
+        this.arrTemp = (ArrayList<RegistrationResponse.ResponseBean>) arrTemp;
         this.arrSubCateogry = (ArrayList<RegistrationResponse.ResponseBean>) arrSubCateogry;
         // this.arrSubCateogry1 = arrSubCateogry1;
     }
-
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -54,8 +53,8 @@ public class CatregeoryAdapter extends RecyclerView.Adapter<CatregeoryAdapter.Vi
         private ViewHolder(View convertView) {
             super(convertView);
 
-            recyclerView=(RecyclerView) itemView.findViewById(R.id.categeory);
-            categeoryName=(TextView)itemView.findViewById(R.id.categeoryName);
+            recyclerView = (RecyclerView) itemView.findViewById(R.id.categeory);
+            categeoryName = (TextView) itemView.findViewById(R.id.categeoryName);
 
         }
     }
@@ -64,10 +63,10 @@ public class CatregeoryAdapter extends RecyclerView.Adapter<CatregeoryAdapter.Vi
     @Override
     public ViewHolderIN onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.single_categeory_lyout,parent,false);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.single_categeory_lyout, parent, false);
 
-        ViewHolderIN viewHolderIN=new ViewHolderIN(view);
+        ViewHolderIN viewHolderIN = new ViewHolderIN(view);
 
         return viewHolderIN;
 
@@ -78,8 +77,8 @@ public class CatregeoryAdapter extends RecyclerView.Adapter<CatregeoryAdapter.Vi
     public void onBindViewHolder(ViewHolderIN holder, final int position) {
         ArrayList res = new ArrayList();
         arrSubCateogry1 = res;
-       // CategorySingalton.getInstance().setSubname(arrSubCateogry.get(position).getSubname());
-        SubCategeoryAdapter subCatregeoryAdapterr = new SubCategeoryAdapter(context ,arrSubCateogry.get(position).getSubCategories());
+        // CategorySingalton.getInstance().setSubname(arrSubCateogry.get(position).getSubname());
+        SubCategeoryAdapter subCatregeoryAdapterr = new SubCategeoryAdapter(context, arrSubCateogry.get(position).getSubCategories());
 //        notifyDataSetChanged();
 
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -102,31 +101,35 @@ public class CatregeoryAdapter extends RecyclerView.Adapter<CatregeoryAdapter.Vi
             public void onClick(View v) {
                     /*Intent intent=new Intent(context, ProductActivity.class);
                     context.startActivity(intent);
-*/                   CategorySingalton.getInstance().setCategosryName(arrSubCateogry.get(position).getCategosryName());
-                    stringList.add(CategorySingalton.getInstance().getCategosryName());
-                    CategorySingalton.getInstance().setCat(arrSubCateogry.get(position).getCategosryName());
-                    CategorySingalton.getInstance().setCateID(arrSubCateogry.get(position).getC_Id());
-                    Utils.moveNextWithAnimation(context,ProductActivity.class);
+*/
+                CategorySingalton.getInstance().setCategosryName(arrSubCateogry.get(position).getCategosryName());
+                stringList.add(CategorySingalton.getInstance().getCategosryName());
+                CategorySingalton.getInstance().setCat(arrSubCateogry.get(position).getCategosryName());
+                CategorySingalton.getInstance().setCateID(arrSubCateogry.get(position).getC_Id());
+                Utils.moveNextWithAnimation(context, ProductActivity.class);
 
 
             }
         });
 
     }
+
     @Override
     public int getItemCount() {
         return arrSubCateogry.size();
     }
+
     public class ViewHolderIN extends RecyclerView.ViewHolder {
         RecyclerView recyclerView;
         TextView view_all_txt;
         TextView categeoryName;
+
         public ViewHolderIN(View itemView) {
             super(itemView);
 
-            recyclerView=(RecyclerView) itemView.findViewById(R.id.categeory);
-            categeoryName=(TextView)itemView.findViewById(R.id.categeoryName);
-            view_all_txt=(TextView) itemView.findViewById(R.id.txt_view);
+            recyclerView = (RecyclerView) itemView.findViewById(R.id.categeory);
+            categeoryName = (TextView) itemView.findViewById(R.id.categeoryName);
+            view_all_txt = (TextView) itemView.findViewById(R.id.txt_view);
 
 
 //            view_all_txt.setOnClickListener(new View.OnClickListener() {
@@ -147,9 +150,6 @@ public class CatregeoryAdapter extends RecyclerView.Adapter<CatregeoryAdapter.Vi
 //            });
         }
     }
-
-
-
 
 
 }

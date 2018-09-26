@@ -110,12 +110,12 @@ public class PaymentPage extends AppCompatActivity {
                 } else {
                     Utils.customMessage(PaymentPage.this, "Something went wrong.");
                 }
-                pDialog.hide();
+                pDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<PaymentResponse> call, Throwable t) {
-                pDialog.hide();
+                pDialog.dismiss();
                 Utils.customMessage(PaymentPage.this, "Something went wrong.");
             }
         });

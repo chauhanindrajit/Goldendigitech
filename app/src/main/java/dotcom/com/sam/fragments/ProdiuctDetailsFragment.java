@@ -230,13 +230,13 @@ public class ProdiuctDetailsFragment extends Fragment {
                                 Toast.makeText(getContext(), "Item added to cart.", Toast.LENGTH_SHORT).show();
                                 ProductActivity.notificationCountCart++;
                                 NotificationCountSetClass.setNotifyCount(ProductActivity.notificationCountCart);
-                                pDialog.hide();
+                                pDialog.dismiss();
 
                             } else if (response.code() == 400) {
-                                pDialog.hide();
+                                pDialog.dismiss();
                                 Utils.customMessage(getContext(), "Service Unavailable \nOur server is currently unavailable or down for maintenance. Please try again in a while.");
                             } else {
-                                pDialog.hide();
+                                pDialog.dismiss();
                                 // btnaddtocart.setVisibility(View.GONE);
                                 //  addedCart.setVisibility(View.VISIBLE);
                                 Utils.customMessage(getContext(), "Something went wrong.");
@@ -247,7 +247,7 @@ public class ProdiuctDetailsFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<ManageCartResponse> call, Throwable t) {
-                            pDialog.hide();
+                            pDialog.dismiss();
                         }
                     });
 
@@ -309,13 +309,13 @@ public class ProdiuctDetailsFragment extends Fragment {
                         btnaddtocart.setVisibility(View.GONE);
                         addedCart.setVisibility(View.VISIBLE);
                     }
-                    pDialog.hide();
+                    pDialog.dismiss();
 
                 } else if (response.code() == 400) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(getContext(), "Service Unavailable \nOur server is currently unavailable or down for maintenance. Please try again in a while.");
                 } else {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     // btnaddtocart.setVisibility(View.GONE);
                     //  addedCart.setVisibility(View.VISIBLE);
                     Utils.customMessage(getContext(), "Something went wrong.");
@@ -326,7 +326,7 @@ public class ProdiuctDetailsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ManageCartResponse> call, Throwable t) {
-                pDialog.hide();
+                pDialog.dismiss();
             }
         });
 

@@ -235,7 +235,7 @@ public class ProductFragment extends Fragment {
         productFilterdataResponseCall.enqueue(new Callback<ProductFilterdataResponse>() {
             @Override
             public void onResponse(Call<ProductFilterdataResponse> call, Response<ProductFilterdataResponse> response) {
-                pDialog.hide();
+                pDialog.dismiss();
                 if (response.code() == 200) {
                     API = false;
                     ProductFilterdataResponse productFilterdataResponse = response.body();
@@ -255,19 +255,19 @@ public class ProductFragment extends Fragment {
                     } else if (productFilterdataResponse.getResponse().size() == 0) {
                         setRecyclerviewProduct();
                     }
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(getActivity(), "Filtered Successfully");
                 } else if (response.code() == 400) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(getActivity(), "Something went wrong.");
                 } else if (response.code() == 404) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(getActivity(), "There is problem to filter.");
                 } else if (response.code() == 409) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(getActivity(), "Email id already exists.");
                 } else if (response.code() == 500) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(getActivity(), "Internal server error.");
                 }
             }
@@ -275,7 +275,7 @@ public class ProductFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ProductFilterdataResponse> call, Throwable t) {
-                pDialog.hide();
+                pDialog.dismiss();
                 Log.e("Failed", "onFailure: " + t);
                 Toast.makeText(getContext(), "Failedd", Toast.LENGTH_LONG).show();
             }

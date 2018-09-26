@@ -173,28 +173,28 @@ public class ServicesLastPage extends AppCompatActivity {
                 ServiceLastPageResponse serviceLastPageResponse = response.body();
                 Log.e(TAG, "onResponse: " + new GsonBuilder().create().toJson(serviceLastPageResponse));
                 if (response.code() == 200) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     //  startActivity(new Intent(ServicesLastPage.this, LoginActivity.class));
                     Utils.customMessage(ServicesLastPage.this, "Thank You.");
                     finish();
                 } else if (response.code() == 400) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(ServicesLastPage.this, "Something went wrong.");
                 } else if (response.code() == 404) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(ServicesLastPage.this, "There is problem to register.");
                 } else if (response.code() == 409) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(ServicesLastPage.this, "Email id already exists.");
                 } else if (response.code() == 500) {
-                    pDialog.hide();
+                    pDialog.dismiss();
                     Utils.customMessage(ServicesLastPage.this, "Internal server error.");
                 }
             }
 
             @Override
             public void onFailure(Call<ServiceLastPageResponse> call, Throwable t) {
-                pDialog.hide();
+                pDialog.dismiss();
                 Utils.customMessage(ServicesLastPage.this, t.getMessage());
             }
 
