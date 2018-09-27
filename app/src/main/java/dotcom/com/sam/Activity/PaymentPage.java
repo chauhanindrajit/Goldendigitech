@@ -16,6 +16,7 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.GsonBuilder;
@@ -39,7 +40,8 @@ import static android.content.ContentValues.TAG;
 public class PaymentPage extends AppCompatActivity {
     private RecyclerView reviewRecyclerView;
     private ProgressDialog pDialog;
-    TextView totalfinal, name, shippingadd;
+    LinearLayout savepricelayout;
+    TextView totalfinal, name, shippingadd,savedprice;
     ReviewAdapter.ManageInterface manageInterface;
 
     @Override
@@ -49,6 +51,8 @@ public class PaymentPage extends AppCompatActivity {
         totalfinal = (TextView) findViewById(R.id.totalfinal);
         name = (TextView) findViewById(R.id.name);
         shippingadd = (TextView) findViewById(R.id.shippingadd);
+        savedprice = (TextView) findViewById(R.id.saveprice);
+        savepricelayout = (LinearLayout) findViewById(R.id.savedpagelayout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -89,15 +93,18 @@ public class PaymentPage extends AppCompatActivity {
                 Log.e(TAG, "onResponse: " + new GsonBuilder().create().toJson(response.body()));
                 Log.e(TAG, "onResponse code: " + response.code());
                 if (response.code() == 200) {
-                    if(SingletonClass.getInstance().isNewadd()==true){
-                    if (!(paymentResponse.getShipName().equals("") || paymentResponse.getShippingAddress().equals(""))) {
-                        name.setText(String.valueOf(paymentResponse.getShipName()));
-                        shippingadd.setText(String.valueOf(paymentResponse.getShippingAddress()));
-                    }}
-
-                    else if(SingletonClass.getInstance().isNewadd()==false) {
+                    if (SingletonClass.getInstance().isNewadd() == true) {
+                        if (!(paymentResponse.getShipName().equals("") || paymentResponse.getShippingAddress().equals(""))) {
+                            name.setText(String.valueOf(paymentResponse.getShipName()));
+                            shippingadd.setText(String.valueOf(paymentResponse.getShippingAddress()));
+                        }
+                    } else if (SingletonClass.getInstance().isNewadd() == false) {
                         name.setText(paymentResponse.getFullName());
                         shippingadd.setText(paymentResponse.getAddress());
+                    }
+                    if(!SingletonClass.getInstance().getSavePrice().equals("0")){
+                        savepricelayout.setVisibility(View.VISIBLE);
+                        savedprice.setText(String.valueOf("₹" +SingletonClass.getInstance().getSavePrice()));
                     }
                     PaymentAdapter paymentAdapter = new PaymentAdapter(PaymentPage.this, paymentResponse.getDATALIST(), (PaymentAdapter.ManageInterface) manageInterface);
                     reviewRecyclerView.setAdapter(paymentAdapter);

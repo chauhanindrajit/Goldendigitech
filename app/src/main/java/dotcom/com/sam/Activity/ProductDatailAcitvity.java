@@ -18,6 +18,7 @@ import android.widget.Toast;
 import dotcom.com.sam.R;
 import dotcom.com.sam.SingaltonsClasses.CategorySingalton;
 import dotcom.com.sam.SingaltonsClasses.ProductSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.Utils.Utils;
 import dotcom.com.sam.fragments.ProdiuctDetailsFragment;
 
@@ -70,4 +71,13 @@ public class ProductDatailAcitvity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
+
+
 }

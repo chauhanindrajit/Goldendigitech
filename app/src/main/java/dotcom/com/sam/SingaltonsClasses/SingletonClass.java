@@ -80,6 +80,7 @@ public class SingletonClass {
     private String SRID;
     private String USERID;
     private String FinalPrice;
+    private String SavePrice;
     private int fav;
     private int POSITIONID;
     private boolean isIncart;
@@ -422,5 +423,13 @@ public class SingletonClass {
 
     public void setNewadd(boolean newadd) {
         this.newadd = newadd;
+    }
+
+    public String getSavePrice() {
+        return SavePrice;
+    }
+
+    public void setSavePrice(String savePrice) {
+        SavePrice = savePrice;
     }
 }

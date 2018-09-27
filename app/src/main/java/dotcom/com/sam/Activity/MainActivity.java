@@ -43,6 +43,7 @@ import dotcom.com.sam.Response.AdoptpetResponse;
 import dotcom.com.sam.Response.NewArrivalResponse;
 import dotcom.com.sam.SingaltonsClasses.AdoptaPetSingalton;
 import dotcom.com.sam.SingaltonsClasses.NewArrivalSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.Utils.ESPreferences;
 import dotcom.com.sam.Utils.PhotoMain;
 import dotcom.com.sam.R;
@@ -209,7 +210,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             pbutton.setTextColor(Color.rgb(30, 144, 255));
             Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
             nbutton.setTextColor(Color.rgb(30, 144, 255));
-        }  else if (id == R.id.my_cart) {
+        } else if (id == R.id.my_cart) {
+            SingletonClass.getInstance().setActivityname("Outside");
             startActivity(new Intent(MainActivity.this, ReviewOrderActivity.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

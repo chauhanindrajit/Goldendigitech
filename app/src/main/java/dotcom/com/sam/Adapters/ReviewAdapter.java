@@ -30,6 +30,7 @@ import dotcom.com.sam.Response.GetCartResponse;
 import dotcom.com.sam.Response.IncrDecResponse;
 import dotcom.com.sam.Response.ManageCartResponse;
 import dotcom.com.sam.Response.RemovecartResponse;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.Utils.Constants;
 import dotcom.com.sam.Utils.ESPreferences;
 import dotcom.com.sam.Utils.IOSProgress;
@@ -53,6 +54,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
     private List<GetCartResponse.ResponseBean> responseBeen;
     ManageInterface manageInterface;
     Double total = 0.0;
+    Double saveprice = 0.0;
 
     public ReviewAdapter(Context context, List<GetCartResponse.ResponseBean> size, ManageInterface manageInterface) {
         this.responseBeen = size;
@@ -112,11 +114,13 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         }
         viewHolder.prPrice.setPaintFlags(viewHolder.prPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         total += Double.parseDouble(String.valueOf(responseBeen.get(position).getDiscountPrice())) * responseBeen.get(position).getQTY();
-        viewHolder.discountprice.setText(String.valueOf(responseBeen.get(position).getDiscountPrice()));
+        viewHolder.discountprice.setText(String.valueOf(responseBeen.get(position).getDiscountPrice() * responseBeen.get(position).getQTY()));
         viewHolder.discount.setText(String.valueOf("₹" + responseBeen.get(position).getDiscount() + " off"));
         viewHolder.qty.setText(String.valueOf(responseBeen.get(position).getQTY()));
         viewHolder.prPrice.setText(String.format("₹%s", Double.parseDouble(String.valueOf(responseBeen.get(position).getPrice())) * responseBeen.get(position).getQTY()));
         viewHolder.qty.setText(String.valueOf(responseBeen.get(position).getQTY()));
+        saveprice += Double.parseDouble(String.valueOf(responseBeen.get(position).getPrice() * responseBeen.get(position).getQTY()));
+        SingletonClass.getInstance().setSavePrice(String.valueOf(Double.parseDouble(String.valueOf(saveprice - total))));
 
 
         viewHolder.incQty.setOnClickListener(new View.OnClickListener() {
@@ -302,6 +306,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
         return responseBeen.size();
     }
+
 
 }
 

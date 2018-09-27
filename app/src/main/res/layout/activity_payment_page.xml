@@ -95,7 +95,28 @@
                 android:layout_height="1sp"
                 android:layout_gravity="center"
                 android:background="@color/gen_black" />
+            <LinearLayout
+                android:id="@+id/savedpagelayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gen_black"
+                    android:text="Congratulation you have saved  :" />
+
+                <TextView
+                    android:id="@+id/saveprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text=""
+                    android:textColor="#00a71c"
+                    android:textStyle="bold" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -120,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1sp"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/gen_black" />
 
             <LinearLayout

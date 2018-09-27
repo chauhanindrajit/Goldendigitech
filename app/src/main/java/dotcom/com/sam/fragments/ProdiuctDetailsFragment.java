@@ -295,10 +295,11 @@ public class ProdiuctDetailsFragment extends Fragment {
                                 editor.apply();
                                 if (SingletonClass.getInstance().getActivityname().equals("New Arrivals")) {
                                     try {
-                                        ProductActivity.conting.setVisibility(View.VISIBLE);
+                                        //ProductActivity.conting.setVisibility(View.VISIBLE);
                                         ProductDatailAcitvity.conting.setVisibility(View.VISIBLE);
-                                        ProductActivity.conting.setText(manageCartResponse.getMessege());
+                                       // ProductActivity.conting.setText(manageCartResponse.getMessege());
                                         ProductDatailAcitvity.conting.setText(manageCartResponse.getMessege());
+
                                     } catch (Exception e) {
 
                                     }
@@ -392,7 +393,7 @@ public class ProdiuctDetailsFragment extends Fragment {
                         addedCart.setVisibility(View.VISIBLE);
                         checkoutlayout.setVisibility(View.VISIBLE);
                         buynowlayout.setVisibility(View.GONE);
-                        radiocard.setVisibility(View.GONE);
+
                     }
                     pDialog.dismiss();
 

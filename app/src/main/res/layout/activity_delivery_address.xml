@@ -76,7 +76,7 @@
                         android:layout_marginTop="15dp"
                         android:checked = "true"
                         android:id="@+id/existingaddradio"
-                        android:text="Rohit sharma"
+                        android:text=""
                         android:textColor="#000"
                         android:textSize="14dp" />
 
@@ -92,14 +92,14 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="15dp"
                             android:singleLine="false"
-                            android:text="charkop kandivbali west mumbai 400067" />
+                            android:text="" />
 
                         <TextView
                             android:id="@+id/deliverycontctno"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="15dp"
-                            android:text="+91-9819493436" />
+                            android:text="" />
                     </LinearLayout>
 
                     <RadioButton
