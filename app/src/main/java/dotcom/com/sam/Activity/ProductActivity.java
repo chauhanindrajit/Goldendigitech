@@ -36,6 +36,7 @@ import java.util.List;
 
 import dotcom.com.sam.Adapters.ProductPagerAdapter;
 import dotcom.com.sam.R;
+import dotcom.com.sam.Response.NewArrivalAllResponse;
 import dotcom.com.sam.Response.ProductResponse;
 import dotcom.com.sam.SingaltonsClasses.CategorySingalton;
 import dotcom.com.sam.SingaltonsClasses.PSingalton;
@@ -62,9 +63,11 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
     private ArrayList<ProductResponse.ResponseBean> arrSubCateogry;
     List<RegistrationResponse.ResponseBean> count = new ArrayList<>();
     ArrayList<List<ProductResponse.ResponseBean>> stringList = new ArrayList<List<ProductResponse.ResponseBean>>();
+    ArrayList<List<NewArrivalAllResponse.ResponseBean>> newarrivalList = new ArrayList<List<NewArrivalAllResponse.ResponseBean>>();
+
     private ProgressDialog pDialog;
     Integer ID, IDS;
-    String sum;
+    String sum, newarrivals;
     public static TextView nodat, conting;
     int subcatid;
     Menu customMenu;
@@ -117,12 +120,21 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
             toolbar.setTitle(CategorySingalton.getInstance().getCategosryName());
 
             ;
-        } else {
+        } else if (CategorySingalton.getInstance().getCategosryName().equals("New Arrivals")) {
+            toolbar.setTitle(CategorySingalton.getInstance().getCategosryName());
+            ID = CategorySingalton.getInstance().getSubcateID();
+            newarrivals = "New";
+            NewArriavls(newarrivals);
+        }
+
+        else if(SingletonClass.getInstance().getSubcat().equals("Subcat")){
             ID = CategorySingalton.getInstance().getSubcateID();
             subcatid = SubcategorySingalton.getInstance().getSc_Id();
             checkAcceptTrip(ID, subcatid);
             toolbar.setTitle(CategorySingalton.getInstance().getCategosryName());
         }
+
+
         sum = SubcategorySingalton.getInstance().getSubCategoryName();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,6 +198,93 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
         tabLayout.addTab(tabLayout.newTab().setText("KENNEL"));
 
     }
+
+//    private void NewArrivals(String newarrivals) {
+//        arrSubCateogry = new ArrayList<>();
+//
+//        pDialog = new ProgressDialog(ProductActivity.this);
+//        pDialog.setMessage("Please wait...");
+//        pDialog.setCancelable(false);
+//        pDialog.show();
+//        final Call<NewArrivalAllResponse> newArrivalAllResponseCall = Utilss.getWebService().NEW_ARRIVAL_ALL_RESPONSE_CALL(newarrivals);
+//        Log.e("URL", "checkAcceptTrip: " + newArrivalAllResponseCall.request().url().toString());
+//        newArrivalAllResponseCall.enqueue(new Callback<NewArrivalAllResponse>() {
+//            @Override
+//            public void onResponse(Call<NewArrivalAllResponse> call, Response<NewArrivalAllResponse> response) {
+//                pDialog.dismiss();
+//                if (stringList.size() > 0) {
+//                    stringList.clear();
+//                }
+//                if (response.code() == 200) {
+//                    pDialog.dismiss();
+//
+//                    NewArrivalAllResponse productResponse = response.body();
+//                    // checkAcceptTrip1();
+//
+//                    Log.e("Proct", new GsonBuilder().create().toJson(response));
+//
+//                    for (int i = 0; i < productResponse.getResponse().size(); i++) {
+//
+//                        ProductSingalton productSingalton = new ProductSingalton();
+//                        PSingalton pSingalton = new PSingalton();
+//                        for (int j = 0; j < productResponse.getResponse().get(i).getProdList().size(); j++) {
+//                            Bundle bundle = new Bundle(); //I guess you're missing this
+//                            bundle.putInt("category", SubcategorySingalton.getInstance().getSc_Id());
+//                            productSingalton.setProductName(productResponse.getResponse().get(i).getProdList().get(j).getProductName());
+//                            productSingalton.setDiscount(productResponse.getResponse().get(i).getProdList().get(j).getDiscount());
+//                            productSingalton.setPrice(productResponse.getResponse().get(i).getProdList().get(j).getPrice());
+//                            productSingalton.setDiscountPrice(String.valueOf(productResponse.getResponse().get(i).getProdList().get(j).getDiscountPrice()));
+//                            productSingalton.setCategosryName(productResponse.getResponse().get(i).getProdList().get(j).getCategosryName());
+//                            productSingalton.setSubCategoryName(productResponse.getResponse().get(i).getProdList().get(j).getSubCategoryName());
+//                            productSingalton.setImage(productResponse.getResponse().get(i).getProdList().get(j).getImage());
+//                            tripSingaltonss.add(productSingalton);
+//                        }
+//
+//
+////                        stringList.add(productResponse.getResponse())
+////                        productSingalton.setSc_Id(tabLayout.getSelectedTabPosition());
+////                        ProductPagerAdapter productPagerAdapter = new ProductPagerAdapter(fragmentManager, stringList, (productResponse.getResponse()));
+////                        mViewPager.setAdapter(productPagerAdapter);
+////                        productPagerAdapter.notifyDataSetChanged();
+////
+//
+//
+//                        tabLayout.addTab(tabLayout.newTab().setText(productResponse.getResponse().get(i).getSubCategoryName()));
+//                        tabLayout.getTabCount();
+//                        if (productResponse.getResponse().get(i).getSc_Id() == subcatid) {
+//
+//                            tabLayout.setScrollPosition(i, 0f, true);
+//                            mViewPager.setCurrentItem(i);
+//                            mViewPager.getCurrentItem();
+//                            mViewPager.setOffscreenPageLimit(3);
+//                            TabListener();
+//                            final int finalI = i;
+//                            mViewPager.post(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    mViewPager.setCurrentItem(finalI);
+//                                    TabListener();
+//                                }
+//                            });
+//                        }
+//                        TabListener();
+//                    }
+//
+//                } else if (response.code() == 500) {
+//                    pDialog.dismiss();
+//                    Utils.customMessage(ProductActivity.this, "Not Found data");
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<NewArrivalAllResponse> call, Throwable t) {
+//                pDialog.dismiss();
+//                Log.e("Failed", "onFailure: " + t);
+//                Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//    }
 
     private void checkAcceptTrip(Integer ID, final int subcatid) {
         arrSubCateogry = new ArrayList<>();
@@ -272,7 +371,92 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
         });
 
     }
+    private void NewArriavls(String newarrivals) {
+        arrSubCateogry = new ArrayList<>();
 
+        pDialog = new ProgressDialog(ProductActivity.this);
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+        final Call<ProductResponse> productResponseCall = Utilss.getWebService().RESPONSE_CALL(newarrivals);
+        Log.e("URL", "checkAcceptTrip: " + productResponseCall.request().url().toString());
+        productResponseCall.enqueue(new Callback<ProductResponse>() {
+            @Override
+            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                pDialog.dismiss();
+                if (stringList.size() > 0) {
+                    stringList.clear();
+                }
+                if (response.code() == 200) {
+
+
+                    ProductResponse productResponse = response.body();
+                    // checkAcceptTrip1();
+
+                    Log.e("Proct", new GsonBuilder().create().toJson(response));
+
+                    for (int i = 0; i < productResponse.getResponse().size(); i++) {
+
+                        ProductSingalton productSingalton = new ProductSingalton();
+                        PSingalton pSingalton = new PSingalton();
+                        for (int j = 0; j < productResponse.getResponse().get(i).getProdList().size(); j++) {
+                            Bundle bundle = new Bundle(); //I guess you're missing this
+                            bundle.putInt("category", SubcategorySingalton.getInstance().getSc_Id());
+                            productSingalton.setProductName(productResponse.getResponse().get(i).getProdList().get(j).getProductName());
+                            productSingalton.setDiscount(productResponse.getResponse().get(i).getProdList().get(j).getDiscount());
+                            productSingalton.setPrice(productResponse.getResponse().get(i).getProdList().get(j).getPrice());
+                            productSingalton.setDiscountPrice(productResponse.getResponse().get(i).getProdList().get(j).getDiscountPrice());
+                            productSingalton.setCategosryName(productResponse.getResponse().get(i).getProdList().get(j).getCategosryName());
+                            productSingalton.setSubCategoryName(productResponse.getResponse().get(i).getProdList().get(j).getSubCategoryName());
+                            productSingalton.setImage(productResponse.getResponse().get(i).getProdList().get(j).getImage());
+                            tripSingaltonss.add(productSingalton);
+                        }
+                        // tripSingaltonss.add(productSingalton);
+                        stringList.add(productResponse.getResponse());
+                        productSingalton.setSc_Id(tabLayout.getSelectedTabPosition());
+                        ProductPagerAdapter productPagerAdapter = new ProductPagerAdapter(fragmentManager, stringList, (productResponse.getResponse()));
+                        mViewPager.setAdapter(productPagerAdapter);
+                        productPagerAdapter.notifyDataSetChanged();
+//                        if(productResponse.getResponse().size()>0){
+//                            nodat.setVisibility(View.INVISIBLE);
+//                        }
+//                        else {
+//                            nodat.setVisibility(View.VISIBLE);
+//                        }
+                        tabLayout.addTab(tabLayout.newTab().setText(productResponse.getResponse().get(i).getSubCategoryName()));
+                        tabLayout.getTabCount();
+                        if (productResponse.getResponse().get(i).getSc_Id() == subcatid) {
+
+                            tabLayout.setScrollPosition(i, 0f, true);
+                            mViewPager.setCurrentItem(i);
+                            mViewPager.getCurrentItem();
+                            mViewPager.setOffscreenPageLimit(3);
+                            TabListener();
+                            final int finalI = i;
+                            mViewPager.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    tabLayout.setSelected(true);
+                                   // mViewPager.setCurrentItem(finalI);
+                                    TabListener();
+                                }
+                            });
+                        }
+                        TabListener();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductResponse> call, Throwable t) {
+                pDialog.dismiss();
+                Log.e("Failed", "onFailure: " + t);
+                Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
     private void TabListener() {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

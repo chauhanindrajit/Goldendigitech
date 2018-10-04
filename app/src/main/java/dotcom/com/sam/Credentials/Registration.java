@@ -149,7 +149,7 @@ public class Registration extends AppCompatActivity {
 //                        }
                 } else if (response.code() == 400) {
                     pDialog.dismiss();
-                    Utils.customMessage(Registration.this, "Something went wrong.");
+                    Utils.customMessage(Registration.this, "Email id already exists.");
                 } else if (response.code() == 404) {
                     pDialog.dismiss();
                     Utils.customMessage(Registration.this, "There is problem to register.");

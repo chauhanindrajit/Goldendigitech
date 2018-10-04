@@ -37,6 +37,7 @@ import java.util.List;
 import javax.security.auth.login.LoginException;
 
 import dotcom.com.sam.Activity.Categeory;
+import dotcom.com.sam.Activity.MainActivity;
 import dotcom.com.sam.Activity.PetPhotography;
 import dotcom.com.sam.Activity.ProductActivity;
 import dotcom.com.sam.Adapters.BasePhotoAdapter;
@@ -303,10 +304,23 @@ public class ProductFragment extends Fragment {
                         setRecyclerviewProduct();
                         API = true;
                     } else if (API == true) {
-                        Intent i = new Intent(getActivity(), Categeory.class);
-                        startActivity(i);
-                        getActivity().finish();
+                        if (CategorySingalton.getInstance().getCategosryName().equals("New Arrivals")) {
+                            Intent setIntent = new Intent(getContext(), MainActivity.class);
+                            setIntent.addCategory(Intent.CATEGORY_HOME);
+                            setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(setIntent);
+                        } else {
+                            Intent i = new Intent(getActivity(), Categeory.class);
+                            startActivity(i);
+                            getActivity().finish();
+                        }
                     }
+//                    else if (CategorySingalton.getInstance().getCategosryName().equals("New Arrivals")){
+//                        Intent setIntent = new Intent(getContext(),MainActivity.class);
+//                        setIntent.addCategory(Intent.CATEGORY_HOME);
+//                        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(setIntent);
+//                    }
                     return true;
                 }
                 return false;

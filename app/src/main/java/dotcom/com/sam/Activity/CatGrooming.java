@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -33,9 +34,14 @@ import java.util.List;
 import java.util.Locale;
 
 import dotcom.com.sam.Adapters.CatgroomingListAdapter;
+import dotcom.com.sam.Adapters.CatsearchListAdapter;
+import dotcom.com.sam.Adapters.DogsearchListAdapter;
 import dotcom.com.sam.Adapters.MatingAdapter;
 import dotcom.com.sam.R;
+import dotcom.com.sam.Response.CatGroomingResponse;
+import dotcom.com.sam.Response.CatsearchResponse;
 import dotcom.com.sam.Response.DiagonsticResponse;
+import dotcom.com.sam.Response.DogsearchResponse;
 import dotcom.com.sam.Utils.Constats;
 import dotcom.com.sam.Utils.Utils;
 import dotcom.com.sam.extras.Utilss;
@@ -50,12 +56,18 @@ public class CatGrooming extends AppCompatActivity {
     RecyclerView recyclerView;
 
     private ProgressDialog pDialog;
-    private ArrayList<DiagonsticResponse.ResponseBean> arrSubCateogry;
-    AutoCompleteTextView acTextView;
+    private ArrayList<CatGroomingResponse.ResponseBean> arrSubCateogry;
+    AutoCompleteTextView acTextView, selectbreed, selectage, sleectsize, salonlocation;
     ImageView pdnitm;
     private ArrayAdapter<String> adapter;
     Button searchdoct;
     List<String> locationTypeList = new ArrayList<>();
+    List<String> breedarray = new ArrayList<>();
+    List<String> agearray = new ArrayList<>();
+    List<String> sizearray = new ArrayList<>();
+    List<String> salonarray = new ArrayList<>();
+
+    String pos, sizepos, salonpos;
     ArrayList<String> item = new ArrayList<>();
     Toolbar toolbar;
     @Override
@@ -95,6 +107,10 @@ public class CatGrooming extends AppCompatActivity {
             nbutton.setTextColor(Color.rgb(30, 144, 255));
         }
         acTextView = (AutoCompleteTextView) findViewById(R.id.languages);
+        selectbreed = (AutoCompleteTextView) findViewById(R.id.breedlist);
+        selectage = (AutoCompleteTextView) findViewById(R.id.selectage);
+        sleectsize = (AutoCompleteTextView) findViewById(R.id.selectsize);
+        salonlocation = (AutoCompleteTextView) findViewById(R.id.salonloctn);
         pdnitm = (ImageView) findViewById(R.id.pdnitm);
         pdnitm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +133,94 @@ public class CatGrooming extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 acTextView.showDropDown();
                 return false;
+            }
+        });
+        final ArrayAdapter<String> loadTypeArrayAdapter1 = new ArrayAdapter<>(CatGrooming.this, R.layout.custom_spinner_item, breedarray);
+        loadTypeArrayAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+        selectbreed.setThreshold(1);
+        selectbreed.setAdapter(loadTypeArrayAdapter1);
+        selectbreed.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                selectbreed.showDropDown();
+                return false;
+            }
+        });
+
+        final ArrayAdapter<String> loadTypeArrayAdapter2 = new ArrayAdapter<>(CatGrooming.this, R.layout.custom_spinner_item, agearray);
+        loadTypeArrayAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+        selectage.setThreshold(1);
+        selectage.setAdapter(loadTypeArrayAdapter2);
+        agearray.add("<1 Year");
+        agearray.add("1-3 Years");
+        agearray.add("3-5 Years");
+        agearray.add("5-8 Years");
+        agearray.add("8+ Years");
+        selectage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                pos = String.valueOf(i + 1);
+                Log.e("POPSSSS", "onItemClick: " + pos);
+            }
+        });
+        selectage.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                selectage.showDropDown();
+                return false;
+            }
+        });
+        final ArrayAdapter<String> loadTypeArrayAdapter3 = new ArrayAdapter<>(CatGrooming.this, R.layout.custom_spinner_item, sizearray);
+        loadTypeArrayAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+        sleectsize.setThreshold(1);
+        sleectsize.setAdapter(loadTypeArrayAdapter3);
+        sizearray.add("Small (5-11 kg, 6-12 inches)");
+        sizearray.add("Medium (11-20 kg, 12-16 inches)");
+        sizearray.add("Large (20-35 kg, 16-24 inches)");
+        sizearray.add("Giant (35-50 kg, 24-35 inches)");
+        sleectsize.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                sleectsize.showDropDown();
+                return false;
+            }
+        });
+        sleectsize.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                sizepos = String.valueOf(i + 1);
+                Log.e("sizepos", "onItemClick: " + sizepos);
+            }
+        });
+
+        final ArrayAdapter<String> loadTypeArrayAdapter4 = new ArrayAdapter<>(CatGrooming.this, R.layout.custom_spinner_item, salonarray);
+        loadTypeArrayAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+        salonlocation.setThreshold(1);
+        salonlocation.setAdapter(loadTypeArrayAdapter4);
+        salonarray.add("Salon Service");
+        salonarray.add("At Home Service");
+        salonlocation.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                salonlocation.showDropDown();
+                return false;
+            }
+        });
+        salonlocation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                if (i == 0) {
+                    salonpos = "Salon";
+                } else if (i == 1) {
+                    salonpos = "Home";
+                }
             }
         });
         acTextView.addTextChangedListener(new TextWatcher() {
@@ -153,7 +257,14 @@ public class CatGrooming extends AppCompatActivity {
         searchdoct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(validate()){
+                    String breedselected = selectbreed.getText().toString().trim();
+                    String loc = acTextView.getText().toString().trim();
+                    String ageselctd = pos.toString().trim();
+                    String size = sizepos.toString().trim();
+                    String salonlctn = salonpos.toString().trim();
+                    Searchdoggrooming(breedselected, loc, ageselctd, size, salonlctn);
+                }
                 acTextView.setAdapter(loadTypeArrayAdapter);
                 ObjectAnimator animation = ObjectAnimator.ofFloat(seachlayout, "translationY", -seachlayout.getHeight());
                 animation.setDuration(800);
@@ -271,18 +382,21 @@ public class CatGrooming extends AppCompatActivity {
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
         pDialog.show();
-        final Call<DiagonsticResponse> diagonsticResponseCall = Utilss.getWebService().DIAGONSTIC_RESPONSE_CALL();
-        diagonsticResponseCall.enqueue(new Callback<DiagonsticResponse>() {
+        final Call<CatGroomingResponse> catGroomingResponseCall = Utilss.getWebService().CAT_GROOMING_RESPONSE_CALL();
+        catGroomingResponseCall.enqueue(new Callback<CatGroomingResponse>() {
             @Override
-            public void onResponse(Call<DiagonsticResponse> call, Response<DiagonsticResponse> response) {
+            public void onResponse(Call<CatGroomingResponse> call, Response<CatGroomingResponse> response) {
                 pDialog.dismiss();
                 if (response.code() == 200) {
-                    DiagonsticResponse diagonsticResponse = response.body();
+                    CatGroomingResponse catGroomingResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));
-                    for (int i = 0; i < diagonsticResponse.getResponse().size(); i++) {
-                        locationTypeList.add(diagonsticResponse.getResponse().get(i).getLocation());
+                    for (int i = 0; i < catGroomingResponse.getResponse().size(); i++) {
+                        locationTypeList.add(String.valueOf(catGroomingResponse.getResponse().get(i).getSearchLocations()));
+                        for (int j = 0; j < catGroomingResponse.getResponse().get(i).getGroomingdata().size(); j++) {
+                            breedarray.add(catGroomingResponse.getResponse().get(i).getGroomingdata().get(j).getBreedName());
+                        }
                         // initList();
-                        CatgroomingListAdapter catgroomingListAdapter = new CatgroomingListAdapter(CatGrooming.this, diagonsticResponse.getResponse());
+                        CatgroomingListAdapter catgroomingListAdapter = new CatgroomingListAdapter(CatGrooming.this, catGroomingResponse.getResponse());
                         catgroomingListAdapter.getItemCount();
                         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(CatGrooming.this, LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(verticalLayoutManager);
@@ -293,7 +407,7 @@ public class CatGrooming extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<DiagonsticResponse> call, Throwable t) {
+            public void onFailure(Call<CatGroomingResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
 
             }
@@ -303,4 +417,63 @@ public class CatGrooming extends AppCompatActivity {
 
     }
 
+    private void Searchdoggrooming(String breedselected, String loc, String ageselctd, String size, String salonlctn) {
+        arrSubCateogry = new ArrayList<>();
+        pDialog = new ProgressDialog(CatGrooming.this);
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+        final Call<CatsearchResponse> catsearchResponseCall = Utilss.getWebService().CATSEARCH_RESPONSE_CALL(breedselected, ageselctd, size, salonlctn, loc);
+        catsearchResponseCall.enqueue(new Callback<CatsearchResponse>() {
+            @Override
+            public void onResponse(Call<CatsearchResponse> call, Response<CatsearchResponse> response) {
+                pDialog.dismiss();
+                if (response.code() == 200) {
+                    CatsearchResponse catsearchResponse = response.body();
+                    Log.e("dioglist", new GsonBuilder().create().toJson(response));
+                    for (int i = 0; i < catsearchResponse.getResponse().size(); i++) {
+                        //                        locationTypeList.add(String.valueOf(catsearchResponse.getResponse().get(i).getSearchLocations()));
+                        //                        // initList();
+                        CatsearchListAdapter catsearchListAdapter = new CatsearchListAdapter(CatGrooming.this, catsearchResponse.getResponse());
+                        catsearchListAdapter.getItemCount();
+                        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(CatGrooming.this, LinearLayoutManager.VERTICAL, false);
+                        recyclerView.setLayoutManager(verticalLayoutManager);
+                        recyclerView.setAdapter(catsearchListAdapter);
+                        //Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CatsearchResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
+
+            }
+
+
+        });
+
+    }
+    private boolean validate() {
+
+        if (selectbreed.getText().toString().equals("")) {
+            Toast.makeText(CatGrooming.this,"Please Select Breed name.",Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (selectage.getText().toString().equals("")) {
+            Toast.makeText(CatGrooming.this,"Please Select Age",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (sleectsize.getText().toString().equals("")) {
+            Toast.makeText(CatGrooming.this,"Please Select Size.",Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (salonlocation.getText().toString().equals("")) {
+            Toast.makeText(CatGrooming.this, "Please enter salon location.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
 }

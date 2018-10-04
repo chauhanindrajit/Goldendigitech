@@ -128,6 +128,8 @@ public class ReviewOrderActivity extends AppCompatActivity {
                                     public void onResponse(Call<DeleteallResponse> call, Response<DeleteallResponse> response) {
                                         Log.e(TAG, "onResponse code: " + response.code());
                                         if (response.code() == 200) {
+
+                                            MainActivity.conting.setVisibility(View.GONE);
                                             //Utils.customMessage(mContext, "Added into cart");
                                             getCartList();
                                             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ReviewOrderActivity.this);
@@ -138,7 +140,9 @@ public class ReviewOrderActivity extends AppCompatActivity {
                                             try {
                                                 ProductActivity.conting.setText(cont);
                                                 ProductDatailAcitvity.conting.setText(cont);
-                                            }catch (Exception e){
+                                                MainActivity.conting.setText(cont);
+                                                MainActivity.conting.setVisibility(View.GONE);
+                                            } catch (Exception e) {
 
                                             }
                                             pDialog.dismiss();
@@ -158,7 +162,7 @@ public class ReviewOrderActivity extends AppCompatActivity {
                                 });
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                         public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
                 });
@@ -265,18 +269,6 @@ public class ReviewOrderActivity extends AppCompatActivity {
             }
         });
     }
-
-    IOSProgress mProgressHUD;
-
-    private void showProgressDialog() {
-        mProgressHUD = IOSProgress.show(ReviewOrderActivity.this, "please wait...", true, false);
-    }
-
-    private void hideProgressDialog() {
-        mProgressHUD.dismiss();
-
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

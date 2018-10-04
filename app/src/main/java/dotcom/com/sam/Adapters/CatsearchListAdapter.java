@@ -22,33 +22,31 @@ import java.util.Locale;
 import dotcom.com.sam.ProfileActivity.Catgromingprofile;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Response.CatGroomingResponse;
-import dotcom.com.sam.Response.DiagonsticResponse;
-import dotcom.com.sam.ProfileActivity.Doggromingprofile;
+import dotcom.com.sam.Response.CatsearchResponse;
 import dotcom.com.sam.SingaltonsClasses.CatSingalton;
-import dotcom.com.sam.SingaltonsClasses.DogSingalton;
-import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 
-public class CatgroomingListAdapter extends RecyclerView.Adapter<CatgroomingListAdapter.VetViewHolder> {
+public class CatsearchListAdapter extends RecyclerView.Adapter<CatsearchListAdapter.VetViewHolder> {
     Context context;
-    private ArrayList<CatGroomingResponse.ResponseBean> arrSubCateogry;
-    public static ArrayList<CatGroomingResponse.ResponseBean> filterItem;
+    private ArrayList<CatsearchResponse.ResponseBean> arrSubCateogry;
+    public static ArrayList<CatsearchResponse.ResponseBean> filterItem;
 
-    public CatgroomingListAdapter(Context context, List<CatGroomingResponse.ResponseBean> arrSubCateogry) {
+    public CatsearchListAdapter(Context context, List<CatsearchResponse.ResponseBean> arrSubCateogry) {
         this.context = context;
-        this.arrSubCateogry = (ArrayList<CatGroomingResponse.ResponseBean>) arrSubCateogry;
+        this.arrSubCateogry = (ArrayList<CatsearchResponse.ResponseBean>) arrSubCateogry;
         this.filterItem = new ArrayList<>();
         try {
             filterItem.addAll(arrSubCateogry);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
         }
     }
 
     @Override
     public VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.single_catgroming_layout, parent, false);
+        View view = layoutInflater.inflate(R.layout.single_catsearch_layout, parent, false);
 
-        CatgroomingListAdapter.VetViewHolder vetViewHolder = new CatgroomingListAdapter.VetViewHolder(view);
+        CatsearchListAdapter.VetViewHolder vetViewHolder = new CatsearchListAdapter.VetViewHolder(view);
 
         return vetViewHolder;
     }
@@ -63,15 +61,12 @@ public class CatgroomingListAdapter extends RecyclerView.Adapter<CatgroomingList
 
                 CatSingalton.getInstance().setCenterName(arrSubCateogry.get(position).getCenterName());
                 CatSingalton.getInstance().setImages(arrSubCateogry.get(position).getImages());
-                SingletonClass.getInstance().setPackagename("Cat");
-                CatSingalton.getInstance().setGroomingService_Id(arrSubCateogry.get(position).getGroomingService_Id());
-
 //                DiagonsticSingalton.getInstance().setSampleType(arrSubCateogry.get(position).getSampleType());
 //                DiagonsticSingalton.getInstance().setSampleCollectionTimeing(arrSubCateogry.get(position).getSampleCollectionTimeing());
 //                DiagonsticSingalton.getInstance().setPetsType(arrSubCateogry.get(position).getPetsType());
 //                DiagonsticSingalton.getInstance().setLocation(arrSubCateogry.get(position).getLocation());
                 ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.imageView, "diagnostic_image");
-                Intent intent = new Intent(context, Doggromingprofile.class);
+                Intent intent = new Intent(context, Catgromingprofile.class);
                 context.startActivity(intent, activityOptions.toBundle());
 
 
@@ -82,7 +77,7 @@ public class CatgroomingListAdapter extends RecyclerView.Adapter<CatgroomingList
         holder.centername.setText(arrSubCateogry.get(position).getCenterName());
         holder.servic.setText(arrSubCateogry.get(position).getOwnerAddress());
         if (arrSubCateogry.get(position).getImages() != null) {
-            Picasso.with(context).load("http://mrsam.in/sam/MainImage/" + arrSubCateogry.get(position).getImages().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(holder.imageView);
+            Picasso.with(context).load("http://mrsam.in/sam/GroomingImages/" + arrSubCateogry.get(position).getImages().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(holder.imageView);
         } else {
             Picasso.with(context).load(R.drawable.noimage).into(holder.imageView);
 
@@ -114,10 +109,10 @@ public class CatgroomingListAdapter extends RecyclerView.Adapter<CatgroomingList
             arrSubCateogry.addAll(filterItem);
             notifyDataSetChanged();
         } else {
-            for (CatGroomingResponse.ResponseBean arrSubCateogry1 : filterItem) {
+            for (CatsearchResponse.ResponseBean arrSubCateogry1 : filterItem) {
                 notifyDataSetChanged();
                 if (arrSubCateogry1.getSearchLocations().toString().equalsIgnoreCase(charText)) {
-                    ArrayList<CatGroomingResponse.ResponseBean> newList = new ArrayList<>();
+                    ArrayList<CatsearchResponse.ResponseBean> newList = new ArrayList<>();
                     newList.add(arrSubCateogry1);
                     arrSubCateogry.addAll(newList);
                     notifyDataSetChanged();

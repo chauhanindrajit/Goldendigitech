@@ -1,33 +1,49 @@
 package dotcom.com.sam.ProfileActivity;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
+import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
+import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
+import java.util.List;
 
-import dotcom.com.sam.Activity.DogGrooming;
-import dotcom.com.sam.Activity.GroomingLastpage;
-import dotcom.com.sam.Activity.PetSetter;
+import dotcom.com.sam.Adapters.PackageAdapter;
 import dotcom.com.sam.R;
+import dotcom.com.sam.Response.DogcatpackageResponse;
+import dotcom.com.sam.SingaltonsClasses.CatSingalton;
+import dotcom.com.sam.SingaltonsClasses.DogSingalton;
 import dotcom.com.sam.SingaltonsClasses.SingletonClass;
-import dotcom.com.sam.Utils.PatientDetails;
-import dotcom.com.sam.Utils.Utils;
+import dotcom.com.sam.extras.Utilss;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Doggromingprofile extends AppCompatActivity {
     Button button;
     TextView cntnm, servic, smpltype, pettype, loc, colntime;
     Toolbar toolbar;
+    ImageView imag;
+    Context context;
+    RecyclerView recyclerView;
+    public static List<DogcatpackageResponse.ResponseBean.GroomingPackagesBean> arrSubCateogry;
+    private ProgressDialog pDialog;
+    String ID;
+    List<String> agearray = new ArrayList<>();
     final Calendar myCalendar = Calendar.getInstance();
 
     @Override
@@ -39,8 +55,10 @@ public class Doggromingprofile extends AppCompatActivity {
         servic = (TextView) findViewById(R.id.ssericess);
         smpltype = (TextView) findViewById(R.id.ssamtype);
         pettype = (TextView) findViewById(R.id.spettype);
+        imag = (ImageView) findViewById(R.id.img);
         loc = (TextView) findViewById(R.id.blocation);
         colntime = (TextView) findViewById(R.id.scollectntimess);
+        recyclerView = (RecyclerView) findViewById(R.id.recylcerview_newarrival);
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("DogGrooming");
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
@@ -51,54 +69,67 @@ public class Doggromingprofile extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+        cntnm.setText(DogSingalton.getInstance().getCenterName());
+        if (SingletonClass.getInstance().getPackagename().equals("Cat")) {
+            cntnm.setText(CatSingalton.getInstance().getCenterName());
+            ID = String.valueOf(CatSingalton.getInstance().getGroomingService_Id());
+            checkAcceptTrip(ID);
+        } else if (SingletonClass.getInstance().getPackagename().equals("Dog")) {
+            cntnm.setText(DogSingalton.getInstance().getCenterName());
+            ID = String.valueOf(DogSingalton.getInstance().getGroomingService_Id());
+            checkAcceptTrip(ID);
+        }
+        Log.e("IDDD", "onCreate: " + ID);
 
+        if (DogSingalton.getInstance().getImages() != null) {
+            Picasso.with(context).load("http://mrsam.in/sam/MainImage/" + DogSingalton.getInstance().getImages().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(imag);
+        } else {
+            Picasso.with(context).load(R.drawable.noimage).into(imag);
+        }
+
+    }
+
+    void setRecyclerView() {
+        PackageAdapter packageAdapter = new PackageAdapter(this, arrSubCateogry);
+        packageAdapter.getItemCount();
+        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(Doggromingprofile.this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(verticalLayoutManager);
+        recyclerView.setAdapter(packageAdapter);
+    }
+
+    private void checkAcceptTrip(String ID) {
+
+        pDialog = new ProgressDialog(Doggromingprofile.this);
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+        final Call<DogcatpackageResponse> dogcatpackageResponseCall = Utilss.getWebService().DOGCATPACKAGE_RESPONSE_CALL(ID);
+        dogcatpackageResponseCall.enqueue(new Callback<DogcatpackageResponse>() {
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
+            public void onResponse(Call<DogcatpackageResponse> call, Response<DogcatpackageResponse> response) {
+                pDialog.dismiss();
+                if (response.code() == 200) {
+                    DogcatpackageResponse dogcatpackageResponse = response.body();
+                    Log.e("dioglist", new GsonBuilder().create().toJson(response));
+                    for (int i = 0; i < dogcatpackageResponse.getResponse().size(); i++) {
+
+                        PackageAdapter packageAdapter = new PackageAdapter(Doggromingprofile.this, dogcatpackageResponse.getResponse().get(i).getGroomingPackages());
+                        packageAdapter.getItemCount();
+                        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(Doggromingprofile.this, LinearLayoutManager.VERTICAL, false);
+                        recyclerView.setLayoutManager(verticalLayoutManager);
+                        recyclerView.setAdapter(packageAdapter);
+                    }
+                }
             }
 
-        };
-
-        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                new DatePickerDialog(Doggromingprofile.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            public void onFailure(Call<DogcatpackageResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
+
             }
+
+
         });
-    }
 
-    private void updateLabel() {
-        String myFormat = "dd/MM/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        SingletonClass.getInstance().setDate(sdf.format(myCalendar.getTime()));
-        // getdate.setText(sdf.format(myCalendar.getTime()));
-        getTime();
-        // enddtae.setText(sdf.format(myCalendar.getTime()));
-    }
-
-    void getTime() {
-        Calendar mcurrentTime = Calendar.getInstance();
-        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-        int minute = mcurrentTime.get(Calendar.MINUTE);
-        int second = mcurrentTime.get(Calendar.SECOND);
-        TimePickerDialog mTimePicker;
-        mTimePicker = new TimePickerDialog(Doggromingprofile.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                SingletonClass.getInstance().setTime(selectedHour + ":" + selectedMinute);
-                Utils.moveNextWithAnimation(Doggromingprofile.this, GroomingLastpage.class);
-                //starttime.setText(selectedHour + ":" + selectedMinute);
-            }
-        }, hour, minute, false);//Yes 24 hour time
-        mTimePicker.setTitle("Select Time");
-        mTimePicker.show();
     }
 }

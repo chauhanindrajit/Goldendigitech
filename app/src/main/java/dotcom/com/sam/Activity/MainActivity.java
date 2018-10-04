@@ -7,10 +7,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,10 +21,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +47,7 @@ import dotcom.com.sam.Credentials.LoginActivity;
 import dotcom.com.sam.Response.AdoptpetResponse;
 import dotcom.com.sam.Response.NewArrivalResponse;
 import dotcom.com.sam.SingaltonsClasses.AdoptaPetSingalton;
+import dotcom.com.sam.SingaltonsClasses.CategorySingalton;
 import dotcom.com.sam.SingaltonsClasses.NewArrivalSingalton;
 import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.Utils.ESPreferences;
@@ -72,9 +78,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ArrayList<String> stringList = new ArrayList<>();
     private ListView stationsListView;
 
-
+    boolean doubleBackToExitPressedOnce = false;
     private ProgressDialog pDialog;
     private ListView lv;
+    ImageView addtocart;
     UserSessionManager session;
     // URL to get contacts JSON
     private static String url = "http://worldindia.in/SamApi/api/ShopByPetVC/getFeaturedproduct?Featured=new";
@@ -82,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static ArrayList<HashMap<String, String>> contactList;
     public static List<NewArrivalResponse.ResponseBean> arrSubCateogry;
     ArrayList tripSingaltonss;
-    TextView catname, viewall;
+    public static TextView nodat, conting, viewall;
 
 
     @Override
@@ -90,7 +97,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
+        conting = (TextView) findViewById(R.id.count);
+        addtocart = (ImageView) findViewById(R.id.addtocard);
+        addtocart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, ReviewOrderActivity.class);
+                startActivity(i);
+            }
+        });
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String value = sharedPreferences.getString("COU", "");
+        if (value.equals("") || value.isEmpty() || value.equals("0")) {
+            // not having user id
+            conting.setVisibility(View.INVISIBLE);
 
+            // Utils.customMessage(ProductActivity.this, "NO CART DATA FOUND");
+        } else {
+            conting.setVisibility(View.VISIBLE);
+            conting.setText(String.valueOf(value));
+            // user id is available
+        }
         //setTransition
         Utils.setExplodTransition(this);
         contactList = new ArrayList<>();
@@ -124,10 +151,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         buttonClickEvent();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.addDrawerListener(toggle);
-//        toggle.syncState();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.gen_white));
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -139,10 +167,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Intent setIntent = new Intent(Intent.ACTION_MAIN);
-            setIntent.addCategory(Intent.CATEGORY_HOME);
-            setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(setIntent);
+
+            if (doubleBackToExitPressedOnce) {
+
+                Intent setIntent = new Intent(Intent.ACTION_MAIN);
+                setIntent.addCategory(Intent.CATEGORY_HOME);
+                setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(setIntent);
+
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast toast =
+                    Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.BOTTOM, 0, 0);
+            toast.show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
 
         }
     }
@@ -332,9 +379,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                // Utils.moveNextWithAnimation(MainActivity.this,ProductActivity.class);
-                Utils.customMessage(MainActivity.this, "Please try after some time");
+                CategorySingalton.getInstance().setCategosryName("New Arrivals");
+                CategorySingalton.getInstance().setSubcateID(1);
+                Utils.moveNextWithAnimation(MainActivity.this, ProductActivity.class);
             }
         });
     }
@@ -483,6 +530,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
     }
+
 
 
 }

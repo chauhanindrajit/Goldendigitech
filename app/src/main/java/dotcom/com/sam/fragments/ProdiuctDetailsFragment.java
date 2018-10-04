@@ -172,6 +172,7 @@ public class ProdiuctDetailsFragment extends Fragment {
                                         ProductActivity.conting.setVisibility(View.VISIBLE);
                                         ProductDatailAcitvity.conting.setVisibility(View.VISIBLE);
                                         ProductActivity.conting.setText(manageCartResponse.getMessege());
+                                        MainActivity.conting.setText(manageCartResponse.getMessege());
                                         ProductDatailAcitvity.conting.setText(manageCartResponse.getMessege());
                                     } catch (Exception e) {
 
@@ -182,6 +183,7 @@ public class ProdiuctDetailsFragment extends Fragment {
                                     ProductDatailAcitvity.conting.setVisibility(View.VISIBLE);
                                     ProductActivity.conting.setText(manageCartResponse.getMessege());
                                     ProductDatailAcitvity.conting.setText(manageCartResponse.getMessege());
+                                    MainActivity.conting.setText(manageCartResponse.getMessege());
                                 } catch (Exception e) {
 
                                 }
@@ -296,9 +298,12 @@ public class ProdiuctDetailsFragment extends Fragment {
                                 if (SingletonClass.getInstance().getActivityname().equals("New Arrivals")) {
                                     try {
                                         //ProductActivity.conting.setVisibility(View.VISIBLE);
+
                                         ProductDatailAcitvity.conting.setVisibility(View.VISIBLE);
-                                       // ProductActivity.conting.setText(manageCartResponse.getMessege());
+                                        MainActivity.conting.setVisibility(View.VISIBLE);
+                                        // ProductActivity.conting.setText(manageCartResponse.getMessege());
                                         ProductDatailAcitvity.conting.setText(manageCartResponse.getMessege());
+                                        MainActivity.conting.setText(manageCartResponse.getMessege());
 
                                     } catch (Exception e) {
 
@@ -309,6 +314,7 @@ public class ProdiuctDetailsFragment extends Fragment {
                                     ProductDatailAcitvity.conting.setVisibility(View.VISIBLE);
                                     ProductActivity.conting.setText(manageCartResponse.getMessege());
                                     ProductDatailAcitvity.conting.setText(manageCartResponse.getMessege());
+                                    MainActivity.conting.setText(manageCartResponse.getMessege());
                                 } catch (Exception e) {
 
                                 }

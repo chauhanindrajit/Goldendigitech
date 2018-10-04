@@ -21,6 +21,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import dotcom.com.sam.Activity.MainActivity;
 import dotcom.com.sam.Activity.ProductActivity;
 import dotcom.com.sam.Activity.ProductDatailAcitvity;
 import dotcom.com.sam.Activity.ReviewOrderActivity;
@@ -270,6 +271,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                             editor.putString("COU", cont);
                             editor.apply();
                             try {
+                                MainActivity.conting.setText(cont);
                                 ProductActivity.conting.setText(cont);
                                 ProductDatailAcitvity.conting.setText(cont);
                             } catch (Exception e) {

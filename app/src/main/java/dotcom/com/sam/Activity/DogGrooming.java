@@ -14,10 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -32,10 +34,14 @@ import java.util.List;
 import java.util.Locale;
 
 import dotcom.com.sam.Adapters.DoggroomingListAdapter;
+import dotcom.com.sam.Adapters.DogsearchListAdapter;
 import dotcom.com.sam.Adapters.MatingAdapter;
 import dotcom.com.sam.Adapters.PetOldageListAdapter;
+import dotcom.com.sam.Credentials.Registration;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Response.DiagonsticResponse;
+import dotcom.com.sam.Response.DogGroomingResponse;
+import dotcom.com.sam.Response.DogsearchResponse;
 import dotcom.com.sam.Utils.Constats;
 import dotcom.com.sam.Utils.Utils;
 import dotcom.com.sam.extras.Utilss;
@@ -50,12 +56,18 @@ public class DogGrooming extends AppCompatActivity {
     RecyclerView recyclerView;
 
     private ProgressDialog pDialog;
-    private ArrayList<DiagonsticResponse.ResponseBean> arrSubCateogry;
-    AutoCompleteTextView acTextView;
+    private ArrayList<DogGroomingResponse.ResponseBean> arrSubCateogry;
+    AutoCompleteTextView acTextView, selectbreed, selectage, sleectsize, salonlocation;
     ImageView pdnitm;
     private ArrayAdapter<String> adapter;
     Button searchdoct;
     List<String> locationTypeList = new ArrayList<>();
+    List<String> breedarray = new ArrayList<>();
+    List<String> agearray = new ArrayList<>();
+    List<String> sizearray = new ArrayList<>();
+    List<String> salonarray = new ArrayList<>();
+
+    String pos, sizepos, salonpos;
     ArrayList<String> item = new ArrayList<>();
     Toolbar toolbar;
 
@@ -96,6 +108,11 @@ public class DogGrooming extends AppCompatActivity {
             }
         });
         acTextView = (AutoCompleteTextView) findViewById(R.id.languages);
+        selectbreed = (AutoCompleteTextView) findViewById(R.id.breedlist);
+        selectage = (AutoCompleteTextView) findViewById(R.id.selectage);
+        sleectsize = (AutoCompleteTextView) findViewById(R.id.selectsize);
+        salonlocation = (AutoCompleteTextView) findViewById(R.id.salonloctn);
+
         pdnitm = (ImageView) findViewById(R.id.pdnitm);
         pdnitm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +125,108 @@ public class DogGrooming extends AppCompatActivity {
         loadTypeArrayAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
         acTextView.setThreshold(1);
         acTextView.setAdapter(loadTypeArrayAdapter);
+        acTextView.setOnTouchListener(new View.OnTouchListener() {
 
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                try {
+
+
+                    acTextView.showDropDown();
+                } catch (Exception e) {
+                }
+                return false;
+            }
+        });
+
+        final ArrayAdapter<String> loadTypeArrayAdapter1 = new ArrayAdapter<>(DogGrooming.this, R.layout.custom_spinner_item, breedarray);
+        loadTypeArrayAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+        selectbreed.setThreshold(1);
+        selectbreed.setAdapter(loadTypeArrayAdapter1);
+        selectbreed.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                selectbreed.showDropDown();
+                return false;
+            }
+        });
+
+        final ArrayAdapter<String> loadTypeArrayAdapter2 = new ArrayAdapter<>(DogGrooming.this, R.layout.custom_spinner_item, agearray);
+        loadTypeArrayAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+        selectage.setThreshold(1);
+        selectage.setAdapter(loadTypeArrayAdapter2);
+        agearray.add("<1 Year");
+        agearray.add("1-3 Years");
+        agearray.add("3-5 Years");
+        agearray.add("5-8 Years");
+        agearray.add("8+ Years");
+        selectage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                pos = String.valueOf(i + 1);
+                Log.e("POPSSSS", "onItemClick: " + pos);
+            }
+        });
+        selectage.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                selectage.showDropDown();
+                return false;
+            }
+        });
+        final ArrayAdapter<String> loadTypeArrayAdapter3 = new ArrayAdapter<>(DogGrooming.this, R.layout.custom_spinner_item, sizearray);
+        loadTypeArrayAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+        sleectsize.setThreshold(1);
+        sleectsize.setAdapter(loadTypeArrayAdapter3);
+        sizearray.add("Small (5-11 kg, 6-12 inches)");
+        sizearray.add("Medium (11-20 kg, 12-16 inches)");
+        sizearray.add("Large (20-35 kg, 16-24 inches)");
+        sizearray.add("Giant (35-50 kg, 24-35 inches)");
+        sleectsize.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                sleectsize.showDropDown();
+                return false;
+            }
+        });
+        sleectsize.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                sizepos = String.valueOf(i + 1);
+                Log.e("sizepos", "onItemClick: " + sizepos);
+            }
+        });
+
+        final ArrayAdapter<String> loadTypeArrayAdapter4 = new ArrayAdapter<>(DogGrooming.this, R.layout.custom_spinner_item, salonarray);
+        loadTypeArrayAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+        salonlocation.setThreshold(1);
+        salonlocation.setAdapter(loadTypeArrayAdapter4);
+        salonarray.add("Salon Service");
+        salonarray.add("At Home Service");
+        salonlocation.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                salonlocation.showDropDown();
+                return false;
+            }
+        });
+        salonlocation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                if (i == 0) {
+                    salonpos = "Salon";
+                } else if (i == 1) {
+                    salonpos = "Home";
+                }
+            }
+        });
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item);
         final DoggroomingListAdapter doggroomingListAdapter = new DoggroomingListAdapter(DogGrooming.this, arrSubCateogry);
 
@@ -147,7 +265,14 @@ public class DogGrooming extends AppCompatActivity {
         searchdoct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (validate()) {
+                    String breedselected = selectbreed.getText().toString().trim();
+                    String loc = acTextView.getText().toString().trim();
+                    String ageselctd = pos.toString().trim();
+                    String size = sizepos.toString().trim();
+                    String salonlctn = salonpos.toString().trim();
+                    Searchdoggrooming(breedselected, loc, ageselctd, size, salonlctn);
+                }
                 acTextView.setAdapter(loadTypeArrayAdapter);
                 ObjectAnimator animation = ObjectAnimator.ofFloat(seachlayout, "translationY", -seachlayout.getHeight());
                 animation.setDuration(800);
@@ -178,6 +303,7 @@ public class DogGrooming extends AppCompatActivity {
             }
         });
     }
+
 
     private void setViewVisiblity() {
         if (MainActivity.module_name == Constats.Module.ADOPTED) {// invisible search drawer for adapted
@@ -260,23 +386,25 @@ public class DogGrooming extends AppCompatActivity {
 
     private void checkAcceptTrip() {
         arrSubCateogry = new ArrayList<>();
-
         pDialog = new ProgressDialog(DogGrooming.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
         pDialog.show();
-        final Call<DiagonsticResponse> diagonsticResponseCall = Utilss.getWebService().DIAGONSTIC_RESPONSE_CALL();
-        diagonsticResponseCall.enqueue(new Callback<DiagonsticResponse>() {
+        final Call<DogGroomingResponse> dogGroomingResponseCall = Utilss.getWebService().DOG_GROOMING_RESPONSE_CALL();
+        dogGroomingResponseCall.enqueue(new Callback<DogGroomingResponse>() {
             @Override
-            public void onResponse(Call<DiagonsticResponse> call, Response<DiagonsticResponse> response) {
+            public void onResponse(Call<DogGroomingResponse> call, Response<DogGroomingResponse> response) {
                 pDialog.dismiss();
                 if (response.code() == 200) {
-                    DiagonsticResponse diagonsticResponse = response.body();
+                    DogGroomingResponse dogGroomingResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));
-                    for (int i = 0; i < diagonsticResponse.getResponse().size(); i++) {
-                        locationTypeList.add(diagonsticResponse.getResponse().get(i).getLocation());
+                    for (int i = 0; i < dogGroomingResponse.getResponse().size(); i++) {
+                        locationTypeList.add(String.valueOf(dogGroomingResponse.getResponse().get(i).getSearchLocations()));
+                        for (int j = 0; j < dogGroomingResponse.getResponse().get(i).getGroomingdata().size(); j++) {
+                            breedarray.add(dogGroomingResponse.getResponse().get(i).getGroomingdata().get(j).getBreedName());
+                        }
                         // initList();
-                        DoggroomingListAdapter doggroomingListAdapter = new DoggroomingListAdapter(DogGrooming.this, diagonsticResponse.getResponse());
+                        DoggroomingListAdapter doggroomingListAdapter = new DoggroomingListAdapter(DogGrooming.this, dogGroomingResponse.getResponse());
                         doggroomingListAdapter.getItemCount();
                         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(DogGrooming.this, LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(verticalLayoutManager);
@@ -287,7 +415,7 @@ public class DogGrooming extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<DiagonsticResponse> call, Throwable t) {
+            public void onFailure(Call<DogGroomingResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
 
             }
@@ -295,6 +423,67 @@ public class DogGrooming extends AppCompatActivity {
 
         });
 
+    }
+
+    private void Searchdoggrooming(String breedselected, String loc, String ageselctd, String size, String salonlctn) {
+        arrSubCateogry = new ArrayList<>();
+        pDialog = new ProgressDialog(DogGrooming.this);
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+        final Call<DogsearchResponse> dogsearchResponseCall = Utilss.getWebService().DOGSEARCH_RESPONSE_CALL(breedselected, ageselctd, size, salonlctn, loc);
+        dogsearchResponseCall.enqueue(new Callback<DogsearchResponse>() {
+            @Override
+            public void onResponse(Call<DogsearchResponse> call, Response<DogsearchResponse> response) {
+                pDialog.dismiss();
+                if (response.code() == 200) {
+                    DogsearchResponse dogGroomingResponse = response.body();
+                    Log.e("dioglist", new GsonBuilder().create().toJson(response));
+                    for (int i = 0; i < dogGroomingResponse.getResponse().size(); i++) {
+                        locationTypeList.add(String.valueOf(dogGroomingResponse.getResponse().get(i).getSearchLocations()));
+                        // initList();
+                        DogsearchListAdapter dogsearchListAdapter = new DogsearchListAdapter(DogGrooming.this, dogGroomingResponse.getResponse());
+                        dogsearchListAdapter.getItemCount();
+                        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(DogGrooming.this, LinearLayoutManager.VERTICAL, false);
+                        recyclerView.setLayoutManager(verticalLayoutManager);
+                        recyclerView.setAdapter(dogsearchListAdapter);
+                        //Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DogsearchResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Failedd", Toast.LENGTH_LONG).show();
+
+            }
+
+
+        });
+
+    }
+
+    private boolean validate() {
+
+        if (selectbreed.getText().toString().equals("")) {
+            Toast.makeText(DogGrooming.this, "Please Select Breed name.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (selectage.getText().toString().equals("")) {
+            Toast.makeText(DogGrooming.this, "Please Select Age", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (sleectsize.getText().toString().equals("")) {
+            Toast.makeText(DogGrooming.this, "Please Select Size.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (salonlocation.getText().toString().equals("")) {
+            Toast.makeText(DogGrooming.this, "Please enter salon location.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
 }

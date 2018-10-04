@@ -17,6 +17,7 @@
     <!-- dots active colors -->
 
     <!-- Placeholder colors-->
-    <color name="stay_color">#999999</color>
+    <color name="stay_color">#00bcbcbc</color>
+    <color name="nav_color">#f7f6f6</color>
 
 </resources>

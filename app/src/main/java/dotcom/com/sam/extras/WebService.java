@@ -7,9 +7,14 @@ import dotcom.com.sam.Response.AdoptpetResponse;
 import dotcom.com.sam.Response.BaseResponse;
 import dotcom.com.sam.Response.BuypetResponse;
 import dotcom.com.sam.Response.BuypetfilterResponse;
+import dotcom.com.sam.Response.CatGroomingResponse;
+import dotcom.com.sam.Response.CatsearchResponse;
 import dotcom.com.sam.Response.ChangePassResponse;
 import dotcom.com.sam.Response.DeleteallResponse;
 import dotcom.com.sam.Response.DiagonsticResponse;
+import dotcom.com.sam.Response.DogGroomingResponse;
+import dotcom.com.sam.Response.DogcatpackageResponse;
+import dotcom.com.sam.Response.DogsearchResponse;
 import dotcom.com.sam.Response.ForgotPassResponse;
 import dotcom.com.sam.Response.GetCartResponse;
 import dotcom.com.sam.Response.HomeRespose;
@@ -19,6 +24,7 @@ import dotcom.com.sam.Response.ManageCartResponse;
 import dotcom.com.sam.Response.MatingResponse;
 import dotcom.com.sam.Response.MatingsearchResponse;
 import dotcom.com.sam.Response.MicroChippingRespose;
+import dotcom.com.sam.Response.NewArrivalAllResponse;
 import dotcom.com.sam.Response.NewArrivalResponse;
 import dotcom.com.sam.Response.OldPetResponse;
 import dotcom.com.sam.Response.PaymentResponse;
@@ -197,4 +203,34 @@ public interface WebService {
     @POST("api/ShopByPetVC/AddNewDeliveryAddress")
     Call<AddnewAddressResponse> ADDNEW_ADDRESS_RESPONSE_CALL(@Body AddnewaddressRequest addnewaddressRequest);
 
+    @GET("api/ShopByPetVC/ShopByPetNewArrival?")
+    Call<NewArrivalAllResponse> NEW_ARRIVAL_ALL_RESPONSE_CALL(@Query("New") String New);
+
+
+    @GET("api/ShopByPetVC/NewArrivalAllData/{New}")
+    Call<ProductResponse> RESPONSE_CALL(@Path("New") String New);
+
+    @GET("api/ShopByPetVC/DOgGroomingAllData")
+    Call<DogGroomingResponse> DOG_GROOMING_RESPONSE_CALL();
+
+    @GET("api/ShopByPetVC/CatGroomingAlldata")
+    Call<CatGroomingResponse> CAT_GROOMING_RESPONSE_CALL();
+
+    @GET("api/ShopByPetVC/getDogGroomingSearch?")
+    Call<DogsearchResponse> DOGSEARCH_RESPONSE_CALL(@Query("Breed") String breed,
+                                                    @Query("Age") String age,
+                                                    @Query("Size") String size,
+                                                    @Query("ServiceAt") String serviceat,
+                                                    @Query("Location") String location
+    );
+
+    @GET("api/ShopByPetVC/getCatGroomingSearch?")
+    Call<CatsearchResponse> CATSEARCH_RESPONSE_CALL(@Query("Breed") String breed,
+                                                    @Query("Age") String age,
+                                                    @Query("Size") String size,
+                                                    @Query("ServiceAt") String serviceat,
+                                                    @Query("Location") String location
+    );
+    @GET("api/ShopByPetVC/GroomingDetailsdata?")
+    Call<DogcatpackageResponse> DOGCATPACKAGE_RESPONSE_CALL(@Query("id") String id);
 }

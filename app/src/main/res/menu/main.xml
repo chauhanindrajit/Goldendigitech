@@ -7,6 +7,6 @@
     <item android:id="@+id/action_cart"
           android:title="@string/action_cart"
           app:showAsAction="always"
-          tools:showIn="@layout/activity_product"
+          tools:showIn="@layout/activity_main"
           android:icon="@drawable/shooping"/>
 </menu>

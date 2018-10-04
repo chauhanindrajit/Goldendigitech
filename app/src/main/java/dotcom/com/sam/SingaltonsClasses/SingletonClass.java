@@ -81,6 +81,8 @@ public class SingletonClass {
     private String USERID;
     private String FinalPrice;
     private String SavePrice;
+    private String packagename;
+    private  String subcat;
     private int fav;
     private int POSITIONID;
     private boolean isIncart;
@@ -431,5 +433,21 @@ public class SingletonClass {
 
     public void setSavePrice(String savePrice) {
         SavePrice = savePrice;
+    }
+
+    public String getSubcat() {
+        return subcat;
+    }
+
+    public void setSubcat(String subcat) {
+        this.subcat = subcat;
+    }
+
+    public String getPackagename() {
+        return packagename;
+    }
+
+    public void setPackagename(String packagename) {
+        this.packagename = packagename;
     }
 }

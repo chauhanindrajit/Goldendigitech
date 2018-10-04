@@ -58,6 +58,7 @@ public class ProductDatailAcitvity extends AppCompatActivity {
             conting.setVisibility(View.GONE);
         } else {
             conting.setText(String.valueOf(value));
+            MainActivity.conting.setText(String.valueOf(value));
             // user id is available
         }
         // conting.setText(String.valueOf(cart_count));

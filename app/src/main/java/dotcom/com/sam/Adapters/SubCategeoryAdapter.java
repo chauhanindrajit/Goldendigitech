@@ -18,6 +18,7 @@ import java.util.List;
 import dotcom.com.sam.Activity.ProductActivity;
 import dotcom.com.sam.R;
 import dotcom.com.sam.SingaltonsClasses.CategorySingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.SingaltonsClasses.SubcategorySingalton;
 import dotcom.com.sam.Utils.Utils;
 import dotcom.com.sam.extras.Constants;
@@ -69,6 +70,7 @@ public class SubCategeoryAdapter extends RecyclerView.Adapter<SubCategeoryAdapte
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    SingletonClass.getInstance().setSubcat("Subcat");
                     SubcategorySingalton.getInstance().setSc_Id(arrTemp.get(position).getSc_Id());
                     CategorySingalton.getInstance().setCategosryName(arrTemp.get(position).getCategosryName());
                     SubcategorySingalton.getInstance().setSubCategoryName(arrTemp.get(position).getSubCategoryName());

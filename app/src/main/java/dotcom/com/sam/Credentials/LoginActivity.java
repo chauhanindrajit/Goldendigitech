@@ -23,6 +23,7 @@ import com.google.gson.GsonBuilder;
 import dotcom.com.sam.Activity.DogGrooming;
 import dotcom.com.sam.Activity.MainActivity;
 import dotcom.com.sam.R;
+import dotcom.com.sam.Response.GetCartResponse;
 import dotcom.com.sam.Response.LoginResponse;
 import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.Utils.ESPreferences;
@@ -136,13 +137,10 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("KEY", String.valueOf(String.valueOf(loginResponse.getRJ_ID())));
                     editor.apply();
-
-
                     loginstatus = "true";
                     new UserSessionManager(getApplicationContext()).setUrlData(getApplicationContext(), loginstatus, UserSessionManager.LOGIN_STATUS);
                     Utils.saveUserPreference(LoginActivity.this, Constants.FIRST_NAME, loginResponse.getFullName());
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
+                    getCartList();
                 } else if (response.code() == 404) {
                     pDialog.dismiss();
                     Utils.customMessage(LoginActivity.this, "Please check email id and password.!!");
@@ -218,5 +216,54 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+    private void getCartList() {
+        //    pDialog = new ProgressDialog(Categeory.this);
+//        pDialog.setMessage("Please wait...");
+//        pDialog.setCancelable(false);
+//        pDialog.show();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        String value = sharedPreferences.getString("KEY", "");
+        Call<GetCartResponse> getCartResponseCall = Utilss.getWebService().getAllCartList(Integer.valueOf((value)));
+        Log.e("115 ", ": :" + getCartResponseCall.request().url().toString());
+        getCartResponseCall.enqueue(new Callback<GetCartResponse>() {
+            @Override
+            public void onResponse(Call<GetCartResponse> call, Response<GetCartResponse> response) {
+                GetCartResponse getCartResponse = response.body();
+                Intent startActivity = null;
+                if (response.code() == 200) {
+                    if (getCartResponse.getStatus() == 200) {
+                        // pDialog.dismiss();
+                        // ESPreferences.SSP().putLong(CART_COUNT, Long.valueOf(getCartResponse.getResponse().size()));
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        String cont = String.valueOf(getCartResponse.getResponse().size());
+                        editor.putString("COU", cont);
+                        editor.apply();
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
+
+                    } else if (getCartResponse.getStatus() == 404) {
+                        startActivity = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(startActivity);
+                        finish();
+                    } else if (response.code() == 404) {
+
+                    } else if (response.code() == 500) {
+                        Utils.timeOutDialog(LoginActivity.this, true);
+                    } else {
+                        Utils.customMessage(LoginActivity.this, "Something went wrong.");
+                    }
+
+                    //pDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetCartResponse> call, Throwable t) {
+                // pDialog.dismiss();
+                Utils.customMessage(LoginActivity.this, "Something went wrong.");
+            }
+        });
     }
 }
