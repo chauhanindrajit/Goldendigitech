@@ -40,6 +40,7 @@ public class Doggromingprofile extends AppCompatActivity {
     ImageView imag;
     Context context;
     RecyclerView recyclerView;
+    List<DogcatpackageResponse.ResponseBean> mainrespose = new ArrayList<>();
     public static List<DogcatpackageResponse.ResponseBean.GroomingPackagesBean> arrSubCateogry;
     private ProgressDialog pDialog;
     String ID;
@@ -90,7 +91,7 @@ public class Doggromingprofile extends AppCompatActivity {
     }
 
     void setRecyclerView() {
-        PackageAdapter packageAdapter = new PackageAdapter(this, arrSubCateogry);
+        PackageAdapter packageAdapter = new PackageAdapter(this, arrSubCateogry, mainrespose);
         packageAdapter.getItemCount();
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(Doggromingprofile.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(verticalLayoutManager);
@@ -113,7 +114,7 @@ public class Doggromingprofile extends AppCompatActivity {
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));
                     for (int i = 0; i < dogcatpackageResponse.getResponse().size(); i++) {
 
-                        PackageAdapter packageAdapter = new PackageAdapter(Doggromingprofile.this, dogcatpackageResponse.getResponse().get(i).getGroomingPackages());
+                        PackageAdapter packageAdapter = new PackageAdapter(Doggromingprofile.this, dogcatpackageResponse.getResponse().get(i).getGroomingPackages(),dogcatpackageResponse.getResponse());
                         packageAdapter.getItemCount();
                         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(Doggromingprofile.this, LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(verticalLayoutManager);

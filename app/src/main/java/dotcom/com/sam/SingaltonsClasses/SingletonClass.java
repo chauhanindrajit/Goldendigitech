@@ -36,18 +36,23 @@ public class SingletonClass {
     public ArrayList<Integer> getBrandIdList() {
         return brand;
     }
+
     public ArrayList<Integer> getCatidlist() {
         return catidlist;
     }
+
     public ArrayList<Integer> productid() {
         return PID;
     }
+
     public ArrayList<Integer> getBreedidlist() {
         return breedidlist;
     }
+
     public ArrayList<String> getPricename() {
         return pricename;
     }
+
     public ArrayList<String> getAgename() {
         return Agename;
     }
@@ -72,6 +77,7 @@ public class SingletonClass {
     public void setFilterApply(boolean filterApply) {
         isFilterApply = filterApply;
     }
+
     private String Date;
     private String Time;
     private String Activityname;
@@ -82,12 +88,20 @@ public class SingletonClass {
     private String FinalPrice;
     private String SavePrice;
     private String packagename;
-    private  String subcat;
+    private String subcat;
     private int fav;
     private int POSITIONID;
     private boolean isIncart;
     private boolean newadd;
     boolean isFilterApply;
+    private String Packageid;
+    private String Salonorhome;
+    private String Addonservices;
+    private String Owneraddress;
+    private String Addonprice;
+    private String dogcatpackagename;
+    private String addonservicesprice;
+
 
     //-----------------brand filter
 
@@ -152,6 +166,7 @@ public class SingletonClass {
             }
         }
     }
+
     public boolean addBreedId(int id) {
         Log.e(TAG, "brand size : " + breedidlist.size());
         check = false;
@@ -295,7 +310,7 @@ public class SingletonClass {
 
 
     //---------------sort by price
-    String sortBy="";
+    String sortBy = "";
 
     public String getSortBy() {
         return sortBy;
@@ -449,5 +464,61 @@ public class SingletonClass {
 
     public void setPackagename(String packagename) {
         this.packagename = packagename;
+    }
+
+    public String getPackageid() {
+        return Packageid;
+    }
+
+    public void setPackageid(String packageid) {
+        Packageid = packageid;
+    }
+
+    public String getSalonorhome() {
+        return Salonorhome;
+    }
+
+    public void setSalonorhome(String salonorhome) {
+        Salonorhome = salonorhome;
+    }
+
+    public String getAddonservices() {
+        return Addonservices;
+    }
+
+    public void setAddonservices(String addonservices) {
+        Addonservices = addonservices;
+    }
+
+    public String getOwneraddress() {
+        return Owneraddress;
+    }
+
+    public void setOwneraddress(String owneraddress) {
+        Owneraddress = owneraddress;
+    }
+
+    public String getAddonprice() {
+        return Addonprice;
+    }
+
+    public void setAddonprice(String addonprice) {
+        Addonprice = addonprice;
+    }
+
+    public String getDogcatpackagename() {
+        return dogcatpackagename;
+    }
+
+    public void setDogcatpackagename(String dogcatpackagename) {
+        this.dogcatpackagename = dogcatpackagename;
+    }
+
+    public String getAddonservicesprice() {
+        return addonservicesprice;
+    }
+
+    public void setAddonservicesprice(String addonservicesprice) {
+        this.addonservicesprice = addonservicesprice;
     }
 }

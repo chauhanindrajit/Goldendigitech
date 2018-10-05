@@ -3,7 +3,11 @@ package dotcom.com.sam.Adapters;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,8 +18,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +34,7 @@ import dotcom.com.sam.Activity.GroomingLastpage;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Response.DogcatpackageResponse;
 import dotcom.com.sam.SingaltonsClasses.SingletonClass;
+import dotcom.com.sam.Utils.PatientDetails;
 import dotcom.com.sam.Utils.Utils;
 
 /**
@@ -39,11 +47,15 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
     ArrayList<String> stringList = new ArrayList<>();
     public static List<DogcatpackageResponse.ResponseBean.GroomingPackagesBean> arrSubCateogry;
     List<String> breedarray = new ArrayList<>();
-    List<String> agearray = new ArrayList<>();
+    List<DogcatpackageResponse.ResponseBean> mainrespose = new ArrayList<>();
+    private String visitype = "";
+    private String addonprice;
 
-    public PackageAdapter(Context context, List<DogcatpackageResponse.ResponseBean.GroomingPackagesBean> response) {
+
+    public PackageAdapter(Context context, List<DogcatpackageResponse.ResponseBean.GroomingPackagesBean> response, List<DogcatpackageResponse.ResponseBean> dogcatpackageResponseResponse) {
         this.context = context;
         this.arrSubCateogry = response;
+        this.mainrespose = dogcatpackageResponseResponse;
 
     }
 
@@ -73,18 +85,51 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
             }
 
         };
+        holder.salonorhomegrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                RadioButton checkedRadioButton = (RadioButton) group.findViewById(checkedId);
+                boolean isChecked = checkedRadioButton.isChecked();
+                if (isChecked) {
+                    visitype = String.valueOf(checkedRadioButton.getText());
+                    Log.e(" Gender Group ", "onCheckedChanged: " + checkedRadioButton.getText());
+                }
+            }
+        });
+
+
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(context, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                if (visitype.toString().equals("")) {
+                    Toast.makeText(context, "Please Select Salon or home Price.", Toast.LENGTH_LONG).show();
+                } else if (holder.addonservices.getText().toString().equals("")) {
+                    Toast.makeText(context, "Please Select Add on services.", Toast.LENGTH_LONG).show();
+                } else {
+                    SingletonClass.getInstance().setPackageid(String.valueOf(arrSubCateogry.get(position).getG_Packages_Id()));
+                    SingletonClass.getInstance().setSalonorhome(visitype);
+                    SingletonClass.getInstance().setAddonservices(holder.addonservices.getText().toString());
+                    SingletonClass.getInstance().setOwneraddress(mainrespose.get(position).getOwnerAddress());
+                    SingletonClass.getInstance().setAddonprice(addonprice);
+                    SingletonClass.getInstance().setDogcatpackagename(arrSubCateogry.get(position).getPackageTitle());
+                    new DatePickerDialog(context, date, myCalendar
+                            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                            myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                }
             }
         });
         holder.packagename.setText(arrSubCateogry.get(position).getPackageTitle());
         holder.servicesincludes.setText(arrSubCateogry.get(position).getServicesIncluded());
         holder.salonprice.setText(String.valueOf(arrSubCateogry.get(position).getSalonPrice()));
         holder.homeprice.setText(String.valueOf(arrSubCateogry.get(position).getAtHomePrice()));
+        // holder.home.setText(String.valueOf("At home Price  : "+arrSubCateogry.get(position).getAtHomePrice()));
+        // holder.salon.setText(String.valueOf("Salon Price  : "+arrSubCateogry.get(position).getSalonPrice()));
+        holder.home.setText(Html.fromHtml("<br/><b><font color='" + Color.BLACK + "'>" + "At home Price : " + "</font></b>" +
+                "<big> <font color='" + Color.RED + "'>" + arrSubCateogry.get(position).getAtHomePrice() + "</font>" + "<br />"
+        ));
+        holder.salon.setText(Html.fromHtml("<br/><b><font color='" + Color.BLACK + "'>" + "Salon Price : " + "</font></b>" +
+                "<big> <font color='" + Color.RED + "'>" + arrSubCateogry.get(position).getSalonPrice() + "</font>" + "<br/>"
+        ));
         if (breedarray.size() > 0) {
             breedarray.clear();
         }
@@ -102,6 +147,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
                 for (int i = 0; i < arrSubCateogry.get(position).getAddOns().size(); i++) {
                     // breedarray.clear();
                     breedarray.add(arrSubCateogry.get(position).getAddOns().get(i).getAddOnnName());
+                    addonprice = String.valueOf(arrSubCateogry.get(position).getAddOns().get(i).getAddOnAmount());
                 }
 
                 holder.addonservices.showDropDown();
@@ -151,8 +197,9 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
         TextView packagename, servicesincludes, salonprice, homeprice;
         LinearLayout prod;
         Button button;
+        RadioButton salon, home;
         AutoCompleteTextView addonservices;
-
+        RadioGroup salonorhomegrp;
 
         public ViewHOLDER(View itemView) {
             super(itemView);
@@ -161,7 +208,11 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
             salonprice = itemView.findViewById(R.id.salonrate);
             homeprice = itemView.findViewById(R.id.homerate);
             button = itemView.findViewById(R.id.btn_bookpackage);
+            salon = itemView.findViewById(R.id.salonprice);
+            home = itemView.findViewById(R.id.homeprice);
             addonservices = itemView.findViewById(R.id.addonservices);
+            salonorhomegrp = itemView.findViewById(R.id.salonorhomegrp);
+
         }
     }
 

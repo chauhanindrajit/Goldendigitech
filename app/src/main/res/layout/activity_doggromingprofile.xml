@@ -8,7 +8,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize">
 
         <LinearLayout
@@ -82,7 +82,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recylcerview_newarrival"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#ffffff"
                 android:cacheColorHint="@android:color/transparent"
                 android:scrollingCache="false">
