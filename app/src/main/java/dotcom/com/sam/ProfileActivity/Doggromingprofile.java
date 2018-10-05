@@ -119,6 +119,7 @@ public class Doggromingprofile extends AppCompatActivity {
                         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(Doggromingprofile.this, LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(verticalLayoutManager);
                         recyclerView.setAdapter(packageAdapter);
+                        recyclerView.getLayoutManager().setMeasurementCacheEnabled(false);
                     }
                 }
             }
