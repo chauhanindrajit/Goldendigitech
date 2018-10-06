@@ -3,6 +3,7 @@ package dotcom.com.sam.Adapters;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
@@ -34,7 +35,6 @@ import dotcom.com.sam.Activity.GroomingLastpage;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Response.DogcatpackageResponse;
 import dotcom.com.sam.SingaltonsClasses.SingletonClass;
-import dotcom.com.sam.Utils.PatientDetails;
 import dotcom.com.sam.Utils.Utils;
 
 /**
@@ -44,18 +44,20 @@ import dotcom.com.sam.Utils.Utils;
 public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLDER> {
     Context context;
     final Calendar myCalendar = Calendar.getInstance();
-    ArrayList<String> stringList = new ArrayList<>();
+    ArrayList<String> stringList = new ArrayList<String>();
     public static List<DogcatpackageResponse.ResponseBean.GroomingPackagesBean> arrSubCateogry;
     List<String> breedarray = new ArrayList<>();
     List<DogcatpackageResponse.ResponseBean> mainrespose = new ArrayList<>();
     private String visitype = "";
     private String addonprice;
+    private String address;
 
 
-    public PackageAdapter(Context context, List<DogcatpackageResponse.ResponseBean.GroomingPackagesBean> response, List<DogcatpackageResponse.ResponseBean> dogcatpackageResponseResponse) {
+    public PackageAdapter(Context context, List<DogcatpackageResponse.ResponseBean.GroomingPackagesBean> response, List<DogcatpackageResponse.ResponseBean> dogcatpackageResponseResponse, String address) {
         this.context = context;
         this.arrSubCateogry = response;
         this.mainrespose = dogcatpackageResponseResponse;
+        this.address = address;
 
     }
 
@@ -85,6 +87,14 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
             }
 
         };
+//        if(SingletonClass.getInstance().getSalonorhomeradio().equals("Home")){
+//            holder.home.setVisibility(View.VISIBLE);
+//            holder.salon.setVisibility(View.GONE);
+//        }
+//        else if(SingletonClass.getInstance().getSalonorhomeradio().equals("Salon")){
+//            holder.home.setVisibility(View.GONE);
+//            holder.salon.setVisibility(View.VISIBLE);
+//        }
         holder.salonorhomegrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -109,9 +119,19 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
                     SingletonClass.getInstance().setPackageid(String.valueOf(arrSubCateogry.get(position).getG_Packages_Id()));
                     SingletonClass.getInstance().setSalonorhome(visitype);
                     SingletonClass.getInstance().setAddonservices(holder.addonservices.getText().toString());
-                    SingletonClass.getInstance().setOwneraddress(mainrespose.get(position).getOwnerAddress());
+                    SingletonClass.getInstance().setOwneraddress(address);
                     SingletonClass.getInstance().setAddonprice(addonprice);
                     SingletonClass.getInstance().setDogcatpackagename(arrSubCateogry.get(position).getPackageTitle());
+                    SingletonClass.getInstance().setSRRRID(String.valueOf(mainrespose.get(position).getSR_Id()));
+
+
+                    if (stringList.size() > 0) {
+                        stringList.clear();
+                    }
+                    for (int i = 0; i < mainrespose.get(position).getTimeSlot().size(); i++) {
+                        stringList.add(mainrespose.get(position).getTimeSlot().get(i).getBookingTime());
+                    }
+
                     new DatePickerDialog(context, date, myCalendar
                             .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                             myCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -174,21 +194,13 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
     }
 
     void getTime() {
-        Calendar mcurrentTime = Calendar.getInstance();
-        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-        int minute = mcurrentTime.get(Calendar.MINUTE);
-        int second = mcurrentTime.get(Calendar.SECOND);
-        TimePickerDialog mTimePicker;
-        mTimePicker = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                SingletonClass.getInstance().setTime(selectedHour + ":" + selectedMinute);
-                Utils.moveNextWithAnimation(context, GroomingLastpage.class);
-                //starttime.setText(selectedHour + ":" + selectedMinute);
-            }
-        }, hour, minute, false);//Yes 24 hour time
-        mTimePicker.setTitle("Select Time");
-        mTimePicker.show();
+
+
+        Intent i = new Intent(context, GroomingLastpage.class);
+        i.putExtra("mylist", stringList);
+        context.startActivity(i);
+
+
     }
 
     public class ViewHOLDER extends RecyclerView.ViewHolder {

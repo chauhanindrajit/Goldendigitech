@@ -24,6 +24,7 @@ import dotcom.com.sam.R;
 import dotcom.com.sam.Response.DogGroomingResponse;
 import dotcom.com.sam.Response.DogsearchResponse;
 import dotcom.com.sam.SingaltonsClasses.DogSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 
 public class DogsearchListAdapter extends RecyclerView.Adapter<DogsearchListAdapter.VetViewHolder> {
     Context context;
@@ -56,8 +57,10 @@ public class DogsearchListAdapter extends RecyclerView.Adapter<DogsearchListAdap
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 DogSingalton.getInstance().setCenterName(arrSubCateogry.get(position).getCenterName());
                 DogSingalton.getInstance().setImages(arrSubCateogry.get(position).getImages());
+                SingletonClass.getInstance().setPackagename("Dog");
                 ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.imageView, "diagnostic_image");
                 Intent intent = new Intent(context, Doggromingprofile.class);
                 context.startActivity(intent, activityOptions.toBundle());

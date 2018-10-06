@@ -4,11 +4,12 @@ import java.util.List;
 
 public class DogcatpackageResponse {
 
+
     /**
      * success : true
      * Messege : Success
      * status : 200
-     * response : [{"GroomingService_Id":2,"ListingTitle":"Elite Pet Grooming Services","CenterName":"Elite Pet Grooming Services Pvt. Ltd","OwnerName":"Sagar Girase","OwnerPhone":"12345678","OwnerEmail":"adhf@gmfsd.co","OwnerAddress":"Testing adddress ","ListingDesciption":null,"AtHomeFees":null,"SalonFees":null,"SearchLocations":null,"AgeUpto":5,"SizeUpto":4,"ServicesAt":"Salon","OpeningTime":null,"ClosingTime":null,"CloseDays":null,"Images":"01AANew.jpg","CreatedDate":null,"CreatedBy":null,"ModifyDate":null,"ModifyBy":null,"Status":"Active","SR_Id":4,"DeleteStatus":null,"PetType":"Dog","B_Id":null,"B_Ids":null,"GroomingPackages":[{"G_Packages_Id":1,"PackageTitle":"BASIC GROOMING","PackageDescription":"test","ServicesIncluded":"Nail Clipping, Ear Cleaning, Eye Cleaning","SalonPrice":2000,"AtHomePrice":3000,"HomeServices_Included":null,"SR_Id":null,"AddOnn_Id":null,"AddOnn_Ids":null,"Status":null,"DeleteStatus":null,"GroomingService_Id":2,"Pos_priority":null,"AddOns":[{"AddOnnId":1,"AddOnnName":"Ear Cleaning","AddOnAmount":200,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null},{"AddOnnId":2,"AddOnnName":"Nails Clipping","AddOnAmount":300,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null},{"AddOnnId":3,"AddOnnName":"Eye cleaning","AddOnAmount":500,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null}]},{"G_Packages_Id":2,"PackageTitle":"Advanced grooming","PackageDescription":"test","ServicesIncluded":"Nail Clipping, Ear Cleaning, Eye Cleaning","SalonPrice":3000,"AtHomePrice":4000,"HomeServices_Included":null,"SR_Id":null,"AddOnn_Id":null,"AddOnn_Ids":null,"Status":null,"DeleteStatus":null,"GroomingService_Id":2,"Pos_priority":null,"AddOns":[{"AddOnnId":2,"AddOnnName":"Nails Clipping","AddOnAmount":300,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null},{"AddOnnId":3,"AddOnnName":"Eye cleaning","AddOnAmount":500,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null}]},{"G_Packages_Id":3,"PackageTitle":"Premium","PackageDescription":" All Services Description","ServicesIncluded":"All Type","SalonPrice":200,"AtHomePrice":300,"HomeServices_Included":null,"SR_Id":null,"AddOnn_Id":null,"AddOnn_Ids":null,"Status":null,"DeleteStatus":null,"GroomingService_Id":2,"Pos_priority":null,"AddOns":[{"AddOnnId":1,"AddOnnName":"Ear Cleaning","AddOnAmount":200,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null},{"AddOnnId":2,"AddOnnName":"Nails Clipping","AddOnAmount":300,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null},{"AddOnnId":3,"AddOnnName":"Eye cleaning","AddOnAmount":500,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null}]}],"GroomingPackagedata":null,"AddOns":null,"totalAddon":null,"TotalAmount":null,"Groomingdata":null}]
+     * response : [{"GroomingService_Id":2,"ListingTitle":"Elite Pet Grooming Services","CenterName":"Elite Pet Grooming Services Pvt. Ltd","OwnerName":"Sagar Girase","OwnerPhone":"12345678","OwnerEmail":"adhf@gmfsd.co","OwnerAddress":"Testing adddress ","ListingDesciption":null,"AtHomeFees":null,"SalonFees":null,"SearchLocations":null,"AgeUpto":5,"SizeUpto":4,"ServicesAt":"Salon","OpeningTime":null,"ClosingTime":null,"CloseDays":null,"Images":"01AANew.jpg","CreatedDate":null,"CreatedBy":null,"ModifyDate":null,"ModifyBy":null,"Status":"Active","SR_Id":4,"DeleteStatus":null,"PetType":"Dog","B_Id":null,"B_Ids":null,"GroomingPackages":[{"G_Packages_Id":1,"PackageTitle":"BASIC GROOMING","PackageDescription":"test","ServicesIncluded":"Nail Clipping, Ear Cleaning, Eye Cleaning","SalonPrice":2000,"AtHomePrice":3000,"HomeServices_Included":null,"SR_Id":null,"AddOnn_Id":null,"AddOnn_Ids":null,"Status":null,"DeleteStatus":null,"GroomingService_Id":2,"Pos_priority":null,"AddOns":[{"AddOnnId":1,"AddOnnName":"Ear Cleaning","AddOnAmount":200,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null},{"AddOnnId":2,"AddOnnName":"Nails Clipping","AddOnAmount":300,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null},{"AddOnnId":3,"AddOnnName":"Eye cleaning","AddOnAmount":500,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null}]},{"G_Packages_Id":2,"PackageTitle":"Advanced grooming","PackageDescription":"test","ServicesIncluded":"Nail Clipping, Ear Cleaning, Eye Cleaning","SalonPrice":3000,"AtHomePrice":4000,"HomeServices_Included":null,"SR_Id":null,"AddOnn_Id":null,"AddOnn_Ids":null,"Status":null,"DeleteStatus":null,"GroomingService_Id":2,"Pos_priority":null,"AddOns":[{"AddOnnId":2,"AddOnnName":"Nails Clipping","AddOnAmount":300,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null},{"AddOnnId":3,"AddOnnName":"Eye cleaning","AddOnAmount":500,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null}]},{"G_Packages_Id":3,"PackageTitle":"Premium","PackageDescription":" All Services Description","ServicesIncluded":"All Type","SalonPrice":200,"AtHomePrice":300,"HomeServices_Included":null,"SR_Id":null,"AddOnn_Id":null,"AddOnn_Ids":null,"Status":null,"DeleteStatus":null,"GroomingService_Id":2,"Pos_priority":null,"AddOns":[{"AddOnnId":1,"AddOnnName":"Ear Cleaning","AddOnAmount":200,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null},{"AddOnnId":2,"AddOnnName":"Nails Clipping","AddOnAmount":300,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null},{"AddOnnId":3,"AddOnnName":"Eye cleaning","AddOnAmount":500,"SR_Id":null,"G_Package_Id":null,"Status":null,"DeleteStatus":null,"Pos_priority":null}]}],"GroomingPackagedata":null,"AddOns":null,"totalAddon":null,"TotalAmount":null,"Groomingdata":null,"TimeSlot":[{"G_BookingTimeId":1,"BookingTime":"10:00 AM","CreatedDate":null,"CreatedBy":null,"ModifiedDate":null,"ModifiedBy":null,"Status":"Active","DeleteStatus":null,"SR_Id":4,"Field1":null},{"G_BookingTimeId":2,"BookingTime":"11:00 AM","CreatedDate":null,"CreatedBy":null,"ModifiedDate":null,"ModifiedBy":null,"Status":"Active","DeleteStatus":null,"SR_Id":4,"Field1":null},{"G_BookingTimeId":3,"BookingTime":"12:00 PM","CreatedDate":null,"CreatedBy":null,"ModifiedDate":null,"ModifiedBy":null,"Status":"Active","DeleteStatus":null,"SR_Id":4,"Field1":null},{"G_BookingTimeId":4,"BookingTime":"01:00 PM","CreatedDate":null,"CreatedBy":null,"ModifiedDate":null,"ModifiedBy":null,"Status":"Active","DeleteStatus":null,"SR_Id":4,"Field1":null},{"G_BookingTimeId":5,"BookingTime":"02:00 PM","CreatedDate":null,"CreatedBy":null,"ModifiedDate":null,"ModifiedBy":null,"Status":"Active","DeleteStatus":null,"SR_Id":4,"Field1":null}]}]
      */
 
     private boolean success;
@@ -84,6 +85,7 @@ public class DogcatpackageResponse {
          * totalAddon : null
          * TotalAmount : null
          * Groomingdata : null
+         * TimeSlot : [{"G_BookingTimeId":1,"BookingTime":"10:00 AM","CreatedDate":null,"CreatedBy":null,"ModifiedDate":null,"ModifiedBy":null,"Status":"Active","DeleteStatus":null,"SR_Id":4,"Field1":null},{"G_BookingTimeId":2,"BookingTime":"11:00 AM","CreatedDate":null,"CreatedBy":null,"ModifiedDate":null,"ModifiedBy":null,"Status":"Active","DeleteStatus":null,"SR_Id":4,"Field1":null},{"G_BookingTimeId":3,"BookingTime":"12:00 PM","CreatedDate":null,"CreatedBy":null,"ModifiedDate":null,"ModifiedBy":null,"Status":"Active","DeleteStatus":null,"SR_Id":4,"Field1":null},{"G_BookingTimeId":4,"BookingTime":"01:00 PM","CreatedDate":null,"CreatedBy":null,"ModifiedDate":null,"ModifiedBy":null,"Status":"Active","DeleteStatus":null,"SR_Id":4,"Field1":null},{"G_BookingTimeId":5,"BookingTime":"02:00 PM","CreatedDate":null,"CreatedBy":null,"ModifiedDate":null,"ModifiedBy":null,"Status":"Active","DeleteStatus":null,"SR_Id":4,"Field1":null}]
          */
 
         private int GroomingService_Id;
@@ -120,6 +122,7 @@ public class DogcatpackageResponse {
         private Object TotalAmount;
         private Object Groomingdata;
         private List<GroomingPackagesBean> GroomingPackages;
+        private List<TimeSlotBean> TimeSlot;
 
         public int getGroomingService_Id() {
             return GroomingService_Id;
@@ -393,6 +396,14 @@ public class DogcatpackageResponse {
             this.GroomingPackages = GroomingPackages;
         }
 
+        public List<TimeSlotBean> getTimeSlot() {
+            return TimeSlot;
+        }
+
+        public void setTimeSlot(List<TimeSlotBean> TimeSlot) {
+            this.TimeSlot = TimeSlot;
+        }
+
         public static class GroomingPackagesBean {
             /**
              * G_Packages_Id : 1
@@ -632,6 +643,112 @@ public class DogcatpackageResponse {
                 public void setPos_priority(Object Pos_priority) {
                     this.Pos_priority = Pos_priority;
                 }
+            }
+        }
+
+        public static class TimeSlotBean {
+            /**
+             * G_BookingTimeId : 1
+             * BookingTime : 10:00 AM
+             * CreatedDate : null
+             * CreatedBy : null
+             * ModifiedDate : null
+             * ModifiedBy : null
+             * Status : Active
+             * DeleteStatus : null
+             * SR_Id : 4
+             * Field1 : null
+             */
+
+            private int G_BookingTimeId;
+            private String BookingTime;
+            private Object CreatedDate;
+            private Object CreatedBy;
+            private Object ModifiedDate;
+            private Object ModifiedBy;
+            private String Status;
+            private Object DeleteStatus;
+            private int SR_Id;
+            private Object Field1;
+
+            public int getG_BookingTimeId() {
+                return G_BookingTimeId;
+            }
+
+            public void setG_BookingTimeId(int G_BookingTimeId) {
+                this.G_BookingTimeId = G_BookingTimeId;
+            }
+
+            public String getBookingTime() {
+                return BookingTime;
+            }
+
+            public void setBookingTime(String BookingTime) {
+                this.BookingTime = BookingTime;
+            }
+
+            public Object getCreatedDate() {
+                return CreatedDate;
+            }
+
+            public void setCreatedDate(Object CreatedDate) {
+                this.CreatedDate = CreatedDate;
+            }
+
+            public Object getCreatedBy() {
+                return CreatedBy;
+            }
+
+            public void setCreatedBy(Object CreatedBy) {
+                this.CreatedBy = CreatedBy;
+            }
+
+            public Object getModifiedDate() {
+                return ModifiedDate;
+            }
+
+            public void setModifiedDate(Object ModifiedDate) {
+                this.ModifiedDate = ModifiedDate;
+            }
+
+            public Object getModifiedBy() {
+                return ModifiedBy;
+            }
+
+            public void setModifiedBy(Object ModifiedBy) {
+                this.ModifiedBy = ModifiedBy;
+            }
+
+            public String getStatus() {
+                return Status;
+            }
+
+            public void setStatus(String Status) {
+                this.Status = Status;
+            }
+
+            public Object getDeleteStatus() {
+                return DeleteStatus;
+            }
+
+            public void setDeleteStatus(Object DeleteStatus) {
+                this.DeleteStatus = DeleteStatus;
+            }
+
+            public int getSR_Id() {
+                return SR_Id;
+            }
+
+            public void setSR_Id(int SR_Id) {
+                this.SR_Id = SR_Id;
+            }
+
+            public Object getField1() {
+                return Field1;
+            }
+
+            public void setField1(Object Field1) {
+                this.Field1 = Field1;
             }
         }
     }

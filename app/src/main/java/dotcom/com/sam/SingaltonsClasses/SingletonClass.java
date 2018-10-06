@@ -101,7 +101,9 @@ public class SingletonClass {
     private String Addonprice;
     private String dogcatpackagename;
     private String addonservicesprice;
-
+    private String salonorhomeradio;
+    private String SRRRID;
+    ArrayList<String> timeasper = new ArrayList<>();
 
     //-----------------brand filter
 
@@ -520,5 +522,21 @@ public class SingletonClass {
 
     public void setAddonservicesprice(String addonservicesprice) {
         this.addonservicesprice = addonservicesprice;
+    }
+
+    public String getSalonorhomeradio() {
+        return salonorhomeradio;
+    }
+
+    public void setSalonorhomeradio(String salonorhomeradio) {
+        this.salonorhomeradio = salonorhomeradio;
+    }
+
+    public String getSRRRID() {
+        return SRRRID;
+    }
+
+    public void setSRRRID(String SRRRID) {
+        this.SRRRID = SRRRID;
     }
 }

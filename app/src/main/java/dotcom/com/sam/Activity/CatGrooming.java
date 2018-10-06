@@ -42,6 +42,7 @@ import dotcom.com.sam.Response.CatGroomingResponse;
 import dotcom.com.sam.Response.CatsearchResponse;
 import dotcom.com.sam.Response.DiagonsticResponse;
 import dotcom.com.sam.Response.DogsearchResponse;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.Utils.Constats;
 import dotcom.com.sam.Utils.Utils;
 import dotcom.com.sam.extras.Utilss;
@@ -66,7 +67,7 @@ public class CatGrooming extends AppCompatActivity {
     List<String> agearray = new ArrayList<>();
     List<String> sizearray = new ArrayList<>();
     List<String> salonarray = new ArrayList<>();
-
+    String athomeoratsalon;
     String pos, sizepos, salonpos;
     ArrayList<String> item = new ArrayList<>();
     Toolbar toolbar;
@@ -258,6 +259,12 @@ public class CatGrooming extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(validate()){
+                    if(salonpos.equals("Salon")){
+                        athomeoratsalon = "Salon";
+                    }else if(salonpos.equals("Home")){
+                        // SingletonClass.getInstance().setSalonorhomeradio("Home");
+                        athomeoratsalon = "Home";
+                    }
                     String breedselected = selectbreed.getText().toString().trim();
                     String loc = acTextView.getText().toString().trim();
                     String ageselctd = pos.toString().trim();
@@ -434,6 +441,11 @@ public class CatGrooming extends AppCompatActivity {
                     for (int i = 0; i < catsearchResponse.getResponse().size(); i++) {
                         //                        locationTypeList.add(String.valueOf(catsearchResponse.getResponse().get(i).getSearchLocations()));
                         //                        // initList();
+                        if(salonpos.equals("Salon")){
+                            SingletonClass.getInstance().setSalonorhomeradio("Salon");
+                        }else if(salonpos.equals("Home")){
+                            SingletonClass.getInstance().setSalonorhomeradio("Home");
+                        }
                         CatsearchListAdapter catsearchListAdapter = new CatsearchListAdapter(CatGrooming.this, catsearchResponse.getResponse());
                         catsearchListAdapter.getItemCount();
                         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(CatGrooming.this, LinearLayoutManager.VERTICAL, false);

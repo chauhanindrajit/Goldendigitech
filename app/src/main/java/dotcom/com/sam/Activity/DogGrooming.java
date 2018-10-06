@@ -36,12 +36,14 @@ import java.util.Locale;
 import dotcom.com.sam.Adapters.DoggroomingListAdapter;
 import dotcom.com.sam.Adapters.DogsearchListAdapter;
 import dotcom.com.sam.Adapters.MatingAdapter;
+import dotcom.com.sam.Adapters.PackageAdapter;
 import dotcom.com.sam.Adapters.PetOldageListAdapter;
 import dotcom.com.sam.Credentials.Registration;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Response.DiagonsticResponse;
 import dotcom.com.sam.Response.DogGroomingResponse;
 import dotcom.com.sam.Response.DogsearchResponse;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.Utils.Constats;
 import dotcom.com.sam.Utils.Utils;
 import dotcom.com.sam.extras.Utilss;
@@ -66,7 +68,7 @@ public class DogGrooming extends AppCompatActivity {
     List<String> agearray = new ArrayList<>();
     List<String> sizearray = new ArrayList<>();
     List<String> salonarray = new ArrayList<>();
-
+    String athomeoratsalon;
     String pos, sizepos, salonpos;
     ArrayList<String> item = new ArrayList<>();
     Toolbar toolbar;
@@ -266,6 +268,12 @@ public class DogGrooming extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (validate()) {
+                    if(salonpos.equals("Salon")){
+                       athomeoratsalon = "Salon";
+                    }else if(salonpos.equals("Home")){
+                       // SingletonClass.getInstance().setSalonorhomeradio("Home");
+                        athomeoratsalon = "Home";
+                    }
                     String breedselected = selectbreed.getText().toString().trim();
                     String loc = acTextView.getText().toString().trim();
                     String ageselctd = pos.toString().trim();
@@ -442,6 +450,7 @@ public class DogGrooming extends AppCompatActivity {
                     for (int i = 0; i < dogGroomingResponse.getResponse().size(); i++) {
                         locationTypeList.add(String.valueOf(dogGroomingResponse.getResponse().get(i).getSearchLocations()));
                         // initList();
+
                         DogsearchListAdapter dogsearchListAdapter = new DogsearchListAdapter(DogGrooming.this, dogGroomingResponse.getResponse());
                         dogsearchListAdapter.getItemCount();
                         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(DogGrooming.this, LinearLayoutManager.VERTICAL, false);

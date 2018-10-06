@@ -10,6 +10,7 @@ import dotcom.com.sam.Response.BuypetfilterResponse;
 import dotcom.com.sam.Response.CatGroomingResponse;
 import dotcom.com.sam.Response.CatsearchResponse;
 import dotcom.com.sam.Response.ChangePassResponse;
+import dotcom.com.sam.Response.DateandtimeResponse;
 import dotcom.com.sam.Response.DeleteallResponse;
 import dotcom.com.sam.Response.DiagonsticResponse;
 import dotcom.com.sam.Response.DogGroomingResponse;
@@ -231,6 +232,13 @@ public interface WebService {
                                                     @Query("ServiceAt") String serviceat,
                                                     @Query("Location") String location
     );
+
     @GET("api/ShopByPetVC/GroomingDetailsdata?")
     Call<DogcatpackageResponse> DOGCATPACKAGE_RESPONSE_CALL(@Query("id") String id);
+
+    @GET("api/ShopByPetVC/TimeSlotCheack?")
+    Call<DateandtimeResponse> DATEANDTIME_RESPONSE_CALL(@Query("Times") String time,
+                                                        @Query("SRID") String srid,
+                                                        @Query("Dates") String date
+    );
 }

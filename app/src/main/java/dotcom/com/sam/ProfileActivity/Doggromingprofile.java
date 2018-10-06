@@ -44,6 +44,8 @@ public class Doggromingprofile extends AppCompatActivity {
     public static List<DogcatpackageResponse.ResponseBean.GroomingPackagesBean> arrSubCateogry;
     private ProgressDialog pDialog;
     String ID;
+    String salonorhome;
+    String address;
     List<String> agearray = new ArrayList<>();
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -74,10 +76,12 @@ public class Doggromingprofile extends AppCompatActivity {
         if (SingletonClass.getInstance().getPackagename().equals("Cat")) {
             cntnm.setText(CatSingalton.getInstance().getCenterName());
             ID = String.valueOf(CatSingalton.getInstance().getGroomingService_Id());
+            salonorhome=SingletonClass.getInstance().getSalonorhomeradio();
             checkAcceptTrip(ID);
         } else if (SingletonClass.getInstance().getPackagename().equals("Dog")) {
             cntnm.setText(DogSingalton.getInstance().getCenterName());
             ID = String.valueOf(DogSingalton.getInstance().getGroomingService_Id());
+            salonorhome=SingletonClass.getInstance().getSalonorhomeradio();
             checkAcceptTrip(ID);
         }
         Log.e("IDDD", "onCreate: " + ID);
@@ -91,7 +95,7 @@ public class Doggromingprofile extends AppCompatActivity {
     }
 
     void setRecyclerView() {
-        PackageAdapter packageAdapter = new PackageAdapter(this, arrSubCateogry, mainrespose);
+        PackageAdapter packageAdapter = new PackageAdapter(this, arrSubCateogry, mainrespose, address);
         packageAdapter.getItemCount();
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(Doggromingprofile.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(verticalLayoutManager);
@@ -113,8 +117,8 @@ public class Doggromingprofile extends AppCompatActivity {
                     DogcatpackageResponse dogcatpackageResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));
                     for (int i = 0; i < dogcatpackageResponse.getResponse().size(); i++) {
-
-                        PackageAdapter packageAdapter = new PackageAdapter(Doggromingprofile.this, dogcatpackageResponse.getResponse().get(i).getGroomingPackages(),dogcatpackageResponse.getResponse());
+                        address=dogcatpackageResponse.getResponse().get(i).getOwnerAddress();
+                        PackageAdapter packageAdapter = new PackageAdapter(Doggromingprofile.this, dogcatpackageResponse.getResponse().get(i).getGroomingPackages(),dogcatpackageResponse.getResponse(),address);
                         packageAdapter.getItemCount();
                         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(Doggromingprofile.this, LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(verticalLayoutManager);

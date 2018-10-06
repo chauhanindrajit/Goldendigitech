@@ -91,7 +91,7 @@
             android:name=".ProfileActivity.VaccinationProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.GroomingService"
+            android:name=".Credentials.Splash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -111,7 +111,7 @@
         <activity android:name=".ProfileActivity.Doggromingprofile" />
         <activity android:name=".Activity.CatGrooming" />
         <activity android:name=".ProfileActivity.Catgromingprofile" />
-        <!--<activity android:name=".Activity.GroomingService" />-->
+        <activity android:name=".Activity.GroomingService" />
         <activity android:name=".Activity.TrainigServices" />
         <activity android:name=".Activity.MicroChipping" />
         <activity android:name=".Activity.PetSitterWalking" />

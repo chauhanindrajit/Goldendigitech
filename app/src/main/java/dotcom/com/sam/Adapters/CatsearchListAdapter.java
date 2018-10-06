@@ -24,6 +24,7 @@ import dotcom.com.sam.R;
 import dotcom.com.sam.Response.CatGroomingResponse;
 import dotcom.com.sam.Response.CatsearchResponse;
 import dotcom.com.sam.SingaltonsClasses.CatSingalton;
+import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 
 public class CatsearchListAdapter extends RecyclerView.Adapter<CatsearchListAdapter.VetViewHolder> {
     Context context;
@@ -61,6 +62,7 @@ public class CatsearchListAdapter extends RecyclerView.Adapter<CatsearchListAdap
 
                 CatSingalton.getInstance().setCenterName(arrSubCateogry.get(position).getCenterName());
                 CatSingalton.getInstance().setImages(arrSubCateogry.get(position).getImages());
+                SingletonClass.getInstance().setPackagename("Cat");
 //                DiagonsticSingalton.getInstance().setSampleType(arrSubCateogry.get(position).getSampleType());
 //                DiagonsticSingalton.getInstance().setSampleCollectionTimeing(arrSubCateogry.get(position).getSampleCollectionTimeing());
 //                DiagonsticSingalton.getInstance().setPetsType(arrSubCateogry.get(position).getPetsType());
