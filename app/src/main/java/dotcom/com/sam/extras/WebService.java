@@ -18,6 +18,7 @@ import dotcom.com.sam.Response.DogcatpackageResponse;
 import dotcom.com.sam.Response.DogsearchResponse;
 import dotcom.com.sam.Response.ForgotPassResponse;
 import dotcom.com.sam.Response.GetCartResponse;
+import dotcom.com.sam.Response.GroomingFinalBookingResponse;
 import dotcom.com.sam.Response.HomeRespose;
 import dotcom.com.sam.Response.IncrDecResponse;
 import dotcom.com.sam.Response.LoginResponse;
@@ -46,6 +47,7 @@ import dotcom.com.sam.Response.WalkingsearchResponse;
 import dotcom.com.sam.request.AddnewaddressRequest;
 import dotcom.com.sam.request.ChangePassRequest;
 import dotcom.com.sam.request.ForgetPassRequest;
+import dotcom.com.sam.request.GroomingfinalRequest;
 import dotcom.com.sam.request.ManageCartRequest;
 import dotcom.com.sam.request.ProductfilterdataRequest;
 import dotcom.com.sam.request.RegistrationRequest;
@@ -241,4 +243,7 @@ public interface WebService {
                                                         @Query("SRID") String srid,
                                                         @Query("Dates") String date
     );
+
+    @POST("api/ShopByPetVC/GroomingAppoinmentBooking")
+    Call<GroomingFinalBookingResponse> GROOMING_FINAL_BOOKING_RESPONSE_CALL(@Body GroomingfinalRequest groomingfinalRequest);
 }

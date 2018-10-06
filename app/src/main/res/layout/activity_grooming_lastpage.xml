@@ -189,6 +189,7 @@
                             android:background="@null"
                             android:drawablePadding="10dp"
                             android:hint="Appointment Date"
+                            android:editable="false"
                             android:inputType="textEmailAddress"
                             android:textSize="15dp" />
 
@@ -215,6 +216,7 @@
                             android:layout_marginBottom="5dp"
                             android:background="@null"
                             android:drawablePadding="10dp"
+                            android:editable="false"
                             android:hint="Appointment Time"
                             android:inputType="textEmailAddress"
                             android:textSize="15dp" />
@@ -240,7 +242,7 @@
                             android:layout_gravity="center"
 
                             android:layout_marginBottom="5dp"
-
+                  android:id="@+id/clientname"
                             android:background="@null"
                             android:drawablePadding="10dp"
                             android:hint="Name"
@@ -262,7 +264,7 @@
 
                         <EditText
 
-                            android:id="@+id/username"
+                            android:id="@+id/clientnumber"
                             android:layout_width="match_parent"
                             android:layout_height="25dp"
 
@@ -296,6 +298,7 @@
                             android:background="@null"
                             android:drawablePadding="10dp"
                             android:hint="Email ID"
+                            android:id="@+id/clientemailid"
                             android:inputType="textEmailAddress"
                             android:textSize="15dp" />
 
@@ -322,6 +325,7 @@
                             android:drawablePadding="10dp"
                             android:ems="5"
                             android:gravity="left|top"
+                            android:id="@+id/cleinetaddress"
                             android:hint="Address"
                             android:inputType="textMultiLine"
                             android:maxLines="5"
