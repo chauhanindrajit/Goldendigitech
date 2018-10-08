@@ -47,7 +47,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
     List<DogcatpackageResponse.ResponseBean> mainrespose = new ArrayList<>();
     private String visitype = "";
     private String addonprice;
-    private String address,srids;
+    private String address, srids;
 
 
     public PackageAdapter(Context context, List<DogcatpackageResponse.ResponseBean.GroomingPackagesBean> response, List<DogcatpackageResponse.ResponseBean> dogcatpackageResponseResponse, String address, String srid, ArrayList<String> stringList) {
@@ -55,8 +55,8 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
         this.arrSubCateogry = response;
         this.mainrespose = dogcatpackageResponseResponse;
         this.address = address;
-        this.srids=srid;
-        this.stringList=stringList;
+        this.srids = srid;
+        this.stringList = stringList;
 
     }
 
@@ -107,9 +107,9 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
                     View radioButton = group.findViewById(radioButtonID);
                     int position = group.indexOfChild(radioButton);
                     if (position == 0) {
-                        SingletonClass.getInstance().setPrice((visitype.replace("Salon Price : ","")));
+                        SingletonClass.getInstance().setPrice((visitype.replace("Salon Price : ", "")));
                     } else {
-                        SingletonClass.getInstance().setPrice((visitype).replace("At home Price : ",""));
+                        SingletonClass.getInstance().setPrice((visitype).replace("At home Price : ", ""));
                     }
                 }
             }

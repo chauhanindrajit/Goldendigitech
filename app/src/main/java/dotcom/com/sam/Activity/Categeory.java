@@ -215,6 +215,7 @@ public class Categeory extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Categeory.this.finish();
         Intent setIntent = new Intent(Categeory.this,MainActivity.class);
         setIntent.addCategory(Intent.CATEGORY_HOME);
         setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

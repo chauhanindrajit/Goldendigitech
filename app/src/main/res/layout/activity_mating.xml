@@ -85,6 +85,7 @@
                         android:layout_height="match_parent"
                         android:cursorVisible="true"
                         android:layout_weight="1"
+                        android:textIsSelectable="true"
                         android:autoSizeMaxTextSize="20dp"
                         android:background="#00ffffff"
                         android:hint="Select your location" />
@@ -120,6 +121,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#00ffffff"
+                        android:cursorVisible="true"
+                        android:textIsSelectable="true"
+                        android:autoSizeMaxTextSize="20dp"
                         android:hint="Pet Type" />
 
                     <ImageView
@@ -151,6 +155,8 @@
                         android:layout_weight="1"
                         android:id="@+id/breeddrp"
                         android:background="#00ffffff"
+                        android:cursorVisible="true"
+                        android:textIsSelectable="true"
                         android:hint="Select Breed" />
 
                     <ImageView
@@ -181,6 +187,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#00ffffff"
+                        android:cursorVisible="true"
+                        android:textIsSelectable="true"
                         android:id="@+id/gendrdrp"
                         android:hint="Select Gender" />
 

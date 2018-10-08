@@ -189,6 +189,8 @@
                             android:background="@null"
                             android:drawablePadding="10dp"
                             android:hint="Appointment Date"
+                            android:cursorVisible="true"
+                            android:textIsSelectable="true"
                             android:editable="false"
                             android:inputType="textEmailAddress"
                             android:textSize="15dp" />
@@ -216,6 +218,8 @@
                             android:layout_marginBottom="5dp"
                             android:background="@null"
                             android:drawablePadding="10dp"
+                            android:cursorVisible="true"
+                            android:textIsSelectable="true"
                             android:editable="false"
                             android:hint="Appointment Time"
                             android:inputType="textEmailAddress"

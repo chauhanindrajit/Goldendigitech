@@ -109,6 +109,31 @@ public class Mating extends AppCompatActivity {
         breed_type = (AutoCompleteTextView) findViewById(R.id.breeddrp);
         gender_typea = (AutoCompleteTextView) findViewById(R.id.gendrdrp);
         acTextView.setCursorVisible(true);
+
+        pet_type.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                pet_type.showDropDown();
+                return false;
+            }
+        });
+        breed_type.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                breed_type.showDropDown();
+                return false;
+            }
+        });
+        gender_typea.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                gender_typea.showDropDown();
+                return false;
+            }
+        });
         pdnitm = (ImageView) findViewById(R.id.pdnitm);
         pdnitm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,6 +197,7 @@ public class Mating extends AppCompatActivity {
         final MatingSingleAdapter matingSingleAdapter3 = new MatingSingleAdapter(Mating.this, tripSingaltonss);
 
 //
+
         acTextView.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
@@ -539,6 +565,8 @@ public class Mating extends AppCompatActivity {
                         matingsearchRequest.setPettype(matingsearchResponse.getResponse().get(i).getPettype());
                         matingsearchRequest.setBreedName(matingsearchResponse.getResponse().get(i).getBreedName());
                         matingsearchRequest.setB_Id(matingsearchResponse.getResponse().get(i).getB_Id());
+                        matingsearchRequest.setPetName(matingsearchResponse.getResponse().get(i).getPetName());
+                        matingsearchRequest.setSR_Id(matingsearchResponse.getResponse().get(i).getSR_Id());
                         matingsearchRequest.setGender(matingsearchResponse.getResponse().get(i).getGender());
                         matingsearchRequest.setAge(matingsearchResponse.getResponse().get(i).getAge());
                         matingsearchRequest.setLocation(matingsearchResponse.getResponse().get(i).getLocation());

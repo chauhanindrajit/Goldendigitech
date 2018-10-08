@@ -78,12 +78,12 @@ public class Doggromingprofile extends AppCompatActivity {
         if (SingletonClass.getInstance().getPackagename().equals("Cat")) {
             cntnm.setText(CatSingalton.getInstance().getCenterName());
             ID = String.valueOf(CatSingalton.getInstance().getGroomingService_Id());
-            salonorhome=SingletonClass.getInstance().getSalonorhomeradio();
+            salonorhome = SingletonClass.getInstance().getSalonorhomeradio();
             checkAcceptTrip(ID);
         } else if (SingletonClass.getInstance().getPackagename().equals("Dog")) {
             cntnm.setText(DogSingalton.getInstance().getCenterName());
             ID = String.valueOf(DogSingalton.getInstance().getGroomingService_Id());
-            salonorhome=SingletonClass.getInstance().getSalonorhomeradio();
+            salonorhome = SingletonClass.getInstance().getSalonorhomeradio();
             checkAcceptTrip(ID);
         }
         Log.e("IDDD", "onCreate: " + ID);
@@ -119,13 +119,13 @@ public class Doggromingprofile extends AppCompatActivity {
                     DogcatpackageResponse dogcatpackageResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));
                     for (int i = 0; i < dogcatpackageResponse.getResponse().size(); i++) {
-                        address=dogcatpackageResponse.getResponse().get(i).getOwnerAddress();
-                        Srid= String.valueOf(dogcatpackageResponse.getResponse().get(i).getSR_Id());
-                        for(int j = 0; j < dogcatpackageResponse.getResponse().get(i).getTimeSlot().size(); j++){
+                        address = dogcatpackageResponse.getResponse().get(i).getOwnerAddress();
+                        Srid = String.valueOf(dogcatpackageResponse.getResponse().get(i).getSR_Id());
+                        for (int j = 0; j < dogcatpackageResponse.getResponse().get(i).getTimeSlot().size(); j++) {
                             stringList.add(dogcatpackageResponse.getResponse().get(i).getTimeSlot().get(j).getBookingTime());
                         }
 
-                        PackageAdapter packageAdapter = new PackageAdapter(Doggromingprofile.this, dogcatpackageResponse.getResponse().get(i).getGroomingPackages(),dogcatpackageResponse.getResponse(),address,Srid,stringList);
+                        PackageAdapter packageAdapter = new PackageAdapter(Doggromingprofile.this, dogcatpackageResponse.getResponse().get(i).getGroomingPackages(), dogcatpackageResponse.getResponse(), address, Srid, stringList);
                         packageAdapter.getItemCount();
                         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(Doggromingprofile.this, LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(verticalLayoutManager);
@@ -145,4 +145,5 @@ public class Doggromingprofile extends AppCompatActivity {
         });
 
     }
+
 }

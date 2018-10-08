@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -216,9 +217,7 @@ public class GroomingLastpage extends AppCompatActivity {
                                  KeyEvent event) {
                 // TODO Auto-generated method stub
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    finish();
-                    Utils.moveNextWithAnimation(GroomingLastpage.this, Doggromingprofile.class);
-                    dialog.dismiss();
+                   GroomingLastpage.this.finish();
                 }
                 return true;
             }

@@ -1,10 +1,13 @@
 package dotcom.com.sam.Activity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,6 +19,7 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,11 +28,13 @@ import com.google.gson.GsonBuilder;
 import dotcom.com.sam.Adapters.PaymentAdapter;
 import dotcom.com.sam.Adapters.ReviewAdapter;
 import dotcom.com.sam.Adapters.ReviewsAdapter;
+import dotcom.com.sam.Credentials.LoginActivity;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Response.GetCartResponse;
 import dotcom.com.sam.Response.PaymentResponse;
 import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.Utils.Utils;
+import dotcom.com.sam.extras.Constants;
 import dotcom.com.sam.extras.Utilss;
 import dotcom.com.sam.request.PlaceOrderRequest;
 import retrofit2.Call;
@@ -128,4 +134,27 @@ public class PaymentPage extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you don't want to order at this time ?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                      PaymentPage.this.finish();
+                        /*    HomeActivity.this.finish();*/
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+        Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
+        pbutton.setTextColor(Color.rgb(30, 144, 255));
+        Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
+        nbutton.setTextColor(Color.rgb(30, 144, 255));
+    }
 }
