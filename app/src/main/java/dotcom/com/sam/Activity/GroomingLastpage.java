@@ -1,7 +1,9 @@
 package dotcom.com.sam.Activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,6 +31,7 @@ import android.widget.Toast;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import dotcom.com.sam.Adapters.PackageAdapter;
 import dotcom.com.sam.Credentials.Registration;
@@ -53,6 +57,8 @@ public class GroomingLastpage extends AppCompatActivity {
     private ProgressDialog pDialog;
     TextView loc, salonprice, packagename, addonname, addonprice, addonnames;
     String Bookingdate, SRID, name;
+    int Price, addonpr;
+    int Totalprice;
     String[] mobileArray = {"Android", "IPhone", "WindowsMobile", "Blackberry",
             "WebOS", "Ubuntu", "Windows7", "Max OS X"};
 
@@ -98,7 +104,9 @@ public class GroomingLastpage extends AppCompatActivity {
                 "<medium> <font color='" + Color.RED + "'>" + SingletonClass.getInstance().getAddonservices() + " :" + "</font>" + "<br />"
         ));
         loc.setText(SingletonClass.getInstance().getOwneraddress());
-
+        Price = Integer.parseInt((SingletonClass.getInstance().getPrice().replaceAll("\n", "")));
+        addonpr = Integer.parseInt(SingletonClass.getInstance().getAddonprice());
+        Totalprice += Integer.parseInt(String.valueOf(Price + addonpr));
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View view2 = inflater.inflate(R.layout.summary_dialog_layout, null);
         ImageView imageView = view2.findViewById(R.id.cancle_image);
@@ -145,16 +153,18 @@ public class GroomingLastpage extends AppCompatActivity {
                         if (response.code() == 200) {
                             DateandtimeResponse dateandtimeResponse = response.body();
                             Log.e("dioglist", new GsonBuilder().create().toJson(response));
-                            Utils.customMessage(GroomingLastpage.this, dateandtimeResponse.getMessege());
+                            if (dateandtimeResponse.getMessege().equals("Booked")) {
+                                Utils.customMessage(GroomingLastpage.this, "Please Select Other Time slot. Thank you");
+                            }
                             if (dateandtimeResponse.getMessege().equals("NotBooked")) {
 
                                 dialog.dismiss();
                             } else {
-                                Utils.customMessage(GroomingLastpage.this, "Please Select Other Time slot. Thank you");
+
                             }
 
                         } else {
-                            Utils.customMessage(GroomingLastpage.this, "Please Select Time slot.");
+                            Utils.customMessage(GroomingLastpage.this, "Please Select some other date or Time slot.");
                         }
                     }
 
@@ -180,22 +190,38 @@ public class GroomingLastpage extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Validate()){
-                String srid = SRID;
-                String packgename = packagename.getText().toString().trim();
-                String servicet = salonprice.getText().toString().trim();
-                String addon = addonname.getText().toString().trim();
-                String bookingtym = time.getText().toString().trim();
-                String bookingdate = date.getText().toString().trim();
-                String clientnam = clientname.getText().toString().trim();
-                String clinumbr = clenmob.getText().toString().trim();
-                String clebtemail = cleemail.getText().toString().trim();
-                String clebnadd = cleadd.getText().toString().trim();
+                if (Validate()) {
+                    String srid = SRID;
+                    String packgename = packagename.getText().toString().trim();
+                    String servicet = salonprice.getText().toString().trim();
+                    String addon = addonname.getText().toString().trim();
+                    String bookingtym = time.getText().toString().trim();
+                    String bookingdate = date.getText().toString().trim();
+                    String clientnam = clientname.getText().toString().trim();
+                    String clinumbr = clenmob.getText().toString().trim();
+                    String clebtemail = cleemail.getText().toString().trim();
+                    String clebnadd = cleadd.getText().toString().trim();
+                    String totalprice = String.valueOf(Totalprice);
+                    if (validate1()) {
+                        Addnewaddress(srid, packgename, servicet, addon, bookingtym, bookingdate, clientnam, clinumbr, clebtemail, clebnadd, totalprice);
 
+                    }
+                }
+            }
+        });
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 
-                Addnewaddress(srid, packgename, servicet, addon, bookingtym, bookingdate, clientnam, clinumbr, clebtemail, clebnadd);
-
-            }}
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    finish();
+                    Utils.moveNextWithAnimation(GroomingLastpage.this, Doggromingprofile.class);
+                    dialog.dismiss();
+                }
+                return true;
+            }
         });
 
     }
@@ -203,28 +229,31 @@ public class GroomingLastpage extends AppCompatActivity {
     private boolean Validate() {
 
         if (clientname.getText().toString().equals("")) {
-            Toast.makeText(GroomingLastpage.this,"Please Enter Valid User Name.",Toast.LENGTH_LONG).show();
+            Toast.makeText(GroomingLastpage.this, "Please Enter Valid User Name.", Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (cleadd.getText().toString().equals("")) {
-            Toast.makeText(GroomingLastpage.this,"Please enter Address.",Toast.LENGTH_LONG).show();
+            Toast.makeText(GroomingLastpage.this, "Please enter Address.", Toast.LENGTH_LONG).show();
+            return false;
+        } else if (cleadd.getText().length() < 12) {
+            Toast.makeText(GroomingLastpage.this, "Please enter a valid Address", Toast.LENGTH_LONG).show();
             return false;
         }
         if (cleemail.getText().toString().equals("")) {
-            Toast.makeText(GroomingLastpage.this,"Please Enter email id.",Toast.LENGTH_LONG).show();
+            Toast.makeText(GroomingLastpage.this, "Please Enter email id.", Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (clenmob.getText().toString().equals("")) {
-            Toast.makeText(GroomingLastpage.this,"Please enter contact number.",Toast.LENGTH_LONG).show();
+            Toast.makeText(GroomingLastpage.this, "Please enter contact number.", Toast.LENGTH_LONG).show();
             return false;
         }
 
         return true;
     }
 
-    private void Addnewaddress(String srid, String packgename, String servicet, String addon, String bookingtym, String bookingdate, String clientnam, String clinumbr, String clebtemail, String clebnadd) {
+    private void Addnewaddress(String srid, String packgename, String servicet, String addon, String bookingtym, String bookingdate, String clientnam, String clinumbr, String clebtemail, String clebnadd, String totalprice) {
         pDialog = new ProgressDialog(GroomingLastpage.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
@@ -233,13 +262,16 @@ public class GroomingLastpage extends AppCompatActivity {
         groomingfinalRequest.setSR_Id(Integer.parseInt(srid));
         groomingfinalRequest.setBookingTime(bookingtym);
         groomingfinalRequest.setBookingDate(bookingdate);
-        groomingfinalRequest.setServiceType(servicet);
-        groomingfinalRequest.setAddOnServices(addon);
+        String myString = servicet;
+        String newString = myString.substring(0, myString.indexOf(":"));
+        groomingfinalRequest.setServiceType(newString);
+        groomingfinalRequest.setAddOnServices(addon.replace(":", ""));
         groomingfinalRequest.setClientName(clientnam);
         groomingfinalRequest.setClientAddress(clebnadd);
         groomingfinalRequest.setClientPhone(clinumbr);
         groomingfinalRequest.setClientEmail(clebtemail);
         groomingfinalRequest.setBookingPackage(packgename);
+        groomingfinalRequest.setTotalAmount(Integer.parseInt(totalprice));
 
 
         Call<GroomingFinalBookingResponse> groomingFinalBookingResponseCall = Utilss.getWebService().GROOMING_FINAL_BOOKING_RESPONSE_CALL(groomingfinalRequest);
@@ -250,8 +282,9 @@ public class GroomingLastpage extends AppCompatActivity {
                 GroomingFinalBookingResponse groomingFinalBookingResponse = response.body();
                 Log.e("dioglist", "getAddressList: " + new GsonBuilder().create().toJson(groomingFinalBookingResponse));
                 if (response.code() == 200) {
-                    String bkngid= String.valueOf(groomingFinalBookingResponse.getGroomingId());
+                    String bkngid = String.valueOf(groomingFinalBookingResponse.getGroomingId());
                     Utils.customMessage(GroomingLastpage.this, " Your Booking id :" + bkngid);
+                    Utils.moveNextWithAnimation(GroomingLastpage.this, GroomingService.class);
                 }
                 pDialog.dismiss();
             }
@@ -264,4 +297,25 @@ public class GroomingLastpage extends AppCompatActivity {
 
     }
 
+
+    public static boolean isValidEmaillId(String email) {
+
+        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
+    }
+
+    private boolean validate1() {
+        boolean temp = true;
+        String checkemail = cleemail.getText().toString();
+
+        if (!isValidEmaillId(checkemail)) {
+            Toast.makeText(GroomingLastpage.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
+            temp = false;
+        }
+        return temp;
+    }
 }

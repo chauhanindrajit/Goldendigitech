@@ -1,7 +1,6 @@
 package dotcom.com.sam.Adapters;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -35,7 +33,6 @@ import dotcom.com.sam.Activity.GroomingLastpage;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Response.DogcatpackageResponse;
 import dotcom.com.sam.SingaltonsClasses.SingletonClass;
-import dotcom.com.sam.Utils.Utils;
 
 /**
  * Created by sanjay on 3/8/2018.
@@ -50,14 +47,16 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
     List<DogcatpackageResponse.ResponseBean> mainrespose = new ArrayList<>();
     private String visitype = "";
     private String addonprice;
-    private String address;
+    private String address,srids;
 
 
-    public PackageAdapter(Context context, List<DogcatpackageResponse.ResponseBean.GroomingPackagesBean> response, List<DogcatpackageResponse.ResponseBean> dogcatpackageResponseResponse, String address) {
+    public PackageAdapter(Context context, List<DogcatpackageResponse.ResponseBean.GroomingPackagesBean> response, List<DogcatpackageResponse.ResponseBean> dogcatpackageResponseResponse, String address, String srid, ArrayList<String> stringList) {
         this.context = context;
         this.arrSubCateogry = response;
         this.mainrespose = dogcatpackageResponseResponse;
         this.address = address;
+        this.srids=srid;
+        this.stringList=stringList;
 
     }
 
@@ -101,8 +100,17 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
                 RadioButton checkedRadioButton = (RadioButton) group.findViewById(checkedId);
                 boolean isChecked = checkedRadioButton.isChecked();
                 if (isChecked) {
+
                     visitype = String.valueOf(checkedRadioButton.getText());
                     Log.e(" Gender Group ", "onCheckedChanged: " + checkedRadioButton.getText());
+                    int radioButtonID = group.getCheckedRadioButtonId();
+                    View radioButton = group.findViewById(radioButtonID);
+                    int position = group.indexOfChild(radioButton);
+                    if (position == 0) {
+                        SingletonClass.getInstance().setPrice((visitype.replace("Salon Price : ","")));
+                    } else {
+                        SingletonClass.getInstance().setPrice((visitype).replace("At home Price : ",""));
+                    }
                 }
             }
         });
@@ -122,15 +130,15 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHOLD
                     SingletonClass.getInstance().setOwneraddress(address);
                     SingletonClass.getInstance().setAddonprice(addonprice);
                     SingletonClass.getInstance().setDogcatpackagename(arrSubCateogry.get(position).getPackageTitle());
-                    SingletonClass.getInstance().setSRRRID(String.valueOf(mainrespose.get(position).getSR_Id()));
+                    SingletonClass.getInstance().setSRRRID(srids);
 
 
-                    if (stringList.size() > 0) {
-                        stringList.clear();
-                    }
-                    for (int i = 0; i < mainrespose.get(position).getTimeSlot().size(); i++) {
-                        stringList.add(mainrespose.get(position).getTimeSlot().get(i).getBookingTime());
-                    }
+//                    if (stringList.size() > 0) {
+//                        stringList.clear();
+//                    }
+//                    for (int i = 0; i < mainrespose.get(position).getTimeSlot().size(); i++) {
+//                        stringList.add(mainrespose.get(position).getTimeSlot().get(i).getBookingTime());
+//                    }
 
                     new DatePickerDialog(context, date, myCalendar
                             .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),

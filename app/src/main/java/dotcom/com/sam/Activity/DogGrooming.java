@@ -268,10 +268,10 @@ public class DogGrooming extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (validate()) {
-                    if(salonpos.equals("Salon")){
-                       athomeoratsalon = "Salon";
-                    }else if(salonpos.equals("Home")){
-                       // SingletonClass.getInstance().setSalonorhomeradio("Home");
+                    if (salonpos.equals("Salon")) {
+                        athomeoratsalon = "Salon";
+                    } else if (salonpos.equals("Home")) {
+                        // SingletonClass.getInstance().setSalonorhomeradio("Home");
                         athomeoratsalon = "Home";
                     }
                     String breedselected = selectbreed.getText().toString().trim();

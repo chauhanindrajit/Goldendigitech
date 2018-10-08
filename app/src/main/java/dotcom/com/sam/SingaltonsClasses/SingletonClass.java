@@ -103,6 +103,7 @@ public class SingletonClass {
     private String addonservicesprice;
     private String salonorhomeradio;
     private String SRRRID;
+    private String Price;
     ArrayList<String> timeasper = new ArrayList<>();
 
     //-----------------brand filter
@@ -538,5 +539,13 @@ public class SingletonClass {
 
     public void setSRRRID(String SRRRID) {
         this.SRRRID = SRRRID;
+    }
+
+    public String getPrice() {
+        return Price;
+    }
+
+    public void setPrice(String price) {
+        Price = price;
     }
 }

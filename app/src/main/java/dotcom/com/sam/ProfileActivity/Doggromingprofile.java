@@ -46,6 +46,8 @@ public class Doggromingprofile extends AppCompatActivity {
     String ID;
     String salonorhome;
     String address;
+    String Srid;
+    ArrayList<String> stringList = new ArrayList<String>();
     List<String> agearray = new ArrayList<>();
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -95,7 +97,7 @@ public class Doggromingprofile extends AppCompatActivity {
     }
 
     void setRecyclerView() {
-        PackageAdapter packageAdapter = new PackageAdapter(this, arrSubCateogry, mainrespose, address);
+        PackageAdapter packageAdapter = new PackageAdapter(this, arrSubCateogry, mainrespose, address, Srid, stringList);
         packageAdapter.getItemCount();
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(Doggromingprofile.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(verticalLayoutManager);
@@ -118,7 +120,12 @@ public class Doggromingprofile extends AppCompatActivity {
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));
                     for (int i = 0; i < dogcatpackageResponse.getResponse().size(); i++) {
                         address=dogcatpackageResponse.getResponse().get(i).getOwnerAddress();
-                        PackageAdapter packageAdapter = new PackageAdapter(Doggromingprofile.this, dogcatpackageResponse.getResponse().get(i).getGroomingPackages(),dogcatpackageResponse.getResponse(),address);
+                        Srid= String.valueOf(dogcatpackageResponse.getResponse().get(i).getSR_Id());
+                        for(int j = 0; j < dogcatpackageResponse.getResponse().get(i).getTimeSlot().size(); j++){
+                            stringList.add(dogcatpackageResponse.getResponse().get(i).getTimeSlot().get(j).getBookingTime());
+                        }
+
+                        PackageAdapter packageAdapter = new PackageAdapter(Doggromingprofile.this, dogcatpackageResponse.getResponse().get(i).getGroomingPackages(),dogcatpackageResponse.getResponse(),address,Srid,stringList);
                         packageAdapter.getItemCount();
                         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(Doggromingprofile.this, LinearLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(verticalLayoutManager);
