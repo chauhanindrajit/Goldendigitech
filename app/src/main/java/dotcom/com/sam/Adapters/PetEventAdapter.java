@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import dotcom.com.sam.Activity.Matinglast;
 import dotcom.com.sam.R;
@@ -26,10 +27,9 @@ public class PetEventAdapter extends RecyclerView.Adapter<PetEventAdapter.VetVie
     static List<MatingSingalton> matingSingaltons;
     public static ArrayList<MatingSingalton> filterItem;
 
-    public PetEventAdapter(Context context, List<MatingSingalton> matingSingaltons)
-    {
-        this.context=context;
-        this.matingSingaltons=matingSingaltons;
+    public PetEventAdapter(Context context, List<MatingSingalton> matingSingaltons) {
+        this.context = context;
+        this.matingSingaltons = matingSingaltons;
         this.filterItem = new ArrayList<>();
         filterItem.addAll(matingSingaltons);
 
@@ -37,10 +37,10 @@ public class PetEventAdapter extends RecyclerView.Adapter<PetEventAdapter.VetVie
 
     @Override
     public VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.activity_single_event,parent,false);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.activity_single_event, parent, false);
 
-        PetEventAdapter.VetViewHolder vetViewHolder=new PetEventAdapter.VetViewHolder(view);
+        PetEventAdapter.VetViewHolder vetViewHolder = new PetEventAdapter.VetViewHolder(view);
 
         return vetViewHolder;
     }
@@ -49,10 +49,10 @@ public class PetEventAdapter extends RecyclerView.Adapter<PetEventAdapter.VetVie
     public void onBindViewHolder(final VetViewHolder holder, int position) {
 
         holder.loc.setText(matingSingaltons.get(position).getLocation());
-       // holder.pet.setText(matingSingaltons.get(position).getPettype());
-      //  holder.gender.setText(matingSingaltons.get(position).getGender());
-      //  holder.age.setText(matingSingaltons.get(position).getAge());
-     //   holder.breed.setText(matingSingaltons.get(position).getBreedName());
+        // holder.pet.setText(matingSingaltons.get(position).getPettype());
+        //  holder.gender.setText(matingSingaltons.get(position).getGender());
+        //  holder.age.setText(matingSingaltons.get(position).getAge());
+        //   holder.breed.setText(matingSingaltons.get(position).getBreedName());
 //        holder.status.setText(matingSingaltons.get(position).getStatus());
         if (matingSingaltons.get(position).getImage() != null) {
             Picasso.with(context).load("http://mrsam.in/sam/MainImage/" + matingSingaltons.get(position).getImage().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(holder.imageView);
@@ -85,48 +85,47 @@ public class PetEventAdapter extends RecyclerView.Adapter<PetEventAdapter.VetVie
 
 
     public class VetViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView,bgimage;
-       TextView loc,pet,gender,age,breed,status;
-       CardView  cardView;
+        ImageView imageView, bgimage;
+        TextView loc, pet, gender, age, breed, status;
+        CardView cardView;
 
         public VetViewHolder(View itemView) {
             super(itemView);
-            loc=itemView.findViewById(R.id.Mlocation);
-          //  pet=itemView.findViewById(R.id.Mdogname);
-            imageView=itemView.findViewById(R.id.mainimage);
-            cardView=itemView.findViewById(R.id.matingcard);
-            bgimage=itemView.findViewById(R.id.bgimage);
-           // gender=itemView.findViewById(R.id.Mfemale);
-           // age=itemView.findViewById(R.id.Mage);
-           // breed=itemView.findViewById(R.id.Mbreed);
-
-
+            loc = itemView.findViewById(R.id.Mlocation);
+            //  pet=itemView.findViewById(R.id.Mdogname);
+            imageView = itemView.findViewById(R.id.mainimage);
+            cardView = itemView.findViewById(R.id.matingcard);
+            bgimage = itemView.findViewById(R.id.bgimage);
+            // gender=itemView.findViewById(R.id.Mfemale);
+            // age=itemView.findViewById(R.id.Mage);
+            // breed=itemView.findViewById(R.id.Mbreed);
 
 
         }
     }
+
     public void filter(String charText) {
 
-//        charText = charText.toLowerCase(Locale.getDefault());
-//        matingSingaltons.clear();
-//        matingSingaltons = new ArrayList<>();
-//        if (charText.length() == 0) {
-//            matingSingaltons.addAll(filterItem);
-//            notifyDataSetChanged();
-//        } else {
-//            for (MatingSingalton matingSingalton : filterItem) {
-//                notifyDataSetChanged();
-//                if (matingSingalton.getLocation().toString().equalsIgnoreCase(charText)||matingSingalton.getBreedName().toString().equalsIgnoreCase(charText) ||matingSingalton.getPettype().toString().equalsIgnoreCase(charText)||matingSingalton.getGender().toString().equalsIgnoreCase(charText)) {
-//                    ArrayList<MatingSingalton> newList = new ArrayList<>();
-//                    newList.add(matingSingalton);
-//                    matingSingaltons.addAll(newList);
-//
-//                    notifyDataSetChanged();
-//
-//                }
-//            }
-//        }
-//        notifyDataSetChanged();
+        charText = charText.toLowerCase(Locale.getDefault());
+        matingSingaltons.clear();
+        matingSingaltons = new ArrayList<>();
+        if (charText.length() == 0) {
+            matingSingaltons.addAll(filterItem);
+            notifyDataSetChanged();
+        } else {
+            for (MatingSingalton matingSingalton : filterItem) {
+                notifyDataSetChanged();
+                if (matingSingalton.getLocation().toString().equalsIgnoreCase(charText) || matingSingalton.getBreedName().toString().equalsIgnoreCase(charText) || matingSingalton.getPettype().toString().equalsIgnoreCase(charText) || matingSingalton.getGender().toString().equalsIgnoreCase(charText)) {
+                    ArrayList<MatingSingalton> newList = new ArrayList<>();
+                    newList.add(matingSingalton);
+                    matingSingaltons.addAll(newList);
+
+                    notifyDataSetChanged();
+
+                }
+            }
+        }
+        notifyDataSetChanged();
 
     }
 

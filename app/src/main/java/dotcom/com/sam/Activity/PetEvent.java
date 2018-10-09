@@ -176,7 +176,7 @@ public class PetEvent extends AppCompatActivity {
                 String actxtvw = acTextView.getText().toString().trim();
 
 
-               // Searchmatingdata(id, actxtvw, pettype, gendr);
+                // Searchmatingdata(id, actxtvw, pettype, gendr);
                 acTextView.setAdapter(loadTypeArrayAdapter);
                 ObjectAnimator animation = ObjectAnimator.ofFloat(seachlayout, "translationY", -seachlayout.getHeight());
                 animation.setDuration(800);

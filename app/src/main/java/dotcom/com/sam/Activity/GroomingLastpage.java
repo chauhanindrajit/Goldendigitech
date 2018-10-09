@@ -158,7 +158,6 @@ public class GroomingLastpage extends AppCompatActivity {
                                 Utils.customMessage(GroomingLastpage.this, "Please Select Other Time slot. Thank you");
                             }
                             if (dateandtimeResponse.getMessege().equals("NotBooked")) {
-
                                 dialog.dismiss();
                             } else {
 
@@ -217,7 +216,7 @@ public class GroomingLastpage extends AppCompatActivity {
                                  KeyEvent event) {
                 // TODO Auto-generated method stub
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
-                   GroomingLastpage.this.finish();
+                    GroomingLastpage.this.finish();
                 }
                 return true;
             }
@@ -262,7 +261,7 @@ public class GroomingLastpage extends AppCompatActivity {
         groomingfinalRequest.setBookingTime(bookingtym);
         groomingfinalRequest.setBookingDate(bookingdate);
         String myString = servicet;
-        String newString = myString.substring(0, myString.indexOf(":"));
+        String newString = myString.substring(0, myString.indexOf(" :"));
         groomingfinalRequest.setServiceType(newString);
         groomingfinalRequest.setAddOnServices(addon.replace(":", ""));
         groomingfinalRequest.setClientName(clientnam);
@@ -283,7 +282,7 @@ public class GroomingLastpage extends AppCompatActivity {
                 if (response.code() == 200) {
                     String bkngid = String.valueOf(groomingFinalBookingResponse.getGroomingId());
                     Utils.customMessage(GroomingLastpage.this, " Your Booking id :" + bkngid);
-                    Utils.moveNextWithAnimation(GroomingLastpage.this, GroomingService.class);
+                    GroomingLastpage.this.finish();
                 }
                 pDialog.dismiss();
             }

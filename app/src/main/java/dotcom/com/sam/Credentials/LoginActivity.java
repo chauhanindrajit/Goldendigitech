@@ -221,6 +221,7 @@ public class LoginActivity extends AppCompatActivity {
 
         return true;
     }
+
     private void getCartList() {
         //    pDialog = new ProgressDialog(Categeory.this);
 //        pDialog.setMessage("Please wait...");

@@ -601,6 +601,7 @@ public class PetSetter extends AppCompatActivity {
                         petSettersearchRequest.setFees(petSittersearchResponse.getResponse().get(i).getFees());
                         petSettersearchRequest.setPetAvailability(petSittersearchResponse.getResponse().get(i).getPetAvailability());
                         petSettersearchRequest.setImage(petSittersearchResponse.getResponse().get(i).getImage());
+                        petSettersearchRequest.setSR_Id(petSittersearchResponse.getResponse().get(i).getSR_Id());
                         tripSingaltonsas.add(petSettersearchRequest);
                         tripSingaltonss.clear();
                         PetSetterSearchAdapter petSetterSearchAdapter = new PetSetterSearchAdapter(PetSetter.this, tripSingaltonsas);

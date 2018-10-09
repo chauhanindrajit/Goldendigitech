@@ -98,7 +98,7 @@ public class PetSittersearchResponse {
         private String StartTime;
         private String EndTime;
         private String Image;
-        private Object SR_Id;
+        private int SR_Id;
         private Object CreatedDate;
         private Object CreatedBy;
         private Object ModifyDate;
@@ -235,11 +235,11 @@ public class PetSittersearchResponse {
             this.Image = Image;
         }
 
-        public Object getSR_Id() {
+        public int getSR_Id() {
             return SR_Id;
         }
 
-        public void setSR_Id(Object SR_Id) {
+        public void setSR_Id(int SR_Id) {
             this.SR_Id = SR_Id;
         }
 

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-   android:layout_gravity="center"
+    android:layout_gravity="center"
     android:background="#bfbfbf"
     android:padding="2dp">
 
@@ -55,30 +55,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:textStyle="bold"
-    android:textColor="@color/gen_black"
-    android:gravity="center"
-    android:text="NOTE : Doctor will only available On Below Time "
-    />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="NOTE : Doctor will only available on below time "
+                        android:textColor="#403f3f"
+                        android:textStyle="normal" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1sp"
+                        android:layout_gravity="center"
+                        android:background="@color/grey_light" />
                     <ListView
                         android:id="@+id/mobile_list"
                         android:layout_width="match_parent"
-                        android:layout_height="230dp" >
-                    </ListView>
+                        android:layout_height="230dp"></ListView>
+
                     <Button
                         android:id="@+id/submitapi"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="15dp"
                         android:layout_marginLeft="25dp"
-                        android:layout_marginRight="25dp"
                         android:layout_marginTop="30dp"
-                        android:background="@color/green_light"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@color/colorPrimary"
                         android:text="SUBMIT"
                         android:textColor="#FFF"
                         android:textSize="15dp" />
@@ -90,7 +95,6 @@
 
         </LinearLayout>
     </RelativeLayout>
-
 
 
 </RelativeLayout>

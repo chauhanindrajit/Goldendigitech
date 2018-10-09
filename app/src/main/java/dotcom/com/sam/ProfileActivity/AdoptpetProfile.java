@@ -23,30 +23,31 @@ import dotcom.com.sam.SingaltonsClasses.OldHomeSingalton;
 import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 
 public class AdoptpetProfile extends AppCompatActivity {
-Context context;
-Button btn_enquirenow;
-    TextView name,dogname,loctn,breedname,status,condition,gender,age,ownername,contctno,emailid,lc;
+    Context context;
+    Button btn_enquirenow;
+    TextView name, dogname, loctn, breedname, status, condition, gender, age, ownername, contctno, emailid, lc;
     ImageView imag;
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adopt_profile);
 
-        name=(TextView)findViewById(R.id.apname);
-        dogname=(TextView)findViewById(R.id.apdogname);
-        loctn=(TextView)findViewById(R.id.aplocatn);
-        breedname=(TextView)findViewById(R.id.apbreedname);
-        status=(TextView)findViewById(R.id.apstatus);
-        lc=(TextView)findViewById(R.id.aplocatnn);
-        condition=(TextView)findViewById(R.id.aphealth);
-        gender=(TextView)findViewById(R.id.apgender);
-        age=(TextView)findViewById(R.id.apage);
-        ownername=(TextView)findViewById(R.id.apowenername);
-        contctno=(TextView)findViewById(R.id.apcontctno);
-        emailid=(TextView)findViewById(R.id.apemailid);
-        imag =(ImageView)findViewById(R.id.profile_image);
-        btn_enquirenow =(Button)findViewById(R.id.btn_enquirynow);
+        name = (TextView) findViewById(R.id.apname);
+        dogname = (TextView) findViewById(R.id.apdogname);
+        loctn = (TextView) findViewById(R.id.aplocatn);
+        breedname = (TextView) findViewById(R.id.apbreedname);
+        status = (TextView) findViewById(R.id.apstatus);
+        lc = (TextView) findViewById(R.id.aplocatnn);
+        condition = (TextView) findViewById(R.id.aphealth);
+        gender = (TextView) findViewById(R.id.apgender);
+        age = (TextView) findViewById(R.id.apage);
+        ownername = (TextView) findViewById(R.id.apowenername);
+        contctno = (TextView) findViewById(R.id.apcontctno);
+        emailid = (TextView) findViewById(R.id.apemailid);
+        imag = (ImageView) findViewById(R.id.profile_image);
+        btn_enquirenow = (Button) findViewById(R.id.btn_enquirynow);
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Adopt A Pet ");
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
@@ -78,20 +79,17 @@ Button btn_enquirenow;
         contctno.setText(String.valueOf(AdoptprofileSingalton.getInstance().getOwnerContact()));
         emailid.setText(AdoptprofileSingalton.getInstance().getOwnerEmail());
 
-btn_enquirenow.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        SingletonClass.getInstance().setCentername(AdoptprofileSingalton.getInstance().getPet_Name());
-        SingletonClass.getInstance().setSRID(String.valueOf(AdoptprofileSingalton.getInstance().getSR_Id()));
-        SingletonClass.getInstance().setActivityname("Adopt A Pet");
-        Intent i = new Intent(AdoptpetProfile.this, ServicesLastPage.class);
-        startActivity(i);
+        btn_enquirenow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SingletonClass.getInstance().setCentername(AdoptprofileSingalton.getInstance().getPet_Name());
+                SingletonClass.getInstance().setSRID(String.valueOf(AdoptprofileSingalton.getInstance().getSR_Id()));
+                SingletonClass.getInstance().setActivityname("Adopt A Pet");
+                Intent i = new Intent(AdoptpetProfile.this, ServicesLastPage.class);
+                startActivity(i);
 
-    }
-});
-
-
-
+            }
+        });
 
 
     }

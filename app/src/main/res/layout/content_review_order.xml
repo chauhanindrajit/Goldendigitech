@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.dotcom.easyshopping.activitis.account.main.checkout.ReviewOrderActivity"
+    tools:context=".Activity.ReviewOrderActivity"
     tools:showIn="@layout/activity_review_order">
 
     <LinearLayout

@@ -63,6 +63,7 @@ public class PetSetterSearchAdapter extends RecyclerView.Adapter<PetSetterSearch
                 PetsetterprofileSingalton.getInstance().setServicesType(arrSubCateogry.get(position).getServicesType());
                 PetsetterprofileSingalton.getInstance().setFees(arrSubCateogry.get(position).getFees());
                 PetsetterprofileSingalton.getInstance().setPetAvailability(arrSubCateogry.get(position).getPetAvailability());
+                PetsetterprofileSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
 
                 ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.imageView, "diagnostic_image");
                 Intent intent = new Intent(context, Petsetterprofileprofile.class);

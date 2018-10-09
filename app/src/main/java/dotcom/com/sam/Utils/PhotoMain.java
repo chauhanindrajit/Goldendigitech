@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +20,8 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import dotcom.com.sam.Activity.DogGrooming;
+import dotcom.com.sam.Adapters.DoggroomingListAdapter;
 import dotcom.com.sam.Adapters.PhotoAdapter;
 import dotcom.com.sam.Adapters.PhotoListAdapter;
 import dotcom.com.sam.R;
@@ -141,9 +144,18 @@ public class PhotoMain extends AppCompatActivity {
                         photoSingalton.setImgUrl(photoResponse.getResponse().get(i).getImgUrl());
                         photoSingalton.setPG_Id(photoResponse.getResponse().get(i).getPG_Id());
                         tripSingaltonss.add(photoSingalton);
-                        mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL);
-                        recyclerView.setLayoutManager(mLayoutManager);
-                        recyclerView.setAdapter(new PhotoAdapter(PhotoMain.this, tripSingaltonss));
+//                        mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL);
+//                        recyclerView.setLayoutManager(mLayoutManager);
+//                        recyclerView.setAdapter(new PhotoAdapter(PhotoMain.this, tripSingaltonss));
+
+
+                        PhotoAdapter photoAdapter = new PhotoAdapter(PhotoMain.this, tripSingaltonss);
+                        photoAdapter.getItemCount();
+                        GridLayoutManager gridLayoutManager = new GridLayoutManager(PhotoMain.this, 2);
+                        photoAdapter.notifyDataSetChanged();
+                        recyclerView.setLayoutManager(gridLayoutManager);
+                        recyclerView.setAdapter(photoAdapter);
+                        recyclerView.setAdapter(photoAdapter);
 
                     }
 

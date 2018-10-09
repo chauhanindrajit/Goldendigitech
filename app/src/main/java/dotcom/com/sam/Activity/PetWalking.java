@@ -495,6 +495,7 @@ public class PetWalking extends AppCompatActivity {
                         walkingsearchRequest.setEndTime(petSittersearchResponse.getResponse().get(i).getEndTime());
                         walkingsearchRequest.setProfile(petSittersearchResponse.getResponse().get(i).getProfile());
                         walkingsearchRequest.setPerhoureCost(petSittersearchResponse.getResponse().get(i).getPerhoureCost());
+                        walkingsearchRequest.setSR_Id(petSittersearchResponse.getResponse().get(i).getSR_Id());
                         walkingsearchRequest.setPerDayCost(petSittersearchResponse.getResponse().get(i).getPerDayCost());
                         walkingsearchRequest.setImage(petSittersearchResponse.getResponse().get(i).getImage());
                         tripSingaltonsas.add(walkingsearchRequest);

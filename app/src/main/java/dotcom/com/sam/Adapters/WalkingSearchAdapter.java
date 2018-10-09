@@ -76,6 +76,7 @@ public class WalkingSearchAdapter extends RecyclerView.Adapter<WalkingSearchAdap
                 WalkingSingalton.getInstance().setPerDayCost(arrSubCateogry.get(position).getPerDayCost());
                 WalkingSingalton.getInstance().setDescription(String.valueOf(arrSubCateogry.get(position).getDescription()));
                 WalkingSingalton.getInstance().setProfile(arrSubCateogry.get(position).getProfile());
+                WalkingSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
 
                 ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.imageView, "diagnostic_image");
                 Intent intent = new Intent(context, WalkingProfile.class);

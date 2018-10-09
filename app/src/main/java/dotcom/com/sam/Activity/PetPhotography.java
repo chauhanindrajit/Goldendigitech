@@ -52,8 +52,8 @@ public class PetPhotography extends AppCompatActivity {
     List<String> suu = new ArrayList<>();
     List<String> url = new ArrayList<>();
     RecyclerView recyclerView;
-    ImageView imageView1, imageView2, imageView3, imageView4,imag;
-    TextView  actegrry,course,qualifictn,expe,aboutme,morepic;
+    ImageView imageView1, imageView2, imageView3, imageView4, imag;
+    TextView actegrry, course, qualifictn, expe, aboutme, morepic;
     CollapsingToolbarLayout collapsingToolbarLayout;
     Context context;
     int id;
@@ -76,14 +76,14 @@ public class PetPhotography extends AppCompatActivity {
         });
         tripSingaltonss = new ArrayList<>();
         tripSingaltonss.clear();
-        collapsingToolbarLayout =(CollapsingToolbarLayout)findViewById(R.id.profilename);
-        actegrry =(TextView)findViewById(R.id.profilecategorye);
-        course =(TextView)findViewById(R.id.profiletxtcourse);
-        qualifictn =(TextView)findViewById(R.id.profilequalification);
-        morepic =(TextView)findViewById(R.id.morephoto);
-        expe =(TextView)findViewById(R.id.profileexperiance);
-        aboutme =(TextView)findViewById(R.id.profileaboutme);
-        imag =(ImageView)findViewById(R.id.photoprofileimage) ;
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.profilename);
+        actegrry = (TextView) findViewById(R.id.profilecategorye);
+        course = (TextView) findViewById(R.id.profiletxtcourse);
+        qualifictn = (TextView) findViewById(R.id.profilequalification);
+        morepic = (TextView) findViewById(R.id.morephoto);
+        expe = (TextView) findViewById(R.id.profileexperiance);
+        aboutme = (TextView) findViewById(R.id.profileaboutme);
+        imag = (ImageView) findViewById(R.id.photoprofileimage);
         collapsingToolbarLayout.setTitle(GetPhotograpgySingalton.getInstance().getName());
         actegrry.setText(GetPhotograpgySingalton.getInstance().getPhotographerCategory());
         course.setText(GetPhotograpgySingalton.getInstance().getCourses());
@@ -97,15 +97,15 @@ public class PetPhotography extends AppCompatActivity {
 
         }
         initView();
-        id=GetPhotograpgySingalton.getInstance().getPG_Id();
+        id = GetPhotograpgySingalton.getInstance().getPG_Id();
         checkAcceptTrip();
         setRecyclerviewPhoto();
         recyclerView.setNestedScrollingEnabled(false);
     }
 
     private void setRecyclerviewPhoto() {
-        BasePhotoAdapter basePhotoAdapter=new BasePhotoAdapter(this,url);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(this, 2);
+        BasePhotoAdapter basePhotoAdapter = new BasePhotoAdapter(this, url);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(PetPhotography.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(basePhotoAdapter);
@@ -131,41 +131,42 @@ public class PetPhotography extends AppCompatActivity {
                     PhotoResponse photoResponse = response.body();
                     Log.e("dioglist", new GsonBuilder().create().toJson(response));
                     for (int i = 0; i < photoResponse.getResponse().size(); i++) {
-                       if(photoResponse.getResponse().get(i).getPG_Id()==id){
-                        PhotoSingalton photoSingalton = new PhotoSingalton();
-                        photoSingalton.setName(photoResponse.getResponse().get(i).getName());
-                        photoSingalton.setLocation(photoResponse.getResponse().get(i).getLocation());
-                        photoSingalton.setPhotographerCategory(photoResponse.getResponse().get(i).getPhotographerCategory());
-                        photoSingalton.setQualification(photoResponse.getResponse().get(i).getQualification());
-                        photoSingalton.setAbout(photoResponse.getResponse().get(i).getAbout());
-                        photoSingalton.setCourses(photoResponse.getResponse().get(i).getCourses());
-                        photoSingalton.setExp(photoResponse.getResponse().get(i).getExp());
-                        photoSingalton.setImage(photoResponse.getResponse().get(i).getImage());
-                        photoSingalton.setMultipalImage(photoResponse.getResponse().get(i).getMultipalImage());
-                        if (photoResponse.getResponse().get(i).getImgUrl().size()<=0){
-                            Utils.customMessage(PetPhotography.this,"Opps!! No Image Found");
-                            //  finish();
-                        }
-                        Log.e("Gallery", "galleryList" + photoResponse.getResponse().get(i).getImgUrl().size());
-                        // List<String> url = new ArrayList<>();
-                        for (int j = 0; j < photoResponse.getResponse().get(i).getImgUrl().size(); j++) {
-                            url.add("http://mrsam.in/sam/PhotographerImages/" + "" + photoResponse.getResponse().get(i).getImgUrl().get(j));
-                        }
+                        if (photoResponse.getResponse().get(i).getPG_Id() == id) {
+                            PhotoSingalton photoSingalton = new PhotoSingalton();
+                            photoSingalton.setName(photoResponse.getResponse().get(i).getName());
+                            photoSingalton.setLocation(photoResponse.getResponse().get(i).getLocation());
+                            photoSingalton.setPhotographerCategory(photoResponse.getResponse().get(i).getPhotographerCategory());
+                            photoSingalton.setQualification(photoResponse.getResponse().get(i).getQualification());
+                            photoSingalton.setAbout(photoResponse.getResponse().get(i).getAbout());
+                            photoSingalton.setCourses(photoResponse.getResponse().get(i).getCourses());
+                            photoSingalton.setExp(photoResponse.getResponse().get(i).getExp());
+                            photoSingalton.setImage(photoResponse.getResponse().get(i).getImage());
+                            photoSingalton.setMultipalImage(photoResponse.getResponse().get(i).getMultipalImage());
+                            if (photoResponse.getResponse().get(i).getImgUrl().size() <= 0) {
+                                Utils.customMessage(PetPhotography.this, "Opps!! No Image Found");
+                                //  finish();
+                            }
+                            Log.e("Gallery", "galleryList" + photoResponse.getResponse().get(i).getImgUrl().size());
+                            // List<String> url = new ArrayList<>();
+                            for (int j = 0; j < photoResponse.getResponse().get(i).getImgUrl().size(); j++) {
+                                url.add("http://mrsam.in/sam/PhotographerImages/" + "" + photoResponse.getResponse().get(i).getImgUrl().get(j));
+                            }
 
-                        if (photoResponse.getResponse().get(i).getImgUrl().size() >= 4) {
-                            morepic.setText(String.valueOf(photoResponse.getResponse().get(i).getImgUrl().size()-4));
-                        } else {
-                            morepic.setText("0");
-                        }
-                        if (photoResponse.getResponse().get(i).getImgUrl().size() > 4) {
-                            setListners();
-                        }
-                        tripSingaltonss.add(photoSingalton);
-                        mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-                        recyclerView.setLayoutManager(mLayoutManager);
-                        recyclerView.setAdapter(new BasePhotoAdapter(PetPhotography.this, url));
+                            if (photoResponse.getResponse().get(i).getImgUrl().size() >= 4) {
+                                morepic.setText(String.valueOf(photoResponse.getResponse().get(i).getImgUrl().size() - 4));
+                            } else {
+                                morepic.setText("0");
+                            }
+                            if (photoResponse.getResponse().get(i).getImgUrl().size() > 4) {
+                                setListners();
+                            }
+                            tripSingaltonss.add(photoSingalton);
+                            mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                            recyclerView.setLayoutManager(mLayoutManager);
+                            recyclerView.setAdapter(new BasePhotoAdapter(PetPhotography.this, url));
 
-                    }}
+                        }
+                    }
 
                 } else if (response.code() == 404) {
                     pDialog.dismiss();
@@ -204,7 +205,7 @@ public class PetPhotography extends AppCompatActivity {
 //        imageView2 = findViewById(R.id.imageView2);
 //        imageView3 = findViewById(R.id.imageView3);
 //        imageView4 = findViewById(R.id.imageView4);
-        recyclerView=findViewById(R.id.recyclerview);
+        recyclerView = findViewById(R.id.recyclerview);
     }
 
 

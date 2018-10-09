@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#00bbe4</color>
-    <color name="colorPrimaryDark">#006ee4</color>
-    <color name="colorAccent">#0081e4</color>
+    <color name="colorPrimaryDark">#00bbe4</color>
+    <color name="colorAccent">#00bbe4</color>
     <color name="colorRipple">#fff</color>
     <color name="textcolor">#3c3c3c</color>
     <color name="gen_black">#000000</color>

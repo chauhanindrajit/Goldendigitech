@@ -27,10 +27,9 @@ public class MatingSearchAdapter extends RecyclerView.Adapter<MatingSearchAdapte
     static List<MatingsearchRequest> matingsearchRequests;
     public static ArrayList<MatingsearchRequest> filterItem;
 
-    public MatingSearchAdapter(Context context, List<MatingsearchRequest> matingsearchRequests)
-    {
-        this.context=context;
-        this.matingsearchRequests=matingsearchRequests;
+    public MatingSearchAdapter(Context context, List<MatingsearchRequest> matingsearchRequests) {
+        this.context = context;
+        this.matingsearchRequests = matingsearchRequests;
 //        this.filterItem = new ArrayList<>();
 //        filterItem.addAll(matingSingaltons);
 
@@ -38,10 +37,10 @@ public class MatingSearchAdapter extends RecyclerView.Adapter<MatingSearchAdapte
 
     @Override
     public VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.activity_search_mating,parent,false);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.activity_search_mating, parent, false);
 
-        MatingSearchAdapter.VetViewHolder vetViewHolder=new MatingSearchAdapter.VetViewHolder(view);
+        MatingSearchAdapter.VetViewHolder vetViewHolder = new MatingSearchAdapter.VetViewHolder(view);
 
         return vetViewHolder;
     }
@@ -89,18 +88,19 @@ public class MatingSearchAdapter extends RecyclerView.Adapter<MatingSearchAdapte
 
 
     public class VetViewHolder extends RecyclerView.ViewHolder {
-       TextView loc,pet,gender,age,breed,status;
+        TextView loc, pet, gender, age, breed, status;
         ImageView imageView, bgimage;
         CardView cardView;
+
         public VetViewHolder(View itemView) {
             super(itemView);
-            loc=itemView.findViewById(R.id.Mlocation);
-            pet=itemView.findViewById(R.id.Mdogname);
-            gender=itemView.findViewById(R.id.Mfemale);
-            age=itemView.findViewById(R.id.Mage);
+            loc = itemView.findViewById(R.id.Mlocation);
+            pet = itemView.findViewById(R.id.Mdogname);
+            gender = itemView.findViewById(R.id.Mfemale);
+            age = itemView.findViewById(R.id.Mage);
             bgimage = itemView.findViewById(R.id.bgimage);
-            breed=itemView.findViewById(R.id.Mbreed);
-            status=itemView.findViewById(R.id.Mstatus);
+            breed = itemView.findViewById(R.id.Mbreed);
+            status = itemView.findViewById(R.id.Mstatus);
             imageView = itemView.findViewById(R.id.mainimage);
             cardView = itemView.findViewById(R.id.matingcard);
 
