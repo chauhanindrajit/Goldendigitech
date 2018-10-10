@@ -35,23 +35,24 @@ import retrofit2.Response;
 public class Registration extends AppCompatActivity {
     Toolbar toolbar;
     TextView signintxt;
-    EditText use_name,email_add,cont_no,password,cnfrpassword,location;
+    EditText use_name, email_add, cont_no, password, cnfrpassword, location;
     Button sign_up;
     private ProgressDialog pDialog;
     public String TAG = Registration.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         toolbar = findViewById(R.id.toolbar);
-        signintxt=(TextView)findViewById(R.id.signintxt);
-        use_name=(EditText) findViewById(R.id.usernames);
-        email_add=(EditText) findViewById(R.id.Email_Address);
-        cont_no=(EditText) findViewById(R.id.conttctno);
-        password=(EditText) findViewById(R.id.passswords);
-        cnfrpassword=(EditText) findViewById(R.id.confrmpaswd);
-        location=(EditText) findViewById(R.id.Address);
-        sign_up =(Button)findViewById(R.id.btn_signup);
+        signintxt = (TextView) findViewById(R.id.signintxt);
+        use_name = (EditText) findViewById(R.id.usernames);
+        email_add = (EditText) findViewById(R.id.Email_Address);
+        cont_no = (EditText) findViewById(R.id.conttctno);
+        password = (EditText) findViewById(R.id.passswords);
+        cnfrpassword = (EditText) findViewById(R.id.confrmpaswd);
+        location = (EditText) findViewById(R.id.Address);
+        sign_up = (Button) findViewById(R.id.btn_signup);
         toolbar.setTitle("Register");
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
@@ -83,13 +84,13 @@ public class Registration extends AppCompatActivity {
                         String cnPassword = cnfrpassword.getText().toString().trim();
                         String uPassword = password.getText().toString().trim();
                         String loctn = location.getText().toString().trim();
-                        if(validate1()){
+                        if (validate1()) {
                             registration(username, emailId, mob, uPassword, cnPassword, loctn);
                         }
 
                     }
 
-                }else {
+                } else {
                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Registration.this);
                     builder.setTitle("Internet problem");
                     builder.setMessage("Oops! seems you have lost internet connectivity. Please try again later.");
@@ -110,7 +111,8 @@ public class Registration extends AppCompatActivity {
             }
         });
     }
-    private void registration(String uName,  String emailId, String mob,String uPassword,String cnfimpasswrd, String loctn) {
+
+    private void registration(String uName, String emailId, String mob, String uPassword, String cnfimpasswrd, String loctn) {
         final Dialog dialog = new Dialog(Registration.this);
         pDialog = new ProgressDialog(Registration.this);
         pDialog.setMessage("Please wait...");
@@ -139,10 +141,10 @@ public class Registration extends AppCompatActivity {
                 Log.e(TAG, "onResponse: " + new GsonBuilder().create().toJson(registtnResponsemain));
                 if (response.code() == 200) {
 
-                        pDialog.dismiss();
-                        startActivity(new Intent(Registration.this, LoginActivity.class));
+                    pDialog.dismiss();
+                    startActivity(new Intent(Registration.this, LoginActivity.class));
                     Utils.customMessage(Registration.this, "Register Successful");
-                        finish();
+                    finish();
 //                        else {
 //                        pDialog.dismiss();
 //                        Toast.makeText(Registration.this, registtnResponsemain.getMessege(), Toast.LENGTH_SHORT).show();
@@ -175,55 +177,56 @@ public class Registration extends AppCompatActivity {
 
 
     private boolean validate1() {
-        boolean temp=true;
+        boolean temp = true;
         String checkemail = email_add.getText().toString();
-        String pass=password.getText().toString();
-        String cpass=cnfrpassword.getText().toString();
-        if(!isValidEmaillId(checkemail)){
-            Toast.makeText(Registration.this,"Invalid Email Address",Toast.LENGTH_SHORT).show();
-            temp=false;
+        String pass = password.getText().toString();
+        String cpass = cnfrpassword.getText().toString();
+        if (!isValidEmaillId(checkemail)) {
+            Toast.makeText(Registration.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
+            temp = false;
         }
-        if(!pass.equals(cpass)){
-            Toast.makeText(Registration.this,"Password Not matching",Toast.LENGTH_SHORT).show();
-            temp=false;
+        if (!pass.equals(cpass)) {
+            Toast.makeText(Registration.this, "Password Not matching", Toast.LENGTH_SHORT).show();
+            temp = false;
         }
         return temp;
     }
 
 
-private boolean validate() {
+    private boolean validate() {
 
 
         if (use_name.getText().toString().equals("")) {
-            Toast.makeText(Registration.this,"Please Enter Valid User Name.",Toast.LENGTH_LONG).show();
+            Toast.makeText(Registration.this, "Please Enter Valid User Name.", Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (email_add.getText().toString().equals("")) {
-            Toast.makeText(Registration.this,"Please enter email id.",Toast.LENGTH_LONG).show();
+            Toast.makeText(Registration.this, "Please enter email id.", Toast.LENGTH_LONG).show();
             return false;
         }
         if (cont_no.getText().toString().equals("")) {
-            Toast.makeText(Registration.this,"Please Enter Contact no.",Toast.LENGTH_LONG).show();
+            Toast.makeText(Registration.this, "Please Enter Contact no.", Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (password.getText().toString().equals("")) {
-            Toast.makeText(Registration.this,"Please enter password.",Toast.LENGTH_LONG).show();
+            Toast.makeText(Registration.this, "Please enter password.", Toast.LENGTH_LONG).show();
             return false;
         } else if (password.getText().length() < 6) {
-            Toast.makeText(Registration.this,"Password must be at least 6 characters long.",Toast.LENGTH_LONG).show();
+            Toast.makeText(Registration.this, "Password must be at least 6 characters long.", Toast.LENGTH_LONG).show();
             return false;
         }
         if (cnfrpassword.getText().toString().equals("")) {
-            Toast.makeText(Registration.this,"Please enter Confirm password.",Toast.LENGTH_LONG).show();
+            Toast.makeText(Registration.this, "Please enter Confirm password.", Toast.LENGTH_LONG).show();
             return false;
         } else if (password.getText().length() < 6) {
-            Toast.makeText(Registration.this,"Password must be at least 6 characters long.",Toast.LENGTH_LONG).show();
+            Toast.makeText(Registration.this, "Password must be at least 6 characters long.", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
     }
+
     public static boolean isValidEmaillId(String email) {
 
         return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"

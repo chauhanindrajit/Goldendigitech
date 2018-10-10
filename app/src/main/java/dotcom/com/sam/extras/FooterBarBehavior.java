@@ -24,7 +24,7 @@ public class FooterBarBehavior extends CoordinatorLayout.Behavior<FooterBarLayou
                                    FooterBarLayout child,
                                    View dependency) {
         //We are watching changes in the AppBarLayout
-         return dependency instanceof RecyclerView;
+        return dependency instanceof RecyclerView;
     }
 
     //This is called for each change to a dependent view

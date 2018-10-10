@@ -31,10 +31,9 @@ public class WalkingSearchAdapter extends RecyclerView.Adapter<WalkingSearchAdap
     static List<WalkingsearchRequest> arrSubCateogry;
     public static ArrayList<WalkingsearchRequest> filterItem;
 
-    public WalkingSearchAdapter(Context context, List<WalkingsearchRequest> arrSubCateogry)
-    {
-        this.context=context;
-        this.arrSubCateogry=arrSubCateogry;
+    public WalkingSearchAdapter(Context context, List<WalkingsearchRequest> arrSubCateogry) {
+        this.context = context;
+        this.arrSubCateogry = arrSubCateogry;
 //        this.filterItem = new ArrayList<>();
 //        filterItem.addAll(matingSingaltons);
 
@@ -42,10 +41,10 @@ public class WalkingSearchAdapter extends RecyclerView.Adapter<WalkingSearchAdap
 
     @Override
     public VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.activity_walkingsearch_mating,parent,false);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.activity_walkingsearch_mating, parent, false);
 
-        WalkingSearchAdapter.VetViewHolder vetViewHolder=new WalkingSearchAdapter.VetViewHolder(view);
+        WalkingSearchAdapter.VetViewHolder vetViewHolder = new WalkingSearchAdapter.VetViewHolder(view);
 
         return vetViewHolder;
     }

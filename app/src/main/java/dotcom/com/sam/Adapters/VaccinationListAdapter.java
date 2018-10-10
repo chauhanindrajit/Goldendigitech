@@ -29,24 +29,24 @@ public class VaccinationListAdapter extends RecyclerView.Adapter<VaccinationList
 
     private ArrayList<VaccinationResponse.ResponseBean> arrSubCateogry;
     public static ArrayList<VaccinationResponse.ResponseBean> filterItem;
-    public VaccinationListAdapter(Context context, List<VaccinationResponse.ResponseBean> arrSubCateogry)
-    {
-        this.context=context;
+
+    public VaccinationListAdapter(Context context, List<VaccinationResponse.ResponseBean> arrSubCateogry) {
+        this.context = context;
         this.arrSubCateogry = (ArrayList<VaccinationResponse.ResponseBean>) arrSubCateogry;
         this.filterItem = new ArrayList<>();
         try {
             filterItem.addAll(arrSubCateogry);
+        } catch (Exception e) {
         }
-        catch (Exception e){}
 
     }
 
     @Override
     public VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.single_vaccination_layout,parent,false);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.single_vaccination_layout, parent, false);
 
-        VaccinationListAdapter.VetViewHolder vetViewHolder=new VaccinationListAdapter.VetViewHolder(view);
+        VaccinationListAdapter.VetViewHolder vetViewHolder = new VaccinationListAdapter.VetViewHolder(view);
 
         return vetViewHolder;
     }
@@ -68,18 +68,15 @@ public class VaccinationListAdapter extends RecyclerView.Adapter<VaccinationList
                 VacccinationSingalton.getInstance().setDoctorType(arrSubCateogry.get(position).getDoctorType());
                 VacccinationSingalton.getInstance().setImage(arrSubCateogry.get(position).getImage());
 
-                 Utils.moveNextWithAnimation(context,VaccinationProfileActivity.class);
+                Utils.moveNextWithAnimation(context, VaccinationProfileActivity.class);
 
 
             }
         });
 
-        if(PetDoctor.categeory== Constats.VET_NEAR_ME||PetDoctor.categeory== Constats.VACCINATION  )
-        {
+        if (PetDoctor.categeory == Constats.VET_NEAR_ME || PetDoctor.categeory == Constats.VACCINATION) {
             holder.layoutVetAtHome.setVisibility(View.GONE);
-        }
-        else if(PetDoctor.categeory== Constats.VET_AT_HOME)
-        {
+        } else if (PetDoctor.categeory == Constats.VET_AT_HOME) {
             holder.layoutVetAtHome.setVisibility(View.GONE);
         }
 
@@ -89,8 +86,8 @@ public class VaccinationListAdapter extends RecyclerView.Adapter<VaccinationList
         holder.experiance.setText(arrSubCateogry.get(position).getWorkExperience());
         holder.homefeess.setText(String.valueOf(arrSubCateogry.get(position).getNearMeFees()));
         holder.opentime.setText(arrSubCateogry.get(position).getAvailableTime());
-       // holder.subdoctortype.setText(arrSubCateogry.get(position).getDoctorType());
-      //  holder.desctription.setText(arrSubCateogry.get(position).getDescription());
+        // holder.subdoctortype.setText(arrSubCateogry.get(position).getDoctorType());
+        //  holder.desctription.setText(arrSubCateogry.get(position).getDescription());
 //        holder.locatn.setText(arrSubCateogry.get(position).getLocation());
         if (arrSubCateogry.get(position).getImage() != null) {
             Picasso.with(context).load("http://mrsam.in/sam/MainImage/" + arrSubCateogry.get(position).getImage().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(holder.imageView);
@@ -106,6 +103,7 @@ public class VaccinationListAdapter extends RecyclerView.Adapter<VaccinationList
     public int getItemCount() {
         return arrSubCateogry.size();
     }
+
     public void filter(String charText) {
 
         charText = charText.toLowerCase(Locale.getDefault());
@@ -132,23 +130,24 @@ public class VaccinationListAdapter extends RecyclerView.Adapter<VaccinationList
 
     public class VetViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        ImageView imageView,rsimage;
-        TextView drname,qualifictn,experiance,homefeess,opentime,desctription,locatn,subdoctortype;
+        ImageView imageView, rsimage;
+        TextView drname, qualifictn, experiance, homefeess, opentime, desctription, locatn, subdoctortype;
         LinearLayout layoutVetAtHome;
+
         public VetViewHolder(View itemView) {
             super(itemView);
-            drname=itemView.findViewById(R.id.doctorname);
-            qualifictn=itemView.findViewById(R.id.doctorqualification);
-            experiance=itemView.findViewById(R.id.doctorexperiance);
-            homefeess=itemView.findViewById(R.id.docthomefees);
-            opentime=itemView.findViewById(R.id.availabletime);
-            cardView=itemView.findViewById(R.id.cardview);
-             rsimage=itemView.findViewById(R.id.rupessimages);
-             desctription=itemView.findViewById(R.id.detaildescription);
-             //subdoctortype =itemView.findViewById(R.id.subdoctortype);
-            locatn=itemView.findViewById(R.id.location);
-            imageView=itemView.findViewById(R.id.profile_image);
-            layoutVetAtHome=itemView.findViewById(R.id.visit_at_home_layout1);
+            drname = itemView.findViewById(R.id.doctorname);
+            qualifictn = itemView.findViewById(R.id.doctorqualification);
+            experiance = itemView.findViewById(R.id.doctorexperiance);
+            homefeess = itemView.findViewById(R.id.docthomefees);
+            opentime = itemView.findViewById(R.id.availabletime);
+            cardView = itemView.findViewById(R.id.cardview);
+            rsimage = itemView.findViewById(R.id.rupessimages);
+            desctription = itemView.findViewById(R.id.detaildescription);
+            //subdoctortype =itemView.findViewById(R.id.subdoctortype);
+            locatn = itemView.findViewById(R.id.location);
+            imageView = itemView.findViewById(R.id.profile_image);
+            layoutVetAtHome = itemView.findViewById(R.id.visit_at_home_layout1);
         }
     }
 

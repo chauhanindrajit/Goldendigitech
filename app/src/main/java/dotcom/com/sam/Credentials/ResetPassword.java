@@ -26,23 +26,24 @@ import retrofit2.Response;
 public class ResetPassword extends AppCompatActivity {
     Toolbar toolbar;
     TextView signup;
-    EditText oPassword, nPassword,emails,cPassword;
+    EditText oPassword, nPassword, emails, cPassword;
     Button changePassword;
     ProgressDialog pDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
-        signup =(TextView)findViewById(R.id.signupfromchanepass);
-        oPassword =(EditText)findViewById(R.id.oldpassword);
-        nPassword =(EditText)findViewById(R.id.newpassword);
-        emails =(EditText)findViewById(R.id.emailid);
-        cPassword =(EditText)findViewById(R.id.conformpassword);
-        changePassword =(Button)findViewById(R.id.resetpasswrd);
+        signup = (TextView) findViewById(R.id.signupfromchanepass);
+        oPassword = (EditText) findViewById(R.id.oldpassword);
+        nPassword = (EditText) findViewById(R.id.newpassword);
+        emails = (EditText) findViewById(R.id.emailid);
+        cPassword = (EditText) findViewById(R.id.conformpassword);
+        changePassword = (Button) findViewById(R.id.resetpasswrd);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ResetPassword.this,Registration.class);
+                Intent i = new Intent(ResetPassword.this, Registration.class);
                 startActivity(i);
             }
         });
@@ -70,7 +71,7 @@ public class ResetPassword extends AppCompatActivity {
 
 
                     if (validate())
-                        changePassword(newPassw, oldPassw,emailadd,cnfrmpass);
+                        changePassword(newPassw, oldPassw, emailadd, cnfrmpass);
                 } else {
 
                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ResetPassword.this);
@@ -90,8 +91,6 @@ public class ResetPassword extends AppCompatActivity {
                 }
             }
         });
-
-
 
 
     }
@@ -171,17 +170,16 @@ public class ResetPassword extends AppCompatActivity {
 
 
     private boolean validate() {
-        String pass=nPassword.getText().toString();
-        String cpass=cPassword.getText().toString();
+        String pass = nPassword.getText().toString();
+        String cpass = cPassword.getText().toString();
         if (oPassword.getText().toString().length() == 0) {
             Utils.customMessage(ResetPassword.this, "Pleas Enter Old Password");
             return false;
         } else if (nPassword.getText().toString().length() == 0) {
             Utils.customMessage(ResetPassword.this, "Pleas Enter New Password");
             return false;
-        }
-        else if (!pass.equals(cpass)){
-            Toast.makeText(ResetPassword.this,"Password Not matching",Toast.LENGTH_SHORT).show();
+        } else if (!pass.equals(cpass)) {
+            Toast.makeText(ResetPassword.this, "Password Not matching", Toast.LENGTH_SHORT).show();
             return false;
 
         }

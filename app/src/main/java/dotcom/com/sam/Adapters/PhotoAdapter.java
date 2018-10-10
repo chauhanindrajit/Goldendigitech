@@ -29,24 +29,25 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolderPr
     Context context;
     private ArrayList<PhotoSingalton> arrSubCateogry;
     private List<String> url;
-    public PhotoAdapter(Context context, List<PhotoSingalton> arrSubCateogry)
-    {
+
+    public PhotoAdapter(Context context, List<PhotoSingalton> arrSubCateogry) {
         this.arrSubCateogry = (ArrayList<PhotoSingalton>) arrSubCateogry;
-        this.url=(List<String>) url;
-        this.context=context;
+        this.url = (List<String>) url;
+        this.context = context;
     }
+
     @Override
     public ViewHolderPro onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.single_photo_layout,parent,false);
-        PhotoAdapter.ViewHolderPro viewHolder=new PhotoAdapter.ViewHolderPro(view);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.single_photo_layout, parent, false);
+        PhotoAdapter.ViewHolderPro viewHolder = new PhotoAdapter.ViewHolderPro(view);
 
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolderPro holder, final int position) {
-       holder.imageView.setOnClickListener(new View.OnClickListener() {
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -63,13 +64,13 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolderPr
                 GetPhotograpgySingalton.getInstance().setPG_Id(arrSubCateogry.get(position).getPG_Id());
                 GetPhotograpgySingalton.getInstance().setImgUrl(arrSubCateogry.get(position).getImgUrl());
 
-                ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"image");
-            Intent intent=new Intent(context,PetPhotography.class);
-            context.startActivity(intent,activityOptions.toBundle());
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.imageView, "image");
+                Intent intent = new Intent(context, PetPhotography.class);
+                context.startActivity(intent, activityOptions.toBundle());
 
             }
         });
-       holder.name.setText(arrSubCateogry.get(position).getName());
+        holder.name.setText(arrSubCateogry.get(position).getName());
         holder.loc.setText(arrSubCateogry.get(position).getLocation());
         holder.course.setText(arrSubCateogry.get(position).getCourses());
         if (arrSubCateogry.get(position).getImage() != null) {
@@ -87,13 +88,14 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolderPr
 
     public class ViewHolderPro extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView loc,name,course;
+        TextView loc, name, course;
+
         public ViewHolderPro(View itemView) {
             super(itemView);
-           imageView=itemView.findViewById(R.id.imageView);
-            loc=itemView.findViewById(R.id.photoloc);
-            name=itemView.findViewById(R.id.photoname);
-            course=itemView.findViewById(R.id.photocourse);
+            imageView = itemView.findViewById(R.id.imageView);
+            loc = itemView.findViewById(R.id.photoloc);
+            name = itemView.findViewById(R.id.photoname);
+            course = itemView.findViewById(R.id.photocourse);
 
 
         }

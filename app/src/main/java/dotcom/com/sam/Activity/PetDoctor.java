@@ -16,6 +16,7 @@ public class PetDoctor extends AppCompatActivity {
     public static int categeory = 0;
     Button btnVetNearMe, btnVetAtHome, btnDiagnostic, btnVaccination;
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

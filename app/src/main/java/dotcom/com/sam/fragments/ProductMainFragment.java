@@ -28,6 +28,7 @@ public class ProductMainFragment extends Fragment {
     TabLayout tabLayout;
     private ArrayList<ProductResponse.ResponseBean> arrSubCateogry;
     ArrayList<List<ProductResponse.ResponseBean>> stringList = new ArrayList<List<ProductResponse.ResponseBean>>();
+
     public ProductMainFragment() {
         // Required empty public constructor
     }
@@ -41,28 +42,24 @@ public class ProductMainFragment extends Fragment {
     }
 
 
-
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView(getView());
         addTab();
-       ProductPagerAdapter productPagerAdapter=new ProductPagerAdapter(ProductActivity.fragmentManager,stringList, arrSubCateogry);
+        ProductPagerAdapter productPagerAdapter = new ProductPagerAdapter(ProductActivity.fragmentManager, stringList, arrSubCateogry);
         mViewPager.setAdapter(productPagerAdapter);
         TabListener();
     }
 
 
-    private void initView(View view)
-    {
-        mViewPager=(ViewPager) view.findViewById(R.id.pager);
-        tabLayout=(TabLayout) view.findViewById(R.id.tablayout);
+    private void initView(View view) {
+        mViewPager = (ViewPager) view.findViewById(R.id.pager);
+        tabLayout = (TabLayout) view.findViewById(R.id.tablayout);
 
     }
 
-    private void addTab()
-    {
+    private void addTab() {
         tabLayout.addTab(tabLayout.newTab().setText("FEED"));
         tabLayout.addTab(tabLayout.newTab().setText("APPAREL"));
         tabLayout.addTab(tabLayout.newTab().setText("SHOES"));
@@ -72,8 +69,7 @@ public class ProductMainFragment extends Fragment {
     }
 
 
-    private void TabListener()
-    {
+    private void TabListener() {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -114,9 +110,6 @@ public class ProductMainFragment extends Fragment {
 
 
     }
-
-
-
 
 
 }

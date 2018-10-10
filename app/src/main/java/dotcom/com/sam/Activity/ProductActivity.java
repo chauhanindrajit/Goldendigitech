@@ -125,9 +125,7 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
             ID = CategorySingalton.getInstance().getSubcateID();
             newarrivals = "New";
             NewArriavls(newarrivals);
-        }
-
-        else if(SingletonClass.getInstance().getSubcat().equals("Subcat")){
+        } else if (SingletonClass.getInstance().getSubcat().equals("Subcat")) {
             ID = CategorySingalton.getInstance().getSubcateID();
             subcatid = SubcategorySingalton.getInstance().getSc_Id();
             checkAcceptTrip(ID, subcatid);
@@ -371,6 +369,7 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
         });
 
     }
+
     private void NewArriavls(String newarrivals) {
         arrSubCateogry = new ArrayList<>();
 
@@ -437,7 +436,7 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
                                 @Override
                                 public void run() {
                                     tabLayout.setSelected(true);
-                                   // mViewPager.setCurrentItem(finalI);
+                                    // mViewPager.setCurrentItem(finalI);
                                     TabListener();
                                 }
                             });
@@ -457,6 +456,7 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
         });
 
     }
+
     private void TabListener() {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

@@ -58,6 +58,7 @@ public class DiagoHome extends AppCompatActivity {
     List<String> locationTypeList = new ArrayList<>();
     ArrayList<String> item = new ArrayList<>();
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

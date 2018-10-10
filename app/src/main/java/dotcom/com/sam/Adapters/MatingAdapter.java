@@ -22,26 +22,25 @@ public class MatingAdapter extends RecyclerView.Adapter<MatingAdapter.VetViewHol
     Context context;
 
 
-    public MatingAdapter(Context context)
-    {
-        this.context=context;
+    public MatingAdapter(Context context) {
+        this.context = context;
 
     }
 
     @Override
     public VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.single_mate_profile,parent,false);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.single_mate_profile, parent, false);
 
-        MatingAdapter.VetViewHolder vetViewHolder=new MatingAdapter.VetViewHolder(view);
+        MatingAdapter.VetViewHolder vetViewHolder = new MatingAdapter.VetViewHolder(view);
 
         return vetViewHolder;
     }
 
     @Override
     public void onBindViewHolder(final VetViewHolder holder, int position) {
-      //for mating----------------------
-        if(MainActivity.module_name==Constats.Module.MATING) {
+        //for mating----------------------
+        if (MainActivity.module_name == Constats.Module.MATING) {
             holder.layoutAdopt.setVisibility(View.GONE);
             holder.layoutMating.setVisibility(View.VISIBLE);
 
@@ -54,17 +53,16 @@ public class MatingAdapter extends RecyclerView.Adapter<MatingAdapter.VetViewHol
 
             }
         }//for adopt
-        if(MainActivity.module_name==Constats.Module.ADOPTED) {
+        if (MainActivity.module_name == Constats.Module.ADOPTED) {
             holder.layoutAdopt.setVisibility(View.VISIBLE);
             holder.layoutMating.setVisibility(View.GONE);
             if (position % 1 == 0) {
                 holder.mainImage.setBackgroundResource(R.drawable.cat_sample);
                 holder.background.setBackgroundResource(R.drawable.cat_sample);
-               // holder.txt_availiblity.setBackgroundResource(R.drawable.unavailable_shpe);
+                // holder.txt_availiblity.setBackgroundResource(R.drawable.unavailable_shpe);
                 holder.txt_availiblity.setText("NEW");
 
-            }
-            else {
+            } else {
                 holder.txt_availiblity.setVisibility(View.GONE);
             }
 
@@ -74,7 +72,7 @@ public class MatingAdapter extends RecyclerView.Adapter<MatingAdapter.VetViewHol
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(MainActivity.module_name==Constats.Module.ADOPTED) {
+                if (MainActivity.module_name == Constats.Module.ADOPTED) {
                     ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.mainImage, "image");
                     Intent intent = new Intent(context, AdoptProfile.class);
                     context.startActivity(intent, activityOptions.toBundle());
@@ -93,19 +91,19 @@ public class MatingAdapter extends RecyclerView.Adapter<MatingAdapter.VetViewHol
 
 
     public class VetViewHolder extends RecyclerView.ViewHolder {
-        ImageView mainImage,background;
-        LinearLayout layoutMating,layoutAdopt;
+        ImageView mainImage, background;
+        LinearLayout layoutMating, layoutAdopt;
         TextView txt_availiblity;
         CardView cardView;
 
         public VetViewHolder(View itemView) {
             super(itemView);
-            mainImage=itemView.findViewById(R.id.main_image);
-            background=itemView.findViewById(R.id.backgrond_img);
-            txt_availiblity=itemView.findViewById(R.id.txt_availiblity);
-            layoutMating=itemView.findViewById(R.id.mating_layout);
-            layoutAdopt=itemView.findViewById(R.id.adopt_layout);
-            cardView=itemView.findViewById(R.id.cardview);
+            mainImage = itemView.findViewById(R.id.main_image);
+            background = itemView.findViewById(R.id.backgrond_img);
+            txt_availiblity = itemView.findViewById(R.id.txt_availiblity);
+            layoutMating = itemView.findViewById(R.id.mating_layout);
+            layoutAdopt = itemView.findViewById(R.id.adopt_layout);
+            cardView = itemView.findViewById(R.id.cardview);
 
 
         }

@@ -28,11 +28,12 @@ public class ForgotPassword extends AppCompatActivity {
     EditText emaiId;
     Button submitPassword;
     ProgressDialog pDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-        reset =(TextView)findViewById(R.id.resetpass);
+        reset = (TextView) findViewById(R.id.resetpass);
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Forgot Password");
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
@@ -45,7 +46,7 @@ public class ForgotPassword extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ForgotPassword.this,ResetPassword.class);
+                Intent i = new Intent(ForgotPassword.this, ResetPassword.class);
                 startActivity(i);
             }
         });
@@ -92,8 +93,7 @@ public class ForgotPassword extends AppCompatActivity {
         pDialog.show();
         final ForgetPassRequest forgetPassRequest = new ForgetPassRequest(emailId);
         Call<ForgotPassResponse> changePasswordResponseCall = Utilss.getWebService().getForgotPassword(forgetPassRequest);
-        changePasswordResponseCall.enqueue(new Callback<ForgotPassResponse>()
-         {
+        changePasswordResponseCall.enqueue(new Callback<ForgotPassResponse>() {
             @Override
             public void onResponse(Call<ForgotPassResponse> call, Response<ForgotPassResponse> response) {
                 if (response.code() == 200) {
@@ -126,6 +126,7 @@ public class ForgotPassword extends AppCompatActivity {
             }
         });
     }
+
     private boolean validate() {
         if (emaiId.getText().toString().length() == 0) {
             Utils.customMessage(ForgotPassword.this, "Pleas Enter Email Id");

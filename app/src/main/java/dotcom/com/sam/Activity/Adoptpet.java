@@ -31,16 +31,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Adoptpet extends AppCompatActivity {
-RecyclerView recyclerView;
+    RecyclerView recyclerView;
     ArrayList tripSingaltonss;
     private ProgressDialog pDialog;
     private ArrayList<AdoptaPetSingalton> arrSubCateogry;
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adoptpet);
-        recyclerView=(RecyclerView)findViewById(R.id.recylcerview_products);
+        recyclerView = (RecyclerView) findViewById(R.id.recylcerview_products);
         tripSingaltonss = new ArrayList<>();
         tripSingaltonss.clear();
         checkAcceptTrip();
@@ -57,17 +58,18 @@ RecyclerView recyclerView;
         });
 
     }
-    private  void setRecyclerviewProduct()
-    {
+
+    private void setRecyclerviewProduct() {
         //   recyclerView
-        AdoptpetAdapter adoptpetAdapter=new AdoptpetAdapter(this,arrSubCateogry);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(this, 1);
+        AdoptpetAdapter adoptpetAdapter = new AdoptpetAdapter(this, arrSubCateogry);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
         //  LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.Gr, false);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adoptpetAdapter);
 
 
     }
+
     private void checkAcceptTrip() {
         arrSubCateogry = new ArrayList<>();
 

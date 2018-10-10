@@ -33,35 +33,36 @@ import dotcom.com.sam.SingaltonsClasses.TripSingalton;
 public class VetProfileActivity extends AppCompatActivity {
     ImageView profileImage;
     Button btnBook;
-    TextView drname,qualifictn,experiance,homefeess,subdoctortype,desctription,locatn,subcharge;
-    LinearLayout visitAtHomeLayout,vaccinationLayoput;
+    TextView drname, qualifictn, experiance, homefeess, subdoctortype, desctription, locatn, subcharge;
+    LinearLayout visitAtHomeLayout, vaccinationLayoput;
     ImageView imag;
     Context context;
     final Calendar myCalendar = Calendar.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vet_profile);
-        drname = (TextView)findViewById(R.id.doctname);
-        qualifictn = (TextView)findViewById(R.id.subqualification);
-        experiance = (TextView)findViewById(R.id.subexperiance);
-        homefeess = (TextView)findViewById(R.id.subvisitathomefee);
-        subdoctortype =(TextView)findViewById(R.id.subdoctortype);
-        subcharge =(TextView)findViewById(R.id.vetsubcharge);
+        drname = (TextView) findViewById(R.id.doctname);
+        qualifictn = (TextView) findViewById(R.id.subqualification);
+        experiance = (TextView) findViewById(R.id.subexperiance);
+        homefeess = (TextView) findViewById(R.id.subvisitathomefee);
+        subdoctortype = (TextView) findViewById(R.id.subdoctortype);
+        subcharge = (TextView) findViewById(R.id.vetsubcharge);
         //opentime = (TextView)findViewById(R.id.availabletime);
-        desctription = (TextView)findViewById(R.id.detaildescription);
-        locatn = (TextView)findViewById(R.id.location);
+        desctription = (TextView) findViewById(R.id.detaildescription);
+        locatn = (TextView) findViewById(R.id.location);
         drname.setText(TripSingalton.getInstance().getDoctorName());
         qualifictn.setText(TripSingalton.getInstance().getQualification());
         experiance.setText(TripSingalton.getInstance().getWorkExperience());
         subcharge.setText(String.valueOf(TripSingalton.getInstance().getNearMeFees()));
         subdoctortype.setText(TripSingalton.getInstance().getDoctorType());
-        btnBook=findViewById(R.id.btn_bookapointment);
+        btnBook = findViewById(R.id.btn_bookapointment);
         // opentime.setText(TripSingalton.getInstance().getAvailableTime());
         desctription.setText(TripSingalton.getInstance().getDescription());
         locatn.setText(TripSingalton.getInstance().getLocation());
 
-        imag =(ImageView)findViewById(R.id.profile_image);
+        imag = (ImageView) findViewById(R.id.profile_image);
         //OldpetRequest oldpetRequest= new OldpetRequest();
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -101,53 +102,45 @@ public class VetProfileActivity extends AppCompatActivity {
 
     private void setVisilityView() {
 
-        if(PetDoctor.categeory== Constats.VET_AT_HOME)
-        {
+        if (PetDoctor.categeory == Constats.VET_AT_HOME) {
             visitAtHomeLayout.setVisibility(View.VISIBLE);
             vaccinationLayoput.setVisibility(View.GONE);
-        }
-        else if(PetDoctor.categeory== Constats.VET_NEAR_ME)
-        {
+        } else if (PetDoctor.categeory == Constats.VET_NEAR_ME) {
             visitAtHomeLayout.setVisibility(View.GONE);
             vaccinationLayoput.setVisibility(View.GONE);
-        }
-        else if(PetDoctor.categeory== Constats.VACCINATION)
-        {
+        } else if (PetDoctor.categeory == Constats.VACCINATION) {
             visitAtHomeLayout.setVisibility(View.GONE);
             vaccinationLayoput.setVisibility(View.VISIBLE);
         }
     }
 
     private void initView() {
-        profileImage=findViewById(R.id.profile_image);
+        profileImage = findViewById(R.id.profile_image);
         // Bitmap bitmap= BitmapFactory.decodeResource()
 
-        visitAtHomeLayout=findViewById(R.id.visit_at_home_layout);
-        vaccinationLayoput=findViewById(R.id.vaccination_layout);
+        visitAtHomeLayout = findViewById(R.id.visit_at_home_layout);
+        vaccinationLayoput = findViewById(R.id.vaccination_layout);
     }
 
 
-    private void initListner()
-    {
+    private void initListner() {
 
     }
 
-    private void getDate()
-    {
+    private void getDate() {
         Calendar calendar = Calendar.getInstance();
 
-        DatePickerDialog datePickerDialog=new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 
                 getTime();
             }
-        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE));
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
         datePickerDialog.show();
     }
 
-    void getTime()
-    {
+    void getTime() {
         Calendar mcurrentTime = Calendar.getInstance();
         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
         int minute = mcurrentTime.get(Calendar.MINUTE);

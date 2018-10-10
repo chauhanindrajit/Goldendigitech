@@ -27,31 +27,30 @@ import dotcom.com.sam.Activity.VetList;
 import dotcom.com.sam.ProfileActivity.VetProfileActivity;
 import dotcom.com.sam.SingaltonsClasses.TripSingalton;
 
-public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewHolder>  implements Filterable {
+public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewHolder> implements Filterable {
     Context context;
     RecyclerView recyclerView;
     CardView cardView;
     TripSingalton tripSingalton = new TripSingalton();
     public static int glob;
-   public static List<TripSingalton> arrSubCateogry;
+    public static List<TripSingalton> arrSubCateogry;
     public static ArrayList<TripSingalton> filterItem;
 
     private int currentItem;
+
     public VetListAdapter(Context context, ArrayList<TripSingalton> arrSubCateogry) {
 
 
         this.context = context;
-        if(!VetList.isfilter){
-        this.arrSubCateogry = (List<TripSingalton>) arrSubCateogry;
-        this.filterItem = new ArrayList<>();
-        filterItem.addAll(arrSubCateogry);
+        if (!VetList.isfilter) {
+            this.arrSubCateogry = (List<TripSingalton>) arrSubCateogry;
+            this.filterItem = new ArrayList<>();
+            filterItem.addAll(arrSubCateogry);
+
+        }
+
 
     }
-
-
-    }
-
-
 
 
     @Override
@@ -85,7 +84,7 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
             }
         });
 
-       // TripSingalton tripSingalton =this.tripSingalton.get(position);
+        // TripSingalton tripSingalton =this.tripSingalton.get(position);
         holder.drname.setText(arrSubCateogry.get(position).getDoctorName());
         holder.qualifictn.setText(arrSubCateogry.get(position).getQualification());
         holder.experiance.setText(arrSubCateogry.get(position).getWorkExperience());
@@ -117,7 +116,7 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
 
         charText = charText.toLowerCase(Locale.getDefault());
         arrSubCateogry.clear();
-arrSubCateogry = new ArrayList<>();
+        arrSubCateogry = new ArrayList<>();
         if (charText.length() == 0) {
             arrSubCateogry.addAll(filterItem);
             notifyDataSetChanged();
@@ -130,12 +129,12 @@ arrSubCateogry = new ArrayList<>();
                     newList.add(arrSubCateogry1);
                     arrSubCateogry.addAll(newList);
                     refresh();
-                     notifyDataSetChanged();
+                    notifyDataSetChanged();
 
                 }
             }
         }
-       notifyDataSetChanged();
+        notifyDataSetChanged();
 
     }
 
@@ -144,6 +143,7 @@ arrSubCateogry = new ArrayList<>();
         viewModels.addAll(viewModels);
         notifyDataSetChanged();
     }
+
     public void addItem(int position, TripSingalton viewModel) {
         arrSubCateogry.add(position, viewModel);
         notifyItemInserted(position);
@@ -154,15 +154,13 @@ arrSubCateogry = new ArrayList<>();
         notifyItemRemoved(position);
     }
 
-    public void setFilter(String s)
-    {
+    public void setFilter(String s) {
 
-        arrSubCateogry.addAll(tripSingalton );
+        arrSubCateogry.addAll(tripSingalton);
         notifyDataSetChanged();
     }
 
-    private void refresh()
-    {
+    private void refresh() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -172,8 +170,9 @@ arrSubCateogry = new ArrayList<>();
 
 
             }
-        },3000);
+        }, 3000);
     }
+
     @Override
     public Filter getFilter() {
 
@@ -226,6 +225,7 @@ arrSubCateogry = new ArrayList<>();
         arrSubCateogry.addAll(newlist);
         this.notifyDataSetChanged();
     }
+
     public class VetViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView, rsimage;

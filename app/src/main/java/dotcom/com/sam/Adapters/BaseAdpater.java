@@ -18,19 +18,16 @@ import dotcom.com.sam.extras.Constants;
 /**
  * Created by sanjay on 3/9/2018.
  */
-public  class BaseAdpater  {
+public class BaseAdpater {
 
     private Context context;
-    private  ArrayList<HashMap<String, String>> arrcontactList;
-    private  ArrayList<ArrayList<HashMap<String, String>>> arrSubCateogry;
+    private ArrayList<HashMap<String, String>> arrcontactList;
+    private ArrayList<ArrayList<HashMap<String, String>>> arrSubCateogry;
 
 
-
-    public BaseAdpater(Context context)
-    {
-        this.context=context;
+    public BaseAdpater(Context context) {
+        this.context = context;
     }
-
 
 
 }

@@ -42,6 +42,7 @@ public class PhotoMain extends AppCompatActivity {
     Toolbar toolbar;
     List<String> url = new ArrayList<>();
     private RecyclerView.LayoutManager mLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,39 +82,36 @@ public class PhotoMain extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        if(getIntent().getStringExtra("comeFrom")==null)
-        {
+        if (getIntent().getStringExtra("comeFrom") == null) {
             setRecyclerviewProduct();
-        }
-        else
-        {
+        } else {
             setRecyclerviewPhoto();
         }
 
     }
 
     private void setRecyclerviewPhoto() {
-        PhotoListAdapter photoAdapter=new PhotoListAdapter(this,suu);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(this, 3);
+        PhotoListAdapter photoAdapter = new PhotoListAdapter(this, suu);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         //  LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.Gr, false);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(photoAdapter);
     }
 
     private void initView() {
-        recyclerView=findViewById(R.id.recyclerview);
+        recyclerView = findViewById(R.id.recyclerview);
     }
 
-    private  void setRecyclerviewProduct()
-    {
+    private void setRecyclerviewProduct() {
         //   recyclerView
-        PhotoAdapter photoAdapter=new PhotoAdapter(this,arrSubCateogry);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(this, 2);
+        PhotoAdapter photoAdapter = new PhotoAdapter(this, arrSubCateogry);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         //  LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.Gr, false);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(photoAdapter);
 
     }
+
     private void checkAcceptTrip() {
         arrSubCateogry = new ArrayList<>();
 

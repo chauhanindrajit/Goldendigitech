@@ -27,16 +27,17 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.View
     Context context;
     public static int i;
     private List<String> arrSubCateogry;
-    public PhotoListAdapter(Context context, List<String> arrSubCateogry)
-    {
+
+    public PhotoListAdapter(Context context, List<String> arrSubCateogry) {
         this.arrSubCateogry = (ArrayList<String>) arrSubCateogry;
-        this.context=context;
+        this.context = context;
     }
+
     @Override
     public ViewHolderPro onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.single_pet_photo_layout,parent,false);
-        PhotoListAdapter.ViewHolderPro viewHolder=new PhotoListAdapter.ViewHolderPro(view);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.single_pet_photo_layout, parent, false);
+        PhotoListAdapter.ViewHolderPro viewHolder = new PhotoListAdapter.ViewHolderPro(view);
 
         return viewHolder;
     }
@@ -62,9 +63,9 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.View
             @Override
             public void onClick(View view) {
                 GetPhotograpgySingalton.getInstance().setImgUrl((arrSubCateogry.get(position).replaceAll(" ", "%20")));
-                ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"image");
-                Intent intent=new Intent(context,ImageViewerActivity.class);
-                context.startActivity(intent,activityOptions.toBundle());
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.imageView, "image");
+                Intent intent = new Intent(context, ImageViewerActivity.class);
+                context.startActivity(intent, activityOptions.toBundle());
             }
         });
 
@@ -77,9 +78,10 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.View
 
     public class ViewHolderPro extends RecyclerView.ViewHolder {
         ImageView imageView;
+
         public ViewHolderPro(View itemView) {
             super(itemView);
-         imageView=itemView.findViewById(R.id.imageView);
+            imageView = itemView.findViewById(R.id.imageView);
 
         }
 

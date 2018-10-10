@@ -30,23 +30,23 @@ public class TrainingservicesListAdapter extends RecyclerView.Adapter<Trainingse
     Context context;
     private ArrayList<TrainingRequest> arrSubCateogry;
     public static ArrayList<TrainingRequest> filterItem;
-    public TrainingservicesListAdapter(Context context, List<TrainingRequest> arrSubCateogry)
-    {
-        this.context=context;
+
+    public TrainingservicesListAdapter(Context context, List<TrainingRequest> arrSubCateogry) {
+        this.context = context;
         this.arrSubCateogry = (ArrayList<TrainingRequest>) arrSubCateogry;
         this.filterItem = new ArrayList<>();
         try {
             filterItem.addAll(arrSubCateogry);
+        } catch (Exception e) {
         }
-        catch (Exception e){}
     }
 
     @Override
     public VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.single_trainingservices_layout,parent,false);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.single_trainingservices_layout, parent, false);
 
-        TrainingservicesListAdapter.VetViewHolder vetViewHolder=new TrainingservicesListAdapter.VetViewHolder(view);
+        TrainingservicesListAdapter.VetViewHolder vetViewHolder = new TrainingservicesListAdapter.VetViewHolder(view);
 
         return vetViewHolder;
     }
@@ -57,7 +57,7 @@ public class TrainingservicesListAdapter extends RecyclerView.Adapter<Trainingse
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-         //  Utils.moveNextWithAnimation(context,Diagnostics.class);
+                //  Utils.moveNextWithAnimation(context,Diagnostics.class);
 
                 TrainingSingalton.getInstance().setCenterName(arrSubCateogry.get(position).getCenterName());
                 TrainingSingalton.getInstance().setLocation(arrSubCateogry.get(position).getLocation());
@@ -69,22 +69,20 @@ public class TrainingservicesListAdapter extends RecyclerView.Adapter<Trainingse
                 TrainingSingalton.getInstance().setImage(arrSubCateogry.get(position).getImage());
                 TrainingSingalton.getInstance().setMobile(arrSubCateogry.get(position).getMobile());
                 TrainingSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
-                ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"diagnostic_image");
-           Intent intent=new Intent(context,TrainingProfile.class);
-           context.startActivity(intent,activityOptions.toBundle());
-
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.imageView, "diagnostic_image");
+                Intent intent = new Intent(context, TrainingProfile.class);
+                context.startActivity(intent, activityOptions.toBundle());
 
 
             }
         });
 
 
-
         holder.centername.setText(arrSubCateogry.get(position).getCenterName());
         holder.loc.setText(arrSubCateogry.get(position).getLocation());
         holder.fee.setText(String.valueOf(arrSubCateogry.get(position).getFees()));
-        holder.opntym.setText("Open: "+arrSubCateogry.get(position).getOpenDay());
-        holder.closetym.setText("Close: "+arrSubCateogry.get(position).getCloseDay());
+        holder.opntym.setText("Open: " + arrSubCateogry.get(position).getOpenDay());
+        holder.closetym.setText("Close: " + arrSubCateogry.get(position).getCloseDay());
 
         if (arrSubCateogry.get(position).getImage() != null) {
             Picasso.with(context).load("http://mrsam.in/sam/MainImage/" + arrSubCateogry.get(position).getImage().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(holder.imageView);
@@ -109,6 +107,7 @@ public class TrainingservicesListAdapter extends RecyclerView.Adapter<Trainingse
     public int getItemCount() {
         return arrSubCateogry.size();
     }
+
     public void filter(String charText) {
 
         charText = charText.toLowerCase(Locale.getDefault());
@@ -134,20 +133,21 @@ public class TrainingservicesListAdapter extends RecyclerView.Adapter<Trainingse
     }
 
     public class VetViewHolder extends RecyclerView.ViewHolder {
-        TextView centername,loc,fee,opntym,closetym;
+        TextView centername, loc, fee, opntym, closetym;
         CardView cardView;
         ImageView imageView;
         LinearLayout layoutVetAtHome;
+
         public VetViewHolder(View itemView) {
             super(itemView);
-            centername=itemView.findViewById(R.id.diagnosticsname);
-            loc=itemView.findViewById(R.id.tloc);
-            fee=itemView.findViewById(R.id.tfee);
-            opntym=itemView.findViewById(R.id.opentimes);
-            closetym=itemView.findViewById(R.id.closetime);
-            cardView=itemView.findViewById(R.id.cardview);
-            imageView=itemView.findViewById(R.id.profile_image);
-            layoutVetAtHome=itemView.findViewById(R.id.visit_at_home_layout);
+            centername = itemView.findViewById(R.id.diagnosticsname);
+            loc = itemView.findViewById(R.id.tloc);
+            fee = itemView.findViewById(R.id.tfee);
+            opntym = itemView.findViewById(R.id.opentimes);
+            closetym = itemView.findViewById(R.id.closetime);
+            cardView = itemView.findViewById(R.id.cardview);
+            imageView = itemView.findViewById(R.id.profile_image);
+            layoutVetAtHome = itemView.findViewById(R.id.visit_at_home_layout);
         }
     }
 

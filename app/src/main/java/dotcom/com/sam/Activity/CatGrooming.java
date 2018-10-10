@@ -71,6 +71,7 @@ public class CatGrooming extends AppCompatActivity {
     String pos, sizepos, salonpos;
     ArrayList<String> item = new ArrayList<>();
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -258,10 +259,10 @@ public class CatGrooming extends AppCompatActivity {
         searchdoct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validate()){
-                    if(salonpos.equals("Salon")){
+                if (validate()) {
+                    if (salonpos.equals("Salon")) {
                         athomeoratsalon = "Salon";
-                    }else if(salonpos.equals("Home")){
+                    } else if (salonpos.equals("Home")) {
                         // SingletonClass.getInstance().setSalonorhomeradio("Home");
                         athomeoratsalon = "Home";
                     }
@@ -441,9 +442,9 @@ public class CatGrooming extends AppCompatActivity {
                     for (int i = 0; i < catsearchResponse.getResponse().size(); i++) {
                         //                        locationTypeList.add(String.valueOf(catsearchResponse.getResponse().get(i).getSearchLocations()));
                         //                        // initList();
-                        if(salonpos.equals("Salon")){
+                        if (salonpos.equals("Salon")) {
                             SingletonClass.getInstance().setSalonorhomeradio("Salon");
-                        }else if(salonpos.equals("Home")){
+                        } else if (salonpos.equals("Home")) {
                             SingletonClass.getInstance().setSalonorhomeradio("Home");
                         }
                         CatsearchListAdapter catsearchListAdapter = new CatsearchListAdapter(CatGrooming.this, catsearchResponse.getResponse());
@@ -466,19 +467,20 @@ public class CatGrooming extends AppCompatActivity {
         });
 
     }
+
     private boolean validate() {
 
         if (selectbreed.getText().toString().equals("")) {
-            Toast.makeText(CatGrooming.this,"Please Select Breed name.",Toast.LENGTH_LONG).show();
+            Toast.makeText(CatGrooming.this, "Please Select Breed name.", Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (selectage.getText().toString().equals("")) {
-            Toast.makeText(CatGrooming.this,"Please Select Age",Toast.LENGTH_LONG).show();
+            Toast.makeText(CatGrooming.this, "Please Select Age", Toast.LENGTH_LONG).show();
             return false;
         }
         if (sleectsize.getText().toString().equals("")) {
-            Toast.makeText(CatGrooming.this,"Please Select Size.",Toast.LENGTH_LONG).show();
+            Toast.makeText(CatGrooming.this, "Please Select Size.", Toast.LENGTH_LONG).show();
             return false;
         }
 

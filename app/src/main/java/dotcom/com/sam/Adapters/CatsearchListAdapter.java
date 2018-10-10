@@ -37,8 +37,7 @@ public class CatsearchListAdapter extends RecyclerView.Adapter<CatsearchListAdap
         this.filterItem = new ArrayList<>();
         try {
             filterItem.addAll(arrSubCateogry);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
         }
     }
 

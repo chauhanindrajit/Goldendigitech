@@ -22,25 +22,26 @@ import dotcom.com.sam.SingaltonsClasses.SingletonClass;
 import dotcom.com.sam.request.OldpetRequest;
 
 public class PetOldAgeHomeProfile extends AppCompatActivity {
-Context context;
-Button contact;
-    TextView name,loc,address,petavil,anount,serviceavail,desption;
+    Context context;
+    Button contact;
+    TextView name, loc, address, petavil, anount, serviceavail, desption;
     ImageView imag;
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_old_age_home_profile);
 
-        name=(TextView)findViewById(R.id.oldpname);
-        loc=(TextView)findViewById(R.id.oldplocation);
-        address=(TextView)findViewById(R.id.oldpaddress);
-        petavil=(TextView)findViewById(R.id.oldpetavilvilty);
-        anount=(TextView)findViewById(R.id.oldpamont);
-        serviceavail=(TextView)findViewById(R.id.oldpserviceavailbilty);
-        desption=(TextView)findViewById(R.id.oldpdescription);
-        imag =(ImageView)findViewById(R.id.oldpimages);
-        contact =(Button)findViewById(R.id.btn_contact);
+        name = (TextView) findViewById(R.id.oldpname);
+        loc = (TextView) findViewById(R.id.oldplocation);
+        address = (TextView) findViewById(R.id.oldpaddress);
+        petavil = (TextView) findViewById(R.id.oldpetavilvilty);
+        anount = (TextView) findViewById(R.id.oldpamont);
+        serviceavail = (TextView) findViewById(R.id.oldpserviceavailbilty);
+        desption = (TextView) findViewById(R.id.oldpdescription);
+        imag = (ImageView) findViewById(R.id.oldpimages);
+        contact = (Button) findViewById(R.id.btn_contact);
         //OldpetRequest oldpetRequest= new OldpetRequest();
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("PetOldAgeHome");
@@ -66,15 +67,15 @@ Button contact;
         serviceavail.setText(OldHomeSingalton.getInstance().getServicesType());
         desption.setText(OldHomeSingalton.getInstance().getDescription());
 
-contact.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        SingletonClass.getInstance().setCentername(OldHomeSingalton.getInstance().getHomeName());
-        SingletonClass.getInstance().setSRID(String.valueOf(MicroChippingSingalton.getInstance().getSR_Id()));
-        SingletonClass.getInstance().setActivityname("PetOldAgeHome");
-        Intent i = new Intent(PetOldAgeHomeProfile.this, ServicesLastPage.class);
-        startActivity(i);
-    }
-});
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SingletonClass.getInstance().setCentername(OldHomeSingalton.getInstance().getHomeName());
+                SingletonClass.getInstance().setSRID(String.valueOf(MicroChippingSingalton.getInstance().getSR_Id()));
+                SingletonClass.getInstance().setActivityname("PetOldAgeHome");
+                Intent i = new Intent(PetOldAgeHomeProfile.this, ServicesLastPage.class);
+                startActivity(i);
+            }
+        });
     }
 }

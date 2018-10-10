@@ -5,8 +5,7 @@ package dotcom.com.sam.extras;
  */
 
 public class Validation {
-    static public boolean blankValidate()
-    {
+    static public boolean blankValidate() {
 
         return true;
     }

@@ -40,6 +40,7 @@ public class PhotoViewerMutiple extends AppCompatActivity {
     Toolbar toolbar;
     int id;
     private RecyclerView.LayoutManager mLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,19 +58,21 @@ public class PhotoViewerMutiple extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        id= GetPhotograpgySingalton.getInstance().getPG_Id();
+        id = GetPhotograpgySingalton.getInstance().getPG_Id();
     }
+
     private void setRecyclerviewPhoto() {
-        PhotoListAdapter photoAdapter=new PhotoListAdapter(this,suu);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(this, 3);
+        PhotoListAdapter photoAdapter = new PhotoListAdapter(this, suu);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         //  LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.Gr, false);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(photoAdapter);
     }
 
     private void initView() {
-        recyclerView=findViewById(R.id.recyclerview);
+        recyclerView = findViewById(R.id.recyclerview);
     }
+
     private void checkAcceptTrip() {
         arrSubCateogry = new ArrayList<>();
         final String siteurl = Utils.getStringUserPreference(PhotoViewerMutiple.this, Constants.SITE_URL);

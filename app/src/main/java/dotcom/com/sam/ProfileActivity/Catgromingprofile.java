@@ -63,8 +63,8 @@ public class Catgromingprofile extends AppCompatActivity {
             }
         });
         cntnm.setText(CatSingalton.getInstance().getCenterName());
-        ID= String.valueOf(CatSingalton.getInstance().getGroomingService_Id());
-        Log.e("IDDD", "onCreate: "+ID);
+        ID = String.valueOf(CatSingalton.getInstance().getGroomingService_Id());
+        Log.e("IDDD", "onCreate: " + ID);
         //OldpetRequest oldpetRequest= new OldpetRequest();
         if (CatSingalton.getInstance().getImages() != null) {
             Picasso.with(context).load("http://mrsam.in/sam/MainImage/" + CatSingalton.getInstance().getImages().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(imag);

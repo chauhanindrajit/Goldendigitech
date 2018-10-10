@@ -116,8 +116,10 @@ public class SubBuyFilterAdapter extends RecyclerView.Adapter<SubBuyFilterAdapte
 //                        SingletonClass.getInstance().removeAgename(pBean.getSubCatName());
 //                    }
 
-                //}
-            }}}
+                        //}
+                    }
+                }
+            }
         });
 
     }

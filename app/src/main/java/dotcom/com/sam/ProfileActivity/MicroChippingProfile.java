@@ -19,20 +19,21 @@ import dotcom.com.sam.SingaltonsClasses.TrainingSingalton;
 import dotcom.com.sam.Utils.Utils;
 
 public class MicroChippingProfile extends AppCompatActivity {
-Context context;
-    Button btn_coln ;
-    TextView name,loc,address,petavil,anount,serviceavail,desption;
+    Context context;
+    Button btn_coln;
+    TextView name, loc, address, petavil, anount, serviceavail, desption;
     ImageView imag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_microchipping_profile);
-        name=(TextView)findViewById(R.id.oldpname);
-        address=(TextView)findViewById(R.id.oldpaddress);
-        anount=(TextView)findViewById(R.id.oldpamont);
-        btn_coln=(Button)findViewById(R.id.btn_collection);
-        desption=(TextView)findViewById(R.id.oldpdescription);
-        imag =(ImageView)findViewById(R.id.oldpimages);
+        name = (TextView) findViewById(R.id.oldpname);
+        address = (TextView) findViewById(R.id.oldpaddress);
+        anount = (TextView) findViewById(R.id.oldpamont);
+        btn_coln = (Button) findViewById(R.id.btn_collection);
+        desption = (TextView) findViewById(R.id.oldpdescription);
+        imag = (ImageView) findViewById(R.id.oldpimages);
         //OldpetRequest oldpetRequest= new OldpetRequest();
         if (MicroChippingSingalton.getInstance().getImage() != null) {
             Picasso.with(context).load("http://mrsam.in/sam/MainImage/" + MicroChippingSingalton.getInstance().getImage().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(imag);

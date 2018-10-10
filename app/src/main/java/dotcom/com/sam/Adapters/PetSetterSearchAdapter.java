@@ -29,10 +29,9 @@ public class PetSetterSearchAdapter extends RecyclerView.Adapter<PetSetterSearch
     static List<PetSettersearchRequest> arrSubCateogry;
     public static ArrayList<PetSettersearchRequest> filterItem;
 
-    public PetSetterSearchAdapter(Context context, List<PetSettersearchRequest> arrSubCateogry)
-    {
-        this.context=context;
-        this.arrSubCateogry=arrSubCateogry;
+    public PetSetterSearchAdapter(Context context, List<PetSettersearchRequest> arrSubCateogry) {
+        this.context = context;
+        this.arrSubCateogry = arrSubCateogry;
 //        this.filterItem = new ArrayList<>();
 //        filterItem.addAll(matingSingaltons);
 
@@ -40,10 +39,10 @@ public class PetSetterSearchAdapter extends RecyclerView.Adapter<PetSetterSearch
 
     @Override
     public VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.activity_petcsearchsetter_mating,parent,false);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.activity_petcsearchsetter_mating, parent, false);
 
-        PetSetterSearchAdapter.VetViewHolder vetViewHolder=new PetSetterSearchAdapter.VetViewHolder(view);
+        PetSetterSearchAdapter.VetViewHolder vetViewHolder = new PetSetterSearchAdapter.VetViewHolder(view);
 
         return vetViewHolder;
     }

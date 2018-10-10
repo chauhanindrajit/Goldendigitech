@@ -25,30 +25,30 @@ public class BuypetFilterAdapter extends RecyclerView.Adapter<BuypetFilterAdapte
     int pos;
     private List<BuypetfilterResponse.ResponseBean> details;
 
-    public BuypetFilterAdapter(Context context, List<BuypetfilterResponse.ResponseBean> details)
-    {
+    public BuypetFilterAdapter(Context context, List<BuypetfilterResponse.ResponseBean> details) {
 
-        this.details =details;
-        this.context=  context;
+        this.details = details;
+        this.context = context;
         notifyDataSetChanged();
     }
+
     @Override
     public ViewHolderPro onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.buy_pet_search_product,parent,false);
-        BuypetFilterAdapter.ViewHolderPro viewHolder=new BuypetFilterAdapter.ViewHolderPro(view);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.buy_pet_search_product, parent, false);
+        BuypetFilterAdapter.ViewHolderPro viewHolder = new BuypetFilterAdapter.ViewHolderPro(view);
 
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolderPro holder, int position) {
-        SubBuyFilterAdapter subBuyFilterAdapter = new SubBuyFilterAdapter(context ,details.get(position).getBreedList(),details.get(position).getCategosryName());
+        SubBuyFilterAdapter subBuyFilterAdapter = new SubBuyFilterAdapter(context, details.get(position).getBreedList(), details.get(position).getCategosryName());
 //        notifyDataSetChanged();
 
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         holder.recyclerView.setLayoutManager(horizontalLayoutManagaer);
-       holder.recyclerView.setAdapter(subBuyFilterAdapter);
+        holder.recyclerView.setAdapter(subBuyFilterAdapter);
         holder.catname.setText(details.get(position).getCategosryName());
         //holder.subcatname.setText(details.get(position).getSubList().get(position).getSubCatName());
 
@@ -63,13 +63,13 @@ public class BuypetFilterAdapter extends RecyclerView.Adapter<BuypetFilterAdapte
     public class ViewHolderPro extends RecyclerView.ViewHolder {
         ImageView imageView;
         RecyclerView recyclerView;
-        TextView catname,subcatname;
+        TextView catname, subcatname;
+
         public ViewHolderPro(View itemView) {
             super(itemView);
-            recyclerView=(RecyclerView) itemView.findViewById(R.id.categeory);
-            catname=itemView.findViewById(R.id.categname);
-            subcatname=itemView.findViewById(R.id.subcaty);
-
+            recyclerView = (RecyclerView) itemView.findViewById(R.id.categeory);
+            catname = itemView.findViewById(R.id.categname);
+            subcatname = itemView.findViewById(R.id.subcaty);
 
 
         }

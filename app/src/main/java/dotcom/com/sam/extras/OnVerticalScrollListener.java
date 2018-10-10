@@ -9,9 +9,9 @@ import android.widget.LinearLayout;
 public class OnVerticalScrollListener extends RecyclerView.OnScrollListener {
 
     CardView layout;
-    public OnVerticalScrollListener(CardView linearLayout)
-    {
-       layout=linearLayout;
+
+    public OnVerticalScrollListener(CardView linearLayout) {
+        layout = linearLayout;
     }
 
     @Override
@@ -37,23 +37,25 @@ public class OnVerticalScrollListener extends RecyclerView.OnScrollListener {
     }
 
     public void onScrolledUp() {
-        Log.d("hhh","Scrolled up");
-        if(layout.getVisibility()==View.GONE)
-        {    Log.d("hhh","Scrolled up vv");
+        Log.d("hhh", "Scrolled up");
+        if (layout.getVisibility() == View.GONE) {
+            Log.d("hhh", "Scrolled up vv");
             layout.setVisibility(View.VISIBLE);
         }
 
     }
 
     public void onScrolledDown() {
-        Log.d("hhh","Scrolled down");
-        if(layout.getVisibility()!=View.GONE)
-        { Log.d("hhh","Scrolled down vv");
+        Log.d("hhh", "Scrolled down");
+        if (layout.getVisibility() != View.GONE) {
+            Log.d("hhh", "Scrolled down vv");
             layout.setVisibility(View.GONE);
         }
     }
 
-    public void onScrolledToTop() {}
+    public void onScrolledToTop() {
+    }
 
-    public void onScrolledToBottom() {}
+    public void onScrolledToBottom() {
+    }
 }

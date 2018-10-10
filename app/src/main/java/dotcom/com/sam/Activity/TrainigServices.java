@@ -64,6 +64,7 @@ public class TrainigServices extends AppCompatActivity {
     ArrayList tripSingaltonss;
     private ArrayList<TrainingRequest> tripSingaltonsas;
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

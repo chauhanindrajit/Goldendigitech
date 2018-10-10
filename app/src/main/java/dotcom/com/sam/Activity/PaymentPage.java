@@ -47,7 +47,7 @@ public class PaymentPage extends AppCompatActivity {
     private RecyclerView reviewRecyclerView;
     private ProgressDialog pDialog;
     LinearLayout savepricelayout;
-    TextView totalfinal, name, shippingadd,savedprice;
+    TextView totalfinal, name, shippingadd, savedprice;
     ReviewAdapter.ManageInterface manageInterface;
 
     @Override
@@ -108,9 +108,9 @@ public class PaymentPage extends AppCompatActivity {
                         name.setText(paymentResponse.getFullName());
                         shippingadd.setText(paymentResponse.getAddress());
                     }
-                    if(!SingletonClass.getInstance().getSavePrice().equals("0")){
+                    if (!SingletonClass.getInstance().getSavePrice().equals("0")) {
                         savepricelayout.setVisibility(View.VISIBLE);
-                        savedprice.setText(String.valueOf("₹" +SingletonClass.getInstance().getSavePrice()));
+                        savedprice.setText(String.valueOf("₹" + SingletonClass.getInstance().getSavePrice()));
                     }
                     PaymentAdapter paymentAdapter = new PaymentAdapter(PaymentPage.this, paymentResponse.getDATALIST(), (PaymentAdapter.ManageInterface) manageInterface);
                     reviewRecyclerView.setAdapter(paymentAdapter);
@@ -141,7 +141,7 @@ public class PaymentPage extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                      PaymentPage.this.finish();
+                        PaymentPage.this.finish();
                         /*    HomeActivity.this.finish();*/
                     }
                 })

@@ -34,19 +34,20 @@ public class MicrochippingAdapter extends RecyclerView.Adapter<MicrochippingAdap
     Context context;
     private ArrayList<MicroChippingSingalton> arrSubCateogry;
     public static ArrayList<MicroChippingSingalton> filterItem;
-    public MicrochippingAdapter(Context context, List<MicroChippingSingalton> arrSubCateogry)
-    {
-        this.context=context;
+
+    public MicrochippingAdapter(Context context, List<MicroChippingSingalton> arrSubCateogry) {
+        this.context = context;
         this.arrSubCateogry = (ArrayList<MicroChippingSingalton>) arrSubCateogry;
         this.filterItem = new ArrayList<>();
-       filterItem.addAll(arrSubCateogry);
+        filterItem.addAll(arrSubCateogry);
     }
+
     @Override
     public VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.single_microchipping_home,parent,false);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.single_microchipping_home, parent, false);
 
-        MicrochippingAdapter.VetViewHolder vetViewHolder=new MicrochippingAdapter.VetViewHolder(view);
+        MicrochippingAdapter.VetViewHolder vetViewHolder = new MicrochippingAdapter.VetViewHolder(view);
 
         return vetViewHolder;
     }
@@ -57,8 +58,8 @@ public class MicrochippingAdapter extends RecyclerView.Adapter<MicrochippingAdap
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-         //  Utils.moveNextWithAnimation(context,Diagnostics.class);
-               // OldpetRequest oldpetRequest = new OldpetRequest();
+                //  Utils.moveNextWithAnimation(context,Diagnostics.class);
+                // OldpetRequest oldpetRequest = new OldpetRequest();
 
                 MicroChippingSingalton.getInstance().setCenterName(arrSubCateogry.get(position).getCenterName());
                 MicroChippingSingalton.getInstance().setAddress(arrSubCateogry.get(position).getAddress());
@@ -68,11 +69,9 @@ public class MicrochippingAdapter extends RecyclerView.Adapter<MicrochippingAdap
                 MicroChippingSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
 
 
-
-           ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"diagnostic_image");
-           Intent intent=new Intent(context,MicroChippingProfile.class);
-           context.startActivity(intent,activityOptions.toBundle());
-
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.imageView, "diagnostic_image");
+                Intent intent = new Intent(context, MicroChippingProfile.class);
+                context.startActivity(intent, activityOptions.toBundle());
 
 
             }
@@ -104,6 +103,7 @@ public class MicrochippingAdapter extends RecyclerView.Adapter<MicrochippingAdap
     public int getItemCount() {
         return arrSubCateogry.size();
     }
+
     public void filter(String charText) {
 
         charText = charText.toLowerCase(Locale.getDefault());
@@ -132,16 +132,17 @@ public class MicrochippingAdapter extends RecyclerView.Adapter<MicrochippingAdap
         CardView cardView;
         ImageView imageView;
         LinearLayout layoutVetAtHome;
-        TextView loc,petavail,amount,name;
+        TextView loc, petavail, amount, name;
+
         public VetViewHolder(View itemView) {
             super(itemView);
-            loc=itemView.findViewById(R.id.oldlicatn);
-            petavail=itemView.findViewById(R.id.oldpetavailibilty);
-            amount=itemView.findViewById(R.id.oldamount);
-            name=itemView.findViewById(R.id.oldname);
-            cardView=itemView.findViewById(R.id.cardview);
-            imageView=itemView.findViewById(R.id.profile_image);
-            layoutVetAtHome=itemView.findViewById(R.id.visit_at_home_layout);
+            loc = itemView.findViewById(R.id.oldlicatn);
+            petavail = itemView.findViewById(R.id.oldpetavailibilty);
+            amount = itemView.findViewById(R.id.oldamount);
+            name = itemView.findViewById(R.id.oldname);
+            cardView = itemView.findViewById(R.id.cardview);
+            imageView = itemView.findViewById(R.id.profile_image);
+            layoutVetAtHome = itemView.findViewById(R.id.visit_at_home_layout);
         }
     }
 

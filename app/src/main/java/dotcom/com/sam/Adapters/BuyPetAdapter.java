@@ -32,22 +32,22 @@ import dotcom.com.sam.extras.Constants;
 public class BuyPetAdapter extends RecyclerView.Adapter<BuyPetAdapter.VetViewHolder> {
     Context context;
     private ArrayList<BuyPetSingalton> arrSubCateogry;
+
     //public static ArrayList<AdoptaPetSingalton> filterItem;
-    public BuyPetAdapter(Context context, List<BuyPetSingalton> arrSubCateogry)
-    {
-        this.context=context;
+    public BuyPetAdapter(Context context, List<BuyPetSingalton> arrSubCateogry) {
+        this.context = context;
         this.arrSubCateogry = (ArrayList<BuyPetSingalton>) arrSubCateogry;
-       // this.filterItem = new ArrayList<>();
+        // this.filterItem = new ArrayList<>();
 //       filterItem.addAll(arrSubCateogry);
     }
 
 
     @Override
     public VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.single_buypet_profile,parent,false);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.single_buypet_profile, parent, false);
 
-        BuyPetAdapter.VetViewHolder vetViewHolder=new BuyPetAdapter.VetViewHolder(view);
+        BuyPetAdapter.VetViewHolder vetViewHolder = new BuyPetAdapter.VetViewHolder(view);
 
         return vetViewHolder;
     }
@@ -58,7 +58,7 @@ public class BuyPetAdapter extends RecyclerView.Adapter<BuyPetAdapter.VetViewHol
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-         //  Utils.moveNextWithAnimation(context,AdoptpetProfile.class);
+                //  Utils.moveNextWithAnimation(context,AdoptpetProfile.class);
 
                 BuypetprofileSingalton.getInstance().setPet_Name(arrSubCateogry.get(position).getPet_Name());
                 BuypetprofileSingalton.getInstance().setAge(arrSubCateogry.get(position).getAge());
@@ -74,10 +74,9 @@ public class BuyPetAdapter extends RecyclerView.Adapter<BuyPetAdapter.VetViewHol
                 BuypetprofileSingalton.getInstance().setLocation(arrSubCateogry.get(position).getLocation());
                 BuypetprofileSingalton.getInstance().setSR_Id(arrSubCateogry.get(position).getSR_Id());
 
-           ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"diagnostic_image");
-           Intent intent=new Intent(context,BuypetProfile.class);
-           context.startActivity(intent,activityOptions.toBundle());
-
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.imageView, "diagnostic_image");
+                Intent intent = new Intent(context, BuypetProfile.class);
+                context.startActivity(intent, activityOptions.toBundle());
 
 
             }
@@ -106,15 +105,16 @@ public class BuyPetAdapter extends RecyclerView.Adapter<BuyPetAdapter.VetViewHol
         CardView cardView;
         ImageView imageView;
         LinearLayout layoutVetAtHome;
-        TextView loc,petavail,amount,name;
+        TextView loc, petavail, amount, name;
+
         public VetViewHolder(View itemView) {
             super(itemView);
-            loc=itemView.findViewById(R.id.apetlicatn);
-            petavail=itemView.findViewById(R.id.txt_availiblity);
-            name=itemView.findViewById(R.id.apetname);
-            cardView=itemView.findViewById(R.id.cardview);
-            imageView=itemView.findViewById(R.id.main_image);
-            layoutVetAtHome=itemView.findViewById(R.id.visit_at_home_layout);
+            loc = itemView.findViewById(R.id.apetlicatn);
+            petavail = itemView.findViewById(R.id.txt_availiblity);
+            name = itemView.findViewById(R.id.apetname);
+            cardView = itemView.findViewById(R.id.cardview);
+            imageView = itemView.findViewById(R.id.main_image);
+            layoutVetAtHome = itemView.findViewById(R.id.visit_at_home_layout);
         }
     }
 

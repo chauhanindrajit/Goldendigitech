@@ -69,7 +69,7 @@ public class Utilss {
     }
 
     public static WebService getWebServiceForAuthorization(final Context context) {
-        Log.e(TAG, "Authorization" + " Bearer " + Utilss.getStringUserPreference(context,Constants.USER_NAME));
+        Log.e(TAG, "Authorization" + " Bearer " + Utilss.getStringUserPreference(context, Constants.USER_NAME));
 
         OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
         okHttpClient.connectTimeout(7000, TimeUnit.SECONDS);
@@ -79,7 +79,7 @@ public class Utilss {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 final Request request = chain.request().newBuilder()
-                        .addHeader("Authorization", " Bearer " + Utilss.getStringUserPreference(context,Constants.USER_NAME))
+                        .addHeader("Authorization", " Bearer " + Utilss.getStringUserPreference(context, Constants.USER_NAME))
                         .build();
                 return chain.proceed(request);
             }
@@ -290,7 +290,8 @@ public class Utilss {
             }
         return null;
     }
-/*yyyy-mm-dd*/
+
+    /*yyyy-mm-dd*/
     @SuppressLint("SimpleDateFormat")
     public static String dateFor(String datetime) {
         if (datetime != null)
@@ -402,7 +403,6 @@ public class Utilss {
     }
 
 
-
     public static boolean messageDialog(final Context activity, final boolean close, String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setMessage(msg)
@@ -493,7 +493,8 @@ public class Utilss {
         }
         return null;
     }
- public static String fullDay(int month) {
+
+    public static String fullDay(int month) {
         switch (month) {
             case 1:
                 return "01";
@@ -514,7 +515,7 @@ public class Utilss {
             case 9:
                 return "09";
             default:
-                return ""+month;
+                return "" + month;
 
         }
     }

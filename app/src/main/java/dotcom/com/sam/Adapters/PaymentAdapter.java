@@ -96,16 +96,13 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.ViewHold
 
         viewHolder.prName.setText(responseBeen.get(position).getProductName());
         if (responseBeen.get(position).getQTY() == 0) {
-            viewHolder.qty.setText("qty :"+"0");
+            viewHolder.qty.setText("qty :" + "0");
         } else {
-            viewHolder.qty.setText(String.valueOf("qty :"+responseBeen.get(position).getQTY()));
+            viewHolder.qty.setText(String.valueOf("qty :" + responseBeen.get(position).getQTY()));
         }
 
         viewHolder.discountprice.setText(String.valueOf(responseBeen.get(position).getDiscountPrice()));
-        viewHolder.qty.setText(String.valueOf("qty :"+responseBeen.get(position).getQTY()));
-
-
-
+        viewHolder.qty.setText(String.valueOf("qty :" + responseBeen.get(position).getQTY()));
 
 
     }

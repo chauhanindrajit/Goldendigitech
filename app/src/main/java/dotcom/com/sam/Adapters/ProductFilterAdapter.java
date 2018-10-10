@@ -37,19 +37,19 @@ public class ProductFilterAdapter extends RecyclerView.Adapter<ProductFilterAdap
     public static final String STRING_IMAGE_URI = "ImageUri";
     public static final String STRING_IMAGE_POSITION = "ImagePosition";
 
-    public ProductFilterAdapter(Context context, List<ProductFilterdataResponse.ResponseBean> details , String[] mValues)
-    {
+    public ProductFilterAdapter(Context context, List<ProductFilterdataResponse.ResponseBean> details, String[] mValues) {
 
-        this.details =details;
-        this.context=context;
-        this.mValues=mValues;
+        this.details = details;
+        this.context = context;
+        this.mValues = mValues;
         notifyDataSetChanged();
     }
+
     @Override
     public ViewHolderPro onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.single_filter_product,parent,false);
-        ProductFilterAdapter.ViewHolderPro viewHolder=new ProductFilterAdapter.ViewHolderPro(view);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.single_filter_product, parent, false);
+        ProductFilterAdapter.ViewHolderPro viewHolder = new ProductFilterAdapter.ViewHolderPro(view);
 
         return viewHolder;
     }
@@ -77,9 +77,9 @@ public class ProductFilterAdapter extends RecyclerView.Adapter<ProductFilterAdap
                 ProductSingalton.getInstance().setDiscount(details.get(position).getDiscount());
                 ProductSingalton.getInstance().setDiscountPrice(details.get(position).getDiscountPrice());
 
-                ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation((Activity) context,holder.imageView,"productimage");
-                Intent intent=new Intent(context,ProductDatailAcitvity.class);
-                context.startActivity(intent,activityOptions.toBundle());
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.imageView, "productimage");
+                Intent intent = new Intent(context, ProductDatailAcitvity.class);
+                context.startActivity(intent, activityOptions.toBundle());
 
 
             }
@@ -95,7 +95,7 @@ public class ProductFilterAdapter extends RecyclerView.Adapter<ProductFilterAdap
 
             }
         });
-        pos=position;
+        pos = position;
     }
 
     @Override
@@ -105,15 +105,16 @@ public class ProductFilterAdapter extends RecyclerView.Adapter<ProductFilterAdap
     }
 
     public class ViewHolderPro extends RecyclerView.ViewHolder {
-        ImageView imageView,wishlist;
-        TextView pdctname,withdiscont,actualprce;
+        ImageView imageView, wishlist;
+        TextView pdctname, withdiscont, actualprce;
+
         public ViewHolderPro(View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.prod_image);
-            pdctname=itemView.findViewById(R.id.proctname);
-            withdiscont=itemView.findViewById(R.id.withdiscount);
-            actualprce=itemView.findViewById(R.id.actual_price);
-            wishlist=itemView.findViewById(R.id.wishlist);
+            imageView = itemView.findViewById(R.id.prod_image);
+            pdctname = itemView.findViewById(R.id.proctname);
+            withdiscont = itemView.findViewById(R.id.withdiscount);
+            actualprce = itemView.findViewById(R.id.actual_price);
+            wishlist = itemView.findViewById(R.id.wishlist);
 
 
         }

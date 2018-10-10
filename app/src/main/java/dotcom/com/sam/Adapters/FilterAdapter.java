@@ -30,25 +30,25 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
     int pos;
     private List<ProductResponse.ResponseBean.FilterListBean> details;
 
-    public FilterAdapter(Context context, List<ProductResponse.ResponseBean.FilterListBean> details)
-    {
+    public FilterAdapter(Context context, List<ProductResponse.ResponseBean.FilterListBean> details) {
 
-        this.details =details;
-        this.context=context;
+        this.details = details;
+        this.context = context;
         notifyDataSetChanged();
     }
+
     @Override
     public ViewHolderPro onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.search_product,parent,false);
-        FilterAdapter.ViewHolderPro viewHolder=new FilterAdapter.ViewHolderPro(view);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.search_product, parent, false);
+        FilterAdapter.ViewHolderPro viewHolder = new FilterAdapter.ViewHolderPro(view);
 
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolderPro holder, int position) {
-        SubFilterAdapter subFilterAdapter = new SubFilterAdapter(context ,details.get(position).getSubList(),details.get(position).getCatName());
+        SubFilterAdapter subFilterAdapter = new SubFilterAdapter(context, details.get(position).getSubList(), details.get(position).getCatName());
 //        notifyDataSetChanged();
 
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
@@ -68,13 +68,13 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
     public class ViewHolderPro extends RecyclerView.ViewHolder {
         ImageView imageView;
         RecyclerView recyclerView;
-        TextView catname,subcatname;
+        TextView catname, subcatname;
+
         public ViewHolderPro(View itemView) {
             super(itemView);
-            recyclerView=(RecyclerView) itemView.findViewById(R.id.categeory);
-            catname=itemView.findViewById(R.id.categname);
-            subcatname=itemView.findViewById(R.id.subcaty);
-
+            recyclerView = (RecyclerView) itemView.findViewById(R.id.categeory);
+            catname = itemView.findViewById(R.id.categname);
+            subcatname = itemView.findViewById(R.id.subcaty);
 
 
         }

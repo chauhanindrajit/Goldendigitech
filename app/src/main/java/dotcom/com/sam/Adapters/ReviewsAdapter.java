@@ -32,22 +32,22 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.VetViewH
     Context context;
     int click = 0;
     private ReviewAdapter.ManageInterface arrSubCateogry;
+
     //public static ArrayList<AdoptaPetSingalton> filterItem;
-    public ReviewsAdapter(Context context, ReviewAdapter.ManageInterface arrSubCateogry)
-    {
-        this.context=context;
-        this.arrSubCateogry =  arrSubCateogry;
-       // this.filterItem = new ArrayList<>();
+    public ReviewsAdapter(Context context, ReviewAdapter.ManageInterface arrSubCateogry) {
+        this.context = context;
+        this.arrSubCateogry = arrSubCateogry;
+        // this.filterItem = new ArrayList<>();
 //       filterItem.addAll(arrSubCateogry);
     }
 
 
     @Override
     public VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view=layoutInflater.inflate(R.layout.review_list_adapter_item,parent,false);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.review_list_adapter_item, parent, false);
 
-        ReviewsAdapter.VetViewHolder vetViewHolder=new ReviewsAdapter.VetViewHolder(view);
+        ReviewsAdapter.VetViewHolder vetViewHolder = new ReviewsAdapter.VetViewHolder(view);
 
         return vetViewHolder;
     }
@@ -88,23 +88,24 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.VetViewH
         holder.wishlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (click == 0){
+                if (click == 0) {
                     click = 1;
-                ImageUrlUtils imageUrlUtils = new ImageUrlUtils();
-               // imageUrlUtils.productname(details.get(position).getProductName());
-                holder.wishlist.setImageResource(R.drawable.ic_favorite_black_24dp);
-                notifyDataSetChanged();
-                //Toast.makeText(mActivity,"Item added to wishlist.",Toast.LENGTH_SHORT).show();
+                    ImageUrlUtils imageUrlUtils = new ImageUrlUtils();
+                    // imageUrlUtils.productname(details.get(position).getProductName());
+                    holder.wishlist.setImageResource(R.drawable.ic_favorite_black_24dp);
+                    notifyDataSetChanged();
+                    //Toast.makeText(mActivity,"Item added to wishlist.",Toast.LENGTH_SHORT).show();
 
-            }else if (click == 1){
+                } else if (click == 1) {
                     holder.wishlist.setImageResource(R.drawable.blckfav);
                     notifyDataSetChanged();
-            }}
+                }
+            }
         });
 
-      //  holder.name.setText(arrSubCateogry.get(position).getPet_Name());
-      //  holder.loc.setText(arrSubCateogry.get(position).getLocation());
-      //  holder.petavail.setText(arrSubCateogry.get(position).getStatus());
+        //  holder.name.setText(arrSubCateogry.get(position).getPet_Name());
+        //  holder.loc.setText(arrSubCateogry.get(position).getLocation());
+        //  holder.petavail.setText(arrSubCateogry.get(position).getStatus());
 
 //        if (arrSubCateogry.get(position).getImage() != null) {
 //            Picasso.with(context).load("http://mrsam.in/sam/MainImage/" + arrSubCateogry.get(position).getImage().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(holder.imageView);
@@ -121,19 +122,20 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.VetViewH
 
     public class VetViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        ImageView imageView,wishlist;
+        ImageView imageView, wishlist;
         LinearLayout layoutVetAtHome;
-        TextView loc,baseprice,amount,name;
+        TextView loc, baseprice, amount, name;
+
         public VetViewHolder(View itemView) {
             super(itemView);
-          //  loc=itemView.findViewById(R.id.apetlicatn);
-          //  petavail=itemView.findViewById(R.id.txt_availiblity);
-          //  name=itemView.findViewById(R.id.apetname);
-          //  cardView=itemView.findViewById(R.id.cardview);
-           // imageView=itemView.findViewById(R.id.main_image);
-            layoutVetAtHome=itemView.findViewById(R.id.visit_at_home_layout);
-            baseprice =itemView.findViewById(R.id.baseprice);
-            wishlist=itemView.findViewById(R.id.wishlist);
+            //  loc=itemView.findViewById(R.id.apetlicatn);
+            //  petavail=itemView.findViewById(R.id.txt_availiblity);
+            //  name=itemView.findViewById(R.id.apetname);
+            //  cardView=itemView.findViewById(R.id.cardview);
+            // imageView=itemView.findViewById(R.id.main_image);
+            layoutVetAtHome = itemView.findViewById(R.id.visit_at_home_layout);
+            baseprice = itemView.findViewById(R.id.baseprice);
+            wishlist = itemView.findViewById(R.id.wishlist);
         }
     }
 

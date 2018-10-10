@@ -85,7 +85,7 @@ public class Categeory extends AppCompatActivity {
         Suncatdddata = new ArrayList<>();
         contactList = new ArrayList<>();
         toolbar.setTitle("SAM");
-     //   subcat();
+        //   subcat();
         // subcat();
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
@@ -124,7 +124,7 @@ public class Categeory extends AppCompatActivity {
     }
 
     void setCategeoryLayout() {
-        CatregeoryAdapter catregeoryAdapterr = new CatregeoryAdapter(Categeory.this, arrSubCateogry,stringList);
+        CatregeoryAdapter catregeoryAdapterr = new CatregeoryAdapter(Categeory.this, arrSubCateogry, stringList);
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(Categeory.this, LinearLayoutManager.VERTICAL, false);
         categeoryLayout.setLayoutManager(horizontalLayoutManagaer);
         categeoryLayout.setAdapter(catregeoryAdapterr);
@@ -152,18 +152,18 @@ public class Categeory extends AppCompatActivity {
                     List<List<RegistrationResponse.ResponseBean>> dataList = Collections.singletonList(registrationResponse.getResponse());
 
                     for (int i = 0; i < registrationResponse.getResponse().size(); i++) {
-                            List<RegistrationResponse.ResponseBean.SubCategoriesBean> arrTemp = new ArrayList<>(registrationResponse.getResponse().get(i).getSubCategories());
-                            CategorySingalton categorySingalton = new CategorySingalton();
+                        List<RegistrationResponse.ResponseBean.SubCategoriesBean> arrTemp = new ArrayList<>(registrationResponse.getResponse().get(i).getSubCategories());
+                        CategorySingalton categorySingalton = new CategorySingalton();
 
-                            stringList.add(registrationResponse.getResponse().get(i).getSubCategories().get(i).getSubCategoryName());
-                            CatregeoryAdapter catregeoryAdapterr = new CatregeoryAdapter(Categeory.this,registrationResponse.getResponse(),stringList);
-                            LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(Categeory.this, LinearLayoutManager.VERTICAL, false);
-                            categeoryLayout.setLayoutManager(horizontalLayoutManagaer);
-                            categeoryLayout.setAdapter(catregeoryAdapterr);
-                            catregeoryAdapterr.notifyDataSetChanged();
+                        stringList.add(registrationResponse.getResponse().get(i).getSubCategories().get(i).getSubCategoryName());
+                        CatregeoryAdapter catregeoryAdapterr = new CatregeoryAdapter(Categeory.this, registrationResponse.getResponse(), stringList);
+                        LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(Categeory.this, LinearLayoutManager.VERTICAL, false);
+                        categeoryLayout.setLayoutManager(horizontalLayoutManagaer);
+                        categeoryLayout.setAdapter(catregeoryAdapterr);
+                        catregeoryAdapterr.notifyDataSetChanged();
 //                        recyclerView.setAdapter(mAdapter);
-                            // recyclerView.setAdapter(catregeoryAdapterr);
-                            catregeoryAdapterr.notifyItemInserted(0);
+                        // recyclerView.setAdapter(catregeoryAdapterr);
+                        catregeoryAdapterr.notifyItemInserted(0);
                         // catregeoryAdapterr.getItemCount();
 
                     }
@@ -216,16 +216,15 @@ public class Categeory extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Categeory.this.finish();
-        Intent setIntent = new Intent(Categeory.this,MainActivity.class);
+        Intent setIntent = new Intent(Categeory.this, MainActivity.class);
         setIntent.addCategory(Intent.CATEGORY_HOME);
         setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(setIntent);
     }
 
 
-
     private void getCartList() {
-    //    pDialog = new ProgressDialog(Categeory.this);
+        //    pDialog = new ProgressDialog(Categeory.this);
 //        pDialog.setMessage("Please wait...");
 //        pDialog.setCancelable(false);
 //        pDialog.show();
@@ -241,30 +240,31 @@ public class Categeory extends AppCompatActivity {
                 Log.e(TAG, "onResponse code: " + response.code());
                 if (response.code() == 200) {
                     if (getCartResponse.getStatus() == 200) {
-                       // pDialog.dismiss();
+                        // pDialog.dismiss();
                         // ESPreferences.SSP().putLong(CART_COUNT, Long.valueOf(getCartResponse.getResponse().size()));
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Categeory.this);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        String cont= String.valueOf(getCartResponse.getResponse().size());
-                        editor.putString("COU",cont);
+                        String cont = String.valueOf(getCartResponse.getResponse().size());
+                        editor.putString("COU", cont);
                         editor.apply();
 
 
                     } else if (getCartResponse.getStatus() == 404) {
 
-                } else if (response.code() == 404) {
+                    } else if (response.code() == 404) {
 
-                } else if (response.code() == 500) {
-                    Utils.timeOutDialog(Categeory.this, true);
-                } else {
-                    Utils.customMessage(Categeory.this, "Something went wrong.");
+                    } else if (response.code() == 500) {
+                        Utils.timeOutDialog(Categeory.this, true);
+                    } else {
+                        Utils.customMessage(Categeory.this, "Something went wrong.");
+                    }
+                    //pDialog.dismiss();
                 }
-                //pDialog.dismiss();
-            }}
+            }
 
             @Override
             public void onFailure(Call<GetCartResponse> call, Throwable t) {
-               // pDialog.dismiss();
+                // pDialog.dismiss();
                 Utils.customMessage(Categeory.this, "Something went wrong.");
             }
         });

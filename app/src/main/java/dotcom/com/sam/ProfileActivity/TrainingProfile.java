@@ -18,22 +18,23 @@ import dotcom.com.sam.SingaltonsClasses.WalkingSingalton;
 import dotcom.com.sam.Utils.Utils;
 
 public class TrainingProfile extends AppCompatActivity {
-   Context context;
-   Button btn_coln ;
-    TextView name,address,petavil,anount,desption;
+    Context context;
+    Button btn_coln;
+    TextView name, address, petavil, anount, desption;
     ImageView imag;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training_profile);
-        name=(TextView)findViewById(R.id.tpcentername);
+        name = (TextView) findViewById(R.id.tpcentername);
         context = TrainingProfile.this;
-        address=(TextView)findViewById(R.id.tpaddress);
-        anount=(TextView)findViewById(R.id.tpfess);
-        desption=(TextView)findViewById(R.id.tpdescription);
-        btn_coln=(Button)findViewById(R.id.btn_collection);
+        address = (TextView) findViewById(R.id.tpaddress);
+        anount = (TextView) findViewById(R.id.tpfess);
+        desption = (TextView) findViewById(R.id.tpdescription);
+        btn_coln = (Button) findViewById(R.id.btn_collection);
         //spec =(TextView)findViewById(R.id.specilist);
-        imag =(ImageView)findViewById(R.id.tpimage);
+        imag = (ImageView) findViewById(R.id.tpimage);
         //OldpetRequest oldpetRequest= new OldpetRequest();
         if (TrainingSingalton.getInstance().getImage() != null) {
             Picasso.with(context).load("http://mrsam.in/sam/MainImage/" + TrainingSingalton.getInstance().getImage().toString().replaceAll(" ", "%20")).placeholder(R.drawable.progress_animation).into(imag);
@@ -55,6 +56,6 @@ public class TrainingProfile extends AppCompatActivity {
 
             }
         });
-       // spec.setText("Specialist: "+WalkingSingalton.getInstance().getProfile());
+        // spec.setText("Specialist: "+WalkingSingalton.getInstance().getProfile());
     }
 }

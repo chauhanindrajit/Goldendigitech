@@ -20,7 +20,7 @@ public class Converter {
     public static Drawable convertLayoutToImage(Context mContext, int count, int drawableId) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.badge_icon_layout, null);
-        ((ImageView)view.findViewById(R.id.icon_badge)).setImageResource(drawableId);
+        ((ImageView) view.findViewById(R.id.icon_badge)).setImageResource(drawableId);
 
         if (count == 0) {
             View counterTextPanel = view.findViewById(R.id.counterValuePanel);

@@ -14,6 +14,7 @@ import dotcom.com.sam.Adapters.BuypetFilterAdapter;
 import dotcom.com.sam.Adapters.FilterAdapter;
 import dotcom.com.sam.Adapters.ProductAdapter;
 import dotcom.com.sam.R;
+
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ import dotcom.com.sam.request.OldpetRequest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 public class BuyPetList extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList tripSingaltonss;
@@ -62,14 +64,15 @@ public class BuyPetList extends AppCompatActivity {
     Toolbar toolbar;
 
     private RecyclerView.LayoutManager mLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy_pet_list);
-        recyclerView=(RecyclerView)findViewById(R.id.recylcerview_products);
-      //  filtrrecyview=(RecyclerView) findViewById(R.id.filtrrecyview);
+        recyclerView = (RecyclerView) findViewById(R.id.recylcerview_products);
+        //  filtrrecyview=(RecyclerView) findViewById(R.id.filtrrecyview);
         toolbar = findViewById(R.id.toolbar);
-        filterLaout = (CardView)findViewById(R.id.footer_filter);
+        filterLaout = (CardView) findViewById(R.id.footer_filter);
         toolbar.setTitle("Buy Pet");
 
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
@@ -87,13 +90,13 @@ public class BuyPetList extends AppCompatActivity {
         //filterdata();
         setsummarydialog();
 
-       // filterdata();
+        // filterdata();
     }
 
 
     private void setRecyclerviewProduct() {
         //   recyclerView
-        BuyPetAdapter productAdapter = new BuyPetAdapter(this,arrSubCateogry);
+        BuyPetAdapter productAdapter = new BuyPetAdapter(this, arrSubCateogry);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         //  LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.Gr, false);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -101,6 +104,7 @@ public class BuyPetList extends AppCompatActivity {
 
 
     }
+
     private void setsummarydialog() {
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View view2 = inflater.inflate(R.layout.filter_dialog_layout, null);
@@ -149,7 +153,6 @@ public class BuyPetList extends AppCompatActivity {
                 });
 
 
-
             }
         });
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -159,6 +162,7 @@ public class BuyPetList extends AppCompatActivity {
             }
         });
     }
+
     private void checkAcceptTrip() {
         arrSubCateogry = new ArrayList<>();
 
