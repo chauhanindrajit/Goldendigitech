@@ -138,6 +138,7 @@
         <activity android:name=".Activity.ReviewOrderActivity" />
         <activity android:name=".Activity.ServicesLastPage" />
         <activity android:name=".Activity.DeliveryAddress" />
+        <activity android:name=".Activity.CheckInternetScreen" />
         <activity android:name=".Activity.PaymentPage"></activity>
     </application>
 

@@ -28,23 +28,20 @@ import static dotcom.com.sam.extras.Utilss.USER_PREFERENCE;
 public class Utils {
 
 
-    public  static void setExplodTransition(Context context)
-    {
-        Explode explode=new Explode();
+    public static void setExplodTransition(Context context) {
+        Explode explode = new Explode();
         explode.setDuration(400);
-        ((Activity)context).getWindow().setEnterTransition(explode);
+        ((Activity) context).getWindow().setEnterTransition(explode);
     }
 
 
-
-
-    public static void moveNextWithAnimation(Context context,Class activity)
-    {
-       ActivityOptions activityOptions= ActivityOptions.makeSceneTransitionAnimation(((Activity) context));
-        Intent intent=new Intent(context,activity);
-        context.startActivity(intent,activityOptions.toBundle());
+    public static void moveNextWithAnimation(Context context, Class activity) {
+        ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(((Activity) context));
+        Intent intent = new Intent(context, activity);
+        context.startActivity(intent, activityOptions.toBundle());
 
     }
+
     public static Toast customMessage(Context ctx, String message) {
 
         Toast toast = Toast.makeText(ctx, message, Toast.LENGTH_LONG);
@@ -53,10 +50,12 @@ public class Utils {
         return toast;
 
     }
+
     public static String getStringUserPreference(Context context, String key) {
         SharedPreferences sharedPref = context.getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE);
         return sharedPref.getString(key, null);
     }
+
     public static void saveUserPreference(Context context, String key, String value) {
         SharedPreferences sharedPref = context.getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -69,14 +68,16 @@ public class Utils {
         SharedPreferences sharedSettingPref = context.getSharedPreferences(SETTING_PREFERENCE, Context.MODE_PRIVATE);
         return sharedUserPref.edit().clear().commit() && sharedSettingPref.edit().clear().commit();
     }
+
     public static boolean isOnline(Context context) {
         ConnectivityManager manager = (ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
 
         return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
     }
+
     public static boolean dataNotFound(final Activity activity, final boolean close) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();

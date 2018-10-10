@@ -14,6 +14,7 @@ import android.widget.Button;
 import com.google.gson.GsonBuilder;
 
 import dotcom.com.sam.Activity.Categeory;
+import dotcom.com.sam.Activity.CheckInternetScreen;
 import dotcom.com.sam.Activity.MainActivity;
 import dotcom.com.sam.R;
 import dotcom.com.sam.Response.GetCartResponse;
@@ -37,41 +38,42 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         if (Utils.isOnline(Splash.this)) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    loginstatus = new UserSessionManager(getApplicationContext()).getUrlData(getApplicationContext(), UserSessionManager.LOGIN_STATUS);
-                    String userToken = Utils.getStringUserPreference(Splash.this, Constants.RJ_ID);
-                    Log.e("User Token :: ", "run: " + userToken);
-                    Intent startActivity = null;
-                    if (userToken != null) {
-                        getCartList();
-                    } else {
-                        startActivity = new Intent(Splash.this, LoginActivity.class);
-                        startActivity(startActivity);
-                        finish();
-
-                    }
-
-                }
-            }, 300);
-        } else {
-            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Splash.this);
-            builder.setTitle("Internet problem");
-            builder.setMessage("Oops! seems you have lost internet connectivity. Please try again later.");
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-
-            android.app.AlertDialog alert = builder.create();
-            alert.show();
-            Button nbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
-            nbutton.setTextColor(Color.rgb(30, 144, 255));
+            getPermission();
         }
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Utils.isOnline(getApplicationContext())) {
+            getPermission();
+        } else {
+            Intent intent = new Intent(Splash.this, CheckInternetScreen.class);
+            startActivity(intent);
+        }
+    }
+
+    private void getPermission() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                loginstatus = new UserSessionManager(getApplicationContext()).getUrlData(getApplicationContext(), UserSessionManager.LOGIN_STATUS);
+                String userToken = Utils.getStringUserPreference(Splash.this, Constants.RJ_ID);
+                Log.e("User Token :: ", "run: " + userToken);
+                Intent startActivity = null;
+                if (userToken != null) {
+                    getCartList();
+                } else {
+                    startActivity = new Intent(Splash.this, LoginActivity.class);
+                    startActivity(startActivity);
+                    finish();
+
+                }
+
+            }
+        }, 300);
+
 
     }
 
