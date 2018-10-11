@@ -119,7 +119,7 @@ public class TrainingservicesListAdapter extends RecyclerView.Adapter<Trainingse
         } else {
             for (TrainingRequest arrSubCateogry1 : filterItem) {
                 notifyDataSetChanged();
-                if (arrSubCateogry1.getLocation().toString().equalsIgnoreCase(charText)) {
+                if (arrSubCateogry1.getLocation().toString().equalsIgnoreCase(charText) || arrSubCateogry1.getServices().toString().equalsIgnoreCase(charText)) {
                     ArrayList<TrainingRequest> newList = new ArrayList<>();
                     newList.add(arrSubCateogry1);
                     arrSubCateogry.addAll(newList);

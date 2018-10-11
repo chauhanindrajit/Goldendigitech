@@ -85,7 +85,7 @@ public class Utils {
         builder.setView(dialogLayout)
                 // builder.setMessage("Sorry No Records Found..")
                 .setCancelable(false)
-                .setIcon(R.mipmap.ic_launcher)
+                .setIcon(R.drawable.logo)
                 .setTitle("NO RECORD FOUND!!")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

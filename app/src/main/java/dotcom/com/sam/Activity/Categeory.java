@@ -84,7 +84,7 @@ public class Categeory extends AppCompatActivity {
         Adddata = new ArrayList<>();
         Suncatdddata = new ArrayList<>();
         contactList = new ArrayList<>();
-        toolbar.setTitle("SAM");
+        toolbar.setTitle("Shop by Pet");
         //   subcat();
         // subcat();
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));

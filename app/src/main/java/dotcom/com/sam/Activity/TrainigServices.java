@@ -55,11 +55,12 @@ public class TrainigServices extends AppCompatActivity {
 
     private ProgressDialog pDialog;
     private ArrayList<TrainingRequest> arrSubCateogry;
-    AutoCompleteTextView acTextView;
+    AutoCompleteTextView acTextView, selectservices;
     ImageView pdnitm;
     private ArrayAdapter<String> adapter;
     Button searchdoct;
     List<String> locationTypeList = new ArrayList<>();
+    List<String> serviceslist = new ArrayList<>();
     ArrayList<String> item = new ArrayList<>();
     ArrayList tripSingaltonss;
     private ArrayList<TrainingRequest> tripSingaltonsas;
@@ -96,6 +97,7 @@ public class TrainigServices extends AppCompatActivity {
             nbutton.setTextColor(Color.rgb(30, 144, 255));
         }
         acTextView = (AutoCompleteTextView) findViewById(R.id.languages);
+        selectservices = (AutoCompleteTextView) findViewById(R.id.selectservice);
         pdnitm = (ImageView) findViewById(R.id.pdnitm);
         pdnitm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +120,11 @@ public class TrainigServices extends AppCompatActivity {
         acTextView.setThreshold(1);
         acTextView.setAdapter(loadTypeArrayAdapter);
 
+        final ArrayAdapter<String> loadTypeArrayAdapter1 = new ArrayAdapter<>(TrainigServices.this, R.layout.custom_spinner_item, serviceslist);
+        loadTypeArrayAdapter1.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+        selectservices.setThreshold(1);
+        selectservices.setAdapter(loadTypeArrayAdapter1);
+
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item);
         final TrainingservicesListAdapter trainingservicesListAdapter = new TrainingservicesListAdapter(TrainigServices.this, arrSubCateogry);
 
@@ -126,6 +133,14 @@ public class TrainigServices extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 acTextView.showDropDown();
+                return false;
+            }
+        });
+        selectservices.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                selectservices.showDropDown();
                 return false;
             }
         });
@@ -151,6 +166,34 @@ public class TrainigServices extends AppCompatActivity {
                 } catch (Exception e) {
                     acTextView.getText().clear();
                     acTextView.setText("");
+
+                }
+
+
+            }
+        });
+        selectservices.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                try {
+
+                    trainingservicesListAdapter.filter(selectservices.getText().toString().toLowerCase(Locale.getDefault()));
+                    adapter.notifyDataSetChanged();
+                    trainingservicesListAdapter.notifyDataSetChanged();
+                    recyclerView.setAdapter(trainingservicesListAdapter);
+                } catch (Exception e) {
+                    selectservices.getText().clear();
+                    selectservices.setText("");
 
                 }
 
@@ -305,7 +348,7 @@ public class TrainigServices extends AppCompatActivity {
 
                         tripSingaltonss.add(trainingRequest);
 
-
+                        serviceslist.add(trainingServicesResponse.getResponse().get(i).getServices());
                         locationTypeList.add(trainingServicesResponse.getResponse().get(i).getLocation());
                         // initList();
                         TrainingservicesListAdapter trainingservicesListAdapter = new TrainingservicesListAdapter(TrainigServices.this, tripSingaltonss);

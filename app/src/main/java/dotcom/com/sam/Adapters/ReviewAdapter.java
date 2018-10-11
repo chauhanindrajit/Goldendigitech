@@ -270,10 +270,12 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                             String cont = String.valueOf(removecartResponse.getResponse().size());
                             editor.putString("COU", cont);
                             editor.apply();
+
                             try {
                                 MainActivity.conting.setText(cont);
                                 ProductActivity.conting.setText(cont);
                                 ProductDatailAcitvity.conting.setText(cont);
+
                             } catch (Exception e) {
 
                             }
@@ -282,6 +284,9 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                             //Utils.customMessage(mContext, "Added into cart");
                             // manageInterface.manageCart(true);
                             pDialog.dismiss();
+                            if (cont.equals("0")) {
+                                MainActivity.conting.setVisibility(View.GONE);
+                            }
                         } else if (response.code() == 400) {
                             pDialog.dismiss();
                             Utils.customMessage(mContext, "Service Unavailable \nOur server is currently unavailable or down for maintenance. Please try again in a while.");

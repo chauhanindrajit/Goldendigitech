@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="dotcom.com.sam.Activity.MainActivity"
-    tools:openDrawer="end">
+    tools:openDrawer="left"
+    tools:context="dotcom.com.sam.Activity.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,6 +57,7 @@
                         android:layout_gravity="center"
                         android:background="@drawable/rounded_corner"
                         android:gravity="center"
+                        android:textSize="12dp"
                         android:textAlignment="center"
                         android:textColor="#ffffff"
                         android:textStyle="bold" />

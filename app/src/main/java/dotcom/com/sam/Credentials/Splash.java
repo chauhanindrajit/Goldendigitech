@@ -36,11 +36,6 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        if (Utils.isOnline(Splash.this)) {
-            getPermission();
-        }
-
     }
     @Override
     protected void onResume() {
@@ -57,7 +52,6 @@ public class Splash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 loginstatus = new UserSessionManager(getApplicationContext()).getUrlData(getApplicationContext(), UserSessionManager.LOGIN_STATUS);
                 String userToken = Utils.getStringUserPreference(Splash.this, Constants.RJ_ID);
                 Log.e("User Token :: ", "run: " + userToken);
@@ -72,41 +66,14 @@ public class Splash extends AppCompatActivity {
                 }
 
             }
-        }, 300);
+        }, 200);
 
 
     }
 
-    private void startSplash() {
 
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                loginstatus = new UserSessionManager(getApplicationContext()).getUrlData(getApplicationContext(), UserSessionManager.LOGIN_STATUS);
-                String userToken = Utils.getStringUserPreference(Splash.this, Constants.USER_NAME);
-                Log.e("User Token :: ", "run: " + userToken);
-                Intent startActivity = null;
-                if (loginstatus.equalsIgnoreCase("true")) {
-                    startActivity = new Intent(Splash.this, MainActivity.class);
-                    startActivity(startActivity);
-                    finish();
-
-                } else {
-                    startActivity = new Intent(Splash.this, LoginActivity.class);
-                    startActivity(startActivity);
-                    finish();
-
-                }
-            }
-        }, 3000);
-    }
 
     private void getCartList() {
-        //    pDialog = new ProgressDialog(Categeory.this);
-//        pDialog.setMessage("Please wait...");
-//        pDialog.setCancelable(false);
-//        pDialog.show();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Splash.this);
         String value = sharedPreferences.getString("KEY", "");
         Call<GetCartResponse> getCartResponseCall = Utilss.getWebService().getAllCartList(Integer.valueOf((value)));
