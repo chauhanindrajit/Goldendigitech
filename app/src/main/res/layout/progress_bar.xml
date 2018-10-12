@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ProgressBar
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    style="?android:attr/progressBarStyleLarge"
-    android:layout_width="40dp"
-    android:layout_height="40dp"
-    android:layout_gravity="center" />
+<com.wang.avi.AVLoadingIndicatorView android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    app:indicatorColor="@color/colorPrimary"
+    style="@style/AVLoadingIndicatorView.Large"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:indicatorName="LineScalePulseOutRapidIndicator"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

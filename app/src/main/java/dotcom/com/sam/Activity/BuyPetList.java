@@ -2,6 +2,7 @@ package dotcom.com.sam.Activity;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -123,7 +124,9 @@ public class BuyPetList extends AppCompatActivity {
                 pDialog = new ProgressDialog(BuyPetList.this);
                 pDialog.setMessage("Please wait...");
                 pDialog.setCancelable(false);
+                pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
                 pDialog.show();
+                pDialog.setContentView( R.layout.progress_bar );
                 final Call<BuypetfilterResponse> buypetfilterResponseCall = Utilss.getWebService().BUYPETFILTER_RESPONSE_CALL();
                 buypetfilterResponseCall.enqueue(new Callback<BuypetfilterResponse>() {
                     @Override
@@ -169,7 +172,9 @@ public class BuyPetList extends AppCompatActivity {
         pDialog = new ProgressDialog(BuyPetList.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<BuypetResponse> buypetResponseCall = Utilss.getWebService().BUYPET_RESPONSE_CALL();
         buypetResponseCall.enqueue(new Callback<BuypetResponse>() {
             @Override

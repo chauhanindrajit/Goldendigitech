@@ -3,6 +3,7 @@ package dotcom.com.sam.Utils;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -118,7 +119,9 @@ public class PhotoMain extends AppCompatActivity {
         pDialog = new ProgressDialog(PhotoMain.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<PhotoResponse> photoResponseCall = Utilss.getWebService().PHOTO_RESPONSE_CALL();
         photoResponseCall.enqueue(new Callback<PhotoResponse>() {
             @Override

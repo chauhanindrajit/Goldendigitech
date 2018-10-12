@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
@@ -108,7 +109,9 @@ public class ReviewOrderActivity extends AppCompatActivity {
                                 pDialog = new ProgressDialog(ReviewOrderActivity.this);
                                 pDialog.setMessage("Please wait...");
                                 pDialog.setCancelable(false);
+                                pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
                                 pDialog.show();
+                                pDialog.setContentView( R.layout.progress_bar );
                                 ManageCartRequest manageCartRequest = new ManageCartRequest();
                                 manageCartRequest.setPT_Id(0);
                                 manageCartRequest.setPrice(Integer.parseInt(String.valueOf(1)));
@@ -197,7 +200,9 @@ public class ReviewOrderActivity extends AppCompatActivity {
         pDialog = new ProgressDialog(ReviewOrderActivity.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ReviewOrderActivity.this);
         String value = sharedPreferences.getString("KEY", "");
         Call<GetCartResponse> getCartResponseCall = Utilss.getWebService().getAllCartList(Integer.valueOf((value)));

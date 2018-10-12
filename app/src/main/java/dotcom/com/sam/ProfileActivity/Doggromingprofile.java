@@ -3,6 +3,7 @@ package dotcom.com.sam.ProfileActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -109,7 +110,9 @@ public class Doggromingprofile extends AppCompatActivity {
         pDialog = new ProgressDialog(Doggromingprofile.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<DogcatpackageResponse> dogcatpackageResponseCall = Utilss.getWebService().DOGCATPACKAGE_RESPONSE_CALL(ID);
         dogcatpackageResponseCall.enqueue(new Callback<DogcatpackageResponse>() {
             @Override

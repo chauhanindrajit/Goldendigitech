@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -186,7 +187,9 @@ public class PatientDetails extends AppCompatActivity {
         pDialog = new ProgressDialog(PatientDetails.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         // Getting Device Unique ID.
         TelephonyManager manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         @SuppressLint("HardwareIds")
@@ -282,6 +285,10 @@ public class PatientDetails extends AppCompatActivity {
         }
         if (contactno.getText().toString().equals("")) {
             Toast.makeText(PatientDetails.this, "Please Enter Contact no.", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (visitype.toString().equals("")) {
+            Toast.makeText(PatientDetails.this, "Please select nature of visit.", Toast.LENGTH_LONG).show();
             return false;
         }
         if (toolbar.getTitle() == "Vet At Home") {

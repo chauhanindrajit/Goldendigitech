@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -259,7 +260,9 @@ public class PetOldAgeHome extends AppCompatActivity {
         pDialog = new ProgressDialog(PetOldAgeHome.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<OldPetResponse> oldPetResponseCall = Utilss.getWebService().PET_OLD_RESPONSE_CALL();
         oldPetResponseCall.enqueue(new Callback<OldPetResponse>() {
             @Override

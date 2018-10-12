@@ -61,22 +61,5 @@ public class Adoption extends AppCompatActivity {
                 Utils.moveNextWithAnimation(Adoption.this, TrainigServices.class);
             }
         });
-//
-//        btnBuyPet.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Utils.moveNextWithAnimation(Adoption.this,BuyPetList.class);
-//                MainActivity.module_name= Constats.Module.BUY_PET;
-//            }
-//        });
-//
-//        btnOldAgeHome.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Utils.moveNextWithAnimation(Adoption.this,PetOldAgeHome.class);
-//              //  MainActivity.module_name= Constats.Module.PET_OLDAGE_HOME;
-//            }
-//        });
-
     }
 }

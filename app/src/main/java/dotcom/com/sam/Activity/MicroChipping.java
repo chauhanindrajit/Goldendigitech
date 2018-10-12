@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -260,7 +261,9 @@ public class MicroChipping extends AppCompatActivity {
         pDialog = new ProgressDialog(MicroChipping.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<MicroChippingRespose> microChippingResposeCall = Utilss.getWebService().MICRO_CHIPPING_RESPOSE_CALL();
         microChippingResposeCall.enqueue(new Callback<MicroChippingRespose>() {
             @Override

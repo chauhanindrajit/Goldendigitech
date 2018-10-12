@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -118,7 +119,9 @@ public class PetPhotography extends AppCompatActivity {
         pDialog = new ProgressDialog(PetPhotography.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<PhotoResponse> photoResponseCall = Utilss.getWebService().PHOTO_RESPONSE_CALL();
         photoResponseCall.enqueue(new Callback<PhotoResponse>() {
             @Override

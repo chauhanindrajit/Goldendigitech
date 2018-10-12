@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -145,7 +146,9 @@ public class GroomingLastpage extends AppCompatActivity {
                 pDialog = new ProgressDialog(GroomingLastpage.this);
                 pDialog.setMessage("Please wait...");
                 pDialog.setCancelable(false);
+                pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
                 pDialog.show();
+                pDialog.setContentView( R.layout.progress_bar );
                 final Call<DateandtimeResponse> dateandtimeResponseCall = Utilss.getWebService().DATEANDTIME_RESPONSE_CALL(name, SRID, Bookingdate);
                 dateandtimeResponseCall.enqueue(new Callback<DateandtimeResponse>() {
                     @Override
@@ -255,7 +258,9 @@ public class GroomingLastpage extends AppCompatActivity {
         pDialog = new ProgressDialog(GroomingLastpage.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         GroomingfinalRequest groomingfinalRequest = new GroomingfinalRequest();
         groomingfinalRequest.setSR_Id(Integer.parseInt(srid));
         groomingfinalRequest.setBookingTime(bookingtym);

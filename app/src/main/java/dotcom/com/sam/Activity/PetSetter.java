@@ -8,6 +8,7 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -517,7 +518,9 @@ public class PetSetter extends AppCompatActivity {
         pDialog = new ProgressDialog(PetSetter.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<PetSitterResponse> petSitterResponseCall = Utilss.getWebService().PET_SITTER_RESPONSE_CALL();
         petSitterResponseCall.enqueue(new Callback<PetSitterResponse>() {
             @Override

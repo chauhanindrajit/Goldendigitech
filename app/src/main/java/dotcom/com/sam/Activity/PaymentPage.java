@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -87,7 +88,9 @@ public class PaymentPage extends AppCompatActivity {
         pDialog = new ProgressDialog(PaymentPage.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(PaymentPage.this);
         String value = sharedPreferences.getString("KEY", "");
         Call<PaymentResponse> paymentResponseCall = Utilss.getWebService().PAYMENT_RESPONSE_CALL(Integer.valueOf((value)));

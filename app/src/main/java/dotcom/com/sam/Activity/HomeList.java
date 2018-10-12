@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -270,7 +271,9 @@ public class HomeList extends AppCompatActivity {
         pDialog = new ProgressDialog(HomeList.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<HomeRespose> homeResposeCall = Utilss.getWebService().HOME_RESPOSE_CALL();
         homeResposeCall.enqueue(new Callback<HomeRespose>() {
             @Override

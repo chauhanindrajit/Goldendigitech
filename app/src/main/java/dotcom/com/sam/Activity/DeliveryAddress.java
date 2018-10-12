@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
@@ -153,7 +154,9 @@ public class DeliveryAddress extends AppCompatActivity {
         pDialog = new ProgressDialog(DeliveryAddress.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(DeliveryAddress.this);
         String value = sharedPreferences.getString("KEY", "");
         Call<AddressResponse> getAddressResponseCall = Utilss.getWebService().ADDRESS_RESPONSE_CALL(Integer.valueOf(value));

@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -411,7 +412,9 @@ public class PetWalking extends AppCompatActivity {
         pDialog = new ProgressDialog(PetWalking.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<PetWalkingResponse> petWalkingResponseCall = Utilss.getWebService().PET_WALKING_RESPONSE_CALL();
         petWalkingResponseCall.enqueue(new Callback<PetWalkingResponse>() {
             @Override
@@ -474,7 +477,9 @@ public class PetWalking extends AppCompatActivity {
         pDialog = new ProgressDialog(PetWalking.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         Call<WalkingsearchResponse> walkingsearchResponseCall = Utilss.getWebService().WALKINGSEARCH_RESPONSE_CALL(loc, strtday, strtym, endtym);
         walkingsearchResponseCall.enqueue(new Callback<WalkingsearchResponse>() {
             @Override

@@ -2,6 +2,7 @@ package dotcom.com.sam.Activity;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -76,7 +77,9 @@ public class Adoptpet extends AppCompatActivity {
         pDialog = new ProgressDialog(Adoptpet.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<AdoptpetResponse> adoptpetResponseCall = Utilss.getWebService().ADOPTPET_RESPONSE_CALL();
         adoptpetResponseCall.enqueue(new Callback<AdoptpetResponse>() {
             @Override

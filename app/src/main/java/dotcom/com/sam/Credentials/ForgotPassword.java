@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -90,7 +91,9 @@ public class ForgotPassword extends AppCompatActivity {
         pDialog = new ProgressDialog(ForgotPassword.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final ForgetPassRequest forgetPassRequest = new ForgetPassRequest(emailId);
         Call<ForgotPassResponse> changePasswordResponseCall = Utilss.getWebService().getForgotPassword(forgetPassRequest);
         changePasswordResponseCall.enqueue(new Callback<ForgotPassResponse>() {

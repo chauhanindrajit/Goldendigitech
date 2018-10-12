@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -271,7 +272,9 @@ public class DiagoHome extends AppCompatActivity {
         pDialog = new ProgressDialog(DiagoHome.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<DiagonsticResponse> diagonsticResponseCall = Utilss.getWebService().DIAGONSTIC_RESPONSE_CALL();
         diagonsticResponseCall.enqueue(new Callback<DiagonsticResponse>() {
             @Override

@@ -480,9 +480,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pDialog = new ProgressDialog(MainActivity.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
-       // pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
-       // pDialog.setContentView( R.layout.progress_bar );
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<NewArrivalResponse> newArrivalResponseCall = Utilss.getWebService().NEW_ARRIVAL_RESPONSE_CALL();
         newArrivalResponseCall.enqueue(new Callback<NewArrivalResponse>() {
             @Override

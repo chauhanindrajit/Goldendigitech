@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,6 +48,9 @@ import static android.content.ContentValues.TAG;
 
 
 public class Categeory extends AppCompatActivity {
+    public static ArrayList<HashMap<String, String>> contactList;
+    // URL to get contacts JSON
+    private static String url = "http://worldindia.in/SamApi/api/SamVC/getShopByPetCategoryList";
     RecyclerView categeoryLayout;
     ArrayList Adddata;
     ArrayList Suncatdddata;
@@ -55,21 +59,17 @@ public class Categeory extends AppCompatActivity {
     RegistrationResponse registrationResponse;
     ListView listView;
     ArrayList<String> stringList = new ArrayList<>();
+    List<RegistrationResponse.ResponseBean.SubCategoriesBean> arrTemp = new ArrayList<>();
+    TextView catname;
+    Toolbar toolbar;
     private ListView stationsListView;
     private String TAG = MainActivity.class.getSimpleName();
     private RecyclerView.Adapter mAdapter;
     private ProgressDialog pDialog;
     private ListView lv;
-
-    // URL to get contacts JSON
-    private static String url = "http://worldindia.in/SamApi/api/SamVC/getShopByPetCategoryList";
-    public static ArrayList<HashMap<String, String>> contactList;
     private ArrayList<RegistrationResponse.ResponseBean> arrSubCateogry;
     private ArrayList<String> arrSubCateogry1;
-    List<RegistrationResponse.ResponseBean.SubCategoriesBean> arrTemp = new ArrayList<>();
     private ArrayAdapter<TripSingalton> stationListAdapter;
-    TextView catname;
-    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +139,9 @@ public class Categeory extends AppCompatActivity {
         pDialog = new ProgressDialog(Categeory.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<RegistrationResponse> registrationResponseCall = Utilss.getWebService().RESPONSE_CALL();
         registrationResponseCall.enqueue(new Callback<RegistrationResponse>() {
             @Override

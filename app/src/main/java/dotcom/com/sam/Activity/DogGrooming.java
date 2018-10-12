@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -397,7 +398,9 @@ public class DogGrooming extends AppCompatActivity {
         pDialog = new ProgressDialog(DogGrooming.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<DogGroomingResponse> dogGroomingResponseCall = Utilss.getWebService().DOG_GROOMING_RESPONSE_CALL();
         dogGroomingResponseCall.enqueue(new Callback<DogGroomingResponse>() {
             @Override
@@ -438,7 +441,9 @@ public class DogGrooming extends AppCompatActivity {
         pDialog = new ProgressDialog(DogGrooming.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<DogsearchResponse> dogsearchResponseCall = Utilss.getWebService().DOGSEARCH_RESPONSE_CALL(breedselected, ageselctd, size, salonlctn, loc);
         dogsearchResponseCall.enqueue(new Callback<DogsearchResponse>() {
             @Override

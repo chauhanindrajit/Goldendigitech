@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -389,7 +390,9 @@ public class CatGrooming extends AppCompatActivity {
         pDialog = new ProgressDialog(CatGrooming.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<CatGroomingResponse> catGroomingResponseCall = Utilss.getWebService().CAT_GROOMING_RESPONSE_CALL();
         catGroomingResponseCall.enqueue(new Callback<CatGroomingResponse>() {
             @Override
@@ -430,7 +433,9 @@ public class CatGrooming extends AppCompatActivity {
         pDialog = new ProgressDialog(CatGrooming.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<CatsearchResponse> catsearchResponseCall = Utilss.getWebService().CATSEARCH_RESPONSE_CALL(breedselected, ageselctd, size, salonlctn, loc);
         catsearchResponseCall.enqueue(new Callback<CatsearchResponse>() {
             @Override

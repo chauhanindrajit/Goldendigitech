@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -290,7 +291,9 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
         pDialog = new ProgressDialog(ProductActivity.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<ProductResponse> productResponseCall = Utilss.getWebService().PRODUCT_RESPONSE_CALL(ID);
         Log.e("URL", "checkAcceptTrip: " + productResponseCall.request().url().toString());
         productResponseCall.enqueue(new Callback<ProductResponse>() {
@@ -376,7 +379,9 @@ public class ProductActivity extends AppCompatActivity implements NavigationView
         pDialog = new ProgressDialog(ProductActivity.this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<ProductResponse> productResponseCall = Utilss.getWebService().RESPONSE_CALL(newarrivals);
         Log.e("URL", "checkAcceptTrip: " + productResponseCall.request().url().toString());
         productResponseCall.enqueue(new Callback<ProductResponse>() {

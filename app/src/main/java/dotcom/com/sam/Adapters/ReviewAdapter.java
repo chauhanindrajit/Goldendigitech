@@ -3,7 +3,9 @@ package dotcom.com.sam.Adapters;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -130,7 +132,9 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                 pDialog = new ProgressDialog(mContext);
                 pDialog.setMessage("Please wait...");
                 pDialog.setCancelable(false);
+                pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
                 pDialog.show();
+                pDialog.setContentView( R.layout.progress_bar );
 
                 Log.e(TAG, "onClick: " + responseBeen.get(position).getPT_Id() + " " + responseBeen.get(position).getPrice() + " " + responseBeen.get(position).getOrd_Id());
                 ManageCartRequest manageCartRequest = new ManageCartRequest();
@@ -185,7 +189,9 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                         pDialog = new ProgressDialog(mContext);
                         pDialog.setMessage("Please wait...");
                         pDialog.setCancelable(false);
+                        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
                         pDialog.show();
+                        pDialog.setContentView( R.layout.progress_bar );
                         Log.e(TAG, "onClick: " + responseBeen.get(position).getPT_Id() + " " + responseBeen.get(position).getPrice() + " " + responseBeen.get(position).getOrd_Id());
 
                         ManageCartRequest manageCartRequest = new ManageCartRequest();
@@ -239,7 +245,9 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
                 pDialog = new ProgressDialog(mContext);
                 pDialog.setMessage("Please wait...");
                 pDialog.setCancelable(false);
+                pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
                 pDialog.show();
+                pDialog.setContentView( R.layout.progress_bar );
                 Log.e(TAG, "onClick: " + responseBeen.get(position).getCRT_Id() + " " + responseBeen.get(position).getRJ_ID() + " " + responseBeen.get(position).getPT_Id());
 
                 ManageCartRequest manageCartRequest = new ManageCartRequest();

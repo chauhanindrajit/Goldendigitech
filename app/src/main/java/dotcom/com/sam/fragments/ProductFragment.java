@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -230,7 +232,9 @@ public class ProductFragment extends Fragment {
         productfilterdataRequest.setCheckboxCategory(SingletonClass.getInstance().getCatidlist());
         productfilterdataRequest.setCheckboxProductType(type);
 
+        pDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
         pDialog.show();
+        pDialog.setContentView( R.layout.progress_bar );
         final Call<ProductFilterdataResponse> productFilterdataResponseCall = Utilss.getWebService().PRODUCT_FILTERDATA_RESPONSE_CALL(productfilterdataRequest);
         Log.e("URL", "checkAcceptTrip: " + productFilterdataResponseCall.request().url().toString());
         productFilterdataResponseCall.enqueue(new Callback<ProductFilterdataResponse>() {
